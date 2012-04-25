@@ -9,7 +9,7 @@
 
 unit CodeRegEx;
 
-interface    
+interface
 
 uses
   Classes, PngTools;

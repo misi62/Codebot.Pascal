@@ -13,7 +13,7 @@ interface
 
 {$I CODEBOT.INC}
 
-uses  
+uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs;
 
 type

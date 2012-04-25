@@ -442,7 +442,7 @@ begin
       end;
   	finally
       SyncTerminate;
-    end;      
+    end;
   finally
     Uninit;
     CoUninitialize;

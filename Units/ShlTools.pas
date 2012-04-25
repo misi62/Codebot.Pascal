@@ -1180,7 +1180,7 @@ begin
           end;
         finally
           SetLength(FItem, Result);
-        end;          
+        end;
       end;
       if Length(FItem) > 0 then
         Sort(0, Length(FItem) - 1);

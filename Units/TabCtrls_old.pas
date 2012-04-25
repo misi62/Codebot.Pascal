@@ -234,7 +234,7 @@ begin
   begin
     FEnabled := Value;
     Changed(False);
-  end;    
+  end;
 end;
 
 procedure TDrawTabItem.SetVisible(Value: Boolean);
@@ -466,7 +466,7 @@ begin
     SetTextColor(DC, Blend(clWindowText, clWindow, 60))
   else
     SetTextColor(DC, ColorToRGB(clWindowText));
-  F := 0;    
+  F := 0;
   if dsDefaulted in State then
     F := SelectObject(DC, GetFont(DC, [fsBold]));
   DrawCaption(DC, DrawTab.Tabs[Index].Caption, Rect, drLeft, not (dsDisabled in State));
@@ -767,7 +767,7 @@ begin
   if Assigned(FOnDrawBackground) then
     FOnDrawBackground(Self)
   else
-    GetStyler.DrawBackground(Self);    
+    GetStyler.DrawBackground(Self);
 end;
 
 procedure TCustomDrawTabs.DrawClose(Index: Integer; Rect: TRect; State: TDrawState);

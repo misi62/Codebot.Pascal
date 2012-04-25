@@ -199,7 +199,7 @@ const
 
 type
   DMO_ROLE_TYPE = TOleEnum;
-  
+
 const
   DMORole_Server = $00000001;
   DMORole_Database = $00000002;
@@ -209,7 +209,7 @@ const
 
 type
   DMO_VER = TOleEnum;
-  
+
 const
   DMOVer_Unknown = $00000000;
   DMOVer_Pre_60 = $00000001;
@@ -254,7 +254,7 @@ const
 
 type
   DMO_DBSTATUS_TYPE = TOleEnum;
-  
+
 const
   DMODBStat_Normal = $00000000;
   DMODBStat_Loading = $00000020;
@@ -317,7 +317,7 @@ const
 
 type
   DMO_DEPENDENCY_TYPE = TOleEnum;
-  
+
 const
   DMODep_Parents = $00000000;
   DMODep_FullHierarchy = $00010000;
@@ -344,7 +344,7 @@ const
 
 type
   DMO_SCRIPT_TYPE = TOleEnum;
-  
+
 const
   DMOScript_Default = $00000004;
   DMOScript_Drops = $00000001;
@@ -423,7 +423,7 @@ const
 
 type
   DMO_COMP_LEVEL_TYPE = TOleEnum;
-  
+
 const
   DMOCompLevel_Unknown = $00000000;
   DMOCompLevel_60 = $0000003C;
@@ -1081,8 +1081,8 @@ type
     function GetColumnFloat(Row: Integer; Column: Integer): Single; safecall;
     function GetColumnDouble(Row: Integer; Column: Integer): Double; safecall;
     function GetColumnString(Row: Integer; Column: Integer): WideString; safecall;
-    function GetRangeString(Top: OleVariant; Left: OleVariant; Bottom: OleVariant; 
-      Right: OleVariant; RowDelim: OleVariant; ColDelim: OleVariant; 
+    function GetRangeString(Top: OleVariant; Left: OleVariant; Bottom: OleVariant;
+      Right: OleVariant; RowDelim: OleVariant; ColDelim: OleVariant;
       ColWidths: OleVariant): WideString; safecall;
     procedure Refresh; safecall;
     function GetColumnDate(Row: Integer; Column: Integer): TDateTime; safecall;

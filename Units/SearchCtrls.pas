@@ -3,7 +3,7 @@ unit SearchCtrls;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   DialogsEx, ResourceData, BtnCtrls, StdCtrls, GraphTools, SuplCtrls;
 
 type

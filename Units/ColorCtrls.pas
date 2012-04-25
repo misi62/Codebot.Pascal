@@ -353,7 +353,7 @@ begin
     LineTo(DC, 0, H);
     LineTo(DC, 0, 0);
     SelectObject(DC, P);
-  end;    
+  end;
 end;
 
 { THuePicker }

@@ -1396,7 +1396,7 @@ var
   OldOptions: array of record
     O: TButtonOptions;
     D: Boolean;
-  end;    
+  end;
   Options: TButtonOptions;
   NewOptions: TButtonOptions;
   X: Integer;
@@ -1566,7 +1566,7 @@ begin
       else
         X := X + Button.Width + 1;
       Item.PopupMenu.Popup(X, Y);
-    end;      
+    end;
   end;
 end;
 

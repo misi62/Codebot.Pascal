@@ -20,7 +20,7 @@ uses
 const
   WM_CHILDSETFOCUS    = WM_USER + $0AC1A;
   WM_CHILDKILLFOCUS   = WM_CHILDSETFOCUS + 1;
-  
+
 { TComponentBinding }
 
 type

@@ -269,7 +269,7 @@ begin
 	finally
   	Text.Free;
 	  Stream.Free;
-	end;    
+	end;
 end;
 
 procedure ComponentToVariant(Instance: TComponent; var Data: OleVariant);

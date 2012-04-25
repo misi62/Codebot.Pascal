@@ -480,7 +480,7 @@ begin
     SetTextColor(DC, Blend(clWindowText, clWindow, 60))
   else
     SetTextColor(DC, ColorToRGB(clWindowText));
-  F := 0;    
+  F := 0;
   if dsDefaulted in State then
     F := SelectObject(DC, GetFont(DC, [fsBold]));
   DrawCaption(DC, DrawTab.Tabs[Index].Caption, Rect, drLeft, not (dsDisabled in State));
@@ -1376,7 +1376,7 @@ begin
     Tab.Right := Tab.Left + S.cx + HeightOf(Tab) + 20;
     if WidthOf(Tab) < MinTabSize then
       Tab.Right := Tab.Left + MinTabSize;
-    FillChar(Close, SizeOf(Close), #0);      
+    FillChar(Close, SizeOf(Close), #0);
     if T.Tabs[Index].CanClose and (T.TabIndex = Index) then
     begin
       I := FColdButton.Height;

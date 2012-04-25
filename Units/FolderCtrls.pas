@@ -921,7 +921,7 @@ const
           State := [dsPressed]
         else
           State := [dsHot];
-        DrawThemeScroll(DC, Rect, State); // Arrows[Button], 
+        DrawThemeScroll(DC, Rect, State); // Arrows[Button],
         SelectClipRect(DC, Rect, RGN_DIFF);
       end;
     end;

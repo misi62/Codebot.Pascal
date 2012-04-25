@@ -649,7 +649,7 @@ begin
     else
     	Result := TLargeShellImages.Create(Application);
 		ShellImageLists[SmallImages] := Result;
-  end;    
+  end;
 end;
 
 { TShellImageNode }

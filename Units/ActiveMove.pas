@@ -1,6 +1,6 @@
 unit ActiveMovie;
 
-{$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers. 
+{$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers.
 
 interface
 
@@ -8,10 +8,10 @@ uses Windows, ActiveX, Classes, Graphics, OleServer, OleCtrls, StdVCL;
 
 // *********************************************************************//
 // GUIDS declared in the TypeLibrary. Following prefixes are used:
-//   Type Libraries     : LIBID_xxxx                                      
-//   CoClasses          : CLASS_xxxx                                      
-//   DISPInterfaces     : DIID_xxxx                                       
-//   Non-DISP interfaces: IID_xxxx                                        
+//   Type Libraries     : LIBID_xxxx
+//   CoClasses          : CLASS_xxxx
+//   DISPInterfaces     : DIID_xxxx
+//   Non-DISP interfaces: IID_xxxx
 // *********************************************************************//
 const
   // TypeLibrary Major and minor versions
@@ -28,7 +28,7 @@ const
   CLASS_ActiveMovie: TGUID = '{05589FA1-C356-11CE-BF01-00AA0055595A}';
 
 // *********************************************************************//
-// Declaration of Enumerations defined in Type Library                    
+// Declaration of Enumerations defined in Type Library
 // *********************************************************************//
 // Constants for enum ReadyStateConstants
 type
@@ -82,7 +82,7 @@ const
 type
 
 // *********************************************************************//
-// Forward declaration of types defined in TypeLibrary                    
+// Forward declaration of types defined in TypeLibrary
 // *********************************************************************//
   DActiveMovieEvents = dispinterface;
   DActiveMovieEvents2 = dispinterface;
@@ -94,14 +94,14 @@ type
   IActiveMovie3Disp = dispinterface;
 
 // *********************************************************************//
-// Declaration of CoClasses defined in Type Library                       
-// (NOTE: Here we map each CoClass to its Default Interface)              
+// Declaration of CoClasses defined in Type Library
+// (NOTE: Here we map each CoClass to its Default Interface)
 // *********************************************************************//
   ActiveMovie = IActiveMovie3;
 
 
 // *********************************************************************//
-// Declaration of structures, unions and aliases.                         
+// Declaration of structures, unions and aliases.
 // *********************************************************************//
   PSmallint1 = ^Smallint; {*}
   PWordBool1 = ^WordBool; {*}
@@ -126,7 +126,7 @@ type
     procedure MouseDown(Button: Smallint; Shift: Smallint; x: OLE_XPOS_PIXELS; y: OLE_YPOS_PIXELS); dispid -605;
     procedure MouseMove(Button: Smallint; Shift: Smallint; x: OLE_XPOS_PIXELS; y: OLE_YPOS_PIXELS); dispid -606;
     procedure MouseUp(Button: Smallint; Shift: Smallint; x: OLE_XPOS_PIXELS; y: OLE_YPOS_PIXELS); dispid -607;
-    procedure Error(SCode: Smallint; const Description: WideString; const Source: WideString; 
+    procedure Error(SCode: Smallint; const Description: WideString; const Source: WideString;
                     var CancelDisplay: WordBool); dispid 999;
   end;
 
@@ -149,7 +149,7 @@ type
     procedure MouseDown(Button: Smallint; Shift: Smallint; x: OLE_XPOS_PIXELS; y: OLE_YPOS_PIXELS); dispid -605;
     procedure MouseMove(Button: Smallint; Shift: Smallint; x: OLE_XPOS_PIXELS; y: OLE_YPOS_PIXELS); dispid -606;
     procedure MouseUp(Button: Smallint; Shift: Smallint; x: OLE_XPOS_PIXELS; y: OLE_YPOS_PIXELS); dispid -607;
-    procedure Error(SCode: Smallint; const Description: WideString; const Source: WideString; 
+    procedure Error(SCode: Smallint; const Description: WideString; const Source: WideString;
                     var CancelDisplay: WordBool); dispid 999;
     procedure DisplayModeChange; dispid 51;
     procedure ReadyStateChange(ReadyState: ReadyStateConstants); dispid -609;
@@ -483,8 +483,8 @@ type
   end;
 
 // *********************************************************************//
-// The Class CoActiveMovie provides a Create and CreateRemote method to          
-// create instances of the default interface IActiveMovie3 exposed by              
+// The Class CoActiveMovie provides a Create and CreateRemote method to
+// create instances of the default interface IActiveMovie3 exposed by
 // the CoClass ActiveMovie. The functions are intended to be used by
 // clients wishing to automate the CoClass objects exposed by the
 // server of this typelibrary.

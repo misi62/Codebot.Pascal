@@ -656,9 +656,9 @@ const
   IDM_GETZOOMNUMERATOR = 2345;
   IDM_GETZOOMDENOMINATOR = 2346;
   { Commands for complex text }
-  IDM_DIRLTR = 2350;                  
-  IDM_DIRRTL = 2351;                  
-  IDM_BLOCKDIRLTR = 2352;             
+  IDM_DIRLTR = 2350;
+  IDM_DIRRTL = 2351;
+  IDM_BLOCKDIRLTR = 2352;
   IDM_BLOCKDIRRTL = 2353;
   IDM_INLINEDIRLTR = 2354;
   IDM_INLINEDIRRTL = 2355;
@@ -1071,7 +1071,7 @@ begin
       Doc.designMode := ModeStates[Value];
     Source := S;
   end;
-end;  
+end;
 
 procedure TDocBrowser.CreateWnd;
 begin
@@ -1308,7 +1308,7 @@ function TDocBrowser.UpdateUI: HResult;
 begin
   { Return S_OK to indicate we handled (ignored) OK }
   Result := S_OK;
-end;    
+end;
 
 { TAutoDispatch }
 

@@ -543,7 +543,7 @@ begin
 			end;
       NotifySnapShot(FWnd, Self)
 		end;
-  finally    
+  finally
     if PriorMode > FMode then
       SetMode(PriorMode);
 	end;

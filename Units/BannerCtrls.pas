@@ -470,7 +470,7 @@ begin
 	if FPageIndex > -1 then
 		Result := TObject(FPageList[FPageIndex])
 	else
-		Result := nil;		
+		Result := nil;
 end;
 
 procedure TBannerBook.SetPageIndex(Value: Integer);

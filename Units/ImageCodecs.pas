@@ -285,7 +285,7 @@ const
 type
   WICDecodeOptions = LongInt;
 
-const  
+const
 	WICDecodeMetadataCacheOnDemand = $0;
 	WICDecodeMetadataCacheOnLoad = $1;
 
@@ -300,7 +300,7 @@ const
 type
   WICComponentType = LongInt;
 
-const  
+const
 	WICDecoder = $1;
 	WICEncoder = $2;
 	WICPixelFormatConverter = $4;
@@ -312,7 +312,7 @@ const
 type
   WICComponentEnumerateOptions = LongInt;
 
-const  
+const
 	WICComponentEnumerateDefault = $0;
 	WICComponentEnumerateRefresh = $1;
 	WICComponentEnumerateDisabled = LongInt($80000000);
@@ -321,7 +321,7 @@ const
 type
   WICBitmapInterpolationMode = LongInt;
 
-const  
+const
 	WICBitmapInterpolationModeNearestNeighbor = $0;
 	WICBitmapInterpolationModeLinear = $1;
 	WICBitmapInterpolationModeCubic = $2;
@@ -330,7 +330,7 @@ const
 type
   WICBitmapPaletteType = LongInt;
 
-const  
+const
 	WICBitmapPaletteTypeCustom = $0;
 	WICBitmapPaletteTypeMedianCut = $1;
 	WICBitmapPaletteTypeFixedBW = $2;
@@ -364,7 +364,7 @@ const
 type
   WICBitmapAlphaChannelOption = LongInt;
 
-const  
+const
 	WICBitmapUseAlpha = $0;
 	WICBitmapUsePremultipliedAlpha = $1;
 	WICBitmapIgnoreAlpha = $2;
@@ -383,14 +383,14 @@ const
 type
   WICBitmapLockFlags = LongInt;
 
-const  
+const
 	WICBitmapLockRead = $1;
 	WICBitmapLockWrite = $2;
 
 type
   WICBitmapDecoderCapabilities = LongInt;
 
-const  
+const
 	WICBitmapDecoderCapabilitySameEncoder = $1;
 	WICBitmapDecoderCapabilityCanDecodeAllImages = $2;
 	WICBitmapDecoderCapabilityCanDecodeSomeImages = $4;
@@ -417,7 +417,7 @@ const
 type
   WICComponentSigning = LongInt;
 
-const  
+const
 	WICComponentSigned = $1;
 	WICComponentUnsigned = $2;
 	WICComponentSafe = $4;
@@ -426,7 +426,7 @@ const
 type
   WICTiffCompressionOption = LongInt;
 
-const  
+const
 	WICTiffCompressionDontCare = $0;
 	WICTiffCompressionNone = $1;
 	WICTiffCompressionCCITT3 = $2;
@@ -438,7 +438,7 @@ const
 type
   WICNamedWhitePoint = LongInt;
 
-const  
+const
 	WICWhitePointDefault = $1;
 	WICWhitePointDaylight	= $2;
 	WICWhitePointCloudy	= $4;
@@ -462,7 +462,7 @@ const
 type
   WICRawRotationCapabilities = LongInt;
 
-const  
+const
 	WICRawRotationCapabilityNotSupported = $0;
 	WICRawRotationCapabilityGetSupported = $1;
 	WICRawRotationCapabilityNinetyDegreesSupported = $2;
@@ -471,7 +471,7 @@ const
 type
   WICRawParameterSet = LongInt;
 
-const  
+const
 	WICAsShotParameterSet = $1;
 	WICUserAdjustedParameterSet = $2;
 	WICAutoAdjustedParameterSet = $3;
@@ -479,7 +479,7 @@ const
 type
   WICRawRenderMode = LongInt;
 
-const  
+const
 	WICRawRenderModeDraft = $1;
 	WICRawRenderModeNormal = $2;
 	WICRawRenderModeBestQuality = $3;
@@ -808,10 +808,10 @@ type
   ['{3C613A02-34B2-44EA-9A7C-45AEA9C6FD6D}']
     function InitializeFromFilename(wzFilename: PWideChar): HResult; stdcall;
     function InitializeFromMemory(pbBuffer: PByte; cbBufferSize: UINT): HResult; stdcall;
-    function InitializeFromExifColorSpace(value: UINT): HResult; stdcall;		
-    function GetType(out pType: WICColorContextType): HResult; stdcall;		
-    function GetProfileBytes(cbBuffer: UINT; var pbBuffer: PByte; out pcbActual: UINT): HResult; stdcall;		
-    function GetExifColorSpace(out pValue: UINT): HResult; stdcall;		
+    function InitializeFromExifColorSpace(value: UINT): HResult; stdcall;
+    function GetType(out pType: WICColorContextType): HResult; stdcall;
+    function GetProfileBytes(cbBuffer: UINT; var pbBuffer: PByte; out pcbActual: UINT): HResult; stdcall;
+    function GetExifColorSpace(out pValue: UINT): HResult; stdcall;
   end;
 
   IWICColorTransform = interface(IWICBitmapSource)

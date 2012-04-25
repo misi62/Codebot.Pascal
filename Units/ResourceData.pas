@@ -53,7 +53,7 @@ destructor TImageListLink.Destroy;
 begin
 	if FImageLink <> nil then
 		FImageLink.UnRegisterChanges(FImageChangeLink);
-	FImageChangeLink.Free;	
+	FImageChangeLink.Free;
   inherited Destroy;
 end;
 

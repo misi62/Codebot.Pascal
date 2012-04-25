@@ -230,7 +230,7 @@ procedure TCustomSlideBar.DoChange;
 begin
 	if FChanged then
 	  if Assigned(FOnChange) then FOnChange(Self);
-	FChanged := False;    
+	FChanged := False;
 end;
 
 procedure TCustomSlideBar.Notification(AComponent: TComponent; Operation: TOperation);
@@ -520,7 +520,7 @@ begin
   FPopup.Slide.OnChange := DoValueChange;
   FPopup.Associate := Self;
   FPopup.Slide.Associate := Self;
-  
+
 end;
 
 function TCustomSlideEdit.PopupValid: Boolean;

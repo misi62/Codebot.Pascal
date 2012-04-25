@@ -156,10 +156,10 @@ var
   EndBufferedAnimation: function(hbpAnimation: HANIMATIONBUFFER; fUpdateTarget: BOOL): HRESULT; stdcall;
 
   BufferedPaintRenderAnimation: function(hwnd: HWND; hdcTarget: HDC): BOOL; stdcall;
-    
+
 //----------------------------------------------------------------------------
-// Tells if the DWM is running, and composition effects are possible for this 
-// process (themes are active). 
+// Tells if the DWM is running, and composition effects are possible for this
+// process (themes are active).
 // Roughly equivalent to "DwmIsCompositionEnabled() && IsAppthemed()"
 //----------------------------------------------------------------------------
   IsCompositionActive: function: BOOL; stdcall;
@@ -169,10 +169,10 @@ var
 //                      - Gets the duration for the specified transition
 //
 //  hTheme              - theme data handle
-//  iPartId             - part number 
+//  iPartId             - part number
 //  iStateIdFrom        - starting state number of part
 //  iStateIdTo          - ending state number of part
-//  iPropId             - property id 
+//  iPropId             - property id
 //  pdwDuration         - receives the transition duration
 //------------------------------------------------------------------------
 type

@@ -883,7 +883,7 @@ begin
     else
       Result := TLargeShellImages.Create(nil);
     ShellImageLists[SmallImages] := Result;
-  end;    
+  end;
 end;
 
 { TShellImageNode }
@@ -2915,7 +2915,7 @@ begin
       Result := SendMessage(FListViewHandle, Msg, WParam, LParam);
 end;
 
-procedure TShellView.WMSetFocus(var Message: TWMSetFocus); 
+procedure TShellView.WMSetFocus(var Message: TWMSetFocus);
 begin
   inherited;
   if FListViewHandle <> 0 then
@@ -3086,7 +3086,7 @@ begin
     N := Items[ItemIndex].Node;
     if Binding <> nil then
       Binding.Change(Self, N);
-    inherited Click;      
+    inherited Click;
   end;
 end;
 

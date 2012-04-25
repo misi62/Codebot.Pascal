@@ -140,7 +140,7 @@ type
     FPreviewTimer: TTimer;
 		procedure PhotoResize(Sender: TObject; const FileName: string;
 			Photo: TBitmap; Width, Height: Integer);
-    procedure PreviewTimer(Sender: TObject);      
+    procedure PreviewTimer(Sender: TObject);
     procedure StartPreview(Item: TListItem);
     procedure ShowPreview;
     procedure HidePreview;
@@ -656,7 +656,7 @@ begin
   else if I > $FF then
     Result := $FF
   else
-    Result := I;        
+    Result := I;
 end;
 
 function BmpClone(B: TBitmap): TBitmap;
@@ -933,7 +933,7 @@ begin
           Scale := FSizes[J] / Picture.Graphic.Height;
           Aspect := Picture.Graphic.Height / Picture.Graphic.Width;
           if Aspect < 0.75 then
-            Scale := Scale * (Aspect / 0.75); 
+            Scale := Scale * (Aspect / 0.75);
 					FPhoto.Assign(Picture.Graphic);
 					ResizeBitmap(FPhoto, Round(FPhoto.Width * Scale),
 						Round(FPhoto.Height * Scale), FMode);
@@ -1231,7 +1231,7 @@ begin
   if Item = nil then
   	Item := FPhotos.Add;
   Item.FWidth := Width;
-  Item.FHeight :=  Height;    
+  Item.FHeight :=  Height;
   if Photo.Height <= DefViewSmallHeight then
   begin
 	  Item.FileName := FileName;

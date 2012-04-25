@@ -3843,7 +3843,7 @@ begin
   Result := CalcCaptionSize(DC, 'Wg').cy;
 end;
 
-function FontHeight(Font: TFont): Integer; 
+function FontHeight(Font: TFont): Integer;
 var
   DC: HDC;
   F: HFONT;

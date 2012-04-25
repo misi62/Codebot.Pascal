@@ -53,9 +53,9 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure Apply(UpdateKind: TUpdateKind);  virtual; 
+    procedure Apply(UpdateKind: TUpdateKind);  virtual;
     procedure ExecSQL(UpdateKind: TUpdateKind);
-    procedure SetParams(UpdateKind: TUpdateKind);       
+    procedure SetParams(UpdateKind: TUpdateKind);
     property DataSet: TADOUpdateQuery read GetDataSet write SetDataSet;
     property Query[UpdateKind: TUpdateKind]: TADOQuery read GetQuery;
     property SQL[UpdateKind: TUpdateKind]: TStrings read GetSQL write SetSQL;
@@ -110,9 +110,9 @@ function TADOUpdateSQL.GetQuery(UpdateKind: TUpdateKind): TADOQuery;
 begin
   if not Assigned(FQueries[UpdateKind]) then
   begin
-    FQueries[UpdateKind] := TADOQuery.Create(Self);    
-    FQueries[UpdateKind].Connection := FDataSet.Connection; 
-    FQueries[UpdateKind].SQL.Assign(FSQLText[UpdateKind]);  
+    FQueries[UpdateKind] := TADOQuery.Create(Self);
+    FQueries[UpdateKind].Connection := FDataSet.Connection;
+    FQueries[UpdateKind].SQL.Assign(FSQLText[UpdateKind]);
   end;
   Result := FQueries[UpdateKind];
 end;
@@ -179,12 +179,12 @@ begin
 		Param := Q.Parameters.Items[I];
 		Name := Param.Name;
 		Old := CompareText(Copy(Name, 1, 4), 'OLD_') = 0;
-		if Old then 
+		if Old then
 			System.Delete(Name, 1, 4);
-    Old:= Old and (UpdateKind <> ukDelete);  
+    Old:= Old and (UpdateKind <> ukDelete);
     Field := FDataSet.FindField(Name);
     if Field = nil then Continue;
-    if Old then 
+    if Old then
 		begin
 			Param.DataType := Field.DataType;
 			Param.Value := Field.OldValue;
@@ -300,11 +300,11 @@ procedure TADOUpdateQuery.FillBuffer;
 var
   I: Integer;
 begin
-  InitBuffer; 
+  InitBuffer;
   FDelRecords.Append;
 	for I:= 0 to Fields.Count - 1 do
-		if Fields[I].FieldKind = fkData then      
-         FDelRecords.Fields[I].Assign(Fields[I]);  
+		if Fields[I].FieldKind = fkData then
+         FDelRecords.Fields[I].Assign(Fields[I]);
   FDelRecords.Post;
 end;
 
@@ -312,15 +312,15 @@ procedure TADOUpdateQuery.ApplyDelUpdates;
 var
   Q: TADOUpdateQuery;
 begin
-  Q := FUpdateObject.FDataSet; 
-  FUpdateObject.FDataSet := TADOUpdateQuery(FDelRecords); 
+  Q := FUpdateObject.FDataSet;
+  FUpdateObject.FDataSet := TADOUpdateQuery(FDelRecords);
   FDelRecords.First;
   while not FDelRecords.Eof do
 	begin
     UpdateObject.Apply(ukDelete);
     FDelRecords.Next;
 	end;
-  FUpdateObject.FDataSet:=Q; 
+  FUpdateObject.FDataSet:=Q;
 end;
 
 procedure TADOUpdateQuery.CommitUpdates;

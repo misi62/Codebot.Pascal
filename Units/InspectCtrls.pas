@@ -309,7 +309,7 @@ type
     property TabStop;
     property TabOrder;
     property UseDockManager;
-		property Visible;    
+		property Visible;
     property WantEnter;
     property OnCanResize;
     property OnClick;
@@ -1499,7 +1499,7 @@ begin
     if Count > 0 then
       S := FEditors[0].Text
     else
-      FInplaceEdit.Top := - ItemHeight * 2;   
+      FInplaceEdit.Top := - ItemHeight * 2;
     ItemIndex := 0;
     UpdateControls(ItemIndex);
     if Count > 0 then

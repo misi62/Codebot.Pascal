@@ -519,9 +519,9 @@ type
     function  absoluteChildNumber(const pNode: IXMLDOMNode): Integer; safecall;
     function  formatIndex(lIndex: Integer; const bstrFormat: WideString): WideString; safecall;
     function  formatNumber(dblNumber: Double; const bstrFormat: WideString): WideString; safecall;
-    function  formatDate(varDate: OleVariant; const bstrFormat: WideString; 
+    function  formatDate(varDate: OleVariant; const bstrFormat: WideString;
                          varDestLocale: OleVariant): WideString; safecall;
-    function  formatTime(varTime: OleVariant; const bstrFormat: WideString; 
+    function  formatTime(varTime: OleVariant; const bstrFormat: WideString;
                          varDestLocale: OleVariant): WideString; safecall;
   end;
 
@@ -546,7 +546,7 @@ type
     function  transform: WordBool; safecall;
     procedure reset; safecall;
     function  Get_readyState: Integer; safecall;
-    procedure addParameter(const baseName: WideString; parameter: OleVariant; 
+    procedure addParameter(const baseName: WideString; parameter: OleVariant;
                            const namespaceURI: WideString); safecall;
     procedure addObject(const obj: IDispatch; const namespaceURI: WideString); safecall;
     function  Get_stylesheet: IXMLDOMNode; safecall;
@@ -583,7 +583,7 @@ type
 
   ISAXEntityResolver = interface(IUnknown)
     ['{99BCA7BD-E8C4-4D5F-A0CF-6D907901FF07}']
-    function  resolveEntity(var pwchPublicId: Word; var pwchSystemId: Word; 
+    function  resolveEntity(var pwchPublicId: Word; var pwchSystemId: Word;
                             out pvarInput: OleVariant): HResult; stdcall;
   end;
 
@@ -592,18 +592,18 @@ type
     function  putDocumentLocator(const pLocator: ISAXLocator): HResult; stdcall;
     function  startDocument: HResult; stdcall;
     function  endDocument: HResult; stdcall;
-    function  startPrefixMapping(var pwchPrefix: Word; cchPrefix: SYSINT; var pwchUri: Word; 
+    function  startPrefixMapping(var pwchPrefix: Word; cchPrefix: SYSINT; var pwchUri: Word;
                                  cchUri: SYSINT): HResult; stdcall;
     function  endPrefixMapping(var pwchPrefix: Word; cchPrefix: SYSINT): HResult; stdcall;
-    function  startElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT; 
-                           var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word; 
+    function  startElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT;
+                           var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word;
                            cchQName: SYSINT; const pAttributes: ISAXAttributes): HResult; stdcall;
-    function  endElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT; 
-                         var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word; 
+    function  endElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT;
+                         var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word;
                          cchQName: SYSINT): HResult; stdcall;
     function  characters(var pwchChars: Word; cchChars: SYSINT): HResult; stdcall;
     function  ignorableWhitespace(var pwchChars: Word; cchChars: SYSINT): HResult; stdcall;
-    function  processingInstruction(var pwchTarget: Word; cchTarget: SYSINT; var pwchData: Word; 
+    function  processingInstruction(var pwchTarget: Word; cchTarget: SYSINT; var pwchData: Word;
                                     cchData: SYSINT): HResult; stdcall;
     function  skippedEntity(var pwchName: Word; cchName: SYSINT): HResult; stdcall;
   end;
@@ -622,39 +622,39 @@ type
     function  getURI(nIndex: SYSINT; out ppwchUri: PWord1; out pcchUri: SYSINT): HResult; stdcall;
     function  getLocalName(nIndex: SYSINT; out ppwchLocalName: PWord1; out pcchLocalName: SYSINT): HResult; stdcall;
     function  getQName(nIndex: SYSINT; out ppwchQName: PWord1; out pcchQName: SYSINT): HResult; stdcall;
-    function  getName(nIndex: SYSINT; out ppwchUri: PWord1; out pcchUri: SYSINT; 
-                      out ppwchLocalName: PWord1; out pcchLocalName: SYSINT; 
+    function  getName(nIndex: SYSINT; out ppwchUri: PWord1; out pcchUri: SYSINT;
+                      out ppwchLocalName: PWord1; out pcchLocalName: SYSINT;
                       out ppwchQName: PWord1; out pcchQName: SYSINT): HResult; stdcall;
-    function  getIndexFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word; 
+    function  getIndexFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word;
                                cchLocalName: SYSINT; out pnIndex: SYSINT): HResult; stdcall;
     function  getIndexFromQName(var pwchQName: Word; cchQName: SYSINT; out pnIndex: SYSINT): HResult; stdcall;
     function  getType(nIndex: SYSINT; out ppwchType: PWord1; out pcchType: SYSINT): HResult; stdcall;
-    function  getTypeFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word; 
+    function  getTypeFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word;
                               cchLocalName: SYSINT; out ppwchType: PWord1; out pcchType: SYSINT): HResult; stdcall;
-    function  getTypeFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchType: PWord1; 
+    function  getTypeFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchType: PWord1;
                                out pcchType: SYSINT): HResult; stdcall;
     function  getValue(nIndex: SYSINT; out ppwchValue: PWord1; out pcchValue: SYSINT): HResult; stdcall;
-    function  getValueFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word; 
+    function  getValueFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word;
                                cchLocalName: SYSINT; out ppwchValue: PWord1; out pcchValue: SYSINT): HResult; stdcall;
-    function  getValueFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchValue: PWord1; 
+    function  getValueFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchValue: PWord1;
                                 out pcchValue: SYSINT): HResult; stdcall;
   end;
 
   ISAXDTDHandler = interface(IUnknown)
     ['{E15C1BAF-AFB3-4D60-8C36-19A8C45DEFED}']
-    function  notationDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
+    function  notationDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
                            cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT): HResult; stdcall;
-    function  unparsedEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
-                                 cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT; 
+    function  unparsedEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
+                                 cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT;
                                  var pwchNotationName: Word; cchNotationName: SYSINT): HResult; stdcall;
   end;
 
   ISAXErrorHandler = interface(IUnknown)
     ['{A60511C4-CCF5-479E-98A3-DC8DC545B7D0}']
     function  error(const pLocator: ISAXLocator; var pwchErrorMessage: Word; hrErrorCode: HResult): HResult; stdcall;
-    function  fatalError(const pLocator: ISAXLocator; var pwchErrorMessage: Word; 
+    function  fatalError(const pLocator: ISAXLocator; var pwchErrorMessage: Word;
                          hrErrorCode: HResult): HResult; stdcall;
-    function  ignorableWarning(const pLocator: ISAXLocator; var pwchErrorMessage: Word; 
+    function  ignorableWarning(const pLocator: ISAXLocator; var pwchErrorMessage: Word;
                                hrErrorCode: HResult): HResult; stdcall;
   end;
 
@@ -666,7 +666,7 @@ type
 
   ISAXLexicalHandler = interface(IUnknown)
     ['{7F85D5F5-47A8-4497-BDA5-84BA04819EA6}']
-    function  startDTD(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
+    function  startDTD(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
                        cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT): HResult; stdcall;
     function  endDTD: HResult; stdcall;
     function  startEntity(var pwchName: Word; cchName: SYSINT): HResult; stdcall;
@@ -679,13 +679,13 @@ type
   ISAXDeclHandler = interface(IUnknown)
     ['{862629AC-771A-47B2-8337-4E6843C1BE90}']
     function  elementDecl(var pwchName: Word; cchName: SYSINT; var pwchModel: Word; cchModel: SYSINT): HResult; stdcall;
-    function  attributeDecl(var pwchElementName: Word; cchElementName: SYSINT; 
-                            var pwchAttributeName: Word; cchAttributeName: SYSINT; 
-                            var pwchType: Word; cchType: SYSINT; var pwchValueDefault: Word; 
+    function  attributeDecl(var pwchElementName: Word; cchElementName: SYSINT;
+                            var pwchAttributeName: Word; cchAttributeName: SYSINT;
+                            var pwchType: Word; cchType: SYSINT; var pwchValueDefault: Word;
                             cchValueDefault: SYSINT; var pwchValue: Word; cchValue: SYSINT): HResult; stdcall;
-    function  internalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchValue: Word; 
+    function  internalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchValue: Word;
                                  cchValue: SYSINT): HResult; stdcall;
-    function  externalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
+    function  externalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
                                  cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT): HResult; stdcall;
   end;
 
@@ -729,9 +729,9 @@ type
     procedure endDocument; safecall;
     procedure startPrefixMapping(var strPrefix: WideString; var strURI: WideString); safecall;
     procedure endPrefixMapping(var strPrefix: WideString); safecall;
-    procedure startElement(var strNamespaceURI: WideString; var strLocalName: WideString; 
+    procedure startElement(var strNamespaceURI: WideString; var strLocalName: WideString;
                            var strQName: WideString; const oAttributes: IVBSAXAttributes); safecall;
-    procedure endElement(var strNamespaceURI: WideString; var strLocalName: WideString; 
+    procedure endElement(var strNamespaceURI: WideString; var strLocalName: WideString;
                          var strQName: WideString); safecall;
     procedure characters(var strChars: WideString); safecall;
     procedure ignorableWhitespace(var strChars: WideString); safecall;
@@ -796,7 +796,7 @@ type
 
   IVBSAXLexicalHandler = interface(IDispatch)
     ['{032AAC35-8C0E-4D9D-979F-E3B702935576}']
-    procedure startDTD(var strName: WideString; var strPublicId: WideString; 
+    procedure startDTD(var strName: WideString; var strPublicId: WideString;
                        var strSystemId: WideString); safecall;
     procedure endDTD; safecall;
     procedure startEntity(var strName: WideString); safecall;
@@ -809,11 +809,11 @@ type
   IVBSAXDeclHandler = interface(IDispatch)
     ['{E8917260-7579-4BE1-B5DD-7AFBFA6F077B}']
     procedure elementDecl(var strName: WideString; var strModel: WideString); safecall;
-    procedure attributeDecl(var strElementName: WideString; var strAttributeName: WideString; 
-                            var strType: WideString; var strValueDefault: WideString; 
+    procedure attributeDecl(var strElementName: WideString; var strAttributeName: WideString;
+                            var strType: WideString; var strValueDefault: WideString;
                             var strValue: WideString); safecall;
     procedure internalEntityDecl(var strName: WideString; var strValue: WideString); safecall;
-    procedure externalEntityDecl(var strName: WideString; var strPublicId: WideString; 
+    procedure externalEntityDecl(var strName: WideString; var strPublicId: WideString;
                                  var strSystemId: WideString); safecall;
   end;
 
@@ -848,14 +848,14 @@ type
 
   IMXAttributes = interface(IDispatch)
     ['{F10D27CC-3EC0-415C-8ED8-77AB1C5E7262}']
-    procedure addAttribute(const strURI: WideString; const strLocalName: WideString; 
-                           const strQName: WideString; const strType: WideString; 
+    procedure addAttribute(const strURI: WideString; const strLocalName: WideString;
+                           const strQName: WideString; const strType: WideString;
                            const strValue: WideString); safecall;
     procedure addAttributeFromIndex(varAtts: OleVariant; nIndex: SYSINT); safecall;
     procedure clear; safecall;
     procedure removeAttribute(nIndex: SYSINT); safecall;
-    procedure setAttribute(nIndex: SYSINT; const strURI: WideString; 
-                           const strLocalName: WideString; const strQName: WideString; 
+    procedure setAttribute(nIndex: SYSINT; const strURI: WideString;
+                           const strLocalName: WideString; const strQName: WideString;
                            const strType: WideString; const strValue: WideString); safecall;
     procedure setAttributes(varAtts: OleVariant); safecall;
     procedure setLocalName(nIndex: SYSINT; const strLocalName: WideString); safecall;
@@ -1019,7 +1019,7 @@ type
 
   IXMLHTTPRequest = interface(IDispatch)
     ['{ED8C108D-4349-11D2-91A4-00C04F7969E8}']
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); safecall;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString); safecall;
     function  getResponseHeader(const bstrHeader: WideString): WideString; safecall;
@@ -1046,7 +1046,7 @@ type
 
   IServerXMLHTTPRequest = interface(IXMLHTTPRequest)
     ['{2E9196BF-13BA-4DD4-91CA-6C571F281495}']
-    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer; 
+    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer;
                           receiveTimeout: Integer); safecall;
     function  waitForResponse(timeoutInSeconds: OleVariant): WordBool; safecall;
     function  getOption(option: SERVERXMLHTTP_OPTION): OleVariant; safecall;

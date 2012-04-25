@@ -1700,7 +1700,7 @@ begin
     S := [];
     if not Enabled then
       S := [dsDisabled]
-    else if Focused then 
+    else if Focused then
       S := [dsFocused];
     if I = FButtonHot then
       Include(S, dsHot);

@@ -370,7 +370,7 @@ begin
   if Transparent <> Value then
   begin
     if Value then
-      ControlStyle := ControlStyle - [csOpaque] 
+      ControlStyle := ControlStyle - [csOpaque]
     else
       ControlStyle := ControlStyle + [csOpaque];
     FTransparent := Value;

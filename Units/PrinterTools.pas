@@ -444,7 +444,7 @@ begin
           Result := I;
           Break;
         end;
-        
+
   finally
     FreeDevice;
   end;

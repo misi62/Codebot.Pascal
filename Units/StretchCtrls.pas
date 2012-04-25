@@ -1001,7 +1001,7 @@ begin
     Result.Bottom := Result.Top + FItemHeight + 5;
   end
   else
-    FillChar(Result, SizeOf(Result), #0);    
+    FillChar(Result, SizeOf(Result), #0);
 end;
 
 function TCustomStretchList.GetUpRect: TRect;

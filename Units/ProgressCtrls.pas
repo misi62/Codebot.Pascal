@@ -247,7 +247,7 @@ begin
       ProgressThread.Add(Self)
     else
       ProgressThread.Remove(Self);
-    Invalidate;      
+    Invalidate;
   end;
 end;
 

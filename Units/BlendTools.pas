@@ -197,7 +197,7 @@ begin
     begin
     	if B.Blue = 0 then
       	A^ := Black
-			{ begin new code }                 
+			{ begin new code }
 			else if B.Blue > $A0 then
       begin
       	PRGB(A)^ := PRGB(@Fill)^;
@@ -1046,7 +1046,7 @@ var
   ACol, P: PRow;
 begin
 	if Radius < 0.01 then Exit;
-	if (W < 2) or (H < 2) then Exit; 
+	if (W < 2) or (H < 2) then Exit;
 	MakeGaussianKernel(K, Radius, 255, 1);
 	GetMem(Rows, H * SizeOf(PRow));
 	GetMem(ACol, H * SizeOf(TRGB));

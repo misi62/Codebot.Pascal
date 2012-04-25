@@ -29,7 +29,7 @@ type
     procedure ApplyUpdates;
     procedure CancelUpdates;
     procedure CommitUpdates;
-  published    
+  published
     property SqlUpdate: TStrings index 0 read GetSqlIndex write SetSqlIndex;
     property SqlInsert: TStrings index 1 read GetSqlIndex write SetSqlIndex;
     property SqlDelete: TStrings index 2 read GetSqlIndex write SetSqlIndex;
@@ -235,9 +235,9 @@ function TUpdateObject.GetQuery(UpdateKind: TUpdateKind): TADOQuery;
 begin
   if not Assigned(FQueries[UpdateKind]) then
   begin
-    FQueries[UpdateKind] := TADOQuery.Create(nil);    
-    FQueries[UpdateKind].Connection := FDataSet.Connection; 
-    FQueries[UpdateKind].SQL.Assign(FSqlText[UpdateKind]);  
+    FQueries[UpdateKind] := TADOQuery.Create(nil);
+    FQueries[UpdateKind].Connection := FDataSet.Connection;
+    FQueries[UpdateKind].SQL.Assign(FSqlText[UpdateKind]);
   end;
   Result := FQueries[UpdateKind];
 end;
@@ -304,12 +304,12 @@ begin
 		Param := Q.Parameters.Items[I];
 		Name := Param.Name;
 		Old := CompareText(Copy(Name, 1, 4), 'OLD_') = 0;
-		if Old then 
+		if Old then
 			System.Delete(Name, 1, 4);
-    Old:= Old and (UpdateKind <> ukDelete);  
+    Old:= Old and (UpdateKind <> ukDelete);
     Field := FDataSet.FindField(Name);
     if Field = nil then Continue;
-    if Old then 
+    if Old then
 		begin
 			Param.DataType := Field.DataType;
 			Param.Value := Field.OldValue;

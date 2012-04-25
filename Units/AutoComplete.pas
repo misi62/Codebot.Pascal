@@ -44,7 +44,7 @@ type
     destructor Destroy; override;
     procedure RealizeEdit;
     property Unknown: IUnknown read FAutoComplete;
-  published  
+  published
     property Active: Boolean read FActive write SetActive;
     property Associate: TWinControl read FAssociate write SetAssociate;
     property Strings: TStrings read FStrings write SetStrings;

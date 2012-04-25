@@ -495,7 +495,7 @@ implementation
 constructor TImageSpeedButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  ControlStyle := [csCaptureMouse, csParentBackground, csDoubleClicks]; //  
+  ControlStyle := [csCaptureMouse, csParentBackground, csDoubleClicks]; //
   Width := 24;
   Height := 24;
   FImageIndex := -1;

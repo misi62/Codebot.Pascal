@@ -52,8 +52,8 @@ type
 	cdDataType = cdUInt32;
 	cdMemType = cdUInt32;
 	cdWhence = cdUInt16;
-	cdPermission = cdUInt16; 
-	 
+	cdPermission = cdUInt16;
+
 type
 	TCDUnknown = Integer;
 	TCDVersionInfo = record

@@ -1342,7 +1342,7 @@ begin
 		finally
     	if not WasLoading then
 		    Exclude(Stylizer.FDesignState, dsLoading);
-		end;      
+		end;
 	end;
 end;
 
@@ -1646,7 +1646,7 @@ begin
 	end
 	else
 		Msg.Result := HTCLIENT;
-end;   
+end;
 
 procedure TDesignHost.WMNCLButtonDown(var Msg: TWMNCLButtonDown);
 

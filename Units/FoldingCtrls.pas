@@ -385,7 +385,7 @@ function TGelFoldingProvider.GetItemHeight(View: TCustomFoldingView): Integer;
 begin
   Result := FontHeight(View.Canvas.Handle) + 3;
 end;
-                     
+
 procedure TGelFoldingProvider.DrawBarBkgnd(View: TCustomFoldingView; Rect: TRect);
 begin
   // View.DrawParentBackground(View.Handle, View.Canvas.Handle, nil, False);
@@ -830,7 +830,7 @@ end;
 
 procedure TCustomFoldingView.ImagesChange(Sender: TObject);
 begin
-  Repaint;          
+  Repaint;
 end;
 
 procedure TCustomFoldingView.BarsChange;
@@ -852,7 +852,7 @@ begin
       end;
   if not Found then
     FSelected := nil;
-  Repaint;          
+  Repaint;
 end;
 
 procedure TCustomFoldingView.DoItemClick(Item: TFoldingItem);

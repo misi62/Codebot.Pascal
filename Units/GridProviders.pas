@@ -454,7 +454,7 @@ begin
     if Result.ItemIndex < 0 then
       Result.ItemIndex := -1
     else if Result.ItemIndex > A.Items.Count - 1 then
-      Result.ItemIndex := -1;      
+      Result.ItemIndex := -1;
   end
   else
   begin

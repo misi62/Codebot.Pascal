@@ -699,7 +699,7 @@ end;
 
 { TOpenGLControl.IDrawingDevice }
 
-function TOpenGLControl.DeviceGetActive: Boolean; 
+function TOpenGLControl.DeviceGetActive: Boolean;
 begin
 	Result := Active;
 end;
@@ -1005,7 +1005,7 @@ end;
 
 { TOpenGLBuffer.IDrawingDevice }
 
-function TOpenGLBuffer.DeviceGetActive: Boolean; 
+function TOpenGLBuffer.DeviceGetActive: Boolean;
 begin
 	Result := Active;
 end;

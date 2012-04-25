@@ -1272,7 +1272,7 @@ type
   ARGB = DWORD;
   TArgb = ARGB;
   PArgb = ^TArgb;
-  
+
   TArgbStruct = packed record
     B, G, R, A: Byte;
   end;
@@ -2919,7 +2919,7 @@ type
     property Opacity: Byte read GetOpacity write SetOpacity;
     property Width: Integer read GetWidth;
     property Height: Integer read GetHeight;
-    property TextRenderingHint: TTextRenderingHint read GetTextRenderingHint write SetTextRenderingHint;  
+    property TextRenderingHint: TTextRenderingHint read GetTextRenderingHint write SetTextRenderingHint;
     property SmoothingMode: TSmoothingMode read GetSmoothingMode write SetSmoothingMode;
     property Transform: IGdiMatrix read GetTransform write SetTransform;
   end;

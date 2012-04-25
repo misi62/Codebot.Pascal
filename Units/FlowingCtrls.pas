@@ -545,7 +545,7 @@ begin
       finally
       	Bitmap.Free;
       end;
-		end;      
+		end;
   end
   else
   begin

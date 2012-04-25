@@ -159,7 +159,7 @@ end;
 
 { TControlHost }
 
-constructor TControlHost.Create(AOwner: TComponent); 
+constructor TControlHost.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FControl := GetControlClass.Create(Self);
@@ -272,7 +272,7 @@ begin
 				else
         	InflateRect(R, 2, 2);
 				FillRectColor(DC, R, H.Stylizer.BandColor);
-        ReleaseDC(Wnd, DC);          
+        ReleaseDC(Wnd, DC);
       end;
 	end;
 end;
@@ -353,7 +353,7 @@ type
   	procedure WMNCPaint(var Msg: TMessage); message WM_NCPAINT;
 		procedure WMPaint(var Msg: TWMPaint); message WM_PAINT;
   end;
-  
+
 { TListHost }
 
 procedure TListBoxFix.WMNCPaint(var Msg: TMessage);

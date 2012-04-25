@@ -1780,7 +1780,7 @@ begin
     	Count := Count + 1
 		else
     	Count := Count - 1;
-    Invalidate;      
+    Invalidate;
   end;
 end;
 

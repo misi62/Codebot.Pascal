@@ -545,7 +545,7 @@ begin
   begin
   	FPropertyInspector.Instance := TObject(ParentLabel.Tag);
     InstanceChange;
-	end;    
+	end;
 end;
 
 procedure TAppExplorerForm.PreviewBoxClose(Sender: TObject);
@@ -570,7 +570,7 @@ procedure TAppExplorerForm.Notification(AComponent: TComponent;
 		else if C = nil then
     	Result := False
 		else
-    	Result := IsSelfOwned(C.Owner);            
+    	Result := IsSelfOwned(C.Owner);
   end;
 
 var

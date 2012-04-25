@@ -93,7 +93,7 @@ type
     property ScaleX: Single read FScaleX write FScaleX;
     property ScaleY: Single read FScaleY write FScaleY;
     property Scanline[Row: Integer]: Pointer read GetScanLine;
-    property Stride: Integer read FStride; 
+    property Stride: Integer read FStride;
     property Size: Integer read GetSize;
   end;
 
@@ -254,7 +254,7 @@ begin
 	  else
 		  AlphaBlend(DC, X, Y, W, H,
     		FBitmap.DC, 0, Index * FWidth, FWidth, FWidth, Func);
-  end;        
+  end;
 end;
 
 procedure TImageBitmap.Blit(DC: HDC; const Rect: TRect; const Borders: TRect; Opacity: Byte = $FF);

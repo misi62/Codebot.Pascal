@@ -855,7 +855,7 @@ begin
     if I <> 0 then
     	FValue := '$' + IntToHex(I, 8)
 		else
-    	FValue := 'nil';      
+    	FValue := 'nil';
   end
   else if PropInfo.PropType^ = TypeInfo(TColor) then
   	FValue := ColorToStr(TColor(GetOrdProp(Instance, PropInfo)));

@@ -1,34 +1,34 @@
 unit MSXML_TLB;
 
 // ************************************************************************ //
-// WARNING                                                                    
-// -------                                                                    
-// The types declared in this file were generated from data read from a       
-// Type Library. If this type library is explicitly or indirectly (via        
-// another type library referring to this type library) re-imported, or the   
-// 'Refresh' command of the Type Library Editor activated while editing the   
-// Type Library, the contents of this file will be regenerated and all        
-// manual modifications will be lost.                                         
+// WARNING
+// -------
+// The types declared in this file were generated from data read from a
+// Type Library. If this type library is explicitly or indirectly (via
+// another type library referring to this type library) re-imported, or the
+// 'Refresh' command of the Type Library Editor activated while editing the
+// Type Library, the contents of this file will be regenerated and all
+// manual modifications will be lost.
 // ************************************************************************ //
 
 // PASTLWTR : $Revision:   1.88  $
 // File generated on 1/31/2002 4:35:15 PM from Type Library described below.
 
 // *************************************************************************//
-// NOTE:                                                                      
-// Items guarded by $IFDEF_LIVE_SERVER_AT_DESIGN_TIME are used by properties  
-// which return objects that may need to be explicitly created via a function 
-// call prior to any access via the property. These items have been disabled  
-// in order to prevent accidental use from within the object inspector. You   
-// may enable them by defining LIVE_SERVER_AT_DESIGN_TIME or by selectively   
-// removing them from the $IFDEF blocks. However, such items must still be    
-// programmatically created via a method of the appropriate CoClass before    
-// they can be used.                                                          
+// NOTE:
+// Items guarded by $IFDEF_LIVE_SERVER_AT_DESIGN_TIME are used by properties
+// which return objects that may need to be explicitly created via a function
+// call prior to any access via the property. These items have been disabled
+// in order to prevent accidental use from within the object inspector. You
+// may enable them by defining LIVE_SERVER_AT_DESIGN_TIME or by selectively
+// removing them from the $IFDEF blocks. However, such items must still be
+// programmatically created via a method of the appropriate CoClass before
+// they can be used.
 // ************************************************************************ //
 // Type Lib: C:\WINDOWS\System32\msxml3.dll (1)
 // IID\LCID: {F5078F18-C551-11D3-89B9-0000F81FE221}\0
-// Helpfile: 
-// DepndLst: 
+// Helpfile:
+// DepndLst:
 //   (1) v2.0 stdole, (C:\WINDOWS\System32\stdole2.tlb)
 //   (2) v4.0 StdVCL, (C:\WINDOWS\System32\STDVCL40.DLL)
 // Errors:
@@ -40,17 +40,17 @@ unit MSXML_TLB;
 //   Hint: Member 'type' of 'IXMLElement2' changed to 'type_'
 //   Error creating palette bitmap of (TDOMDocument) : Invalid GUID format
 // ************************************************************************ //
-{$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers. 
+{$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers.
 interface
 
 uses Windows, ActiveX, Classes, Graphics, OleServer, OleCtrls, StdVCL;
 
 // *********************************************************************//
-// GUIDS declared in the TypeLibrary. Following prefixes are used:        
-//   Type Libraries     : LIBID_xxxx                                      
-//   CoClasses          : CLASS_xxxx                                      
-//   DISPInterfaces     : DIID_xxxx                                       
-//   Non-DISP interfaces: IID_xxxx                                        
+// GUIDS declared in the TypeLibrary. Following prefixes are used:
+//   Type Libraries     : LIBID_xxxx
+//   CoClasses          : CLASS_xxxx
+//   DISPInterfaces     : DIID_xxxx
+//   Non-DISP interfaces: IID_xxxx
 // *********************************************************************//
 const
   // TypeLibrary Major and minor versions
@@ -146,7 +146,7 @@ const
   CLASS_XMLDocument: TGUID = '{CFC399AF-D876-11D0-9C10-00C04FC99C8E}';
 
 // *********************************************************************//
-// Declaration of Enumerations defined in Type Library                    
+// Declaration of Enumerations defined in Type Library
 // *********************************************************************//
 // Constants for enum tagDOMNodeType
 type
@@ -200,7 +200,7 @@ const
 type
 
 // *********************************************************************//
-// Forward declaration of types defined in TypeLibrary                    
+// Forward declaration of types defined in TypeLibrary
 // *********************************************************************//
   IXMLDOMImplementation = interface;
   IXMLDOMImplementationDisp = dispinterface;
@@ -307,8 +307,8 @@ type
   IServerXMLHTTPRequestDisp = dispinterface;
 
 // *********************************************************************//
-// Declaration of CoClasses defined in Type Library                       
-// (NOTE: Here we map each CoClass to its Default Interface)              
+// Declaration of CoClasses defined in Type Library
+// (NOTE: Here we map each CoClass to its Default Interface)
 // *********************************************************************//
   DOMDocument = IXMLDOMDocument2;
   DOMDocument26 = IXMLDOMDocument2;
@@ -340,12 +340,12 @@ type
 
 
 // *********************************************************************//
-// Declaration of structures, unions and aliases.                         
+// Declaration of structures, unions and aliases.
 // *********************************************************************//
   PWord1 = ^Word; {*}
   PUserType1 = ^TGUID; {*}
 
-  DOMNodeType = tagDOMNodeType; 
+  DOMNodeType = tagDOMNodeType;
 
   _xml_error = packed record
     _nLine: SYSUINT;
@@ -358,9 +358,9 @@ type
     _reserved2: LongWord;
   end;
 
-  XMLELEM_TYPE = tagXMLEMEM_TYPE; 
-  SERVERXMLHTTP_OPTION = _SERVERXMLHTTP_OPTION; 
-  SXH_SERVER_CERT_OPTION = _SXH_SERVER_CERT_OPTION; 
+  XMLELEM_TYPE = tagXMLEMEM_TYPE;
+  SERVERXMLHTTP_OPTION = _SERVERXMLHTTP_OPTION;
+  SXH_SERVER_CERT_OPTION = _SXH_SERVER_CERT_OPTION;
 
 // *********************************************************************//
 // Interface: IXMLDOMImplementation
@@ -1562,9 +1562,9 @@ type
     function  absoluteChildNumber(const pNode: IXMLDOMNode): Integer; safecall;
     function  formatIndex(lIndex: Integer; const bstrFormat: WideString): WideString; safecall;
     function  formatNumber(dblNumber: Double; const bstrFormat: WideString): WideString; safecall;
-    function  formatDate(varDate: OleVariant; const bstrFormat: WideString; 
+    function  formatDate(varDate: OleVariant; const bstrFormat: WideString;
                          varDestLocale: OleVariant): WideString; safecall;
-    function  formatTime(varTime: OleVariant; const bstrFormat: WideString; 
+    function  formatTime(varTime: OleVariant; const bstrFormat: WideString;
                          varDestLocale: OleVariant): WideString; safecall;
   end;
 
@@ -1582,9 +1582,9 @@ type
     function  absoluteChildNumber(const pNode: IXMLDOMNode): Integer; dispid 191;
     function  formatIndex(lIndex: Integer; const bstrFormat: WideString): WideString; dispid 192;
     function  formatNumber(dblNumber: Double; const bstrFormat: WideString): WideString; dispid 193;
-    function  formatDate(varDate: OleVariant; const bstrFormat: WideString; 
+    function  formatDate(varDate: OleVariant; const bstrFormat: WideString;
                          varDestLocale: OleVariant): WideString; dispid 194;
-    function  formatTime(varTime: OleVariant; const bstrFormat: WideString; 
+    function  formatTime(varTime: OleVariant; const bstrFormat: WideString;
                          varDestLocale: OleVariant): WideString; dispid 195;
     property nodeName: WideString readonly dispid 2;
     property nodeValue: OleVariant dispid 3;
@@ -1662,7 +1662,7 @@ type
     function  transform: WordBool; safecall;
     procedure reset; safecall;
     function  Get_readyState: Integer; safecall;
-    procedure addParameter(const baseName: WideString; parameter: OleVariant; 
+    procedure addParameter(const baseName: WideString; parameter: OleVariant;
                            const namespaceURI: WideString); safecall;
     procedure addObject(const obj: IDispatch; const namespaceURI: WideString); safecall;
     function  Get_stylesheet: IXMLDOMNode; safecall;
@@ -1691,7 +1691,7 @@ type
     function  transform: WordBool; dispid 8;
     procedure reset; dispid 9;
     property readyState: Integer readonly dispid 10;
-    procedure addParameter(const baseName: WideString; parameter: OleVariant; 
+    procedure addParameter(const baseName: WideString; parameter: OleVariant;
                            const namespaceURI: WideString); dispid 11;
     procedure addObject(const obj: IDispatch; const namespaceURI: WideString); dispid 12;
     property stylesheet: IXMLDOMNode readonly dispid 13;
@@ -1731,7 +1731,7 @@ type
 // *********************************************************************//
   ISAXEntityResolver = interface(IUnknown)
     ['{99BCA7BD-E8C4-4D5F-A0CF-6D907901FF07}']
-    function  resolveEntity(var pwchPublicId: Word; var pwchSystemId: Word; 
+    function  resolveEntity(var pwchPublicId: Word; var pwchSystemId: Word;
                             out pvarInput: OleVariant): HResult; stdcall;
   end;
 
@@ -1745,18 +1745,18 @@ type
     function  putDocumentLocator(const pLocator: ISAXLocator): HResult; stdcall;
     function  startDocument: HResult; stdcall;
     function  endDocument: HResult; stdcall;
-    function  startPrefixMapping(var pwchPrefix: Word; cchPrefix: SYSINT; var pwchUri: Word; 
+    function  startPrefixMapping(var pwchPrefix: Word; cchPrefix: SYSINT; var pwchUri: Word;
                                  cchUri: SYSINT): HResult; stdcall;
     function  endPrefixMapping(var pwchPrefix: Word; cchPrefix: SYSINT): HResult; stdcall;
-    function  startElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT; 
-                           var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word; 
+    function  startElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT;
+                           var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word;
                            cchQName: SYSINT; const pAttributes: ISAXAttributes): HResult; stdcall;
-    function  endElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT; 
-                         var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word; 
+    function  endElement(var pwchNamespaceUri: Word; cchNamespaceUri: SYSINT;
+                         var pwchLocalName: Word; cchLocalName: SYSINT; var pwchQName: Word;
                          cchQName: SYSINT): HResult; stdcall;
     function  characters(var pwchChars: Word; cchChars: SYSINT): HResult; stdcall;
     function  ignorableWhitespace(var pwchChars: Word; cchChars: SYSINT): HResult; stdcall;
-    function  processingInstruction(var pwchTarget: Word; cchTarget: SYSINT; var pwchData: Word; 
+    function  processingInstruction(var pwchTarget: Word; cchTarget: SYSINT; var pwchData: Word;
                                     cchData: SYSINT): HResult; stdcall;
     function  skippedEntity(var pwchName: Word; cchName: SYSINT): HResult; stdcall;
   end;
@@ -1785,21 +1785,21 @@ type
     function  getURI(nIndex: SYSINT; out ppwchUri: PWord1; out pcchUri: SYSINT): HResult; stdcall;
     function  getLocalName(nIndex: SYSINT; out ppwchLocalName: PWord1; out pcchLocalName: SYSINT): HResult; stdcall;
     function  getQName(nIndex: SYSINT; out ppwchQName: PWord1; out pcchQName: SYSINT): HResult; stdcall;
-    function  getName(nIndex: SYSINT; out ppwchUri: PWord1; out pcchUri: SYSINT; 
-                      out ppwchLocalName: PWord1; out pcchLocalName: SYSINT; 
+    function  getName(nIndex: SYSINT; out ppwchUri: PWord1; out pcchUri: SYSINT;
+                      out ppwchLocalName: PWord1; out pcchLocalName: SYSINT;
                       out ppwchQName: PWord1; out pcchQName: SYSINT): HResult; stdcall;
-    function  getIndexFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word; 
+    function  getIndexFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word;
                                cchLocalName: SYSINT; out pnIndex: SYSINT): HResult; stdcall;
     function  getIndexFromQName(var pwchQName: Word; cchQName: SYSINT; out pnIndex: SYSINT): HResult; stdcall;
     function  getType(nIndex: SYSINT; out ppwchType: PWord1; out pcchType: SYSINT): HResult; stdcall;
-    function  getTypeFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word; 
+    function  getTypeFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word;
                               cchLocalName: SYSINT; out ppwchType: PWord1; out pcchType: SYSINT): HResult; stdcall;
-    function  getTypeFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchType: PWord1; 
+    function  getTypeFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchType: PWord1;
                                out pcchType: SYSINT): HResult; stdcall;
     function  getValue(nIndex: SYSINT; out ppwchValue: PWord1; out pcchValue: SYSINT): HResult; stdcall;
-    function  getValueFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word; 
+    function  getValueFromName(var pwchUri: Word; cchUri: SYSINT; var pwchLocalName: Word;
                                cchLocalName: SYSINT; out ppwchValue: PWord1; out pcchValue: SYSINT): HResult; stdcall;
-    function  getValueFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchValue: PWord1; 
+    function  getValueFromQName(var pwchQName: Word; cchQName: SYSINT; out ppwchValue: PWord1;
                                 out pcchValue: SYSINT): HResult; stdcall;
   end;
 
@@ -1810,10 +1810,10 @@ type
 // *********************************************************************//
   ISAXDTDHandler = interface(IUnknown)
     ['{E15C1BAF-AFB3-4D60-8C36-19A8C45DEFED}']
-    function  notationDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
+    function  notationDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
                            cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT): HResult; stdcall;
-    function  unparsedEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
-                                 cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT; 
+    function  unparsedEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
+                                 cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT;
                                  var pwchNotationName: Word; cchNotationName: SYSINT): HResult; stdcall;
   end;
 
@@ -1825,9 +1825,9 @@ type
   ISAXErrorHandler = interface(IUnknown)
     ['{A60511C4-CCF5-479E-98A3-DC8DC545B7D0}']
     function  error(const pLocator: ISAXLocator; var pwchErrorMessage: Word; hrErrorCode: HResult): HResult; stdcall;
-    function  fatalError(const pLocator: ISAXLocator; var pwchErrorMessage: Word; 
+    function  fatalError(const pLocator: ISAXLocator; var pwchErrorMessage: Word;
                          hrErrorCode: HResult): HResult; stdcall;
-    function  ignorableWarning(const pLocator: ISAXLocator; var pwchErrorMessage: Word; 
+    function  ignorableWarning(const pLocator: ISAXLocator; var pwchErrorMessage: Word;
                                hrErrorCode: HResult): HResult; stdcall;
   end;
 
@@ -1849,7 +1849,7 @@ type
 // *********************************************************************//
   ISAXLexicalHandler = interface(IUnknown)
     ['{7F85D5F5-47A8-4497-BDA5-84BA04819EA6}']
-    function  startDTD(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
+    function  startDTD(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
                        cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT): HResult; stdcall;
     function  endDTD: HResult; stdcall;
     function  startEntity(var pwchName: Word; cchName: SYSINT): HResult; stdcall;
@@ -1867,13 +1867,13 @@ type
   ISAXDeclHandler = interface(IUnknown)
     ['{862629AC-771A-47B2-8337-4E6843C1BE90}']
     function  elementDecl(var pwchName: Word; cchName: SYSINT; var pwchModel: Word; cchModel: SYSINT): HResult; stdcall;
-    function  attributeDecl(var pwchElementName: Word; cchElementName: SYSINT; 
-                            var pwchAttributeName: Word; cchAttributeName: SYSINT; 
-                            var pwchType: Word; cchType: SYSINT; var pwchValueDefault: Word; 
+    function  attributeDecl(var pwchElementName: Word; cchElementName: SYSINT;
+                            var pwchAttributeName: Word; cchAttributeName: SYSINT;
+                            var pwchType: Word; cchType: SYSINT; var pwchValueDefault: Word;
                             cchValueDefault: SYSINT; var pwchValue: Word; cchValue: SYSINT): HResult; stdcall;
-    function  internalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchValue: Word; 
+    function  internalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchValue: Word;
                                  cchValue: SYSINT): HResult; stdcall;
-    function  externalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word; 
+    function  externalEntityDecl(var pwchName: Word; cchName: SYSINT; var pwchPublicId: Word;
                                  cchPublicId: SYSINT; var pwchSystemId: Word; cchSystemId: SYSINT): HResult; stdcall;
   end;
 
@@ -1963,9 +1963,9 @@ type
     procedure endDocument; safecall;
     procedure startPrefixMapping(var strPrefix: WideString; var strURI: WideString); safecall;
     procedure endPrefixMapping(var strPrefix: WideString); safecall;
-    procedure startElement(var strNamespaceURI: WideString; var strLocalName: WideString; 
+    procedure startElement(var strNamespaceURI: WideString; var strLocalName: WideString;
                            var strQName: WideString; const oAttributes: IVBSAXAttributes); safecall;
-    procedure endElement(var strNamespaceURI: WideString; var strLocalName: WideString; 
+    procedure endElement(var strNamespaceURI: WideString; var strLocalName: WideString;
                          var strQName: WideString); safecall;
     procedure characters(var strChars: WideString); safecall;
     procedure ignorableWhitespace(var strChars: WideString); safecall;
@@ -1986,9 +1986,9 @@ type
     procedure endDocument; dispid 1324;
     procedure startPrefixMapping(var strPrefix: WideString; var strURI: WideString); dispid 1325;
     procedure endPrefixMapping(var strPrefix: WideString); dispid 1326;
-    procedure startElement(var strNamespaceURI: WideString; var strLocalName: WideString; 
+    procedure startElement(var strNamespaceURI: WideString; var strLocalName: WideString;
                            var strQName: WideString; const oAttributes: IVBSAXAttributes); dispid 1327;
-    procedure endElement(var strNamespaceURI: WideString; var strLocalName: WideString; 
+    procedure endElement(var strNamespaceURI: WideString; var strLocalName: WideString;
                          var strQName: WideString); dispid 1328;
     procedure characters(var strChars: WideString); dispid 1329;
     procedure ignorableWhitespace(var strChars: WideString); dispid 1330;
@@ -2076,9 +2076,9 @@ type
 // *********************************************************************//
   IVBSAXDTDHandler = interface(IDispatch)
     ['{24FB3297-302D-4620-BA39-3A732D850558}']
-    procedure notationDecl(var strName: WideString; var strPublicId: WideString; 
+    procedure notationDecl(var strName: WideString; var strPublicId: WideString;
                            var strSystemId: WideString); safecall;
-    procedure unparsedEntityDecl(var strName: WideString; var strPublicId: WideString; 
+    procedure unparsedEntityDecl(var strName: WideString; var strPublicId: WideString;
                                  var strSystemId: WideString; var strNotationName: WideString); safecall;
   end;
 
@@ -2089,9 +2089,9 @@ type
 // *********************************************************************//
   IVBSAXDTDHandlerDisp = dispinterface
     ['{24FB3297-302D-4620-BA39-3A732D850558}']
-    procedure notationDecl(var strName: WideString; var strPublicId: WideString; 
+    procedure notationDecl(var strName: WideString; var strPublicId: WideString;
                            var strSystemId: WideString); dispid 1335;
-    procedure unparsedEntityDecl(var strName: WideString; var strPublicId: WideString; 
+    procedure unparsedEntityDecl(var strName: WideString; var strPublicId: WideString;
                                  var strSystemId: WideString; var strNotationName: WideString); dispid 1336;
   end;
 
@@ -2102,11 +2102,11 @@ type
 // *********************************************************************//
   IVBSAXErrorHandler = interface(IDispatch)
     ['{D963D3FE-173C-4862-9095-B92F66995F52}']
-    procedure error(const oLocator: IVBSAXLocator; var strErrorMessage: WideString; 
+    procedure error(const oLocator: IVBSAXLocator; var strErrorMessage: WideString;
                     nErrorCode: Integer); safecall;
-    procedure fatalError(const oLocator: IVBSAXLocator; var strErrorMessage: WideString; 
+    procedure fatalError(const oLocator: IVBSAXLocator; var strErrorMessage: WideString;
                          nErrorCode: Integer); safecall;
-    procedure ignorableWarning(const oLocator: IVBSAXLocator; var strErrorMessage: WideString; 
+    procedure ignorableWarning(const oLocator: IVBSAXLocator; var strErrorMessage: WideString;
                                nErrorCode: Integer); safecall;
   end;
 
@@ -2117,11 +2117,11 @@ type
 // *********************************************************************//
   IVBSAXErrorHandlerDisp = dispinterface
     ['{D963D3FE-173C-4862-9095-B92F66995F52}']
-    procedure error(const oLocator: IVBSAXLocator; var strErrorMessage: WideString; 
+    procedure error(const oLocator: IVBSAXLocator; var strErrorMessage: WideString;
                     nErrorCode: Integer); dispid 1339;
-    procedure fatalError(const oLocator: IVBSAXLocator; var strErrorMessage: WideString; 
+    procedure fatalError(const oLocator: IVBSAXLocator; var strErrorMessage: WideString;
                          nErrorCode: Integer); dispid 1340;
-    procedure ignorableWarning(const oLocator: IVBSAXLocator; var strErrorMessage: WideString; 
+    procedure ignorableWarning(const oLocator: IVBSAXLocator; var strErrorMessage: WideString;
                                nErrorCode: Integer); dispid 1341;
   end;
 
@@ -2154,7 +2154,7 @@ type
 // *********************************************************************//
   IVBSAXLexicalHandler = interface(IDispatch)
     ['{032AAC35-8C0E-4D9D-979F-E3B702935576}']
-    procedure startDTD(var strName: WideString; var strPublicId: WideString; 
+    procedure startDTD(var strName: WideString; var strPublicId: WideString;
                        var strSystemId: WideString); safecall;
     procedure endDTD; safecall;
     procedure startEntity(var strName: WideString); safecall;
@@ -2171,7 +2171,7 @@ type
 // *********************************************************************//
   IVBSAXLexicalHandlerDisp = dispinterface
     ['{032AAC35-8C0E-4D9D-979F-E3B702935576}']
-    procedure startDTD(var strName: WideString; var strPublicId: WideString; 
+    procedure startDTD(var strName: WideString; var strPublicId: WideString;
                        var strSystemId: WideString); dispid 1358;
     procedure endDTD; dispid 1359;
     procedure startEntity(var strName: WideString); dispid 1360;
@@ -2189,11 +2189,11 @@ type
   IVBSAXDeclHandler = interface(IDispatch)
     ['{E8917260-7579-4BE1-B5DD-7AFBFA6F077B}']
     procedure elementDecl(var strName: WideString; var strModel: WideString); safecall;
-    procedure attributeDecl(var strElementName: WideString; var strAttributeName: WideString; 
-                            var strType: WideString; var strValueDefault: WideString; 
+    procedure attributeDecl(var strElementName: WideString; var strAttributeName: WideString;
+                            var strType: WideString; var strValueDefault: WideString;
                             var strValue: WideString); safecall;
     procedure internalEntityDecl(var strName: WideString; var strValue: WideString); safecall;
-    procedure externalEntityDecl(var strName: WideString; var strPublicId: WideString; 
+    procedure externalEntityDecl(var strName: WideString; var strPublicId: WideString;
                                  var strSystemId: WideString); safecall;
   end;
 
@@ -2205,11 +2205,11 @@ type
   IVBSAXDeclHandlerDisp = dispinterface
     ['{E8917260-7579-4BE1-B5DD-7AFBFA6F077B}']
     procedure elementDecl(var strName: WideString; var strModel: WideString); dispid 1367;
-    procedure attributeDecl(var strElementName: WideString; var strAttributeName: WideString; 
-                            var strType: WideString; var strValueDefault: WideString; 
+    procedure attributeDecl(var strElementName: WideString; var strAttributeName: WideString;
+                            var strType: WideString; var strValueDefault: WideString;
                             var strValue: WideString); dispid 1368;
     procedure internalEntityDecl(var strName: WideString; var strValue: WideString); dispid 1369;
-    procedure externalEntityDecl(var strName: WideString; var strPublicId: WideString; 
+    procedure externalEntityDecl(var strName: WideString; var strPublicId: WideString;
                                  var strSystemId: WideString); dispid 1370;
   end;
 
@@ -2272,14 +2272,14 @@ type
 // *********************************************************************//
   IMXAttributes = interface(IDispatch)
     ['{F10D27CC-3EC0-415C-8ED8-77AB1C5E7262}']
-    procedure addAttribute(const strURI: WideString; const strLocalName: WideString; 
-                           const strQName: WideString; const strType: WideString; 
+    procedure addAttribute(const strURI: WideString; const strLocalName: WideString;
+                           const strQName: WideString; const strType: WideString;
                            const strValue: WideString); safecall;
     procedure addAttributeFromIndex(varAtts: OleVariant; nIndex: SYSINT); safecall;
     procedure clear; safecall;
     procedure removeAttribute(nIndex: SYSINT); safecall;
-    procedure setAttribute(nIndex: SYSINT; const strURI: WideString; 
-                           const strLocalName: WideString; const strQName: WideString; 
+    procedure setAttribute(nIndex: SYSINT; const strURI: WideString;
+                           const strLocalName: WideString; const strQName: WideString;
                            const strType: WideString; const strValue: WideString); safecall;
     procedure setAttributes(varAtts: OleVariant); safecall;
     procedure setLocalName(nIndex: SYSINT; const strLocalName: WideString); safecall;
@@ -2296,14 +2296,14 @@ type
 // *********************************************************************//
   IMXAttributesDisp = dispinterface
     ['{F10D27CC-3EC0-415C-8ED8-77AB1C5E7262}']
-    procedure addAttribute(const strURI: WideString; const strLocalName: WideString; 
-                           const strQName: WideString; const strType: WideString; 
+    procedure addAttribute(const strURI: WideString; const strLocalName: WideString;
+                           const strQName: WideString; const strType: WideString;
                            const strValue: WideString); dispid 1373;
     procedure addAttributeFromIndex(varAtts: OleVariant; nIndex: SYSINT); dispid 1383;
     procedure clear; dispid 1374;
     procedure removeAttribute(nIndex: SYSINT); dispid 1375;
-    procedure setAttribute(nIndex: SYSINT; const strURI: WideString; 
-                           const strLocalName: WideString; const strQName: WideString; 
+    procedure setAttribute(nIndex: SYSINT; const strURI: WideString;
+                           const strLocalName: WideString; const strQName: WideString;
                            const strType: WideString; const strValue: WideString); dispid 1376;
     procedure setAttributes(varAtts: OleVariant); dispid 1377;
     procedure setLocalName(nIndex: SYSINT; const strLocalName: WideString); dispid 1378;
@@ -2663,7 +2663,7 @@ type
 // *********************************************************************//
   IXMLHTTPRequest = interface(IDispatch)
     ['{ED8C108D-4349-11D2-91A4-00C04F7969E8}']
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); safecall;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString); safecall;
     function  getResponseHeader(const bstrHeader: WideString): WideString; safecall;
@@ -2695,7 +2695,7 @@ type
 // *********************************************************************//
   IXMLHTTPRequestDisp = dispinterface
     ['{ED8C108D-4349-11D2-91A4-00C04F7969E8}']
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); dispid 1;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString); dispid 2;
     function  getResponseHeader(const bstrHeader: WideString): WideString; dispid 3;
@@ -2719,7 +2719,7 @@ type
 // *********************************************************************//
   IServerXMLHTTPRequest = interface(IXMLHTTPRequest)
     ['{2E9196BF-13BA-4DD4-91CA-6C571F281495}']
-    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer; 
+    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer;
                           receiveTimeout: Integer); safecall;
     function  waitForResponse(timeoutInSeconds: OleVariant): WordBool; safecall;
     function  getOption(option: SERVERXMLHTTP_OPTION): OleVariant; safecall;
@@ -2733,12 +2733,12 @@ type
 // *********************************************************************//
   IServerXMLHTTPRequestDisp = dispinterface
     ['{2E9196BF-13BA-4DD4-91CA-6C571F281495}']
-    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer; 
+    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer;
                           receiveTimeout: Integer); dispid 15;
     function  waitForResponse(timeoutInSeconds: OleVariant): WordBool; dispid 16;
     function  getOption(option: SERVERXMLHTTP_OPTION): OleVariant; dispid 17;
     procedure setOption(option: SERVERXMLHTTP_OPTION; value: OleVariant); dispid 18;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); dispid 1;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString); dispid 2;
     function  getResponseHeader(const bstrHeader: WideString): WideString; dispid 3;
@@ -2756,11 +2756,11 @@ type
   end;
 
 // *********************************************************************//
-// The Class CoDOMDocument provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMDocument2 exposed by              
-// the CoClass DOMDocument. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoDOMDocument provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMDocument2 exposed by
+// the CoClass DOMDocument. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoDOMDocument = class
     class function Create: IXMLDOMDocument2;
@@ -2840,11 +2840,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoDOMDocument26 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMDocument2 exposed by              
-// the CoClass DOMDocument26. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoDOMDocument26 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMDocument2 exposed by
+// the CoClass DOMDocument26. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoDOMDocument26 = class
     class function Create: IXMLDOMDocument2;
@@ -2924,11 +2924,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoDOMDocument30 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMDocument2 exposed by              
-// the CoClass DOMDocument30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoDOMDocument30 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMDocument2 exposed by
+// the CoClass DOMDocument30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoDOMDocument30 = class
     class function Create: IXMLDOMDocument2;
@@ -3008,11 +3008,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoFreeThreadedDOMDocument provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMDocument2 exposed by              
-// the CoClass FreeThreadedDOMDocument. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoFreeThreadedDOMDocument provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMDocument2 exposed by
+// the CoClass FreeThreadedDOMDocument. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoFreeThreadedDOMDocument = class
     class function Create: IXMLDOMDocument2;
@@ -3092,11 +3092,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoFreeThreadedDOMDocument26 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMDocument2 exposed by              
-// the CoClass FreeThreadedDOMDocument26. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoFreeThreadedDOMDocument26 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMDocument2 exposed by
+// the CoClass FreeThreadedDOMDocument26. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoFreeThreadedDOMDocument26 = class
     class function Create: IXMLDOMDocument2;
@@ -3176,11 +3176,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoFreeThreadedDOMDocument30 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMDocument2 exposed by              
-// the CoClass FreeThreadedDOMDocument30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoFreeThreadedDOMDocument30 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMDocument2 exposed by
+// the CoClass FreeThreadedDOMDocument30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoFreeThreadedDOMDocument30 = class
     class function Create: IXMLDOMDocument2;
@@ -3260,11 +3260,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXMLSchemaCache provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMSchemaCollection exposed by              
-// the CoClass XMLSchemaCache. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXMLSchemaCache provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMSchemaCollection exposed by
+// the CoClass XMLSchemaCache. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXMLSchemaCache = class
     class function Create: IXMLDOMSchemaCollection;
@@ -3278,7 +3278,7 @@ type
 // Help String      : object for caching schemas
 // Default Interface: IXMLDOMSchemaCollection
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3338,11 +3338,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXMLSchemaCache26 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMSchemaCollection exposed by              
-// the CoClass XMLSchemaCache26. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXMLSchemaCache26 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMSchemaCollection exposed by
+// the CoClass XMLSchemaCache26. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXMLSchemaCache26 = class
     class function Create: IXMLDOMSchemaCollection;
@@ -3356,7 +3356,7 @@ type
 // Help String      : object for caching schemas
 // Default Interface: IXMLDOMSchemaCollection
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3416,11 +3416,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXMLSchemaCache30 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDOMSchemaCollection exposed by              
-// the CoClass XMLSchemaCache30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXMLSchemaCache30 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDOMSchemaCollection exposed by
+// the CoClass XMLSchemaCache30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXMLSchemaCache30 = class
     class function Create: IXMLDOMSchemaCollection;
@@ -3434,7 +3434,7 @@ type
 // Help String      : object for caching schemas
 // Default Interface: IXMLDOMSchemaCollection
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3494,11 +3494,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXSLTemplate provides a Create and CreateRemote method to          
-// create instances of the default interface IXSLTemplate exposed by              
-// the CoClass XSLTemplate. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXSLTemplate provides a Create and CreateRemote method to
+// create instances of the default interface IXSLTemplate exposed by
+// the CoClass XSLTemplate. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXSLTemplate = class
     class function Create: IXSLTemplate;
@@ -3512,7 +3512,7 @@ type
 // Help String      : object for caching compiled XSL stylesheets
 // Default Interface: IXSLTemplate
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3568,11 +3568,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXSLTemplate26 provides a Create and CreateRemote method to          
-// create instances of the default interface IXSLTemplate exposed by              
-// the CoClass XSLTemplate26. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXSLTemplate26 provides a Create and CreateRemote method to
+// create instances of the default interface IXSLTemplate exposed by
+// the CoClass XSLTemplate26. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXSLTemplate26 = class
     class function Create: IXSLTemplate;
@@ -3586,7 +3586,7 @@ type
 // Help String      : object for caching compiled XSL stylesheets
 // Default Interface: IXSLTemplate
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3642,11 +3642,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXSLTemplate30 provides a Create and CreateRemote method to          
-// create instances of the default interface IXSLTemplate exposed by              
-// the CoClass XSLTemplate30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXSLTemplate30 provides a Create and CreateRemote method to
+// create instances of the default interface IXSLTemplate exposed by
+// the CoClass XSLTemplate30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXSLTemplate30 = class
     class function Create: IXSLTemplate;
@@ -3660,7 +3660,7 @@ type
 // Help String      : object for caching compiled XSL stylesheets
 // Default Interface: IXSLTemplate
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3716,11 +3716,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoDSOControl provides a Create and CreateRemote method to          
-// create instances of the default interface IDSOControl exposed by              
-// the CoClass DSOControl. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoDSOControl provides a Create and CreateRemote method to
+// create instances of the default interface IDSOControl exposed by
+// the CoClass DSOControl. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoDSOControl = class
     class function Create: IDSOControl;
@@ -3734,7 +3734,7 @@ type
 // Help String      : XML Data Source Object
 // Default Interface: IDSOControl
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3799,11 +3799,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoDSOControl26 provides a Create and CreateRemote method to          
-// create instances of the default interface IDSOControl exposed by              
-// the CoClass DSOControl26. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoDSOControl26 provides a Create and CreateRemote method to
+// create instances of the default interface IDSOControl exposed by
+// the CoClass DSOControl26. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoDSOControl26 = class
     class function Create: IDSOControl;
@@ -3817,7 +3817,7 @@ type
 // Help String      : XML Data Source Object
 // Default Interface: IDSOControl
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3882,11 +3882,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoDSOControl30 provides a Create and CreateRemote method to          
-// create instances of the default interface IDSOControl exposed by              
-// the CoClass DSOControl30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoDSOControl30 provides a Create and CreateRemote method to
+// create instances of the default interface IDSOControl exposed by
+// the CoClass DSOControl30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoDSOControl30 = class
     class function Create: IDSOControl;
@@ -3900,7 +3900,7 @@ type
 // Help String      : XML Data Source Object
 // Default Interface: IDSOControl
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -3965,11 +3965,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXMLHTTP provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLHTTPRequest exposed by              
-// the CoClass XMLHTTP. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXMLHTTP provides a Create and CreateRemote method to
+// create instances of the default interface IXMLHTTPRequest exposed by
+// the CoClass XMLHTTP. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXMLHTTP = class
     class function Create: IXMLHTTPRequest;
@@ -3983,7 +3983,7 @@ type
 // Help String      : XML HTTP Request class.
 // Default Interface: IXMLHTTPRequest
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4015,9 +4015,9 @@ type
     procedure Disconnect; override;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString); overload;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); overload;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString);
     function  getResponseHeader(const bstrHeader: WideString): WideString;
@@ -4069,11 +4069,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXMLHTTP26 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLHTTPRequest exposed by              
-// the CoClass XMLHTTP26. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXMLHTTP26 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLHTTPRequest exposed by
+// the CoClass XMLHTTP26. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXMLHTTP26 = class
     class function Create: IXMLHTTPRequest;
@@ -4087,7 +4087,7 @@ type
 // Help String      : XML HTTP Request class.
 // Default Interface: IXMLHTTPRequest
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4119,9 +4119,9 @@ type
     procedure Disconnect; override;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString); overload;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); overload;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString);
     function  getResponseHeader(const bstrHeader: WideString): WideString;
@@ -4173,11 +4173,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXMLHTTP30 provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLHTTPRequest exposed by              
-// the CoClass XMLHTTP30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXMLHTTP30 provides a Create and CreateRemote method to
+// create instances of the default interface IXMLHTTPRequest exposed by
+// the CoClass XMLHTTP30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXMLHTTP30 = class
     class function Create: IXMLHTTPRequest;
@@ -4191,7 +4191,7 @@ type
 // Help String      : XML HTTP Request class.
 // Default Interface: IXMLHTTPRequest
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4223,9 +4223,9 @@ type
     procedure Disconnect; override;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString); overload;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); overload;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString);
     function  getResponseHeader(const bstrHeader: WideString): WideString;
@@ -4277,11 +4277,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoServerXMLHTTP provides a Create and CreateRemote method to          
-// create instances of the default interface IServerXMLHTTPRequest exposed by              
-// the CoClass ServerXMLHTTP. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoServerXMLHTTP provides a Create and CreateRemote method to
+// create instances of the default interface IServerXMLHTTPRequest exposed by
+// the CoClass ServerXMLHTTP. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoServerXMLHTTP = class
     class function Create: IServerXMLHTTPRequest;
@@ -4295,7 +4295,7 @@ type
 // Help String      : Server XML HTTP Request class.
 // Default Interface: IServerXMLHTTPRequest
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4327,9 +4327,9 @@ type
     procedure Disconnect; override;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString); overload;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); overload;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString);
     function  getResponseHeader(const bstrHeader: WideString): WideString;
@@ -4337,7 +4337,7 @@ type
     procedure send; overload;
     procedure send(varBody: OleVariant); overload;
     procedure abort;
-    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer; 
+    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer;
                           receiveTimeout: Integer);
     function  waitForResponse: WordBool; overload;
     function  waitForResponse(timeoutInSeconds: OleVariant): WordBool; overload;
@@ -4387,11 +4387,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoServerXMLHTTP30 provides a Create and CreateRemote method to          
-// create instances of the default interface IServerXMLHTTPRequest exposed by              
-// the CoClass ServerXMLHTTP30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoServerXMLHTTP30 provides a Create and CreateRemote method to
+// create instances of the default interface IServerXMLHTTPRequest exposed by
+// the CoClass ServerXMLHTTP30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoServerXMLHTTP30 = class
     class function Create: IServerXMLHTTPRequest;
@@ -4405,7 +4405,7 @@ type
 // Help String      : Server XML HTTP Request class.
 // Default Interface: IServerXMLHTTPRequest
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4437,9 +4437,9 @@ type
     procedure Disconnect; override;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString); overload;
     procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant); overload;
-    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant; 
+    procedure open(const bstrMethod: WideString; const bstrUrl: WideString; varAsync: OleVariant;
                    bstrUser: OleVariant; bstrPassword: OleVariant); overload;
     procedure setRequestHeader(const bstrHeader: WideString; const bstrValue: WideString);
     function  getResponseHeader(const bstrHeader: WideString): WideString;
@@ -4447,7 +4447,7 @@ type
     procedure send; overload;
     procedure send(varBody: OleVariant); overload;
     procedure abort;
-    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer; 
+    procedure setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; sendTimeout: Integer;
                           receiveTimeout: Integer);
     function  waitForResponse: WordBool; overload;
     function  waitForResponse(timeoutInSeconds: OleVariant): WordBool; overload;
@@ -4497,11 +4497,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoSAXXMLReader provides a Create and CreateRemote method to          
-// create instances of the default interface IVBSAXXMLReader exposed by              
-// the CoClass SAXXMLReader. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoSAXXMLReader provides a Create and CreateRemote method to
+// create instances of the default interface IVBSAXXMLReader exposed by
+// the CoClass SAXXMLReader. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoSAXXMLReader = class
     class function Create: IVBSAXXMLReader;
@@ -4515,7 +4515,7 @@ type
 // Help String      : SAX XML Reader (version independent) coclass
 // Default Interface: IVBSAXXMLReader
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4603,11 +4603,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoSAXXMLReader30 provides a Create and CreateRemote method to          
-// create instances of the default interface IVBSAXXMLReader exposed by              
-// the CoClass SAXXMLReader30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoSAXXMLReader30 provides a Create and CreateRemote method to
+// create instances of the default interface IVBSAXXMLReader exposed by
+// the CoClass SAXXMLReader30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoSAXXMLReader30 = class
     class function Create: IVBSAXXMLReader;
@@ -4621,7 +4621,7 @@ type
 // Help String      : SAX XML Reader 3.0 coclass
 // Default Interface: IVBSAXXMLReader
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4709,11 +4709,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoMXXMLWriter provides a Create and CreateRemote method to          
-// create instances of the default interface IMXWriter exposed by              
-// the CoClass MXXMLWriter. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoMXXMLWriter provides a Create and CreateRemote method to
+// create instances of the default interface IMXWriter exposed by
+// the CoClass MXXMLWriter. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoMXXMLWriter = class
     class function Create: IMXWriter;
@@ -4727,7 +4727,7 @@ type
 // Help String      : Microsoft XML Writer (version independent) coclass
 // Default Interface: IMXWriter
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4825,11 +4825,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoMXXMLWriter30 provides a Create and CreateRemote method to          
-// create instances of the default interface IMXWriter exposed by              
-// the CoClass MXXMLWriter30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoMXXMLWriter30 provides a Create and CreateRemote method to
+// create instances of the default interface IMXWriter exposed by
+// the CoClass MXXMLWriter30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoMXXMLWriter30 = class
     class function Create: IMXWriter;
@@ -4843,7 +4843,7 @@ type
 // Help String      : Microsoft XML Writer 3.0 coclass
 // Default Interface: IMXWriter
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4941,11 +4941,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoSAXAttributes provides a Create and CreateRemote method to          
-// create instances of the default interface IMXAttributes exposed by              
-// the CoClass SAXAttributes. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoSAXAttributes provides a Create and CreateRemote method to
+// create instances of the default interface IMXAttributes exposed by
+// the CoClass SAXAttributes. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoSAXAttributes = class
     class function Create: IMXAttributes;
@@ -4959,7 +4959,7 @@ type
 // Help String      : SAX Attributes (version independent) coclass
 // Default Interface: IMXAttributes
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -4981,14 +4981,14 @@ type
     procedure Connect; override;
     procedure ConnectTo(svrIntf: IMXAttributes);
     procedure Disconnect; override;
-    procedure addAttribute(const strURI: WideString; const strLocalName: WideString; 
-                           const strQName: WideString; const strType: WideString; 
+    procedure addAttribute(const strURI: WideString; const strLocalName: WideString;
+                           const strQName: WideString; const strType: WideString;
                            const strValue: WideString);
     procedure addAttributeFromIndex(varAtts: OleVariant; nIndex: SYSINT);
     procedure clear;
     procedure removeAttribute(nIndex: SYSINT);
-    procedure setAttribute(nIndex: SYSINT; const strURI: WideString; 
-                           const strLocalName: WideString; const strQName: WideString; 
+    procedure setAttribute(nIndex: SYSINT; const strURI: WideString;
+                           const strLocalName: WideString; const strQName: WideString;
                            const strType: WideString; const strValue: WideString);
     procedure setAttributes(varAtts: OleVariant);
     procedure setLocalName(nIndex: SYSINT; const strLocalName: WideString);
@@ -5024,11 +5024,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoSAXAttributes30 provides a Create and CreateRemote method to          
-// create instances of the default interface IMXAttributes exposed by              
-// the CoClass SAXAttributes30. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoSAXAttributes30 provides a Create and CreateRemote method to
+// create instances of the default interface IMXAttributes exposed by
+// the CoClass SAXAttributes30. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoSAXAttributes30 = class
     class function Create: IMXAttributes;
@@ -5042,7 +5042,7 @@ type
 // Help String      : SAX Attributes 3.0 coclass
 // Default Interface: IMXAttributes
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -5064,14 +5064,14 @@ type
     procedure Connect; override;
     procedure ConnectTo(svrIntf: IMXAttributes);
     procedure Disconnect; override;
-    procedure addAttribute(const strURI: WideString; const strLocalName: WideString; 
-                           const strQName: WideString; const strType: WideString; 
+    procedure addAttribute(const strURI: WideString; const strLocalName: WideString;
+                           const strQName: WideString; const strType: WideString;
                            const strValue: WideString);
     procedure addAttributeFromIndex(varAtts: OleVariant; nIndex: SYSINT);
     procedure clear;
     procedure removeAttribute(nIndex: SYSINT);
-    procedure setAttribute(nIndex: SYSINT; const strURI: WideString; 
-                           const strLocalName: WideString; const strQName: WideString; 
+    procedure setAttribute(nIndex: SYSINT; const strURI: WideString;
+                           const strLocalName: WideString; const strQName: WideString;
                            const strType: WideString; const strValue: WideString);
     procedure setAttributes(varAtts: OleVariant);
     procedure setLocalName(nIndex: SYSINT; const strLocalName: WideString);
@@ -5107,11 +5107,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoXMLDocument provides a Create and CreateRemote method to          
-// create instances of the default interface IXMLDocument2 exposed by              
-// the CoClass XMLDocument. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoXMLDocument provides a Create and CreateRemote method to
+// create instances of the default interface IXMLDocument2 exposed by
+// the CoClass XMLDocument. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoXMLDocument = class
     class function Create: IXMLDocument2;
@@ -7326,19 +7326,19 @@ begin
   DefaultInterface.open(bstrMethod, bstrUrl, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString;
                         varAsync: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, EmptyParam, EmptyParam);
 end;
 
-procedure TXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString;
                         varAsync: OleVariant; bstrUser: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, EmptyParam);
 end;
 
-procedure TXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString;
                         varAsync: OleVariant; bstrUser: OleVariant; bstrPassword: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
@@ -7551,19 +7551,19 @@ begin
   DefaultInterface.open(bstrMethod, bstrUrl, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TXMLHTTP26.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP26.open(const bstrMethod: WideString; const bstrUrl: WideString;
                           varAsync: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, EmptyParam, EmptyParam);
 end;
 
-procedure TXMLHTTP26.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP26.open(const bstrMethod: WideString; const bstrUrl: WideString;
                           varAsync: OleVariant; bstrUser: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, EmptyParam);
 end;
 
-procedure TXMLHTTP26.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP26.open(const bstrMethod: WideString; const bstrUrl: WideString;
                           varAsync: OleVariant; bstrUser: OleVariant; bstrPassword: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
@@ -7776,19 +7776,19 @@ begin
   DefaultInterface.open(bstrMethod, bstrUrl, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString;
                           varAsync: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, EmptyParam, EmptyParam);
 end;
 
-procedure TXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString;
                           varAsync: OleVariant; bstrUser: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, EmptyParam);
 end;
 
-procedure TXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString;
                           varAsync: OleVariant; bstrUser: OleVariant; bstrPassword: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
@@ -8001,19 +8001,19 @@ begin
   DefaultInterface.open(bstrMethod, bstrUrl, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TServerXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TServerXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString;
                               varAsync: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, EmptyParam, EmptyParam);
 end;
 
-procedure TServerXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TServerXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString;
                               varAsync: OleVariant; bstrUser: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, EmptyParam);
 end;
 
-procedure TServerXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TServerXMLHTTP.open(const bstrMethod: WideString; const bstrUrl: WideString;
                               varAsync: OleVariant; bstrUser: OleVariant; bstrPassword: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
@@ -8049,7 +8049,7 @@ begin
   DefaultInterface.abort;
 end;
 
-procedure TServerXMLHTTP.setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; 
+procedure TServerXMLHTTP.setTimeouts(resolveTimeout: Integer; connectTimeout: Integer;
                                      sendTimeout: Integer; receiveTimeout: Integer);
 begin
   DefaultInterface.setTimeouts(resolveTimeout, connectTimeout, sendTimeout, receiveTimeout);
@@ -8252,25 +8252,25 @@ begin
   DefaultInterface.open(bstrMethod, bstrUrl, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TServerXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TServerXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString;
                                 varAsync: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, EmptyParam, EmptyParam);
 end;
 
-procedure TServerXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TServerXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString;
                                 varAsync: OleVariant; bstrUser: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, EmptyParam);
 end;
 
-procedure TServerXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString; 
+procedure TServerXMLHTTP30.open(const bstrMethod: WideString; const bstrUrl: WideString;
                                 varAsync: OleVariant; bstrUser: OleVariant; bstrPassword: OleVariant);
 begin
   DefaultInterface.open(bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
 end;
 
-procedure TServerXMLHTTP30.setRequestHeader(const bstrHeader: WideString; 
+procedure TServerXMLHTTP30.setRequestHeader(const bstrHeader: WideString;
                                             const bstrValue: WideString);
 begin
   DefaultInterface.setRequestHeader(bstrHeader, bstrValue);
@@ -8301,7 +8301,7 @@ begin
   DefaultInterface.abort;
 end;
 
-procedure TServerXMLHTTP30.setTimeouts(resolveTimeout: Integer; connectTimeout: Integer; 
+procedure TServerXMLHTTP30.setTimeouts(resolveTimeout: Integer; connectTimeout: Integer;
                                        sendTimeout: Integer; receiveTimeout: Integer);
 begin
   DefaultInterface.setTimeouts(resolveTimeout, connectTimeout, sendTimeout, receiveTimeout);
@@ -9457,8 +9457,8 @@ begin
 end;
 {$ENDIF}
 
-procedure TSAXAttributes.addAttribute(const strURI: WideString; const strLocalName: WideString; 
-                                      const strQName: WideString; const strType: WideString; 
+procedure TSAXAttributes.addAttribute(const strURI: WideString; const strLocalName: WideString;
+                                      const strQName: WideString; const strType: WideString;
                                       const strValue: WideString);
 begin
   DefaultInterface.addAttribute(strURI, strLocalName, strQName, strType, strValue);
@@ -9479,8 +9479,8 @@ begin
   DefaultInterface.removeAttribute(nIndex);
 end;
 
-procedure TSAXAttributes.setAttribute(nIndex: SYSINT; const strURI: WideString; 
-                                      const strLocalName: WideString; const strQName: WideString; 
+procedure TSAXAttributes.setAttribute(nIndex: SYSINT; const strURI: WideString;
+                                      const strLocalName: WideString; const strQName: WideString;
                                       const strType: WideString; const strValue: WideString);
 begin
   DefaultInterface.setAttribute(nIndex, strURI, strLocalName, strQName, strType, strValue);
@@ -9608,8 +9608,8 @@ begin
 end;
 {$ENDIF}
 
-procedure TSAXAttributes30.addAttribute(const strURI: WideString; const strLocalName: WideString; 
-                                        const strQName: WideString; const strType: WideString; 
+procedure TSAXAttributes30.addAttribute(const strURI: WideString; const strLocalName: WideString;
+                                        const strQName: WideString; const strType: WideString;
                                         const strValue: WideString);
 begin
   DefaultInterface.addAttribute(strURI, strLocalName, strQName, strType, strValue);
@@ -9630,8 +9630,8 @@ begin
   DefaultInterface.removeAttribute(nIndex);
 end;
 
-procedure TSAXAttributes30.setAttribute(nIndex: SYSINT; const strURI: WideString; 
-                                        const strLocalName: WideString; const strQName: WideString; 
+procedure TSAXAttributes30.setAttribute(nIndex: SYSINT; const strURI: WideString;
+                                        const strLocalName: WideString; const strQName: WideString;
                                         const strType: WideString; const strValue: WideString);
 begin
   DefaultInterface.setAttribute(nIndex, strURI, strLocalName, strQName, strType, strValue);
@@ -9693,11 +9693,11 @@ end;
 
 procedure Register;
 begin
-  RegisterComponents('ActiveX',[TDOMDocument, TDOMDocument26, TDOMDocument30, TFreeThreadedDOMDocument, 
-    TFreeThreadedDOMDocument26, TFreeThreadedDOMDocument30, TXMLSchemaCache, TXMLSchemaCache26, TXMLSchemaCache30, 
-    TXSLTemplate, TXSLTemplate26, TXSLTemplate30, TDSOControl, TDSOControl26, 
-    TDSOControl30, TXMLHTTP, TXMLHTTP26, TXMLHTTP30, TServerXMLHTTP, 
-    TServerXMLHTTP30, TSAXXMLReader, TSAXXMLReader30, TMXXMLWriter, TMXXMLWriter30, 
+  RegisterComponents('ActiveX',[TDOMDocument, TDOMDocument26, TDOMDocument30, TFreeThreadedDOMDocument,
+    TFreeThreadedDOMDocument26, TFreeThreadedDOMDocument30, TXMLSchemaCache, TXMLSchemaCache26, TXMLSchemaCache30,
+    TXSLTemplate, TXSLTemplate26, TXSLTemplate30, TDSOControl, TDSOControl26,
+    TDSOControl30, TXMLHTTP, TXMLHTTP26, TXMLHTTP30, TServerXMLHTTP,
+    TServerXMLHTTP30, TSAXXMLReader, TSAXXMLReader30, TMXXMLWriter, TMXXMLWriter30,
     TSAXAttributes, TSAXAttributes30]);
 end;
 

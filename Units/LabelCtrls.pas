@@ -249,7 +249,7 @@ begin
         Ranges[I + 1] := Swap;
         Break;
       end;
-    end;      
+    end;
   until not Swapped;
 end;
 

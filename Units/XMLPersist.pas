@@ -194,7 +194,7 @@ begin
   	SetLength(FList, Length(Undo.FList));
     for I := 0 to Length(FList) - 1 do
 			FList[I] := Undo.FList[I];
-		Change;      
+		Change;
   end
   else
   	inherited Assign(Source);

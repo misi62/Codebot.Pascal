@@ -17,7 +17,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, StdCtrls,
   ComCtrls, Menus, TypInfo, StrEdit, ImgList, ImgListEx, ToolsAPI, SysTools,
   {$IFDEF D6_UP}DesignIntf, DesignWindows, DesignEditors, VCLEditors, DesignMenus,
-  {$ELSE}DsgnIntf, {$ENDIF} ColnEdit, OpenTools, 
+  {$ELSE}DsgnIntf, {$ENDIF} ColnEdit, OpenTools,
   ProviderTools, Balloon, BalloonHintFrm, FolderCtrls, FolderBarsFrm, ImageListFrm,
   InspectCtrls, InspectorEditorsFrm, StrCollect, NamedStringsEditorFrm, TransparentImagesEditorFrm,
   BannerCtrls, BannerBookFrm, PaneCtrls, FormTools, WinTools, ShlCtrls, FlowCtrls, FlowBox,
@@ -992,12 +992,12 @@ begin
 		end;
 		if (not PagesIconRegistered) and (PageClass.InheritsFrom(TComponent)) then
     begin
-    	try          
+    	try
 				RegisterNoIcon([TComponentClass(PageClass)]);
 				PagesIconRegistered := True;
       except
 				PagesIconRegistered := True;
-			end;        
+			end;
 		end;
 	end;
 end;

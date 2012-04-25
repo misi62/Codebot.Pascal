@@ -264,7 +264,7 @@ type
     property OnStartDock;
     property OnStartDrag;
     property OnUnDock;
-  end; 
+  end;
 
 { TLineGrid }
 
@@ -1060,7 +1060,7 @@ begin
   	Inc(H, 2);
 	if H < CaptionRect.Bottom then
   	H := CaptionRect.Bottom;
-	ExpandedHeight := H;    
+	ExpandedHeight := H;
 end;
 
 procedure TExpandableBox.DblClick;
@@ -1176,7 +1176,7 @@ var
   DC: HDC;
   State: TDrawState;
 begin
-  Rect := inherited GetClientRect; // Classes.Rect(0, 0, Width, Height); 
+  Rect := inherited GetClientRect; // Classes.Rect(0, 0, Width, Height);
   DC := Canvas.Handle;
   State := [];
   if not Enabled then State := State + [dsDisabled];

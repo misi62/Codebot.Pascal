@@ -2442,7 +2442,7 @@ begin
   begin
     for I := 0 to (Needed div SizeOf(DWORD)) - 1 do
     begin
-      PID := OpenProcess(PROCESS_QUERY_INFORMATION or PROCESS_VM_READ, False, PIDs[I]); //  
+      PID := OpenProcess(PROCESS_QUERY_INFORMATION or PROCESS_VM_READ, False, PIDs[I]); //
         case PIDs[I] of
           0:
             FileName := RsSystemIdleProcess;

@@ -665,7 +665,7 @@ begin
             Visibility := mvPublic;
           dkPublished:
             Visibility := mvPublished;
-        else            
+        else
           ReadIdentifier;
         end;
       tkClass:

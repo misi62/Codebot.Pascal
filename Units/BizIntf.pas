@@ -16,7 +16,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-  Windows, ActiveX; 
+  Windows, ActiveX;
 
 const
   BusinessMajorVersion = 1;

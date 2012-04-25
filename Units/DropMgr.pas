@@ -53,7 +53,7 @@ type
 		procedure Loaded; override;
 		procedure Notification(AComponent: TComponent; Operation: TOperation); override;
 	public
-  	destructor Destroy; override;    
+  	destructor Destroy; override;
 	published
   	property WinControl: TWinControl read FWinControl write SetWinControl;
     property OnDropFiles: TDropFilesEvent read FOnDropFiles write FOnDropFiles;

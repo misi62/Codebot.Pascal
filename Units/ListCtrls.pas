@@ -277,7 +277,7 @@ function TCheckItems.FindItemID(ID: Integer): TCheckItem;
 begin
   Result := TCheckItem(inherited FindItemID(ID));
 end;
-                      
+
 function TCheckItems.Insert(Index: Integer): TCheckItem;
 begin
   Result := TCheckItem(inherited Insert(Index));
@@ -367,7 +367,7 @@ procedure TCheckDrawList.DblClick;
 begin
   inherited;
   if ItemIndex > -1 then
-    Items[ItemIndex].Checked := not Items[ItemIndex].Checked; 
+    Items[ItemIndex].Checked := not Items[ItemIndex].Checked;
 end;
 
 procedure TCheckDrawList.KeyDown(var Key: Word; Shift: TShiftState);

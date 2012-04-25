@@ -1170,7 +1170,7 @@ begin
     if (FHotTrack.X > -1) and (FHotTrack.Y > -1) then
     begin
       R := RectFromCoord(FHotTrack.X, FHotTrack.Y);
-      InvalidateRect(Handle, @R, True); 
+      InvalidateRect(Handle, @R, True);
     end;
     if (Value.X < 0) or (Value.Y < 0) then
     begin

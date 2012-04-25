@@ -1120,7 +1120,7 @@ begin
   begin
     AdjustHeight;
     Invalidate;
-  end;    
+  end;
 end;
 
 procedure TCustomButtonEdit.SetStyle(Value: TButtonEditStyle);

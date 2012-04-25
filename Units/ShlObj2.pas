@@ -2,8 +2,8 @@ unit ShlObj2;
 
 interface
 
-uses 
-	ShlObj, ShellApi2, Windows, ActiveX, CommCtrl, ShellAPI, RegStr, Messages, 
+uses
+	ShlObj, ShellApi2, Windows, ActiveX, CommCtrl, ShellAPI, RegStr, Messages,
 	WinInet, UrlMon;
 
 const

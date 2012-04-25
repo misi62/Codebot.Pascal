@@ -622,7 +622,7 @@ end;
 procedure TCustomDBDrawList.CreateParams(var Params: TCreateParams);
 begin
   inherited CreateParams(Params);
-  with Params do 
+  with Params do
     Style := Style or WS_VSCROLL;
 end;
 

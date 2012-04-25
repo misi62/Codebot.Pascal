@@ -128,7 +128,7 @@ begin
     UpperCase(Copy(S, 1, Length(FPrefix))) = UpperCase(FPrefix));
 end;
 
-procedure TVisualLog.Add(const Msg: string; Silent: Boolean = False); 
+procedure TVisualLog.Add(const Msg: string; Silent: Boolean = False);
 var
 	Item: TListItem;
 	F: TextFile;

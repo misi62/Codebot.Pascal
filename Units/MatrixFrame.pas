@@ -3,7 +3,7 @@ unit MatrixFrame;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, 
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ScrollCtrls, InspectCtrls, InspectEditors, BtnCtrls, StdCtrls,
   GraphTools, FormTools;
 

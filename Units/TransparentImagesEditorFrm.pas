@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, GraphTools, StdCtrls, FormTools, 
+  Dialogs, GraphTools, StdCtrls, FormTools,
   ExtDlgs, SuplCtrls, GridCtrls, ImgListEx, Grip,
   ProviderTools, DropMgr, ClipBrd, ClassTools, ImgList;
 

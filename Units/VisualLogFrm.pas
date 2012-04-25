@@ -3,7 +3,7 @@ unit VisualLogFrm;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ShlTools, FormTools, ShlCtrls, ProviderTools;
 
 type

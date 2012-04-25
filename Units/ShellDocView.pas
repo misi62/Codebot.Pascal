@@ -1,14 +1,14 @@
 unit ShellDocView;
 
 // ************************************************************************ //
-// WARNING                                                                    
-// -------                                                                    
-// The types declared in this file were generated from data read from a       
-// Type Library. If this type library is explicitly or indirectly (via        
-// another type library referring to this type library) re-imported, or the   
-// 'Refresh' command of the Type Library Editor activated while editing the   
-// Type Library, the contents of this file will be regenerated and all        
-// manual modifications will be lost.                                         
+// WARNING
+// -------
+// The types declared in this file were generated from data read from a
+// Type Library. If this type library is explicitly or indirectly (via
+// another type library referring to this type library) re-imported, or the
+// 'Refresh' command of the Type Library Editor activated while editing the
+// Type Library, the contents of this file will be regenerated and all
+// manual modifications will be lost.
 // ************************************************************************ //
 
 // PASTLWTR : 1.2
@@ -18,9 +18,9 @@ unit ShellDocView;
 // Type Lib: C:\WINDOWS\system32\ieframe.dll (1)
 // LIBID: {EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}
 // LCID: 0
-// Helpfile: 
+// Helpfile:
 // HelpString: Microsoft Internet Controls
-// DepndLst: 
+// DepndLst:
 //   (1) v2.0 stdole, (C:\WINDOWS\system32\stdole2.tlb)
 // Errors:
 //   Hint: Symbol 'Type' renamed to 'type_'
@@ -32,14 +32,14 @@ unit ShellDocView;
 //   Hint: Parameter 'var' of IShellNameSpace.Expand changed to 'var_'
 // ************************************************************************ //
 // *************************************************************************//
-// NOTE:                                                                      
-// Items guarded by $IFDEF_LIVE_SERVER_AT_DESIGN_TIME are used by properties  
-// which return objects that may need to be explicitly created via a function 
-// call prior to any access via the property. These items have been disabled  
-// in order to prevent accidental use from within the object inspector. You   
-// may enable them by defining LIVE_SERVER_AT_DESIGN_TIME or by selectively   
-// removing them from the $IFDEF blocks. However, such items must still be    
-// programmatically created via a method of the appropriate CoClass before    
+// NOTE:
+// Items guarded by $IFDEF_LIVE_SERVER_AT_DESIGN_TIME are used by properties
+// which return objects that may need to be explicitly created via a function
+// call prior to any access via the property. These items have been disabled
+// in order to prevent accidental use from within the object inspector. You
+// may enable them by defining LIVE_SERVER_AT_DESIGN_TIME or by selectively
+// removing them from the $IFDEF blocks. However, such items must still be
+// programmatically created via a method of the appropriate CoClass before
 // they can be used.
 
 {$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers.
@@ -50,15 +50,15 @@ unit ShellDocView;
 interface
 
 uses Windows, ActiveX, Classes, Graphics, OleCtrls, OleServer, StdVCL, Variants;
-  
+
 
 
 // *********************************************************************//
-// GUIDS declared in the TypeLibrary. Following prefixes are used:        
-//   Type Libraries     : LIBID_xxxx                                      
-//   CoClasses          : CLASS_xxxx                                      
-//   DISPInterfaces     : DIID_xxxx                                       
-//   Non-DISP interfaces: IID_xxxx                                        
+// GUIDS declared in the TypeLibrary. Following prefixes are used:
+//   Type Libraries     : LIBID_xxxx
+//   CoClasses          : CLASS_xxxx
+//   DISPInterfaces     : DIID_xxxx
+//   Non-DISP interfaces: IID_xxxx
 // *********************************************************************//
 const
   // TypeLibrary Major and minor versions
@@ -91,7 +91,7 @@ const
   CLASS_CScriptErrorList: TGUID = '{EFD01300-160F-11D2-BB2E-00805FF7EFCA}';
 
 // *********************************************************************//
-// Declaration of Enumerations defined in Type Library                    
+// Declaration of Enumerations defined in Type Library
 // *********************************************************************//
 // Constants for enum CommandStateChangeConstants
 type
@@ -232,7 +232,7 @@ const
 type
 
 // *********************************************************************//
-// Forward declaration of types defined in TypeLibrary                    
+// Forward declaration of types defined in TypeLibrary
 // *********************************************************************//
   IWebBrowser = interface;
   IWebBrowserDisp = dispinterface;
@@ -258,8 +258,8 @@ type
   IScriptErrorListDisp = dispinterface;
 
 // *********************************************************************//
-// Declaration of CoClasses defined in Type Library                       
-// (NOTE: Here we map each CoClass to its Default Interface)              
+// Declaration of CoClasses defined in Type Library
+// (NOTE: Here we map each CoClass to its Default Interface)
 // *********************************************************************//
   WebBrowser_V1 = IWebBrowser;
   WebBrowser = IWebBrowser2;
@@ -273,7 +273,7 @@ type
 
 
 // *********************************************************************//
-// Declaration of structures, unions and aliases.                         
+// Declaration of structures, unions and aliases.
 // *********************************************************************//
   POleVariant1 = ^OleVariant; {*}
 
@@ -289,8 +289,8 @@ type
     procedure GoForward; safecall;
     procedure GoHome; safecall;
     procedure GoSearch; safecall;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
-                       var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
+                       var TargetFrameName: OleVariant; var PostData: OleVariant;
                        var Headers: OleVariant); safecall;
     procedure Refresh; safecall;
     procedure Refresh2(var Level: OleVariant); safecall;
@@ -338,8 +338,8 @@ type
     procedure GoForward; dispid 101;
     procedure GoHome; dispid 102;
     procedure GoSearch; dispid 103;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
-                       var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
+                       var TargetFrameName: OleVariant; var PostData: OleVariant;
                        var Headers: OleVariant); dispid 104;
     procedure Refresh; dispid -550;
     procedure Refresh2(var Level: OleVariant); dispid 105;
@@ -366,8 +366,8 @@ type
 // *********************************************************************//
   DWebBrowserEvents = dispinterface
     ['{EAB22AC2-30C1-11CF-A7EB-0000C05BAE0B}']
-    procedure BeforeNavigate(const URL: WideString; Flags: Integer; 
-                             const TargetFrameName: WideString; var PostData: OleVariant; 
+    procedure BeforeNavigate(const URL: WideString; Flags: Integer;
+                             const TargetFrameName: WideString; var PostData: OleVariant;
                              const Headers: WideString; var Cancel: WordBool); dispid 100;
     procedure NavigateComplete(const URL: WideString); dispid 101;
     procedure StatusTextChange(const Text: WideString); dispid 102;
@@ -375,15 +375,15 @@ type
     procedure DownloadComplete; dispid 104;
     procedure CommandStateChange(Command: Integer; Enable: WordBool); dispid 105;
     procedure DownloadBegin; dispid 106;
-    procedure NewWindow(const URL: WideString; Flags: Integer; const TargetFrameName: WideString; 
+    procedure NewWindow(const URL: WideString; Flags: Integer; const TargetFrameName: WideString;
                         var PostData: OleVariant; const Headers: WideString; var Processed: WordBool); dispid 107;
     procedure TitleChange(const Text: WideString); dispid 113;
-    procedure FrameBeforeNavigate(const URL: WideString; Flags: Integer; 
-                                  const TargetFrameName: WideString; var PostData: OleVariant; 
+    procedure FrameBeforeNavigate(const URL: WideString; Flags: Integer;
+                                  const TargetFrameName: WideString; var PostData: OleVariant;
                                   const Headers: WideString; var Cancel: WordBool); dispid 200;
     procedure FrameNavigateComplete(const URL: WideString); dispid 201;
-    procedure FrameNewWindow(const URL: WideString; Flags: Integer; 
-                             const TargetFrameName: WideString; var PostData: OleVariant; 
+    procedure FrameNewWindow(const URL: WideString; Flags: Integer;
+                             const TargetFrameName: WideString; var PostData: OleVariant;
                              const Headers: WideString; var Processed: WordBool); dispid 204;
     procedure Quit(var Cancel: WordBool); dispid 103;
     procedure WindowMove; dispid 109;
@@ -456,8 +456,8 @@ type
     procedure GoForward; dispid 101;
     procedure GoHome; dispid 102;
     procedure GoSearch; dispid 103;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
-                       var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
+                       var TargetFrameName: OleVariant; var PostData: OleVariant;
                        var Headers: OleVariant); dispid 104;
     procedure Refresh; dispid -550;
     procedure Refresh2(var Level: OleVariant); dispid 105;
@@ -484,13 +484,13 @@ type
 // *********************************************************************//
   IWebBrowser2 = interface(IWebBrowserApp)
     ['{D30C1661-CDAF-11D0-8A3E-00C04FC9E26E}']
-    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; 
-                        var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant;
+                        var TargetFrameName: OleVariant; var PostData: OleVariant;
                         var Headers: OleVariant); safecall;
     function QueryStatusWB(cmdID: OLECMDID): OLECMDF; safecall;
-    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant; 
+    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant;
                      var pvaOut: OleVariant); safecall;
-    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant; 
+    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant;
                              var pvarSize: OleVariant); safecall;
     function Get_ReadyState: tagREADYSTATE; safecall;
     function Get_Offline: WordBool; safecall;
@@ -524,13 +524,13 @@ type
 // *********************************************************************//
   IWebBrowser2Disp = dispinterface
     ['{D30C1661-CDAF-11D0-8A3E-00C04FC9E26E}']
-    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; 
-                        var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant;
+                        var TargetFrameName: OleVariant; var PostData: OleVariant;
                         var Headers: OleVariant); dispid 500;
     function QueryStatusWB(cmdID: OLECMDID): OLECMDF; dispid 501;
-    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant; 
+    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant;
                      var pvaOut: OleVariant); dispid 502;
-    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant; 
+    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant;
                              var pvarSize: OleVariant); dispid 503;
     property ReadyState: tagREADYSTATE readonly dispid -525;
     property Offline: WordBool dispid 550;
@@ -558,8 +558,8 @@ type
     procedure GoForward; dispid 101;
     procedure GoHome; dispid 102;
     procedure GoSearch; dispid 103;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
-                       var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
+                       var TargetFrameName: OleVariant; var PostData: OleVariant;
                        var Headers: OleVariant); dispid 104;
     procedure Refresh; dispid -550;
     procedure Refresh2(var Level: OleVariant); dispid 105;
@@ -593,8 +593,8 @@ type
     procedure DownloadComplete; dispid 104;
     procedure TitleChange(const Text: WideString); dispid 113;
     procedure PropertyChange(const szProperty: WideString); dispid 112;
-    procedure BeforeNavigate2(const pDisp: IDispatch; var URL: OleVariant; var Flags: OleVariant; 
-                              var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure BeforeNavigate2(const pDisp: IDispatch; var URL: OleVariant; var Flags: OleVariant;
+                              var TargetFrameName: OleVariant; var PostData: OleVariant;
                               var Headers: OleVariant; var Cancel: WordBool); dispid 250;
     procedure NewWindow2(var ppDisp: IDispatch; var Cancel: WordBool); dispid 251;
     procedure NavigateComplete2(const pDisp: IDispatch; var URL: OleVariant); dispid 252;
@@ -615,13 +615,13 @@ type
     procedure ClientToHostWindow(var CX: Integer; var CY: Integer); dispid 268;
     procedure SetSecureLockIcon(SecureLockIcon: Integer); dispid 269;
     procedure FileDownload(ActiveDocument: WordBool; var Cancel: WordBool); dispid 270;
-    procedure NavigateError(const pDisp: IDispatch; var URL: OleVariant; var Frame: OleVariant; 
+    procedure NavigateError(const pDisp: IDispatch; var URL: OleVariant; var Frame: OleVariant;
                             var StatusCode: OleVariant; var Cancel: WordBool); dispid 271;
     procedure PrintTemplateInstantiation(const pDisp: IDispatch); dispid 225;
     procedure PrintTemplateTeardown(const pDisp: IDispatch); dispid 226;
     procedure UpdatePageStatus(const pDisp: IDispatch; var nPage: OleVariant; var fDone: OleVariant); dispid 227;
     procedure PrivacyImpactedStateChange(bImpacted: WordBool); dispid 272;
-    procedure NewWindow3(var ppDisp: IDispatch; var Cancel: WordBool; dwFlags: LongWord; 
+    procedure NewWindow3(var ppDisp: IDispatch; var Cancel: WordBool; dwFlags: LongWord;
                          const bstrUrlContext: WideString; const bstrUrl: WideString); dispid 273;
     procedure SetPhishingFilterStatus(PhishingFilterStatus: Integer); dispid 282;
     procedure WindowStateChanged(dwWindowStateFlags: LongWord; dwValidFlagsMask: LongWord); dispid 283;
@@ -649,12 +649,12 @@ type
     function Item(index: OleVariant): IDispatch; safecall;
     function _NewEnum: IUnknown; safecall;
     procedure Register(const pid: IDispatch; HWND: Integer; swClass: SYSINT; out plCookie: Integer); safecall;
-    procedure RegisterPending(lThreadId: Integer; var pvarloc: OleVariant; 
+    procedure RegisterPending(lThreadId: Integer; var pvarloc: OleVariant;
                               var pvarlocRoot: OleVariant; swClass: SYSINT; out plCookie: Integer); safecall;
     procedure Revoke(lCookie: Integer); safecall;
     procedure OnNavigate(lCookie: Integer; var pvarloc: OleVariant); safecall;
     procedure OnActivated(lCookie: Integer; fActive: WordBool); safecall;
-    function FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant; swClass: SYSINT; 
+    function FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant; swClass: SYSINT;
                           out pHWND: Integer; swfwOptions: SYSINT): IDispatch; safecall;
     procedure OnCreated(lCookie: Integer; const punk: IUnknown); safecall;
     procedure ProcessAttachDetach(fAttach: WordBool); safecall;
@@ -672,12 +672,12 @@ type
     function Item(index: OleVariant): IDispatch; dispid 0;
     function _NewEnum: IUnknown; dispid -4;
     procedure Register(const pid: IDispatch; HWND: Integer; swClass: SYSINT; out plCookie: Integer); dispid 1610743811;
-    procedure RegisterPending(lThreadId: Integer; var pvarloc: OleVariant; 
+    procedure RegisterPending(lThreadId: Integer; var pvarloc: OleVariant;
                               var pvarlocRoot: OleVariant; swClass: SYSINT; out plCookie: Integer); dispid 1610743812;
     procedure Revoke(lCookie: Integer); dispid 1610743813;
     procedure OnNavigate(lCookie: Integer; var pvarloc: OleVariant); dispid 1610743814;
     procedure OnActivated(lCookie: Integer; fActive: WordBool); dispid 1610743815;
-    function FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant; swClass: SYSINT; 
+    function FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant; swClass: SYSINT;
                           out pHWND: Integer; swfwOptions: SYSINT): IDispatch; dispid 1610743816;
     procedure OnCreated(lCookie: Integer; const punk: IUnknown); dispid 1610743817;
     procedure ProcessAttachDetach(fAttach: WordBool); dispid 1610743818;
@@ -695,15 +695,15 @@ type
     procedure RefreshOfflineDesktop; safecall;
     procedure AddFavorite(const URL: WideString; var Title: OleVariant); safecall;
     procedure AddChannel(const URL: WideString); safecall;
-    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString; 
-                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant; 
+    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString;
+                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant;
                                   var Height: OleVariant); safecall;
     function IsSubscribed(const URL: WideString): WordBool; safecall;
-    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString; 
+    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString;
                               var varTargetFrame: OleVariant); safecall;
     procedure ImportExportFavorites(fImport: WordBool; const strImpExpPath: WideString); safecall;
     procedure AutoCompleteSaveForm(var Form: OleVariant); safecall;
-    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString; 
+    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString;
                        var pvarTargetFrame: OleVariant); safecall;
     procedure AutoCompleteAttach(var Reserved: OleVariant); safecall;
     function ShowBrowserUI(const bstrName: WideString; var pvarIn: OleVariant): OleVariant; safecall;
@@ -721,15 +721,15 @@ type
     procedure RefreshOfflineDesktop; dispid 3;
     procedure AddFavorite(const URL: WideString; var Title: OleVariant); dispid 4;
     procedure AddChannel(const URL: WideString); dispid 5;
-    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString; 
-                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant; 
+    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString;
+                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant;
                                   var Height: OleVariant); dispid 6;
     function IsSubscribed(const URL: WideString): WordBool; dispid 7;
-    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString; 
+    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString;
                               var varTargetFrame: OleVariant); dispid 8;
     procedure ImportExportFavorites(fImport: WordBool; const strImpExpPath: WideString); dispid 9;
     procedure AutoCompleteSaveForm(var Form: OleVariant); dispid 10;
-    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString; 
+    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString;
                        var pvarTargetFrame: OleVariant); dispid 11;
     procedure AutoCompleteAttach(var Reserved: OleVariant); dispid 12;
     function ShowBrowserUI(const bstrName: WideString; var pvarIn: OleVariant): OleVariant; dispid 13;
@@ -788,15 +788,15 @@ type
     procedure RefreshOfflineDesktop; dispid 3;
     procedure AddFavorite(const URL: WideString; var Title: OleVariant); dispid 4;
     procedure AddChannel(const URL: WideString); dispid 5;
-    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString; 
-                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant; 
+    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString;
+                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant;
                                   var Height: OleVariant); dispid 6;
     function IsSubscribed(const URL: WideString): WordBool; dispid 7;
-    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString; 
+    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString;
                               var varTargetFrame: OleVariant); dispid 8;
     procedure ImportExportFavorites(fImport: WordBool; const strImpExpPath: WideString); dispid 9;
     procedure AutoCompleteSaveForm(var Form: OleVariant); dispid 10;
-    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString; 
+    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString;
                        var pvarTargetFrame: OleVariant); dispid 11;
     procedure AutoCompleteAttach(var Reserved: OleVariant); dispid 12;
     function ShowBrowserUI(const bstrName: WideString; var pvarIn: OleVariant): OleVariant; dispid 13;
@@ -809,8 +809,8 @@ type
 // *********************************************************************//
   DShellNameSpaceEvents = dispinterface
     ['{55136806-B2DE-11D1-B9F2-00A0C98BC547}']
-    procedure FavoritesSelectionChange(cItems: Integer; hItem: Integer; const strName: WideString; 
-                                       const strUrl: WideString; cVisits: Integer; 
+    procedure FavoritesSelectionChange(cItems: Integer; hItem: Integer; const strName: WideString;
+                                       const strUrl: WideString; cVisits: Integer;
                                        const strDate: WideString; fAvailableOffline: Integer); dispid 1;
     procedure SelectionChange; dispid 2;
     procedure DoubleClick; dispid 3;
@@ -992,32 +992,32 @@ type
 // Event   Interface: DWebBrowserEvents
 // TypeFlags        : (34) CanCreate Control
 // *********************************************************************//
-  TWebBrowserEx_V1BeforeNavigate = procedure(ASender: TObject; const URL: WideString; Flags: Integer; 
-                                                             const TargetFrameName: WideString; 
-                                                             var PostData: OleVariant; 
-                                                             const Headers: WideString; 
+  TWebBrowserEx_V1BeforeNavigate = procedure(ASender: TObject; const URL: WideString; Flags: Integer;
+                                                             const TargetFrameName: WideString;
+                                                             var PostData: OleVariant;
+                                                             const Headers: WideString;
                                                              var Cancel: WordBool) of object;
   TWebBrowserEx_V1NavigateComplete = procedure(ASender: TObject; const URL: WideString) of object;
   TWebBrowserEx_V1StatusTextChange = procedure(ASender: TObject; const Text: WideString) of object;
   TWebBrowserEx_V1ProgressChange = procedure(ASender: TObject; Progress: Integer; ProgressMax: Integer) of object;
   TWebBrowserEx_V1CommandStateChange = procedure(ASender: TObject; Command: Integer; Enable: WordBool) of object;
-  TWebBrowserEx_V1NewWindow = procedure(ASender: TObject; const URL: WideString; Flags: Integer; 
-                                                        const TargetFrameName: WideString; 
-                                                        var PostData: OleVariant; 
-                                                        const Headers: WideString; 
+  TWebBrowserEx_V1NewWindow = procedure(ASender: TObject; const URL: WideString; Flags: Integer;
+                                                        const TargetFrameName: WideString;
+                                                        var PostData: OleVariant;
+                                                        const Headers: WideString;
                                                         var Processed: WordBool) of object;
   TWebBrowserEx_V1TitleChange = procedure(ASender: TObject; const Text: WideString) of object;
-  TWebBrowserEx_V1FrameBeforeNavigate = procedure(ASender: TObject; const URL: WideString; 
-                                                                  Flags: Integer; 
-                                                                  const TargetFrameName: WideString; 
-                                                                  var PostData: OleVariant; 
-                                                                  const Headers: WideString; 
+  TWebBrowserEx_V1FrameBeforeNavigate = procedure(ASender: TObject; const URL: WideString;
+                                                                  Flags: Integer;
+                                                                  const TargetFrameName: WideString;
+                                                                  var PostData: OleVariant;
+                                                                  const Headers: WideString;
                                                                   var Cancel: WordBool) of object;
   TWebBrowserEx_V1FrameNavigateComplete = procedure(ASender: TObject; const URL: WideString) of object;
-  TWebBrowserEx_V1FrameNewWindow = procedure(ASender: TObject; const URL: WideString; Flags: Integer; 
-                                                             const TargetFrameName: WideString; 
-                                                             var PostData: OleVariant; 
-                                                             const Headers: WideString; 
+  TWebBrowserEx_V1FrameNewWindow = procedure(ASender: TObject; const URL: WideString; Flags: Integer;
+                                                             const TargetFrameName: WideString;
+                                                             var PostData: OleVariant;
+                                                             const Headers: WideString;
                                                              var Processed: WordBool) of object;
   TWebBrowserEx_V1Quit = procedure(ASender: TObject; var Cancel: WordBool) of object;
   TWebBrowserEx_V1PropertyChange = procedure(ASender: TObject; const Property_: WideString) of object;
@@ -1058,10 +1058,10 @@ type
     procedure Navigate(const URL: WideString); overload;
     procedure Navigate(const URL: WideString; var Flags: OleVariant); overload;
     procedure Navigate(const URL: WideString; var Flags: OleVariant; var TargetFrameName: OleVariant); overload;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
                        var TargetFrameName: OleVariant; var PostData: OleVariant); overload;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
-                       var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
+                       var TargetFrameName: OleVariant; var PostData: OleVariant;
                        var Headers: OleVariant); overload;
     procedure Refresh;
     procedure Refresh2; overload;
@@ -1129,17 +1129,17 @@ type
   TWebBrowserExCommandStateChange = procedure(ASender: TObject; Command: Integer; Enable: WordBool) of object;
   TWebBrowserExTitleChange = procedure(ASender: TObject; const Text: WideString) of object;
   TWebBrowserExPropertyChange = procedure(ASender: TObject; const szProperty: WideString) of object;
-  TWebBrowserExBeforeNavigate2 = procedure(ASender: TObject; const pDisp: IDispatch; 
-                                                           var URL: OleVariant; 
-                                                           var Flags: OleVariant; 
-                                                           var TargetFrameName: OleVariant; 
-                                                           var PostData: OleVariant; 
-                                                           var Headers: OleVariant; 
+  TWebBrowserExBeforeNavigate2 = procedure(ASender: TObject; const pDisp: IDispatch;
+                                                           var URL: OleVariant;
+                                                           var Flags: OleVariant;
+                                                           var TargetFrameName: OleVariant;
+                                                           var PostData: OleVariant;
+                                                           var Headers: OleVariant;
                                                            var Cancel: WordBool) of object;
   TWebBrowserExNewWindow2 = procedure(ASender: TObject; var ppDisp: IDispatch; var Cancel: WordBool) of object;
-  TWebBrowserExNavigateComplete2 = procedure(ASender: TObject; const pDisp: IDispatch; 
+  TWebBrowserExNavigateComplete2 = procedure(ASender: TObject; const pDisp: IDispatch;
                                                              var URL: OleVariant) of object;
-  TWebBrowserExDocumentComplete = procedure(ASender: TObject; const pDisp: IDispatch; 
+  TWebBrowserExDocumentComplete = procedure(ASender: TObject; const pDisp: IDispatch;
                                                             var URL: OleVariant) of object;
   TWebBrowserExOnVisible = procedure(ASender: TObject; Visible: WordBool) of object;
   TWebBrowserExOnToolBar = procedure(ASender: TObject; ToolBar: WordBool) of object;
@@ -1152,29 +1152,29 @@ type
   TWebBrowserExWindowSetTop = procedure(ASender: TObject; Top: Integer) of object;
   TWebBrowserExWindowSetWidth = procedure(ASender: TObject; Width: Integer) of object;
   TWebBrowserExWindowSetHeight = procedure(ASender: TObject; Height: Integer) of object;
-  TWebBrowserExWindowClosing = procedure(ASender: TObject; IsChildWindow: WordBool; 
+  TWebBrowserExWindowClosing = procedure(ASender: TObject; IsChildWindow: WordBool;
                                                          var Cancel: WordBool) of object;
   TWebBrowserExClientToHostWindow = procedure(ASender: TObject; var CX: Integer; var CY: Integer) of object;
   TWebBrowserExSetSecureLockIcon = procedure(ASender: TObject; SecureLockIcon: Integer) of object;
-  TWebBrowserExFileDownload = procedure(ASender: TObject; ActiveDocument: WordBool; 
+  TWebBrowserExFileDownload = procedure(ASender: TObject; ActiveDocument: WordBool;
                                                         var Cancel: WordBool) of object;
-  TWebBrowserExNavigateError = procedure(ASender: TObject; const pDisp: IDispatch; 
-                                                         var URL: OleVariant; 
-                                                         var Frame: OleVariant; 
-                                                         var StatusCode: OleVariant; 
+  TWebBrowserExNavigateError = procedure(ASender: TObject; const pDisp: IDispatch;
+                                                         var URL: OleVariant;
+                                                         var Frame: OleVariant;
+                                                         var StatusCode: OleVariant;
                                                          var Cancel: WordBool) of object;
   TWebBrowserExPrintTemplateInstantiation = procedure(ASender: TObject; const pDisp: IDispatch) of object;
   TWebBrowserExPrintTemplateTeardown = procedure(ASender: TObject; const pDisp: IDispatch) of object;
-  TWebBrowserExUpdatePageStatus = procedure(ASender: TObject; const pDisp: IDispatch; 
-                                                            var nPage: OleVariant; 
+  TWebBrowserExUpdatePageStatus = procedure(ASender: TObject; const pDisp: IDispatch;
+                                                            var nPage: OleVariant;
                                                             var fDone: OleVariant) of object;
   TWebBrowserExPrivacyImpactedStateChange = procedure(ASender: TObject; bImpacted: WordBool) of object;
-  TWebBrowserExNewWindow3 = procedure(ASender: TObject; var ppDisp: IDispatch; var Cancel: WordBool; 
-                                                      dwFlags: LongWord; 
-                                                      const bstrUrlContext: WideString; 
+  TWebBrowserExNewWindow3 = procedure(ASender: TObject; var ppDisp: IDispatch; var Cancel: WordBool;
+                                                      dwFlags: LongWord;
+                                                      const bstrUrlContext: WideString;
                                                       const bstrUrl: WideString) of object;
   TWebBrowserExSetPhishingFilterStatus = procedure(ASender: TObject; PhishingFilterStatus: Integer) of object;
-  TWebBrowserExWindowStateChanged = procedure(ASender: TObject; dwWindowStateFlags: LongWord; 
+  TWebBrowserExWindowStateChanged = procedure(ASender: TObject; dwWindowStateFlags: LongWord;
                                                               dwValidFlagsMask: LongWord) of object;
 
   TWebBrowserEx = class(TOleControl)
@@ -1231,10 +1231,10 @@ type
     procedure Navigate(const URL: WideString); overload;
     procedure Navigate(const URL: WideString; var Flags: OleVariant); overload;
     procedure Navigate(const URL: WideString; var Flags: OleVariant; var TargetFrameName: OleVariant); overload;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
                        var TargetFrameName: OleVariant; var PostData: OleVariant); overload;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
-                       var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
+                       var TargetFrameName: OleVariant; var PostData: OleVariant;
                        var Headers: OleVariant); overload;
     procedure Refresh;
     procedure Refresh2; overload;
@@ -1247,19 +1247,19 @@ type
     procedure Navigate2(var URL: OleVariant); overload;
     procedure Navigate2(var URL: OleVariant; var Flags: OleVariant); overload;
     procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; var TargetFrameName: OleVariant); overload;
-    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; 
+    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant;
                         var TargetFrameName: OleVariant; var PostData: OleVariant); overload;
-    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; 
-                        var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant;
+                        var TargetFrameName: OleVariant; var PostData: OleVariant;
                         var Headers: OleVariant); overload;
     function QueryStatusWB(cmdID: OLECMDID): OLECMDF;
     procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT); overload;
     procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant); overload;
-    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant; 
+    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant;
                      var pvaOut: OleVariant); overload;
     procedure ShowBrowserBar(var pvaClsid: OleVariant); overload;
     procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant); overload;
-    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant; 
+    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant;
                              var pvarSize: OleVariant); overload;
     property  ControlInterface: IWebBrowser2 read GetControlInterface;
     property  DefaultInterface: IWebBrowser2 read GetControlInterface;
@@ -1344,11 +1344,11 @@ type
   end;
 
 // *********************************************************************//
-// The Class CoInternetExplorer provides a Create and CreateRemote method to          
-// create instances of the default interface IWebBrowser2 exposed by              
-// the CoClass InternetExplorer. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoInternetExplorer provides a Create and CreateRemote method to
+// create instances of the default interface IWebBrowser2 exposed by
+// the CoClass InternetExplorer. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoInternetExplorer = class
     class function Create: IWebBrowser2;
@@ -1356,24 +1356,24 @@ type
   end;
 
   TInternetExplorerStatusTextChange = procedure(ASender: TObject; const Text: WideString) of object;
-  TInternetExplorerProgressChange = procedure(ASender: TObject; Progress: Integer; 
+  TInternetExplorerProgressChange = procedure(ASender: TObject; Progress: Integer;
                                                                 ProgressMax: Integer) of object;
-  TInternetExplorerCommandStateChange = procedure(ASender: TObject; Command: Integer; 
+  TInternetExplorerCommandStateChange = procedure(ASender: TObject; Command: Integer;
                                                                     Enable: WordBool) of object;
   TInternetExplorerTitleChange = procedure(ASender: TObject; const Text: WideString) of object;
   TInternetExplorerPropertyChange = procedure(ASender: TObject; const szProperty: WideString) of object;
-  TInternetExplorerBeforeNavigate2 = procedure(ASender: TObject; const pDisp: IDispatch; 
-                                                                 var URL: OleVariant; 
-                                                                 var Flags: OleVariant; 
-                                                                 var TargetFrameName: OleVariant; 
-                                                                 var PostData: OleVariant; 
-                                                                 var Headers: OleVariant; 
+  TInternetExplorerBeforeNavigate2 = procedure(ASender: TObject; const pDisp: IDispatch;
+                                                                 var URL: OleVariant;
+                                                                 var Flags: OleVariant;
+                                                                 var TargetFrameName: OleVariant;
+                                                                 var PostData: OleVariant;
+                                                                 var Headers: OleVariant;
                                                                  var Cancel: WordBool) of object;
-  TInternetExplorerNewWindow2 = procedure(ASender: TObject; var ppDisp: IDispatch; 
+  TInternetExplorerNewWindow2 = procedure(ASender: TObject; var ppDisp: IDispatch;
                                                             var Cancel: WordBool) of object;
-  TInternetExplorerNavigateComplete2 = procedure(ASender: TObject; const pDisp: IDispatch; 
+  TInternetExplorerNavigateComplete2 = procedure(ASender: TObject; const pDisp: IDispatch;
                                                                    var URL: OleVariant) of object;
-  TInternetExplorerDocumentComplete = procedure(ASender: TObject; const pDisp: IDispatch; 
+  TInternetExplorerDocumentComplete = procedure(ASender: TObject; const pDisp: IDispatch;
                                                                   var URL: OleVariant) of object;
   TInternetExplorerOnVisible = procedure(ASender: TObject; Visible: WordBool) of object;
   TInternetExplorerOnToolBar = procedure(ASender: TObject; ToolBar: WordBool) of object;
@@ -1386,30 +1386,30 @@ type
   TInternetExplorerWindowSetTop = procedure(ASender: TObject; Top: Integer) of object;
   TInternetExplorerWindowSetWidth = procedure(ASender: TObject; Width: Integer) of object;
   TInternetExplorerWindowSetHeight = procedure(ASender: TObject; Height: Integer) of object;
-  TInternetExplorerWindowClosing = procedure(ASender: TObject; IsChildWindow: WordBool; 
+  TInternetExplorerWindowClosing = procedure(ASender: TObject; IsChildWindow: WordBool;
                                                                var Cancel: WordBool) of object;
   TInternetExplorerClientToHostWindow = procedure(ASender: TObject; var CX: Integer; var CY: Integer) of object;
   TInternetExplorerSetSecureLockIcon = procedure(ASender: TObject; SecureLockIcon: Integer) of object;
-  TInternetExplorerFileDownload = procedure(ASender: TObject; ActiveDocument: WordBool; 
+  TInternetExplorerFileDownload = procedure(ASender: TObject; ActiveDocument: WordBool;
                                                               var Cancel: WordBool) of object;
-  TInternetExplorerNavigateError = procedure(ASender: TObject; const pDisp: IDispatch; 
-                                                               var URL: OleVariant; 
-                                                               var Frame: OleVariant; 
-                                                               var StatusCode: OleVariant; 
+  TInternetExplorerNavigateError = procedure(ASender: TObject; const pDisp: IDispatch;
+                                                               var URL: OleVariant;
+                                                               var Frame: OleVariant;
+                                                               var StatusCode: OleVariant;
                                                                var Cancel: WordBool) of object;
   TInternetExplorerPrintTemplateInstantiation = procedure(ASender: TObject; const pDisp: IDispatch) of object;
   TInternetExplorerPrintTemplateTeardown = procedure(ASender: TObject; const pDisp: IDispatch) of object;
-  TInternetExplorerUpdatePageStatus = procedure(ASender: TObject; const pDisp: IDispatch; 
-                                                                  var nPage: OleVariant; 
+  TInternetExplorerUpdatePageStatus = procedure(ASender: TObject; const pDisp: IDispatch;
+                                                                  var nPage: OleVariant;
                                                                   var fDone: OleVariant) of object;
   TInternetExplorerPrivacyImpactedStateChange = procedure(ASender: TObject; bImpacted: WordBool) of object;
-  TInternetExplorerNewWindow3 = procedure(ASender: TObject; var ppDisp: IDispatch; 
-                                                            var Cancel: WordBool; 
-                                                            dwFlags: LongWord; 
-                                                            const bstrUrlContext: WideString; 
+  TInternetExplorerNewWindow3 = procedure(ASender: TObject; var ppDisp: IDispatch;
+                                                            var Cancel: WordBool;
+                                                            dwFlags: LongWord;
+                                                            const bstrUrlContext: WideString;
                                                             const bstrUrl: WideString) of object;
   TInternetExplorerSetPhishingFilterStatus = procedure(ASender: TObject; PhishingFilterStatus: Integer) of object;
-  TInternetExplorerWindowStateChanged = procedure(ASender: TObject; dwWindowStateFlags: LongWord; 
+  TInternetExplorerWindowStateChanged = procedure(ASender: TObject; dwWindowStateFlags: LongWord;
                                                                     dwValidFlagsMask: LongWord) of object;
 
 
@@ -1532,10 +1532,10 @@ type
     procedure Navigate(const URL: WideString); overload;
     procedure Navigate(const URL: WideString; var Flags: OleVariant); overload;
     procedure Navigate(const URL: WideString; var Flags: OleVariant; var TargetFrameName: OleVariant); overload;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
                        var TargetFrameName: OleVariant; var PostData: OleVariant); overload;
-    procedure Navigate(const URL: WideString; var Flags: OleVariant; 
-                       var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate(const URL: WideString; var Flags: OleVariant;
+                       var TargetFrameName: OleVariant; var PostData: OleVariant;
                        var Headers: OleVariant); overload;
     procedure Refresh;
     procedure Refresh2; overload;
@@ -1548,19 +1548,19 @@ type
     procedure Navigate2(var URL: OleVariant); overload;
     procedure Navigate2(var URL: OleVariant; var Flags: OleVariant); overload;
     procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; var TargetFrameName: OleVariant); overload;
-    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; 
+    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant;
                         var TargetFrameName: OleVariant; var PostData: OleVariant); overload;
-    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant; 
-                        var TargetFrameName: OleVariant; var PostData: OleVariant; 
+    procedure Navigate2(var URL: OleVariant; var Flags: OleVariant;
+                        var TargetFrameName: OleVariant; var PostData: OleVariant;
                         var Headers: OleVariant); overload;
     function QueryStatusWB(cmdID: OLECMDID): OLECMDF;
     procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT); overload;
     procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant); overload;
-    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant; 
+    procedure ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant;
                      var pvaOut: OleVariant); overload;
     procedure ShowBrowserBar(var pvaClsid: OleVariant); overload;
     procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant); overload;
-    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant; 
+    procedure ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant;
                              var pvarSize: OleVariant); overload;
     property DefaultInterface: IWebBrowser2 read GetDefaultInterface;
     property Application: IDispatch read Get_Application;
@@ -1721,11 +1721,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoShellBrowserWindow provides a Create and CreateRemote method to          
-// create instances of the default interface IWebBrowser2 exposed by              
-// the CoClass ShellBrowserWindow. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoShellBrowserWindow provides a Create and CreateRemote method to
+// create instances of the default interface IWebBrowser2 exposed by
+// the CoClass ShellBrowserWindow. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoShellBrowserWindow = class
     class function Create: IWebBrowser2;
@@ -1733,11 +1733,11 @@ type
   end;
 
 // *********************************************************************//
-// The Class CoShellWindows provides a Create and CreateRemote method to          
-// create instances of the default interface IShellWindows exposed by              
-// the CoClass ShellWindows. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoShellWindows provides a Create and CreateRemote method to
+// create instances of the default interface IShellWindows exposed by
+// the CoClass ShellWindows. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoShellWindows = class
     class function Create: IShellWindows;
@@ -1784,12 +1784,12 @@ type
     function Item(index: OleVariant): IDispatch; overload;
     function _NewEnum: IUnknown;
     procedure Register(const pid: IDispatch; HWND: Integer; swClass: SYSINT; out plCookie: Integer);
-    procedure RegisterPending(lThreadId: Integer; var pvarloc: OleVariant; 
+    procedure RegisterPending(lThreadId: Integer; var pvarloc: OleVariant;
                               var pvarlocRoot: OleVariant; swClass: SYSINT; out plCookie: Integer);
     procedure Revoke(lCookie: Integer);
     procedure OnNavigate(lCookie: Integer; var pvarloc: OleVariant);
     procedure OnActivated(lCookie: Integer; fActive: WordBool);
-    function FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant; swClass: SYSINT; 
+    function FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant; swClass: SYSINT;
                           out pHWND: Integer; swfwOptions: SYSINT): IDispatch;
     procedure OnCreated(lCookie: Integer; const punk: IUnknown);
     procedure ProcessAttachDetach(fAttach: WordBool);
@@ -1825,11 +1825,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoShellUIHelper provides a Create and CreateRemote method to          
-// create instances of the default interface IShellUIHelper2 exposed by              
-// the CoClass ShellUIHelper. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoShellUIHelper provides a Create and CreateRemote method to
+// create instances of the default interface IShellUIHelper2 exposed by
+// the CoClass ShellUIHelper. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoShellUIHelper = class
     class function Create: IShellUIHelper2;
@@ -1840,10 +1840,10 @@ type
 // *********************************************************************//
 // OLE Server Proxy class declaration
 // Server Object    : TShellUIHelper
-// Help String      : 
+// Help String      :
 // Default Interface: IShellUIHelper2
 // Def. Intf. DISP? : No
-// Event   Interface: 
+// Event   Interface:
 // TypeFlags        : (2) CanCreate
 // *********************************************************************//
 {$IFDEF LIVE_SERVER_AT_DESIGN_TIME}
@@ -1872,23 +1872,23 @@ type
     procedure AddFavorite(const URL: WideString; var Title: OleVariant); overload;
     procedure AddChannel(const URL: WideString);
     procedure AddDesktopComponent(const URL: WideString; const Type_: WideString); overload;
-    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString; 
+    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString;
                                   var Left: OleVariant); overload;
-    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString; 
+    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString;
                                   var Left: OleVariant; var Top: OleVariant); overload;
-    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString; 
+    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString;
                                   var Left: OleVariant; var Top: OleVariant; var Width: OleVariant); overload;
-    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString; 
-                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant; 
+    procedure AddDesktopComponent(const URL: WideString; const Type_: WideString;
+                                  var Left: OleVariant; var Top: OleVariant; var Width: OleVariant;
                                   var Height: OleVariant); overload;
     function IsSubscribed(const URL: WideString): WordBool;
-    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString; 
+    procedure NavigateAndFind(const URL: WideString; const strQuery: WideString;
                               var varTargetFrame: OleVariant);
     procedure ImportExportFavorites(fImport: WordBool; const strImpExpPath: WideString);
     procedure AutoCompleteSaveForm; overload;
     procedure AutoCompleteSaveForm(var Form: OleVariant); overload;
     procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString); overload;
-    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString; 
+    procedure AutoScan(const strSearch: WideString; const strFailureUrl: WideString;
                        var pvarTargetFrame: OleVariant); overload;
     procedure AutoCompleteAttach; overload;
     procedure AutoCompleteAttach(var Reserved: OleVariant); overload;
@@ -1937,30 +1937,30 @@ type
 
 
 // *********************************************************************//
-// The Class CoShellNameSpace provides a Create and CreateRemote method to          
-// create instances of the default interface IShellNameSpace exposed by              
-// the CoClass ShellNameSpace. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoShellNameSpace provides a Create and CreateRemote method to
+// create instances of the default interface IShellNameSpace exposed by
+// the CoClass ShellNameSpace. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoShellNameSpace = class
     class function Create: IShellNameSpace;
     class function CreateRemote(const MachineName: string): IShellNameSpace;
   end;
 
-  TShellNameSpaceFavoritesSelectionChange = procedure(ASender: TObject; cItems: Integer; 
-                                                                        hItem: Integer; 
-                                                                        const strName: WideString; 
-                                                                        const strUrl: WideString; 
-                                                                        cVisits: Integer; 
-                                                                        const strDate: WideString; 
+  TShellNameSpaceFavoritesSelectionChange = procedure(ASender: TObject; cItems: Integer;
+                                                                        hItem: Integer;
+                                                                        const strName: WideString;
+                                                                        const strUrl: WideString;
+                                                                        cVisits: Integer;
+                                                                        const strDate: WideString;
                                                                         fAvailableOffline: Integer) of object;
 
 
 // *********************************************************************//
 // OLE Server Proxy class declaration
 // Server Object    : TShellNameSpace
-// Help String      : 
+// Help String      :
 // Default Interface: IShellNameSpace
 // Def. Intf. DISP? : No
 // Event   Interface: DShellNameSpaceEvents
@@ -2090,23 +2090,23 @@ type
 
 
 // *********************************************************************//
-// The Class CoShellShellNameSpace provides a Create and CreateRemote method to          
-// create instances of the default interface IShellNameSpace exposed by              
-// the CoClass ShellShellNameSpace. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoShellShellNameSpace provides a Create and CreateRemote method to
+// create instances of the default interface IShellNameSpace exposed by
+// the CoClass ShellShellNameSpace. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoShellShellNameSpace = class
     class function Create: IShellNameSpace;
     class function CreateRemote(const MachineName: string): IShellNameSpace;
   end;
 
-  TShellShellNameSpaceFavoritesSelectionChange = procedure(ASender: TObject; cItems: Integer; 
-                                                                             hItem: Integer; 
-                                                                             const strName: WideString; 
-                                                                             const strUrl: WideString; 
-                                                                             cVisits: Integer; 
-                                                                             const strDate: WideString; 
+  TShellShellNameSpaceFavoritesSelectionChange = procedure(ASender: TObject; cItems: Integer;
+                                                                             hItem: Integer;
+                                                                             const strName: WideString;
+                                                                             const strUrl: WideString;
+                                                                             cVisits: Integer;
+                                                                             const strDate: WideString;
                                                                              fAvailableOffline: Integer) of object;
 
 
@@ -2243,11 +2243,11 @@ type
 
 
 // *********************************************************************//
-// The Class CoCScriptErrorList provides a Create and CreateRemote method to          
-// create instances of the default interface IScriptErrorList exposed by              
-// the CoClass CScriptErrorList. The functions are intended to be used by             
-// clients wishing to automate the CoClass objects exposed by the         
-// server of this typelibrary.                                            
+// The Class CoCScriptErrorList provides a Create and CreateRemote method to
+// create instances of the default interface IScriptErrorList exposed by
+// the CoClass CScriptErrorList. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
 // *********************************************************************//
   CoCScriptErrorList = class
     class function Create: IScriptErrorList;
@@ -2344,20 +2344,20 @@ begin
   DefaultInterface.Navigate(URL, Flags, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TWebBrowserEx_V1.Navigate(const URL: WideString; var Flags: OleVariant; 
+procedure TWebBrowserEx_V1.Navigate(const URL: WideString; var Flags: OleVariant;
                                   var TargetFrameName: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, EmptyParam, EmptyParam);
 end;
 
-procedure TWebBrowserEx_V1.Navigate(const URL: WideString; var Flags: OleVariant; 
+procedure TWebBrowserEx_V1.Navigate(const URL: WideString; var Flags: OleVariant;
                                   var TargetFrameName: OleVariant; var PostData: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, PostData, EmptyParam);
 end;
 
-procedure TWebBrowserEx_V1.Navigate(const URL: WideString; var Flags: OleVariant; 
-                                  var TargetFrameName: OleVariant; var PostData: OleVariant; 
+procedure TWebBrowserEx_V1.Navigate(const URL: WideString; var Flags: OleVariant;
+                                  var TargetFrameName: OleVariant; var PostData: OleVariant;
                                   var Headers: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, PostData, Headers);
@@ -2472,20 +2472,20 @@ begin
   DefaultInterface.Navigate(URL, Flags, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TWebBrowserEx.Navigate(const URL: WideString; var Flags: OleVariant; 
+procedure TWebBrowserEx.Navigate(const URL: WideString; var Flags: OleVariant;
                                var TargetFrameName: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, EmptyParam, EmptyParam);
 end;
 
-procedure TWebBrowserEx.Navigate(const URL: WideString; var Flags: OleVariant; 
+procedure TWebBrowserEx.Navigate(const URL: WideString; var Flags: OleVariant;
                                var TargetFrameName: OleVariant; var PostData: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, PostData, EmptyParam);
 end;
 
-procedure TWebBrowserEx.Navigate(const URL: WideString; var Flags: OleVariant; 
-                               var TargetFrameName: OleVariant; var PostData: OleVariant; 
+procedure TWebBrowserEx.Navigate(const URL: WideString; var Flags: OleVariant;
+                               var TargetFrameName: OleVariant; var PostData: OleVariant;
                                var Headers: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, PostData, Headers);
@@ -2541,20 +2541,20 @@ begin
   DefaultInterface.Navigate2(URL, Flags, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TWebBrowserEx.Navigate2(var URL: OleVariant; var Flags: OleVariant; 
+procedure TWebBrowserEx.Navigate2(var URL: OleVariant; var Flags: OleVariant;
                                 var TargetFrameName: OleVariant);
 begin
   DefaultInterface.Navigate2(URL, Flags, TargetFrameName, EmptyParam, EmptyParam);
 end;
 
-procedure TWebBrowserEx.Navigate2(var URL: OleVariant; var Flags: OleVariant; 
+procedure TWebBrowserEx.Navigate2(var URL: OleVariant; var Flags: OleVariant;
                                 var TargetFrameName: OleVariant; var PostData: OleVariant);
 begin
   DefaultInterface.Navigate2(URL, Flags, TargetFrameName, PostData, EmptyParam);
 end;
 
-procedure TWebBrowserEx.Navigate2(var URL: OleVariant; var Flags: OleVariant; 
-                                var TargetFrameName: OleVariant; var PostData: OleVariant; 
+procedure TWebBrowserEx.Navigate2(var URL: OleVariant; var Flags: OleVariant;
+                                var TargetFrameName: OleVariant; var PostData: OleVariant;
                                 var Headers: OleVariant);
 begin
   DefaultInterface.Navigate2(URL, Flags, TargetFrameName, PostData, Headers);
@@ -2575,7 +2575,7 @@ begin
   DefaultInterface.ExecWB(cmdID, cmdexecopt, pvaIn, EmptyParam);
 end;
 
-procedure TWebBrowserEx.ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant; 
+procedure TWebBrowserEx.ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVariant;
                              var pvaOut: OleVariant);
 begin
   DefaultInterface.ExecWB(cmdID, cmdexecopt, pvaIn, pvaOut);
@@ -2591,7 +2591,7 @@ begin
   DefaultInterface.ShowBrowserBar(pvaClsid, pvarShow, EmptyParam);
 end;
 
-procedure TWebBrowserEx.ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant; 
+procedure TWebBrowserEx.ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant;
                                      var pvarSize: OleVariant);
 begin
   DefaultInterface.ShowBrowserBar(pvaClsid, pvarShow, pvarSize);
@@ -3069,20 +3069,20 @@ begin
   DefaultInterface.Navigate(URL, Flags, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TInternetExplorer.Navigate(const URL: WideString; var Flags: OleVariant; 
+procedure TInternetExplorer.Navigate(const URL: WideString; var Flags: OleVariant;
                                      var TargetFrameName: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, EmptyParam, EmptyParam);
 end;
 
-procedure TInternetExplorer.Navigate(const URL: WideString; var Flags: OleVariant; 
+procedure TInternetExplorer.Navigate(const URL: WideString; var Flags: OleVariant;
                                      var TargetFrameName: OleVariant; var PostData: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, PostData, EmptyParam);
 end;
 
-procedure TInternetExplorer.Navigate(const URL: WideString; var Flags: OleVariant; 
-                                     var TargetFrameName: OleVariant; var PostData: OleVariant; 
+procedure TInternetExplorer.Navigate(const URL: WideString; var Flags: OleVariant;
+                                     var TargetFrameName: OleVariant; var PostData: OleVariant;
                                      var Headers: OleVariant);
 begin
   DefaultInterface.Navigate(URL, Flags, TargetFrameName, PostData, Headers);
@@ -3138,20 +3138,20 @@ begin
   DefaultInterface.Navigate2(URL, Flags, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TInternetExplorer.Navigate2(var URL: OleVariant; var Flags: OleVariant; 
+procedure TInternetExplorer.Navigate2(var URL: OleVariant; var Flags: OleVariant;
                                       var TargetFrameName: OleVariant);
 begin
   DefaultInterface.Navigate2(URL, Flags, TargetFrameName, EmptyParam, EmptyParam);
 end;
 
-procedure TInternetExplorer.Navigate2(var URL: OleVariant; var Flags: OleVariant; 
+procedure TInternetExplorer.Navigate2(var URL: OleVariant; var Flags: OleVariant;
                                       var TargetFrameName: OleVariant; var PostData: OleVariant);
 begin
   DefaultInterface.Navigate2(URL, Flags, TargetFrameName, PostData, EmptyParam);
 end;
 
-procedure TInternetExplorer.Navigate2(var URL: OleVariant; var Flags: OleVariant; 
-                                      var TargetFrameName: OleVariant; var PostData: OleVariant; 
+procedure TInternetExplorer.Navigate2(var URL: OleVariant; var Flags: OleVariant;
+                                      var TargetFrameName: OleVariant; var PostData: OleVariant;
                                       var Headers: OleVariant);
 begin
   DefaultInterface.Navigate2(URL, Flags, TargetFrameName, PostData, Headers);
@@ -3172,7 +3172,7 @@ begin
   DefaultInterface.ExecWB(cmdID, cmdexecopt, pvaIn, EmptyParam);
 end;
 
-procedure TInternetExplorer.ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT; 
+procedure TInternetExplorer.ExecWB(cmdID: OLECMDID; cmdexecopt: OLECMDEXECOPT;
                                    var pvaIn: OleVariant; var pvaOut: OleVariant);
 begin
   DefaultInterface.ExecWB(cmdID, cmdexecopt, pvaIn, pvaOut);
@@ -3188,7 +3188,7 @@ begin
   DefaultInterface.ShowBrowserBar(pvaClsid, pvarShow, EmptyParam);
 end;
 
-procedure TInternetExplorer.ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant; 
+procedure TInternetExplorer.ShowBrowserBar(var pvaClsid: OleVariant; var pvarShow: OleVariant;
                                            var pvarSize: OleVariant);
 begin
   DefaultInterface.ShowBrowserBar(pvaClsid, pvarShow, pvarSize);
@@ -3576,14 +3576,14 @@ begin
   Result := DefaultInterface._NewEnum;
 end;
 
-procedure TShellWindows.Register(const pid: IDispatch; HWND: Integer; swClass: SYSINT; 
+procedure TShellWindows.Register(const pid: IDispatch; HWND: Integer; swClass: SYSINT;
                                  out plCookie: Integer);
 begin
   DefaultInterface.Register(pid, HWND, swClass, plCookie);
 end;
 
-procedure TShellWindows.RegisterPending(lThreadId: Integer; var pvarloc: OleVariant; 
-                                        var pvarlocRoot: OleVariant; swClass: SYSINT; 
+procedure TShellWindows.RegisterPending(lThreadId: Integer; var pvarloc: OleVariant;
+                                        var pvarlocRoot: OleVariant; swClass: SYSINT;
                                         out plCookie: Integer);
 begin
   DefaultInterface.RegisterPending(lThreadId, pvarloc, pvarlocRoot, swClass, plCookie);
@@ -3604,7 +3604,7 @@ begin
   DefaultInterface.OnActivated(lCookie, fActive);
 end;
 
-function TShellWindows.FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant; 
+function TShellWindows.FindWindowSW(var pvarloc: OleVariant; var pvarlocRoot: OleVariant;
                                     swClass: SYSINT; out pHWND: Integer; swfwOptions: SYSINT): IDispatch;
 begin
   Result := DefaultInterface.FindWindowSW(pvarloc, pvarlocRoot, swClass, pHWND, swfwOptions);
@@ -3752,27 +3752,27 @@ begin
   DefaultInterface.AddDesktopComponent(URL, Type_, EmptyParam, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString; 
+procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString;
                                              var Left: OleVariant);
 begin
   DefaultInterface.AddDesktopComponent(URL, Type_, Left, EmptyParam, EmptyParam, EmptyParam);
 end;
 
-procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString; 
+procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString;
                                              var Left: OleVariant; var Top: OleVariant);
 begin
   DefaultInterface.AddDesktopComponent(URL, Type_, Left, Top, EmptyParam, EmptyParam);
 end;
 
-procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString; 
-                                             var Left: OleVariant; var Top: OleVariant; 
+procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString;
+                                             var Left: OleVariant; var Top: OleVariant;
                                              var Width: OleVariant);
 begin
   DefaultInterface.AddDesktopComponent(URL, Type_, Left, Top, Width, EmptyParam);
 end;
 
-procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString; 
-                                             var Left: OleVariant; var Top: OleVariant; 
+procedure TShellUIHelper.AddDesktopComponent(const URL: WideString; const Type_: WideString;
+                                             var Left: OleVariant; var Top: OleVariant;
                                              var Width: OleVariant; var Height: OleVariant);
 begin
   DefaultInterface.AddDesktopComponent(URL, Type_, Left, Top, Width, Height);
@@ -3783,7 +3783,7 @@ begin
   Result := DefaultInterface.IsSubscribed(URL);
 end;
 
-procedure TShellUIHelper.NavigateAndFind(const URL: WideString; const strQuery: WideString; 
+procedure TShellUIHelper.NavigateAndFind(const URL: WideString; const strQuery: WideString;
                                          var varTargetFrame: OleVariant);
 begin
   DefaultInterface.NavigateAndFind(URL, strQuery, varTargetFrame);
@@ -3809,7 +3809,7 @@ begin
   DefaultInterface.AutoScan(strSearch, strFailureUrl, EmptyParam);
 end;
 
-procedure TShellUIHelper.AutoScan(const strSearch: WideString; const strFailureUrl: WideString; 
+procedure TShellUIHelper.AutoScan(const strSearch: WideString; const strFailureUrl: WideString;
                                   var pvarTargetFrame: OleVariant);
 begin
   DefaultInterface.AutoScan(strSearch, strFailureUrl, pvarTargetFrame);
@@ -3845,7 +3845,7 @@ begin
   DefaultInterface.SkipRunOnce;
 end;
 
-procedure TShellUIHelper.CustomizeSettings(fSQM: WordBool; fPhishing: WordBool; 
+procedure TShellUIHelper.CustomizeSettings(fSQM: WordBool; fPhishing: WordBool;
                                            const bstrLocale: WideString);
 begin
   DefaultInterface.CustomizeSettings(fSQM, fPhishing, bstrLocale);

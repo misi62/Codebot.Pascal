@@ -17,7 +17,7 @@ uses
 	Classes, AutoComplete, Balloon, ImgListEx, BlendTools, FormTools, BannerCtrls,
   SuplCtrls, PaneCtrls, CtrlBox, FlowCtrls, BtnEdit, ScrollCtrls, InspectCtrls,
   InspectEditors, BtnCtrls, FolderCtrls, ShlCtrls, WebCtrls, AlphaSplash,
-  DropMgr, CameraCtrls, PhotoCtrls, ProgressCtrls, GridCtrls, // MacroTools, 
+  DropMgr, CameraCtrls, PhotoCtrls, ProgressCtrls, GridCtrls, // MacroTools,
   TabCtrls, LayerCtrls, ListCtrls, CaptionBoxCtrls, FoldingCtrls, SlideCtrls,
   FlowBox, ADOUpdate, ShellDocView, UpQuery, ColorCtrls, SuplDBCtrls, StepCtrls,
   LabelCtrls, StrCollect,
@@ -31,7 +31,7 @@ implementation
 procedure Register;
 begin
   RegisterComponents('Codebot Components', [TAutoCompletion, TBalloonHint,
-  	TGlassImageList, TAlphaSplashScreen, TDropFiles, TNamedStringCollector]); //TMacroRecorder, 
+  	TGlassImageList, TAlphaSplashScreen, TDropFiles, TNamedStringCollector]); //TMacroRecorder,
   RegisterComponents('Codebot Containers', [TFramedWindow, TBanner, TBannerBook,
   	TCaptionBox, THeaderSectionBox, TPaneControl,	TControlBox, TControlBoxButton,
     	TFlowSite, TFlowbar, TDrawTabs, TNullPanel, TPaintPanel, TFlowBox]);

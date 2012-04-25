@@ -19,7 +19,7 @@ uses
 {$IFNDEF D12_UP}
 type
   TSysCharSet = set of Char;
-  
+
 function CharInSet(C: AnsiChar; const CharSet: TSysCharSet): Boolean;
 {$ENDIF}
 
@@ -1384,7 +1384,7 @@ begin
         P.Alpha := Alpha;
         Inc(P)
       end;
-    end;      
+    end;
 	end;
 end;
 

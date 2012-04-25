@@ -1021,7 +1021,7 @@ begin
   if I < 0 then
     FList.Insert(I, Socket)
   else
-    FList.Move(I, Index);    
+    FList.Move(I, Index);
 end;
 
 procedure TNetSocketList.Move(CurIndex, NewIndex: Integer);
@@ -1495,7 +1495,7 @@ begin
   if WasParsed then
     if FHeaders.FTopic = '' then
     begin
-    
+
     end;
 
   begin

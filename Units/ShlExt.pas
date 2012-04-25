@@ -104,7 +104,7 @@ type
     dwFlags : DWord; // combination of the FCT_MERGE,... flags
   end;
   PSFVCBToolBarInfo = ^TSFVCBToolBarInfo;
-  
+
   TSFVCBSelectInfo = record
     uOldState : DWORD; // 0
     uNewState :  DWORD; //LVIS_SELECTED, LVIS_FOCUSED,...
