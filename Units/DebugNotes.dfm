@@ -1,0 +1,31 @@
+object DebugForm: TDebugForm
+  Left = 194
+  Top = 113
+  Width = 870
+  Height = 640
+  BorderStyle = bsSizeToolWin
+  Caption = 'Debug'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Memo: TMemo
+    Left = 8
+    Top = 8
+    Width = 153
+    Height = 121
+    ScrollBars = ssBoth
+    TabOrder = 0
+    WordWrap = False
+  end
+end

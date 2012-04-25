@@ -1,0 +1,409 @@
+unit NoteCtrls;
+
+interface
+
+uses
+	Windows, Messages, SysUtils, Classes, Controls, Graphics, Forms,
+  GraphTools, SuplCtrls;
+
+type
+  TNotePages = class(TFramedWindow)
+  private
+    FPageList: TList;
+    FPages: TStrings;
+    FPageIndex: Integer;
+    FOnPageChanged: TNotifyEvent;
+    procedure SetPages(Value: TStrings);
+    procedure SetActivePage(const Value: string);
+    function GetActivePage: string;
+    function GetPage: TObject;
+    procedure SetPageIndex(Value: Integer);
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
+    function GetChildOwner: TComponent; override;
+    procedure GetChildren(Proc: TGetChildProc; Root: TComponent); override;
+    procedure ReadState(Reader: TReader); override;
+    procedure ShowControl(AControl: TControl); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    property Page: TObject read GetPage;
+  published
+    property ActivePage: string read GetActivePage write SetActivePage stored False;
+    property Align;
+    property Anchors;
+    property Color;
+    property Ctl3D;
+    property DragCursor;
+    property DragKind;
+    property DragMode;
+    property Font;
+    property Enabled;
+    property Constraints;
+    property PageIndex: Integer read FPageIndex write SetPageIndex default 0;
+    property Pages: TStrings read FPages write SetPages stored False;
+    property ParentColor;
+    property ParentCtl3D;
+    property ParentFont;
+    property ParentShowHint;
+    property PopupMenu;
+    property ShowHint;
+    property TabOrder;
+    property TabStop;
+    property Visible;
+    property OnClick;
+    property OnContextPopup;
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDock;
+    property OnEndDrag;
+    property OnEnter;
+    property OnExit;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnPageChanged: TNotifyEvent read FOnPageChanged write FOnPageChanged;
+    property OnStartDock;
+    property OnStartDrag;
+  end;
+
+var
+	RegisterPages: procedure (PageClass: TClass);
+
+implementation
+
+{ TNotePage }
+
+type
+  TNotePage = class(TCustomControl)
+  private
+    procedure WMNCHitTest(var Message: TWMNCHitTest); message WM_NCHITTEST;
+  protected
+    procedure ReadState(Reader: TReader); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+  published
+    property Caption;
+    property Height stored False;
+    property TabOrder stored False;
+    property Visible stored False;
+    property Width stored False;
+  end;
+
+{ TNotePageStrings }
+
+  TNotePageStrings = class(TStrings)
+  private
+    FPageList: TList;
+    FNotePages: TNotePages;
+  protected
+    function GetCount: Integer; override;
+    function Get(Index: Integer): string; override;
+    procedure Put(Index: Integer; const S: string); override;
+    function GetObject(Index: Integer): TObject; override;
+    procedure SetUpdateState(Updating: Boolean); override;
+  public
+    constructor Create(PageList: TList; NotePages: TNotePages);
+    procedure Clear; override;
+    procedure Delete(Index: Integer); override;
+    procedure Insert(Index: Integer; const S: string); override;
+    procedure Move(CurIndex, NewIndex: Integer); override;
+  end;
+
+constructor TNotePageStrings.Create(PageList: TList; NotePages: TNotePages);
+begin
+  inherited Create;
+  FPageList := PageList;
+  FNotePages := NotePages;
+end;
+
+function TNotePageStrings.GetCount: Integer;
+begin
+  Result := FPageList.Count;
+end;
+
+function TNotePageStrings.Get(Index: Integer): string;
+begin
+  Result := TNotePage(FPageList[Index]).Caption;
+end;
+
+procedure TNotePageStrings.Put(Index: Integer; const S: string);
+begin
+  TNotePage(FPageList[Index]).Caption := S;
+end;
+
+function TNotePageStrings.GetObject(Index: Integer): TObject;
+begin
+  Result := FPageList[Index];
+end;
+
+procedure TNotePageStrings.SetUpdateState(Updating: Boolean);
+begin
+  { do nothing }
+end;
+
+procedure TNotePageStrings.Clear;
+var
+  I: Integer;
+begin
+  for I := 0 to FPageList.Count - 1 do
+    TObject(FPageList[I]).Free;
+  FPageList.Clear;
+end;
+
+procedure TNotePageStrings.Delete(Index: Integer);
+var
+  Form: TCustomForm;
+begin
+  TObject(FPageList[Index]).Free;
+  FPageList.Delete(Index);
+  FNotePages.PageIndex := 0;
+  if csDesigning in FNotePages.ComponentState then
+  begin
+    Form := GetParentForm(FNotePages);
+    if (Form <> nil) and (Form.Designer <> nil) then
+      Form.Designer.Modified;
+  end;
+end;
+
+procedure TNotePageStrings.Insert(Index: Integer; const S: string);
+var
+  Page: TNotePage;
+  Form: TCustomForm;
+begin
+  Page := TNotePage.Create(FNotePages.Owner);
+  with Page do
+  begin
+    Parent := FNotePages;
+    Caption := S;
+  end;
+  FPageList.Insert(Index, Page);
+  FNotePages.PageIndex := Index;
+  if csDesigning in FNotePages.ComponentState then
+  begin
+		Form := GetParentForm(FNotePages);
+    if (Form <> nil) and (Form.Designer <> nil) then
+      Form.Designer.Modified;
+  end;
+end;
+
+procedure TNotePageStrings.Move(CurIndex, NewIndex: Integer);
+var
+  AObject: TObject;
+begin
+  if CurIndex <> NewIndex then
+  begin
+    AObject := FPageList[CurIndex];
+    FPageList[CurIndex] := FPageList[NewIndex];
+    FPageList[NewIndex] := AObject;
+  end;
+end;
+
+{ TNotePage }
+
+constructor TNotePage.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  Visible := False;
+  ControlStyle := ControlStyle + [csAcceptsControls, csNoDesignVisible,
+    csParentBackground];
+  Align := alClient;
+end;
+
+procedure TNotePage.ReadState(Reader: TReader);
+begin
+  if Reader.Parent is TNotePages then
+    TNotePages(Reader.Parent).FPageList.Add(Self);
+  inherited ReadState(Reader);
+end;
+
+procedure TNotePage.WMNCHitTest(var Message: TWMNCHitTest);
+begin
+	Message.Result := HTTRANSPARENT;
+end;
+
+{ TNotePages }
+
+var
+	Registered: Boolean;
+
+constructor TNotePages.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+	if not Registered then
+		RegisterPages(TNotePage);
+  Registered := True;
+  Width := 150;
+  Height := 150;
+  FPageList := TList.Create;
+  FPages := TNotePageStrings.Create(FPageList, Self);
+  FPageIndex := -1;
+  FPages.Add('default');
+  PageIndex := 0;
+  Exclude(FComponentStyle, csInheritable);
+  ControlStyle := ControlStyle + [csParentBackground];
+end;
+
+destructor TNotePages.Destroy;
+begin
+  FPages.Free;
+  FPageList.Free;
+  inherited Destroy;
+end;
+
+procedure TNotePages.CreateParams(var Params: TCreateParams);
+begin
+  inherited CreateParams(Params);
+  with Params do
+  begin
+    Style := Style or WS_CLIPCHILDREN;
+    WindowClass.style := WindowClass.style and not (CS_HREDRAW or CS_VREDRAW);
+  end;
+end;
+
+function TNotePages.GetChildOwner: TComponent;
+begin
+  Result := Self;
+end;
+
+procedure TNotePages.GetChildren(Proc: TGetChildProc; Root: TComponent);
+var
+  I: Integer;
+begin
+  for I := 0 to FPageList.Count - 1 do Proc(TControl(FPageList[I]));
+end;
+
+procedure TNotePages.ReadState(Reader: TReader);
+begin
+  Pages.Clear;
+  inherited ReadState(Reader);
+  if (FPageIndex <> -1) and (FPageIndex >= 0) and (FPageIndex < FPageList.Count) then
+    with TNotePage(FPageList[FPageIndex]) do
+    begin
+      BringToFront;
+      Visible := True;
+      Align := alClient;
+    end
+  else FPageIndex := -1;
+end;
+
+procedure TNotePages.ShowControl(AControl: TControl);
+var
+  I: Integer;
+begin
+  for I := 0 to FPageList.Count - 1 do
+    if FPageList[I] = AControl then
+    begin
+      SetPageIndex(I);
+      Exit;
+    end;
+  inherited ShowControl(AControl);
+end;
+
+procedure TNotePages.SetPages(Value: TStrings);
+var
+	A, B: Integer;
+  S: string;
+	I: Integer;
+begin
+	FPages.BeginUpdate;
+	try
+ 		{ remove duplicates }
+  	for I := Value.Count - 1 downto 0 do
+		begin
+			S := Trim(Value[I]);
+			if S = '' then Continue;
+			if Value.IndexOf(S) < I then
+			Value.Delete(I);
+		end;
+		{ add new items }
+		for I := 0 to Value.Count - 1 do
+		begin
+			S := Trim(Value[I]);
+			if S = '' then Continue;
+			if FPages.IndexOf(S) < 0 then
+			FPages.Add(S);
+		end;
+		{ remove deleted items }
+		for I := FPages.Count - 1 downto 0 do
+		begin
+			S := Trim(FPages[I]);
+			if S = '' then Continue;
+			if Value.IndexOf(S) < 0 then
+			FPages.Delete(I);
+		end;
+		{ change item ordering }
+		for I := 0 to Value.Count - 1 do
+		begin
+			S := Trim(Value[I]);
+			if S = '' then Continue;
+			A := FPages.IndexOf(S);
+			B := Value.IndexOf(S);
+			if A <> B then
+			FPages.Move(A, B);
+		end;
+		if FPages.Count = 0 then FPages.Add('default');
+	finally
+		FPages.EndUpdate;
+	end;
+end;
+
+function TNotePages.GetPage: TObject;
+begin
+	if FPageIndex > -1 then
+		Result := TObject(FPageList[FPageIndex])
+	else
+		Result := nil;		
+end;
+
+procedure TNotePages.SetPageIndex(Value: Integer);
+var
+	ParentForm: TCustomForm;
+begin
+	if csLoading in ComponentState then
+	begin
+		FPageIndex := Value;
+		Exit;
+	end;
+	if (Value <> FPageIndex) and (Value > -1) and (Value < FPageList.Count) then
+	begin
+		ParentForm := GetParentForm(Self);
+		if ParentForm <> nil then
+			if ContainsControl(ParentForm.ActiveControl) then
+				ParentForm.ActiveControl := Self;
+		with TNotePage(FPageList[Value]) do
+		begin
+			BringToFront;
+			Visible := True;
+			Align := alClient;
+		end;
+		if (FPageIndex > -1) and (FPageIndex < FPageList.Count) then
+			TNotePage(FPageList[FPageIndex]).Visible := False;
+		FPageIndex := Value;
+		if ParentForm <> nil then
+			if ParentForm.ActiveControl = Self then SelectFirst;
+		if Assigned(FOnPageChanged) then
+			FOnPageChanged(Self);
+	end;
+end;
+
+procedure TNotePages.SetActivePage(const Value: string);
+begin
+	SetPageIndex(FPages.IndexOf(Value));
+end;
+
+function TNotePages.GetActivePage: string;
+begin
+	Result := FPages[FPageIndex];
+end;
+
+procedure InternalRegisterPages(PageClass: TClass);
+begin
+	if PageClass.InheritsFrom(TPersistent) then
+		RegisterClass(TPersistentClass(PageClass));
+end;
+
+initialization
+	@RegisterPages := @InternalRegisterPages;
+end.

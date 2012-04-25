@@ -1,0 +1,349 @@
+unit MacroTools;
+
+interface
+
+uses
+	Windows, Messages, SysUtils, Classes, Controls, WinTools, SendKey, Forms,
+  XMLParser, SysTools;
+
+{ TMacro }
+  
+type
+  TMacro = class(TCollectionItem)
+  private
+		FName: string;
+    FData: string;
+  public
+    property Name: string read FName;
+    property Data: string read FData;
+  end;
+
+{ TMacros }
+
+  TMacros = class(TOwnedCollection)
+  private
+    function Get(Index: Integer): TMacro;
+    procedure Put(Index: Integer; Value: TMacro);
+	protected    
+    procedure AssignTo(Dest: TPersistent); override;
+  public
+    constructor Create(AOwner: TPersistent);
+    function Add(const Name, Data: string): TMacro;
+    function Find(const Name: string): TMacro;
+    property Items[Index: Integer]: TMacro read Get write Put; default;
+  end;
+
+{ TMacroRecorder }
+
+	TMacroRecorder = class(TComponent, IUnknown, IObjectStorage)
+  private
+  	FAssociate: TWinControl;
+    FChanged: Boolean;
+    FCurrentMacro: string;
+    FEnabled: Boolean;
+    FMacros: TMacros;
+    FRecording: Boolean;
+    FShortCut: TShortCut;
+    FOnPlayback: TNotifyEvent;
+    FOnStartRecord: TNotifyEvent;
+    FOnStopRecord: TNotifyEvent;
+		procedure MacroHook(Key: Word; State: Cardinal; var Remove: Boolean);
+    procedure SetAssociate(Value: TWinControl);
+    procedure SetEnabled(Value: Boolean);
+    procedure SetRecording(Value: Boolean);
+    function GetEmpty: Boolean;
+	protected
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+  	procedure DoStart; dynamic;
+    procedure DoStop; dynamic;
+		{ TMacroRecorder.IObjectStorage }
+    function GetName: string;
+    procedure WriteData(Node: INode);
+    procedure ReadData(Node: INode);
+  public
+  	constructor Create(AOwner: TComponent); override;
+  	destructor Destroy; override;
+  	procedure Start;
+    procedure Stop;
+    procedure Play;
+    procedure Save(const Name: string);
+    procedure Select(const Name: string);
+		property Macros: TMacros read FMacros;
+    property Changed: Boolean read FChanged;
+    property Empty: Boolean read GetEmpty;
+		property Recording: Boolean read FRecording write SetRecording;
+  published
+  	property Associate: TWinControl read FAssociate write SetAssociate;
+    property Enabled: Boolean read FEnabled write SetEnabled;
+    property ShortCut: TShortCut read FShortCut write FShortCut;
+    property OnPlayback: TNotifyEvent read FOnPlayback write FOnPlayback;
+    property OnStartRecord: TNotifyEvent read FOnStartRecord write FOnStartRecord;
+    property OnStopRecord: TNotifyEvent read FOnStopRecord write FOnStopRecord;
+  end;
+
+implementation
+
+{ TMacros }
+
+constructor TMacros.Create(AOwner: TPersistent);
+begin
+  inherited Create(AOwner, TMacro);
+end;
+
+procedure TMacros.AssignTo(Dest: TPersistent);
+var
+	Strings: TStrings absolute Dest;
+  Ordered: TStringList;
+  I: Integer;
+begin
+	if Dest is TStrings then
+  begin
+		Ordered := TStringList.Create;
+    try
+    	for I := 0 to Count - 1 do
+      	Ordered.Add(Get(I).Name);
+	    Ordered.Sorted := True;
+      Strings.Assign(Ordered);
+		finally
+    	Ordered.Free;
+    end;
+  end
+  else
+  	inherited AssignTo(Dest);
+end;
+
+function TMacros.Add(const Name, Data: string): TMacro;
+begin
+  Result := TMacro(inherited Add);
+  Result.FName := Trim(Name);
+  Result.FData := Data;
+end;
+
+function TMacros.Find(const Name: string): TMacro;
+var
+	S: string;
+  I: Integer;
+begin
+	Result := nil;
+	S := UpperCase(Trim(Name));
+  for I := 0 to Count - 1 do
+  	if UpperCase(Get(I).Name) = S then
+    begin
+    	Result := Get(I);
+      Break;
+    end;
+end;
+
+function TMacros.Get(Index: Integer): TMacro;
+begin
+  Result := TMacro(GetItem(Index));
+end;
+
+procedure TMacros.Put(Index: Integer; Value: TMacro);
+begin
+  SetItem(Index, Value);
+end;
+
+{ TMacroRecorder }
+
+constructor TMacroRecorder.Create(AOwner: TComponent);
+begin
+	FEnabled := True;
+  FMacros := TMacros.Create(Self);
+  inherited Create(AOwner);
+end;
+
+destructor TMacroRecorder.Destroy;
+begin
+	Associate := nil;
+  FMacros.Free;
+  inherited;
+end;
+
+procedure TMacroRecorder.MacroHook(Key: Word; State: Cardinal;
+  var Remove: Boolean);
+begin
+	Remove := False;
+  if State and $80000000 = $80000000 then Exit;
+  if (FAssociate <> nil) and (GetFocus = FAssociate.Handle) then
+  begin
+		FCurrentMacro := FCurrentMacro + TranslateKey(Key);
+		FChanged := True;
+	end;
+end;
+
+procedure TMacroRecorder.Notification(AComponent: TComponent;
+	Operation: TOperation);
+begin
+	if (Operation = opRemove) and (AComponent = FAssociate) then
+		Associate := nil;
+end;
+
+procedure TMacroRecorder.Start;
+begin
+	Recording := True;
+end;
+
+procedure TMacroRecorder.Stop;
+begin
+	Recording := False;
+end;
+
+procedure TMacroRecorder.Play;
+var
+	PriorState: TKeyBoardState;
+  BlankState: TKeyBoardState;
+begin
+	if FRecording or (not FEnabled) or (FAssociate = nil) or
+  	(not FAssociate.CanFocus) then Exit;
+  if FCurrentMacro <> '' then
+  begin
+  	GetKeyboardState(PriorState);
+		FillChar(BlankState, SizeOf(BlankState), #0);
+	  SetKeyboardState(BlankState);
+		FAssociate.SetFocus;
+    SendKeys(PChar(FCurrentMacro), True);
+	  SetKeyboardState(PriorState);
+  end;
+end;
+
+procedure TMacroRecorder.Save(const Name: string);
+var
+	Macro: TMacro;
+  S: string;
+begin
+	Stop;
+	if not FChanged then
+  	Exit;
+	S := Trim(Name);
+  if S = '' then Exit;
+	Macro := Macros.Find(S);
+  if Macro <> nil then
+  	Macro.FData := FCurrentMacro
+	else
+  	Macros.Add(S, FCurrentMacro);
+  FChanged := False;
+end;
+
+procedure TMacroRecorder.Select(const Name: string);
+var
+	Macro: TMacro;
+  S: string;
+begin
+	Stop;
+	S := Trim(Name);
+  if S = '' then Exit;
+	Macro := Macros.Find(S);
+  if Macro <> nil then
+  begin
+  	FCurrentMacro := Macro.FData;
+		FChanged := False;
+	end;
+end;
+
+procedure TMacroRecorder.DoStart;
+begin
+	if Assigned(FOnStartRecord) and FEnabled and (FAssociate <> nil) then
+  	FOnStartRecord(Self);
+end;
+
+procedure TMacroRecorder.DoStop;
+begin
+	if Assigned(FOnStopRecord) and FEnabled and (FAssociate <> nil) then
+  	FOnStopRecord(Self);
+end;
+
+procedure TMacroRecorder.SetAssociate(Value: TWinControl);
+begin
+	if Value <> FAssociate then
+  begin
+  	if FAssociate <> nil then
+    	FAssociate.RemoveFreeNotification(Self);
+  	FAssociate := nil;
+		Stop;
+    FAssociate := Value;
+  	if FAssociate <> nil then
+    	FAssociate.FreeNotification(Self);
+  end;
+end;
+
+procedure TMacroRecorder.SetEnabled(Value: Boolean);
+begin
+	if Value <> FEnabled then
+  begin
+  	FEnabled := False;
+		Stop;
+    FEnabled := Value;
+  end;
+end;
+
+procedure TMacroRecorder.SetRecording(Value: Boolean);
+begin
+  if (FAssociate = nil) or (not FEnabled) then
+  	Value := False;
+  if Value <> FRecording then
+  begin
+  	FRecording := Value;
+    if (FAssociate <> nil) and FAssociate.CanFocus then
+    	FAssociate.SetFocus;
+    if FRecording then
+    begin
+      FChanged := False;
+	    FCurrentMacro := '';
+    	HookKeyboard(MacroHook);
+      DoStart;
+		end
+    else
+    begin
+    	if not FEnabled then
+		    FCurrentMacro := '';
+    	UnhookKeyboard(MacroHook);
+      DoStop;
+    end;
+  end;
+end;
+
+function TMacroRecorder.GetEmpty: Boolean;
+begin
+	Result := FRecording or (FCurrentMacro = '') or (FAssociate = nil) or (not Enabled);
+end;
+
+{ TMacroRecorder.IObjectStorage }
+
+function TMacroRecorder.GetName: string;
+begin
+	Result := 'macros';
+end;
+
+procedure TMacroRecorder.WriteData(Node: INode);
+var
+	N: INode;
+	I: Integer;
+begin
+  for I := 0 to Macros.Count - 1 do
+  begin
+  	N := Node.Nodes.Add('macro');
+    N.Nodes.Add('name').Value := Macros.Get(I).Name;
+    N.Nodes.Add('data').Value := Macros.Get(I).Data;
+  end;
+end;
+
+procedure TMacroRecorder.ReadData(Node: INode);
+var
+	N: INode;
+	I: Integer;
+begin
+	Macros.BeginUpdate;
+  try
+		Macros.Clear;
+    for I := 0 to Node.Nodes.Count - 1 do
+    begin
+    	N := Node.Nodes[I];
+      Macros.Add(N.FindNode('name').Value, N.FindNode('data').Value);
+    end;
+	finally
+  	Macros.EndUpdate;
+  end;
+end;
+
+end.

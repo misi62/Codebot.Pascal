@@ -1,0 +1,52 @@
+unit NotePagesFrm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, NoteCtrls;
+
+type
+  TNotePagesForm = class(TForm)
+    Pages: TMemo;
+    OkButton: TButton;
+    CancelButton: TButton;
+    procedure FormCreate(Sender: TObject);
+	end;
+
+function EditNotePages(NotePages: TNotePages): Boolean;
+
+implementation
+
+{$R *.dfm}
+
+function EditNotePages(NotePages: TNotePages): Boolean;
+var
+	Form: TNotePagesForm;
+  A, B: Integer;
+  S: string;
+	I: Integer;
+begin
+	Form := TNotePagesForm.Create(Application);
+  try
+  	for I := 0 to NotePages.Pages.Count - 1 do
+    begin
+			S := Trim(NotePages.Pages[I]);
+      if S <> '' then
+      	Form.Pages.Lines.Add(S);
+		end;
+    Result := Form.ShowModal = mrOk;
+    if Result then
+    	NotePages.Pages := Form.Pages.Lines;
+  finally
+  	Form.Free;
+  end;
+end;
+
+procedure TNotePagesForm.FormCreate(Sender: TObject);
+begin
+	ClientHeight := Pages.Top + CancelButton.Top + CancelButton.Height;
+	ClientWidth := Pages.Left + CancelButton.Left + CancelButton.Width;
+end;
+
+end.

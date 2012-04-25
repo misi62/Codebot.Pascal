@@ -1,0 +1,95 @@
+
+(********************************************************)
+(*                                                      *)
+(*  Codebot Class Library @ www.codebot.org/delphi      *)
+(*                                                      *)
+(*  1.00.01 Open Source Released 2007                   *)
+(*                                                      *)
+(********************************************************)
+
+unit MacroCtrls;
+
+interface
+
+{$I CODEBOT.INC}
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DialogsEx, StdCtrls, SuplCtrls, Grip, MacroTools;
+
+type
+  TMacroForm = class(TGripForm)
+    List: TListBox;
+    OkButton: TButton;
+    CancelButton: TButton;
+    Bar: THorizontalBar;
+    SelectLabel: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure ListClick(Sender: TObject);
+    procedure ListDblClick(Sender: TObject);
+    procedure ListKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    FRecorder: TMacroRecorder;
+    procedure SetRecorder(Value: TMacroRecorder);
+  public
+    property Recorder: TMacroRecorder read FRecorder write SetRecorder;
+  end;
+
+function SelectMacro(R: TMacroRecorder): Boolean;
+
+implementation
+
+{$R *.dfm}
+
+function SelectMacro(R: TMacroRecorder): Boolean;
+begin
+	Result := False;
+  if (R = nil) or (R.Macros.Count = 0) then Exit;
+	with TMacroForm.Create(Application) do
+  try
+  	Recorder := R;
+    Result := ShowModal = mrOk;
+    if Result then
+    	R.Select(List.Items[List.ItemIndex]);
+  finally
+  	Free;
+  end;
+end;
+
+procedure TMacroForm.FormCreate(Sender: TObject);
+begin
+	GripBox.Visible := False;
+end;
+
+procedure TMacroForm.ListClick(Sender: TObject);
+begin
+  OkButton.Enabled := List.ItemIndex > -1;
+end;
+
+procedure TMacroForm.ListDblClick(Sender: TObject);
+begin
+  if List.ItemIndex > -1 then
+  	ModalResult := mrOk;
+end;
+
+procedure TMacroForm.SetRecorder(Value: TMacroRecorder);
+begin
+  FRecorder := Value;
+  List.Items.Assign(FRecorder.Macros);
+end;
+
+procedure TMacroForm.ListKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+	if List.ItemIndex < 0 then Exit;
+	if (Key = VK_DELETE) and (MessageDlg('Delete macro "' +
+  	List.Items[List.ItemIndex] + '"?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
+	begin
+  	FRecorder.Macros.Find(List.Items[List.ItemIndex]).Free;
+    List.Items.Assign(FRecorder.Macros);
+    OkButton.Enabled := False;
+  end;
+end;
+
+end.
