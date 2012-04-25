@@ -210,13 +210,13 @@ end;
 
 procedure TTransparentImages.LoadFromResourceID(ResID: Integer);
 var
-	Stream: TStream;
+  Stream: TStream;
 begin
-	Stream := TResourceStream.CreateFromID(HInstance, ResID, RT_RCDATA);
+  Stream := TResourceStream.CreateFromID(HInstance, ResID, RT_RCDATA);
   try
-  	LoadFromStream(Stream);
+    LoadFromStream(Stream);
   finally
-  	Stream.Free;
+    Stream.Free;
   end;
 end;
 

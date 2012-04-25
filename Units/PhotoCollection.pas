@@ -3,24 +3,24 @@ unit PhotoCollection;
 interface
 
 uses
-	Windows, Messages, SysUtils, Classes, Graphics, GraphTools;
+  Windows, Messages, SysUtils, Classes, Graphics, GraphTools;
 
 { TPhotoItem }
 
 type
   TPhotoItem = class(TCollectionItem)
   private
-  	FPhoto: IGlassImage;
+    FPhoto: IGlassImage;
     FFileName: string;
-		procedure SetFileName(const Value: string);
-	protected
-  	procedure AssignTo(Dest: TPersistent); override;
+    procedure SetFileName(const Value: string);
+  protected
+    procedure AssignTo(Dest: TPersistent); override;
   public
     constructor Create(Collection: TCollection); override;
     procedure Assign(Source: TPersistent); override;
     procedure LoadFromStream(Stream: TStream);
     procedure SaveToStream(Stream: TStream);
-	published
+  published
     property Photo: IGlassImage read FPhoto;
     property FileName: string read FFileName write SetFileName;
   end;
@@ -29,7 +29,7 @@ type
 
   TPhotoItems = class(TOwnedCollection)
   private
-  	FOnChange: TNotifyEvent;
+    FOnChange: TNotifyEvent;
     function Get(Index: Integer): TPhotoItem;
     procedure Put(Index: Integer; Value: TPhotoItem);
   protected
@@ -51,18 +51,18 @@ implementation
 
 constructor TPhotoItem.Create(Collection: TCollection);
 begin
-	inherited Create(Collection);
+  inherited Create(Collection);
   FPhoto := CreateGlassImage;
 end;
 
 procedure TPhotoItem.AssignTo(Dest: TPersistent);
 begin
-	if Dest is TGraphic then
-  	TGraphic(Dest).Assign(FPhoto.Graphic)
-	else if Dest is TPicture then
-  	TPicture(Dest).Graphic := FPhoto.Graphic
-	else
-	  inherited AssignTo(Dest);
+  if Dest is TGraphic then
+    TGraphic(Dest).Assign(FPhoto.Graphic)
+  else if Dest is TPicture then
+    TPicture(Dest).Graphic := FPhoto.Graphic
+  else
+    inherited AssignTo(Dest);
 end;
 
 procedure TPhotoItem.Assign(Source: TPersistent);
@@ -73,7 +73,7 @@ begin
   begin
     FPhoto.Graphic.Assign(Source);
     FFileName := TPhotoItem(Source).FileName;
-	end
+  end
   else if Source is TGraphic then
     FPhoto.Graphic.Assign(Source)
   else if Source is TPicture then
@@ -87,25 +87,25 @@ procedure TPhotoItem.SetFileName(const Value: string);
 var
   Picture: TPicture;
 begin
-	Picture := TPicture.Create;
+  Picture := TPicture.Create;
   try
-  	Picture.LoadFromFile(Value);
+    Picture.LoadFromFile(Value);
     Assign(Picture);
     FFileName := Value;
   finally
-  	Picture.Free;
+    Picture.Free;
   end;
 end;
 
 procedure TPhotoItem.LoadFromStream(Stream: TStream);
 begin
-	FPhoto.Graphic.SaveToStream(Stream);
+  FPhoto.Graphic.SaveToStream(Stream);
   Changed(False);
 end;
 
 procedure TPhotoItem.SaveToStream(Stream: TStream);
 begin
-	FPhoto.Graphic.LoadFromStream(Stream);;
+  FPhoto.Graphic.LoadFromStream(Stream);;
   Changed(False);
 end;
 
@@ -118,23 +118,23 @@ end;
 
 function TPhotoItems.Add(const FileName: string): TPhotoItem;
 begin
-	BeginUpdate;
+  BeginUpdate;
   try
-	  Result := TPhotoItem(inherited Add);
-  	Result.FileName := FileName;
-	finally
-  	EndUpdate;
+    Result := TPhotoItem(inherited Add);
+    Result.FileName := FileName;
+  finally
+    EndUpdate;
   end;
 end;
 
 function TPhotoItems.Add(Stream: TStream): TPhotoItem;
 begin
-	BeginUpdate;
+  BeginUpdate;
   try
-	  Result := TPhotoItem(inherited Add);
-  	Result.LoadFromStream(Stream);
-	finally
-  	EndUpdate;
+    Result := TPhotoItem(inherited Add);
+    Result.LoadFromStream(Stream);
+  finally
+    EndUpdate;
   end;
 end;
 
@@ -150,11 +150,11 @@ end;
 
 procedure TPhotoItems.Swap(A, B: Integer);
 var
-	Photo: IGlassImage;
-	FileName: string;
+  Photo: IGlassImage;
+  FileName: string;
 begin
-	Photo := Get(A).FPhoto;
-	FileName := Get(A).FFileName;
+  Photo := Get(A).FPhoto;
+  FileName := Get(A).FFileName;
   Get(A).FPhoto := Get(B).FPhoto;
   Get(A).FFileName := Get(B).FFileName;
   Get(B).FPhoto := Photo;
@@ -165,8 +165,8 @@ end;
 procedure TPhotoItems.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
-	if Assigned(FOnChange) then
-  	FOnChange(Self);
+  if Assigned(FOnChange) then
+    FOnChange(Self);
 end;
 
 function TPhotoItems.Get(Index: Integer): TPhotoItem;

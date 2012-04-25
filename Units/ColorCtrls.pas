@@ -892,7 +892,7 @@ end;
 
 procedure TColorSlideEdit.AdjustHeight;
 begin
-	if AutoHeight then
+  if AutoHeight then
     Height := CalcEditHeight(Font) + ColorBarHeight;
   AdjustEdit;
 end;

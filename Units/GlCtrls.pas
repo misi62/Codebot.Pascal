@@ -23,13 +23,13 @@ type
   TRefreshKind = (rkNone, rkPaint, rkIdle, rkThread);
 
   IDrawingDevice = interface(IUnknown)
-  	['{71047618-EBBC-4841-AEDF-41A5DCDCC825}']
+    ['{71047618-EBBC-4841-AEDF-41A5DCDCC825}']
     function GetActive: Boolean;
     procedure SetActive(Value: Boolean);
     function GetDC: HDC;
     function GetRC: HGLRC;
     function GetFrameRate: Single;
-		function GetRefreshKind: TRefreshKind;
+    function GetRefreshKind: TRefreshKind;
     procedure SetRefreshKind(Value: TRefreshKind);
     function GetTimer: ITimer;
     function GetWidth: Integer;
@@ -42,13 +42,13 @@ type
     procedure SetOnLoad(Value: TNotifyEvent);
     function GetOnUnload: TNotifyEvent;
     procedure SetOnUnload(Value: TNotifyEvent);
-  	procedure Draw;
+    procedure Draw;
     procedure Flip;
     property Active: Boolean read GetActive write SetActive;
     property DC: HDC read GetDC;
     property RC: HGLRC read GetRC;
     property FrameRate: Single read GetFrameRate;
-		property RefreshKind: TRefreshKind read GetRefreshKind write SetRefreshKind;
+    property RefreshKind: TRefreshKind read GetRefreshKind write SetRefreshKind;
     property Timer: ITimer read GetTimer;
     property Width: Integer read GetWidth write SetWidth;
     property Height: Integer read GetHeight write SetHeight;
@@ -61,7 +61,7 @@ type
 
   TOpenGLControl = class(TWinControl, IUnknown, IDrawingDevice)
   private
-  	FActive: Boolean;
+    FActive: Boolean;
     FDC: HDC;
     FRC: HGLRC;
     FFrameRate: Single;
@@ -90,7 +90,7 @@ type
     function DeviceGetDC: HDC;
     function DeviceGetRC: HGLRC;
     function DeviceGetFrameRate: Single;
-		function DeviceGetRefreshKind: TRefreshKind;
+    function DeviceGetRefreshKind: TRefreshKind;
     procedure DeviceSetRefreshKind(Value: TRefreshKind);
     function DeviceGetTimer: ITimer;
     function DeviceGetWidth: Integer;
@@ -103,7 +103,7 @@ type
     procedure DeviceSetOnLoad(Value: TNotifyEvent);
     function DeviceGetOnUnload: TNotifyEvent;
     procedure DeviceSetOnUnload(Value: TNotifyEvent);
-  	procedure DeviceDraw;
+    procedure DeviceDraw;
     procedure DeviceFlip;
     { IDrawingDevice resolution }
     function IDrawingDevice.GetActive = DeviceGetActive;
@@ -111,7 +111,7 @@ type
     function IDrawingDevice.GetDC = DeviceGetDC;
     function IDrawingDevice.GetRC = DeviceGetRC;
     function IDrawingDevice.GetFrameRate = DeviceGetFrameRate;
-		function IDrawingDevice.GetRefreshKind = DeviceGetRefreshKind;
+    function IDrawingDevice.GetRefreshKind = DeviceGetRefreshKind;
     procedure IDrawingDevice.SetRefreshKind = DeviceSetRefreshKind;
     function IDrawingDevice.GetTimer = DeviceGetTimer;
     function IDrawingDevice.GetWidth = DeviceGetWidth;
@@ -124,8 +124,8 @@ type
     procedure IDrawingDevice.SetOnLoad = DeviceSetOnLoad;
     function IDrawingDevice.GetOnUnload = DeviceGetOnUnload;
     procedure IDrawingDevice.SetOnUnload = DeviceSetOnUnload;
-  	procedure IDrawingDevice.Draw = DeviceDraw;
-  	procedure IDrawingDevice.Flip = DeviceFlip;
+    procedure IDrawingDevice.Draw = DeviceDraw;
+    procedure IDrawingDevice.Flip = DeviceFlip;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -174,15 +174,15 @@ type
     property OnUnDock;
   end;
 
-	{ TOpenGLBuffer }
+  { TOpenGLBuffer }
 
-	TOpenGLBuffer = class(TComponent, IUnknown, IDrawingDevice)
+  TOpenGLBuffer = class(TComponent, IUnknown, IDrawingDevice)
   private
-  	FActive: Boolean;
+    FActive: Boolean;
     FWidth: Integer;
     FHeight: Integer;
     FBuffer: GLhandle;
-  	FDC: HDC;
+    FDC: HDC;
     FRC: HGLRC;
     FFrameRate: Single;
     FTimer: TStandardTimer;
@@ -196,14 +196,14 @@ type
     procedure SetRefreshKind(Value: TRefreshKind);
     procedure SetWidth(Value: Integer);
     procedure SetHeight(Value: Integer);
-	protected
+  protected
     { IDrawingDevice }
     function DeviceGetActive: Boolean;
     procedure DeviceSetActive(Value: Boolean);
     function DeviceGetDC: HDC;
     function DeviceGetRC: HGLRC;
     function DeviceGetFrameRate: Single;
-		function DeviceGetRefreshKind: TRefreshKind;
+    function DeviceGetRefreshKind: TRefreshKind;
     procedure DeviceSetRefreshKind(Value: TRefreshKind);
     function DeviceGetTimer: ITimer;
     function DeviceGetWidth: Integer;
@@ -216,7 +216,7 @@ type
     procedure DeviceSetOnLoad(Value: TNotifyEvent);
     function DeviceGetOnUnload: TNotifyEvent;
     procedure DeviceSetOnUnload(Value: TNotifyEvent);
-  	procedure DeviceDraw;
+    procedure DeviceDraw;
     procedure DeviceFlip;
     { IDrawingDevice resolution }
     function IDrawingDevice.GetActive = DeviceGetActive;
@@ -224,7 +224,7 @@ type
     function IDrawingDevice.GetDC = DeviceGetDC;
     function IDrawingDevice.GetRC = DeviceGetRC;
     function IDrawingDevice.GetFrameRate = DeviceGetFrameRate;
-		function IDrawingDevice.GetRefreshKind = DeviceGetRefreshKind;
+    function IDrawingDevice.GetRefreshKind = DeviceGetRefreshKind;
     procedure IDrawingDevice.SetRefreshKind = DeviceSetRefreshKind;
     function IDrawingDevice.GetTimer = DeviceGetTimer;
     function IDrawingDevice.GetWidth = DeviceGetWidth;
@@ -237,10 +237,10 @@ type
     procedure IDrawingDevice.SetOnLoad = DeviceSetOnLoad;
     function IDrawingDevice.GetOnUnload = DeviceGetOnUnload;
     procedure IDrawingDevice.SetOnUnload = DeviceSetOnUnload;
-  	procedure IDrawingDevice.Draw = DeviceDraw;
-  	procedure IDrawingDevice.Flip = DeviceFlip;
+    procedure IDrawingDevice.Draw = DeviceDraw;
+    procedure IDrawingDevice.Flip = DeviceFlip;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Draw;
     property Active: Boolean read FActive write SetActive;
@@ -248,7 +248,7 @@ type
     property RC: HGLRC read FRC;
     property FrameRate: Single read FFrameRate;
     property Timer: TStandardTimer read FTimer;
-	published
+  published
     property RefreshKind: TRefreshKind read FRefreshKind write SetRefreshKind;
     property Width: Integer read FWidth write SetWidth;
     property Height: Integer read FHeight write SetHeight;
@@ -296,7 +296,7 @@ procedure UnloadGlut(Module: HMODULE);
 implementation
 
 const
-	WM_REFRESH = WM_USER + 1;
+  WM_REFRESH = WM_USER + 1;
 
 type
   TRefreshManager = class
@@ -348,14 +348,14 @@ begin
   FIdleDevices.Remove(Device);
   FThreadDevices.Remove(Device);
   if Device.Active then
-	  if Device.RefreshKind = rkIdle then
-  	  FIdleDevices.Add(Device)
-	  else if Device.RefreshKind = rkThread then
-  	begin
-    	FThreadDevices.Add(Device);
-	    if FThread = nil then
-  	    FThread := TRefreshThread.Create(Self);
-	  end;
+    if Device.RefreshKind = rkIdle then
+      FIdleDevices.Add(Device)
+    else if Device.RefreshKind = rkThread then
+    begin
+      FThreadDevices.Add(Device);
+      if FThread = nil then
+        FThread := TRefreshThread.Create(Self);
+    end;
   if FIdleDevices.Count > 0 then
     Application.OnIdle := RefreshIdle
   else
@@ -371,7 +371,7 @@ procedure TRefreshManager.RefreshIdle(Sender: TObject; var Done: Boolean);
 var
   I: Integer;
 begin
-	//if FThread = nil then Exit;
+  //if FThread = nil then Exit;
   for I := 0 to FIdleDevices.Count - 1 do
     IDrawingDevice(FIdleDevices[I]).Draw;
   Done := False;
@@ -381,7 +381,7 @@ procedure TRefreshManager.RefreshThread;
 var
   I: Integer;
 begin
-	if FThread = nil then Exit;
+  if FThread = nil then Exit;
   for I := 0 to FThreadDevices.Count - 1 do
     IDrawingDevice(FThreadDevices[I]).Draw;
 end;
@@ -410,11 +410,11 @@ end;
 
 constructor TOpenGLControl.Create(AOwner: TComponent);
 begin
-	glxPreloadExtensions;
+  glxPreloadExtensions;
   inherited Create(AOwner);
   if csDesigning in ComponentState then
     ControlState := ControlState + [csCustomPaint];
-	FActive := True;
+  FActive := True;
   FRefreshKind := rkThread;
   FTimer := TStandardTimer.Create;
   Width := 400;
@@ -423,7 +423,7 @@ end;
 
 destructor TOpenGLControl.Destroy;
 begin
-	Active := False;
+  Active := False;
   FTimer.Free;
   inherited Destroy;
 end;
@@ -435,21 +435,21 @@ begin
   with Params.WindowClass do
   begin
     style := style or CS_OWNDC;
-    style := style and (not (CS_HREDRAW	or CS_VREDRAW));
+    style := style and (not (CS_HREDRAW  or CS_VREDRAW));
   end;
 end;
 
 procedure TOpenGLControl.RecreateFormat;
 var
-	PriorRefresh: TRefreshKind;
+  PriorRefresh: TRefreshKind;
   Descriptor: TPixelFormatDescriptor;
-	DefInt: TPixelAttributes;
+  DefInt: TPixelAttributes;
   DefFloat: TFloatPixelAttributes;
   Valid: GLboolean;
 begin
-	if csDesigning in ComponentState then
-		Exit;
-	PriorRefresh := RefreshKind;
+  if csDesigning in ComponentState then
+    Exit;
+  PriorRefresh := RefreshKind;
   RefreshKind := rkNone;
   if LockContext then
   try
@@ -465,36 +465,36 @@ begin
     FRC := 0;
   end;
   if FDC <> 0 then
-	  ReleaseDC(Handle, FDC);
+    ReleaseDC(Handle, FDC);
   FDC := GetDC(Handle);
-	FillChar(Descriptor, SizeOf(TPixelFormatDescriptor), #0);
-	Valid := False;
-	if WGL_ARB_PIXEL_FORMAT then
+  FillChar(Descriptor, SizeOf(TPixelFormatDescriptor), #0);
+  Valid := False;
+  if WGL_ARB_PIXEL_FORMAT then
   begin
-  	DefInt := DefPixelAttributes;
+    DefInt := DefPixelAttributes;
     DefFloat := DefPixelFloatFloatAttributes;
     if FSamples > 0 then
     begin
-	    DefInt[DefSampleBuffers] := 1;
-	    DefInt[DefSamples] := FSamples;
+      DefInt[DefSampleBuffers] := 1;
+      DefInt[DefSamples] := FSamples;
     end;
-		Valid := wglChoosePixelFormat(FDC, @DefInt, @DefFloat, 1, DebugFormats[0],
-    	DebugFormatCount) and (DebugFormatCount > 0) and SetPixelFormat(FDC, DebugFormats[0], nil);
+    Valid := wglChoosePixelFormat(FDC, @DefInt, @DefFloat, 1, DebugFormats[0],
+      DebugFormatCount) and (DebugFormatCount > 0) and SetPixelFormat(FDC, DebugFormats[0], nil);
   end;
   if not Valid then
   begin
-	  with Descriptor do
-	  begin
-	    nSize := SizeOf(TPixelFormatDescriptor);
-	    nVersion := 1;
-	    dwFlags := PFD_DRAW_TO_WINDOW or PFD_SUPPORT_OPENGL or PFD_DOUBLEBUFFER;
-	    iPixelType := PFD_TYPE_RGBA;
-	    cColorBits := 24;
-	    cDepthBits := 16;
-	    cStencilBits := 1;
-	    iLayerType := PFD_MAIN_PLANE;
-	  end;
-	  DebugFormats[0] := ChoosePixelFormat(FDC, @Descriptor);
+    with Descriptor do
+    begin
+      nSize := SizeOf(TPixelFormatDescriptor);
+      nVersion := 1;
+      dwFlags := PFD_DRAW_TO_WINDOW or PFD_SUPPORT_OPENGL or PFD_DOUBLEBUFFER;
+      iPixelType := PFD_TYPE_RGBA;
+      cColorBits := 24;
+      cDepthBits := 16;
+      cStencilBits := 1;
+      iLayerType := PFD_MAIN_PLANE;
+    end;
+    DebugFormats[0] := ChoosePixelFormat(FDC, @Descriptor);
     Valid := SetPixelFormat(FDC, DebugFormats[0], @Descriptor);
   end;
   if Valid then
@@ -530,7 +530,7 @@ end;
 
 procedure TOpenGLControl.WMDestroy(var Msg);
 var
-	PriorRefresh: TRefreshKind;
+  PriorRefresh: TRefreshKind;
 begin
   if csDesigning in ComponentState then
   begin
@@ -600,7 +600,7 @@ procedure TOpenGLControl.Draw;
 var
   Interval: Single;
 begin
-	if not FActive then Exit;
+  if not FActive then Exit;
   if LockContext then
   try
     Interval := FTimer.Time;
@@ -617,7 +617,7 @@ begin
     begin
       glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
       Flip;
-		end;
+    end;
   finally
     UnlockContext;
   end;
@@ -625,7 +625,7 @@ end;
 
 procedure TOpenGLControl.Flip;
 begin
-	SwapBuffers(FDC);
+  SwapBuffers(FDC);
 end;
 
 function TOpenGLControl.LockContext: Boolean;
@@ -647,9 +647,9 @@ end;
 
 procedure TOpenGLControl.SetActive(Value: Boolean);
 begin
-	if Value <> FActive then
+  if Value <> FActive then
   begin
-  	FActive := Value;
+    FActive := Value;
     Manager.Changed(Self);
   end;
 end;
@@ -667,21 +667,21 @@ end;
 
 procedure TOpenGLControl.SetSamples(Value: Byte);
 begin
-	if Value > 16 then
-  	Value := 16
-	else if Value > 8 then
-  	Value := 8
-	else if Value > 4 then
-  	Value := 4
-	else if Value > 2 then
-  	Value := 2
-	else
-  	Value := 0;
-	if Value > MaxMultiSample then
-  	Value := MaxMultiSample;
+  if Value > 16 then
+    Value := 16
+  else if Value > 8 then
+    Value := 8
+  else if Value > 4 then
+    Value := 4
+  else if Value > 2 then
+    Value := 2
+  else
+    Value := 0;
+  if Value > MaxMultiSample then
+    Value := MaxMultiSample;
   if Value <> FSamples then
   begin
-  	FSamples := Value;
+    FSamples := Value;
     RecreateWnd;
   end;
 end;
@@ -701,208 +701,208 @@ end;
 
 function TOpenGLControl.DeviceGetActive: Boolean;
 begin
-	Result := Active;
+  Result := Active;
 end;
 
 procedure TOpenGLControl.DeviceSetActive(Value: Boolean);
 begin
-	Active := Value;
+  Active := Value;
 end;
 
 function TOpenGLControl.DeviceGetDC: HDC;
 begin
-	Result := DC;
+  Result := DC;
 end;
 
 function TOpenGLControl.DeviceGetRC: HGLRC;
 begin
-	Result := RC;
+  Result := RC;
 end;
 
 function TOpenGLControl.DeviceGetFrameRate: Single;
 begin
-	Result := FrameRate;
+  Result := FrameRate;
 end;
 
 function TOpenGLControl.DeviceGetRefreshKind: TRefreshKind;
 begin
-	Result := RefreshKind;
+  Result := RefreshKind;
 end;
 
 procedure TOpenGLControl.DeviceSetRefreshKind(Value: TRefreshKind);
 begin
-	RefreshKind := Value;
+  RefreshKind := Value;
 end;
 
 function TOpenGLControl.DeviceGetTimer: ITimer;
 begin
-	Result := Timer;
+  Result := Timer;
 end;
 
 function TOpenGLControl.DeviceGetWidth: Integer;
 begin
-	Result := Width;
+  Result := Width;
 end;
 
 procedure TOpenGLControl.DeviceSetWidth(Value: Integer);
 begin
-	Width := Value;
+  Width := Value;
 end;
 
 function TOpenGLControl.DeviceGetHeight: Integer;
 begin
-	Result := Height;
+  Result := Height;
 end;
 
 procedure TOpenGLControl.DeviceSetHeight(Value: Integer);
 begin
-	Height := Value;
+  Height := Value;
 end;
 
 function TOpenGLControl.DeviceGetOnDraw: TNotifyEvent;
 begin
-	Result := OnDraw;
+  Result := OnDraw;
 end;
 
 procedure TOpenGLControl.DeviceSetOnDraw(Value: TNotifyEvent);
 begin
-	OnDraw := Value;
+  OnDraw := Value;
 end;
 
 function TOpenGLControl.DeviceGetOnLoad: TNotifyEvent;
 begin
-	Result := OnLoad;
+  Result := OnLoad;
 end;
 
 procedure TOpenGLControl.DeviceSetOnLoad(Value: TNotifyEvent);
 begin
-	OnLoad := Value;
+  OnLoad := Value;
 end;
 
 function TOpenGLControl.DeviceGetOnUnload: TNotifyEvent;
 begin
-	Result := OnUnload;
+  Result := OnUnload;
 end;
 
 procedure TOpenGLControl.DeviceSetOnUnload(Value: TNotifyEvent);
 begin
-	OnUnload := Value;
+  OnUnload := Value;
 end;
 
 procedure TOpenGLControl.DeviceDraw;
 begin
-	Draw;
+  Draw;
 end;
 
 procedure TOpenGLControl.DeviceFlip;
 begin
-	Flip;
+  Flip;
 end;
 
 { TOpenGLBuffer }
 
 constructor TOpenGLBuffer.Create(AOwner: TComponent);
 begin
-	glxPreloadExtensions;
-	inherited Create(AOwner);
+  glxPreloadExtensions;
+  inherited Create(AOwner);
   FActive := WGL_ARB_PBUFFER;
-	FWidth := 400;
+  FWidth := 400;
   FHeight := 300;
 end;
 
 destructor TOpenGLBuffer.Destroy;
 begin
-	DestroyBuffer;
-	inherited Destroy;
+  DestroyBuffer;
+  inherited Destroy;
 end;
 
 function TOpenGLBuffer.CreateBuffer: Boolean;
 const
-	Attributes: array[0..23] of Integer = (
-		WGL_DRAW_TO_PBUFFER, 1,
-		WGL_SUPPORT_OPENGL, 1,
+  Attributes: array[0..23] of Integer = (
+    WGL_DRAW_TO_PBUFFER, 1,
+    WGL_SUPPORT_OPENGL, 1,
     WGL_DOUBLE_BUFFER, 0,
-		WGL_ACCELERATION, WGL_FULL_ACCELERATION,
+    WGL_ACCELERATION, WGL_FULL_ACCELERATION,
     WGL_PIXEL_TYPE, WGL_TYPE_RGBA,
     WGL_RED_BITS, 8,
     WGL_GREEN_BITS, 8,
     WGL_BLUE_BITS, 8,
-		WGL_ALPHA_BITS, 8,
-		WGL_DEPTH_BITS, 16,
-		WGL_STENCIL_BITS, 1,
-		0, 0);
+    WGL_ALPHA_BITS, 8,
+    WGL_DEPTH_BITS, 16,
+    WGL_STENCIL_BITS, 1,
+    0, 0);
 var
   Lost: GLint;
-	Wnd: HWND;
-	PixelDC: HDC;
+  Wnd: HWND;
+  PixelDC: HDC;
   Format: Integer;
   FormatCount: Cardinal;
 begin
-	Result := False;
-	if not FActive then Exit;
+  Result := False;
+  if not FActive then Exit;
   if FBuffer <> 0 then
   begin
-  	Lost := 1;
+    Lost := 1;
     wglQueryPbuffer(FBuffer, WGL_PBUFFER_LOST, Lost);
     if Lost = 1 then
     begin
-			wglDestroyPbuffer(FBuffer);
-    	FBuffer := 0;
-		end;
+      wglDestroyPbuffer(FBuffer);
+      FBuffer := 0;
+    end;
   end;
   if FBuffer = 0 then
   begin
-  	if Owner is TWinControl then
-    	Wnd := TWinControl(Owner).Handle
-		else
-    	Wnd := GetDesktopWindow;
-  	PixelDC := GetDC(Wnd);
-		if wglChoosePixelFormat(PixelDC, @Attributes, nil, 1, Format,
-			FormatCount) and (FormatCount > 0) then
-		begin
-			FBuffer := wglCreatePbuffer(PixelDC, Format, FWidth, FHeight, nil);
-	    if FBuffer <> 0 then
-	    begin
-				FDC := wglGetPbufferDC(FBuffer);
-	      if FDC <> 0 then
-	      begin
-			    FRC := wglCreateContext(FDC);
-	        if (FRC <> 0) and wglMakeCurrent(FDC, FRC) then
-					begin
-          	if FTimer = nil then
-							FTimer := TStandardTimer.Create;
-						FTimer.Calculate;
-			      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			      glEnable(GL_BLEND);
-			      glEnable(GL_DEPTH_TEST);
-			      glClearColor(0, 0, 0, 0);
-			      glMatrixMode(GL_PROJECTION);
-			      glLoadIdentity;
-			      gluPerspective(60, FWidth / FHeight, 0.5, 1000);
-			      glMatrixMode(GL_MODELVIEW);
-			      glLoadIdentity;
-			      if Assigned(FOnLoad) then
-			        FOnLoad(Self);
-				    Manager.Changed(Self);
+    if Owner is TWinControl then
+      Wnd := TWinControl(Owner).Handle
+    else
+      Wnd := GetDesktopWindow;
+    PixelDC := GetDC(Wnd);
+    if wglChoosePixelFormat(PixelDC, @Attributes, nil, 1, Format,
+      FormatCount) and (FormatCount > 0) then
+    begin
+      FBuffer := wglCreatePbuffer(PixelDC, Format, FWidth, FHeight, nil);
+      if FBuffer <> 0 then
+      begin
+        FDC := wglGetPbufferDC(FBuffer);
+        if FDC <> 0 then
+        begin
+          FRC := wglCreateContext(FDC);
+          if (FRC <> 0) and wglMakeCurrent(FDC, FRC) then
+          begin
+            if FTimer = nil then
+              FTimer := TStandardTimer.Create;
+            FTimer.Calculate;
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            glEnable(GL_DEPTH_TEST);
+            glClearColor(0, 0, 0, 0);
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity;
+            gluPerspective(60, FWidth / FHeight, 0.5, 1000);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity;
+            if Assigned(FOnLoad) then
+              FOnLoad(Self);
+            Manager.Changed(Self);
           end
           else if FRC <> 0 then
           begin
-						wglDeleteContext(FRC);
-						FRC := 0;
+            wglDeleteContext(FRC);
+            FRC := 0;
           end;
           if FRC = 0 then
           begin
-		      	wglReleasePbufferDC(FBuffer, FDC);
+            wglReleasePbufferDC(FBuffer, FDC);
             FDC := 0;
           end;
-				end;
+        end;
         if FDC = 0 then
         begin
-        	wglDestroyPbuffer(FBuffer);
+          wglDestroyPbuffer(FBuffer);
           FBuffer := 0;
         end;
-			end;
-		end;
+      end;
+    end;
     ReleaseDC(Wnd, PixelDC);
   end;
   Result := FBuffer <> 0;
@@ -912,31 +912,31 @@ procedure TOpenGLBuffer.DestroyBuffer;
 var
   Lost: GLint;
 begin
-	if FBuffer <> 0 then
+  if FBuffer <> 0 then
   begin
-  	Lost := 1;
+    Lost := 1;
     wglQueryPbuffer(FBuffer, WGL_PBUFFER_LOST, Lost);
     if Lost = 1 then
-    	FBuffer := 0;
+      FBuffer := 0;
   end;
-	if FBuffer <> 0 then
+  if FBuffer <> 0 then
   begin
-  	if FRC <> 0 then
+    if FRC <> 0 then
     begin
-    	if wglMakeCurrent(FDC, FRC) then
+      if wglMakeCurrent(FDC, FRC) then
       begin
-		  	if Assigned(FOnUnload) then
-  		  	FOnUnload(Self);
-				wglMakeCurrent(0, 0);
-			end;
-			wglDeleteContext(FRC);
-		end;
-		FRC := 0;
-  	if FDC <> 0 then
-			wglReleasePbufferDC(FBuffer, FDC);
-		FDC := 0;
-		wglDestroyPbuffer(FBuffer);
-		FBuffer := 0;
+        if Assigned(FOnUnload) then
+          FOnUnload(Self);
+        wglMakeCurrent(0, 0);
+      end;
+      wglDeleteContext(FRC);
+    end;
+    FRC := 0;
+    if FDC <> 0 then
+      wglReleasePbufferDC(FBuffer, FDC);
+    FDC := 0;
+    wglDestroyPbuffer(FBuffer);
+    FBuffer := 0;
   end;
 end;
 
@@ -944,30 +944,30 @@ procedure TOpenGLBuffer.Draw;
 var
   Interval: Single;
 begin
-	if CreateBuffer and Assigned(FOnDraw) and wglMakeCurrent(FDC, FRC) then // then
+  if CreateBuffer and Assigned(FOnDraw) and wglMakeCurrent(FDC, FRC) then // then
   try
     Interval := FTimer.Time;
-		FTimer.Calculate;
+    FTimer.Calculate;
     if FTimer.Time > Interval then
       FFrameRate := 1 / (FTimer.Time - Interval)
     else
       FFrameRate := -1;
     FOnDraw(Self);
-	finally
-	  wglMakeCurrent(0, 0); //testing for memory leak
-	end;
+  finally
+    wglMakeCurrent(0, 0); //testing for memory leak
+  end;
 end;
 
 procedure TOpenGLBuffer.SetActive(Value: Boolean);
 begin
-	Value := Value and WGL_ARB_PBUFFER;
-	if Value <> FActive then
+  Value := Value and WGL_ARB_PBUFFER;
+  if Value <> FActive then
   begin
-  	FActive := Value;
+    FActive := Value;
     if FActive then
-    	CreateBuffer
-		else
-    	DestroyBuffer;
+      CreateBuffer
+    else
+      DestroyBuffer;
     Manager.Changed(Self);
   end;
 end;
@@ -985,20 +985,20 @@ end;
 
 procedure TOpenGLBuffer.SetWidth(Value: Integer);
 begin
-	if Value < 1 then Value := 1;
+  if Value < 1 then Value := 1;
   if Value <> FWidth then
   begin
-		DestroyBuffer;
+    DestroyBuffer;
     FWidth := Value;
   end;
 end;
 
 procedure TOpenGLBuffer.SetHeight(Value: Integer);
 begin
-	if Value < 1 then Value := 1;
+  if Value < 1 then Value := 1;
   if Value <> FHeight then
   begin
-		DestroyBuffer;
+    DestroyBuffer;
     FHeight := Value;
   end;
 end;
@@ -1007,97 +1007,97 @@ end;
 
 function TOpenGLBuffer.DeviceGetActive: Boolean;
 begin
-	Result := Active;
+  Result := Active;
 end;
 
 procedure TOpenGLBuffer.DeviceSetActive(Value: Boolean);
 begin
-	Active := Value;
+  Active := Value;
 end;
 
 function TOpenGLBuffer.DeviceGetDC: HDC;
 begin
-	Result := DC;
+  Result := DC;
 end;
 
 function TOpenGLBuffer.DeviceGetRC: HGLRC;
 begin
-	Result := RC;
+  Result := RC;
 end;
 
 function TOpenGLBuffer.DeviceGetFrameRate: Single;
 begin
-	Result := FrameRate;
+  Result := FrameRate;
 end;
 
 function TOpenGLBuffer.DeviceGetRefreshKind: TRefreshKind;
 begin
-	Result := RefreshKind;
+  Result := RefreshKind;
 end;
 
 procedure TOpenGLBuffer.DeviceSetRefreshKind(Value: TRefreshKind);
 begin
-	RefreshKind := Value;
+  RefreshKind := Value;
 end;
 
 function TOpenGLBuffer.DeviceGetTimer: ITimer;
 begin
-	Result := Timer;
+  Result := Timer;
 end;
 
 function TOpenGLBuffer.DeviceGetWidth: Integer;
 begin
-	Result := Width;
+  Result := Width;
 end;
 
 procedure TOpenGLBuffer.DeviceSetWidth(Value: Integer);
 begin
-	Width := Value;
+  Width := Value;
 end;
 
 function TOpenGLBuffer.DeviceGetHeight: Integer;
 begin
-	Result := Height;
+  Result := Height;
 end;
 
 procedure TOpenGLBuffer.DeviceSetHeight(Value: Integer);
 begin
-	Height := Value;
+  Height := Value;
 end;
 
 function TOpenGLBuffer.DeviceGetOnDraw: TNotifyEvent;
 begin
-	Result := OnDraw;
+  Result := OnDraw;
 end;
 
 procedure TOpenGLBuffer.DeviceSetOnDraw(Value: TNotifyEvent);
 begin
-	OnDraw := Value;
+  OnDraw := Value;
 end;
 
 function TOpenGLBuffer.DeviceGetOnLoad: TNotifyEvent;
 begin
-	Result := OnLoad;
+  Result := OnLoad;
 end;
 
 procedure TOpenGLBuffer.DeviceSetOnLoad(Value: TNotifyEvent);
 begin
-	OnLoad := Value;
+  OnLoad := Value;
 end;
 
 function TOpenGLBuffer.DeviceGetOnUnload: TNotifyEvent;
 begin
-	Result := OnUnload;
+  Result := OnUnload;
 end;
 
 procedure TOpenGLBuffer.DeviceSetOnUnload(Value: TNotifyEvent);
 begin
-	OnUnload := Value;
+  OnUnload := Value;
 end;
 
 procedure TOpenGLBuffer.DeviceDraw;
 begin
-	Draw;
+  Draw;
 end;
 
 procedure TOpenGLBuffer.DeviceFlip;

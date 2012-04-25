@@ -15,7 +15,7 @@ type
 
 { TImageLink }
 
-	TImageListLink = class(TCustomImageList)
+  TImageListLink = class(TCustomImageList)
   private
     FImageLink: TCustomImageList;
     FImageChangeLink: TChangeLink;
@@ -23,15 +23,15 @@ type
     procedure CheckResource;
     procedure ImageListChange(Sender: TObject);
     procedure SetResource(const Value: string);
-	public
-		constructor Create(AOwner: TComponent); override;
+  public
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   published
-  	property Resource: string read FResource write SetResource;
+    property Resource: string read FResource write SetResource;
   end;
 
 var
-	ResourceModule: TResourceModule;
+  ResourceModule: TResourceModule;
 
 procedure CreateResourceModule;
 
@@ -51,52 +51,52 @@ end;
 
 destructor TImageListLink.Destroy;
 begin
-	if FImageLink <> nil then
-		FImageLink.UnRegisterChanges(FImageChangeLink);
-	FImageChangeLink.Free;
+  if FImageLink <> nil then
+    FImageLink.UnRegisterChanges(FImageChangeLink);
+  FImageChangeLink.Free;
   inherited Destroy;
 end;
 
 procedure TImageListLink.CheckResource;
 begin
-	//if ResourceModule = nil then
-  	//Application.CreateForm(TResourceModule, _ResourceModule);
+  //if ResourceModule = nil then
+    //Application.CreateForm(TResourceModule, _ResourceModule);
 end;
 
 procedure TImageListLink.ImageListChange(Sender: TObject);
 begin
-	Handle := (Sender as TCustomImageList).Handle;
+  Handle := (Sender as TCustomImageList).Handle;
 end;
 
 procedure TImageListLink.SetResource(const Value: string);
 var
-	C: TComponent;
+  C: TComponent;
 begin
-	CheckResource;
-	if Value <> FResource then
+  CheckResource;
+  if Value <> FResource then
   begin
-  	if FImageLink <> nil then
-    	FImageLink.UnRegisterChanges(FImageChangeLink);
-  	FResource := Value;
+    if FImageLink <> nil then
+      FImageLink.UnRegisterChanges(FImageChangeLink);
+    FResource := Value;
     C := ResourceModule.FindComponent(FResource);
     if C is TCustomImageList then
-		begin
-    	FImageLink := TCustomImageList(C);
-    	FImageLink.RegisterChanges(FImageChangeLink);
+    begin
+      FImageLink := TCustomImageList(C);
+      FImageLink.RegisterChanges(FImageChangeLink);
       Handle := FImageLink.Handle;
     end
     else
     begin
-	    FImageLink := nil;
+      FImageLink := nil;
       Handle := 0;
-		end;
+    end;
   end;
 end;
 
 procedure CreateResourceModule;
 begin
-	if ResourceModule = nil then
-  	Application.CreateForm(TResourceModule, ResourceModule);
+  if ResourceModule = nil then
+    Application.CreateForm(TResourceModule, ResourceModule);
 end;
 
 end.

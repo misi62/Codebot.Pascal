@@ -114,7 +114,7 @@ const
 
 constructor TTimelineBarItem.Create(Collection: TCollection);
 begin
-	inherited Create(Collection);
+  inherited Create(Collection);
 end;
 
 procedure TTimelineBarItem.Assign(Source: TPersistent);
@@ -193,7 +193,7 @@ procedure TTimelineBarItems.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
   if GetOwner is TTimelineBar then
-  	TTimelineBar(GetOwner).ItemsChanged;
+    TTimelineBar(GetOwner).ItemsChanged;
 end;
 
 function TTimelineBarItems.Get(Index: Integer): TTimelineBarItem;

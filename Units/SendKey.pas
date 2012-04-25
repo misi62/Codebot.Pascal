@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	SysUtils, Windows, Messages;
+  SysUtils, Windows, Messages;
 
 function TranslateKey(VKey: Word): string;
 
@@ -22,8 +22,8 @@ function TranslateKey(VKey: Word): string;
 
 Takes a PChar as its first parameter and a boolean as its second, like so:
 
-	SendKeys('KeyString', Wait);
-	SendKeys('abc123{left}{left}{left}def{end}456{left 6}ghi{end}789', True);
+  SendKeys('KeyString', Wait);
+  SendKeys('abc123{left}{left}{left}def{end}456{left 6}ghi{end}789', True);
 
 where KeyString is a string of key names and modifiers that you want
 to send to the current input focus and Wait is a boolean variable or value
@@ -110,8 +110,8 @@ implementation
 
 { SendKeys procedure
 
-	Converts a string of characters and key names to keyboard events and
-	passes them to Windows. }
+  Converts a string of characters and key names to keyboard events and
+  passes them to Windows. }
 
 
 type
@@ -180,55 +180,55 @@ const
   VK_FORWARDSLASH = $BF;
 
   NormalKeyRecord: array[0..48] of TSendKey = (
-		(Name: '~'; VKey: VK_RETURN),
-		(Name: Chr(VK_SPACE); VKey: VK_SPACE),
-		(Name: Chr(VK_0); VKey: VK_0),
-		(Name: Chr(VK_1); VKey: VK_1),
-		(Name: Chr(VK_2); VKey: VK_2),
-		(Name: Chr(VK_3); VKey: VK_3),
-		(Name: Chr(VK_4); VKey: VK_4),
-		(Name: Chr(VK_5); VKey: VK_5),
-		(Name: Chr(VK_6); VKey: VK_6),
-		(Name: Chr(VK_7); VKey: VK_7),
-		(Name: Chr(VK_8); VKey: VK_8),
-		(Name: Chr(VK_9); VKey: VK_9),
-		(Name: Chr(VK_A); VKey: VK_A),
-		(Name: Chr(VK_B); VKey: VK_B),
-		(Name: Chr(VK_C); VKey: VK_C),
-		(Name: Chr(VK_D); VKey: VK_D),
-		(Name: Chr(VK_E); VKey: VK_E),
-		(Name: Chr(VK_F); VKey: VK_F),
-		(Name: Chr(VK_G); VKey: VK_G),
-		(Name: Chr(VK_H); VKey: VK_H),
-		(Name: Chr(VK_I); VKey: VK_I),
-		(Name: Chr(VK_J); VKey: VK_J),
-		(Name: Chr(VK_K); VKey: VK_K),
-		(Name: Chr(VK_L); VKey: VK_L),
-		(Name: Chr(VK_M); VKey: VK_M),
-		(Name: Chr(VK_N); VKey: VK_N),
-		(Name: Chr(VK_O); VKey: VK_O),
-		(Name: Chr(VK_P); VKey: VK_P),
-		(Name: Chr(VK_Q); VKey: VK_Q),
-		(Name: Chr(VK_R); VKey: VK_R),
-		(Name: Chr(VK_S); VKey: VK_S),
-		(Name: Chr(VK_T); VKey: VK_T),
-		(Name: Chr(VK_U); VKey: VK_U),
-		(Name: Chr(VK_V); VKey: VK_V),
-		(Name: Chr(VK_W); VKey: VK_W),
-		(Name: Chr(VK_X); VKey: VK_X),
-		(Name: Chr(VK_Y); VKey: VK_Y),
-		(Name: Chr(VK_Z); VKey: VK_Z),
-		(Name: Chr(VK_BACKQUOTE); VKey: VK_BACKQUOTE),
-		(Name: Chr(VK_MINUS); VKey: VK_MINUS),
-		(Name: Chr(VK_EQUALS); VKey: VK_EQUALS),
-		(Name: Chr(VK_LBRACKET); VKey: VK_LBRACKET),
-		(Name: Chr(VK_RBRACKET); VKey: VK_RBRACKET),
-		(Name: Chr(VK_BACKSLASH); VKey: VK_BACKSLASH),
-		(Name: Chr(VK_SEMICOLON); VKey: VK_SEMICOLON),
-		(Name: Chr(VK_QUOTE); VKey: VK_QUOTE),
-		(Name: Chr(VK_COMMA); VKey: VK_COMMA),
-		(Name: Chr(VK_PERIOD); VKey: VK_PERIOD),
-		(Name: Chr(VK_FORWARDSLASH); VKey: VK_FORWARDSLASH));
+    (Name: '~'; VKey: VK_RETURN),
+    (Name: Chr(VK_SPACE); VKey: VK_SPACE),
+    (Name: Chr(VK_0); VKey: VK_0),
+    (Name: Chr(VK_1); VKey: VK_1),
+    (Name: Chr(VK_2); VKey: VK_2),
+    (Name: Chr(VK_3); VKey: VK_3),
+    (Name: Chr(VK_4); VKey: VK_4),
+    (Name: Chr(VK_5); VKey: VK_5),
+    (Name: Chr(VK_6); VKey: VK_6),
+    (Name: Chr(VK_7); VKey: VK_7),
+    (Name: Chr(VK_8); VKey: VK_8),
+    (Name: Chr(VK_9); VKey: VK_9),
+    (Name: Chr(VK_A); VKey: VK_A),
+    (Name: Chr(VK_B); VKey: VK_B),
+    (Name: Chr(VK_C); VKey: VK_C),
+    (Name: Chr(VK_D); VKey: VK_D),
+    (Name: Chr(VK_E); VKey: VK_E),
+    (Name: Chr(VK_F); VKey: VK_F),
+    (Name: Chr(VK_G); VKey: VK_G),
+    (Name: Chr(VK_H); VKey: VK_H),
+    (Name: Chr(VK_I); VKey: VK_I),
+    (Name: Chr(VK_J); VKey: VK_J),
+    (Name: Chr(VK_K); VKey: VK_K),
+    (Name: Chr(VK_L); VKey: VK_L),
+    (Name: Chr(VK_M); VKey: VK_M),
+    (Name: Chr(VK_N); VKey: VK_N),
+    (Name: Chr(VK_O); VKey: VK_O),
+    (Name: Chr(VK_P); VKey: VK_P),
+    (Name: Chr(VK_Q); VKey: VK_Q),
+    (Name: Chr(VK_R); VKey: VK_R),
+    (Name: Chr(VK_S); VKey: VK_S),
+    (Name: Chr(VK_T); VKey: VK_T),
+    (Name: Chr(VK_U); VKey: VK_U),
+    (Name: Chr(VK_V); VKey: VK_V),
+    (Name: Chr(VK_W); VKey: VK_W),
+    (Name: Chr(VK_X); VKey: VK_X),
+    (Name: Chr(VK_Y); VKey: VK_Y),
+    (Name: Chr(VK_Z); VKey: VK_Z),
+    (Name: Chr(VK_BACKQUOTE); VKey: VK_BACKQUOTE),
+    (Name: Chr(VK_MINUS); VKey: VK_MINUS),
+    (Name: Chr(VK_EQUALS); VKey: VK_EQUALS),
+    (Name: Chr(VK_LBRACKET); VKey: VK_LBRACKET),
+    (Name: Chr(VK_RBRACKET); VKey: VK_RBRACKET),
+    (Name: Chr(VK_BACKSLASH); VKey: VK_BACKSLASH),
+    (Name: Chr(VK_SEMICOLON); VKey: VK_SEMICOLON),
+    (Name: Chr(VK_QUOTE); VKey: VK_QUOTE),
+    (Name: Chr(VK_COMMA); VKey: VK_COMMA),
+    (Name: Chr(VK_PERIOD); VKey: VK_PERIOD),
+    (Name: Chr(VK_FORWARDSLASH); VKey: VK_FORWARDSLASH));
 
   SpecialKeyRecord: array[0..41] of TSendKey = (
    (Name:'BACK'; VKey: VK_BACK),
@@ -278,44 +278,44 @@ function TranslateKey(VKey: Word): string;
 var
   KeyState: TKeyBoardState;
   Modifiers: string;
-	I: Integer;
+  I: Integer;
 begin
-	Modifiers := '';
+  Modifiers := '';
   GetKeyboardState(KeyState);
   if KeyState[VK_SHIFT] and $80 <> 0 then
-		Modifiers := '+';
+    Modifiers := '+';
   if KeyState[VK_CONTROL] and $80 <> 0 then
-		Modifiers := Modifiers + '^';
+    Modifiers := Modifiers + '^';
   if KeyState[VK_MENU] and $80 <> 0 then
-		Modifiers := Modifiers + '&';
-	Result := '';
-	for I := Low(NormalKeyRecord) to High(NormalKeyRecord) do
-  	if NormalKeyRecord[I].VKey = VKey then
+    Modifiers := Modifiers + '&';
+  Result := '';
+  for I := Low(NormalKeyRecord) to High(NormalKeyRecord) do
+    if NormalKeyRecord[I].VKey = VKey then
     begin
-			Result := Modifiers + LowerCase(NormalKeyRecord[I].Name);
+      Result := Modifiers + LowerCase(NormalKeyRecord[I].Name);
       Exit;
     end;
-	for I := Low(SpecialKeyRecord) to High(SpecialKeyRecord) do
-  	if SpecialKeyRecord[I].VKey = VKey then
+  for I := Low(SpecialKeyRecord) to High(SpecialKeyRecord) do
+    if SpecialKeyRecord[I].VKey = VKey then
     begin
-			Result := Modifiers + '{' + SpecialKeyRecord[I].Name + '}';
+      Result := Modifiers + '{' + SpecialKeyRecord[I].Name + '}';
       Exit;
     end;
 end;
 
 const
   ExtendedVKeys: set of Byte = [
-		VK_UP,
-		VK_DOWN,
-		VK_LEFT,
-		VK_RIGHT,
-		VK_HOME,
-		VK_END,
-		VK_PRIOR,
-		VK_NEXT,
-		VK_INSERT,
-		VK_BACK,
-		VK_DELETE];
+    VK_UP,
+    VK_DOWN,
+    VK_LEFT,
+    VK_RIGHT,
+    VK_HOME,
+    VK_END,
+    VK_PRIOR,
+    VK_NEXT,
+    VK_INSERT,
+    VK_BACK,
+    VK_DELETE];
 
 const
   INVALIDKEY = $FFFF;
@@ -324,22 +324,22 @@ const
   VKKEYSCANALTON = $04;
 
 var
-	SendEnabled: Boolean = True;
+  SendEnabled: Boolean = True;
   SendRunning: Boolean = False;
 
 procedure DisableKeys;
 begin
-	SendEnabled := False;
+  SendEnabled := False;
 end;
 
 procedure EnableKeys;
 begin
-	SendEnabled := True;
+  SendEnabled := True;
 end;
 
 function KeysSending: Boolean;
 begin
-	Result := SendRunning;
+  Result := SendRunning;
 end;
 
 function SendKeys(SendKeysString: PChar; Wait: Boolean): Boolean;
@@ -350,97 +350,97 @@ var
   NumTimes, MKey: Word;
   KeyString: string[20];
 
-	function BitSet(BitTable, BitMask: Byte): Boolean;
-	begin
-	  Result := ByteBool(BitTable and BitMask);
-	end;
+  function BitSet(BitTable, BitMask: Byte): Boolean;
+  begin
+    Result := ByteBool(BitTable and BitMask);
+  end;
 
-	procedure SetBit(var BitTable: Byte; BitMask: Byte);
-	begin
-	  BitTable := BitTable or Bitmask;
-	end;
+  procedure SetBit(var BitTable: Byte; BitMask: Byte);
+  begin
+    BitTable := BitTable or Bitmask;
+  end;
 
-	procedure KeyboardEvent(VKey, ScanCode: Byte; Flags: Longint);
-	var
-	  KeyboardMsg: TMsg;
-	begin
-  	if not SendEnabled then Exit;
-		keybd_event(VKey, ScanCode, Flags, 0);
-	  if Wait then
-	  	while PeekMessage(KeyboardMsg, 0, WM_KEYFIRST, WM_KEYLAST, PM_REMOVE) do
-		  begin
-		    TranslateMessage(KeyboardMsg);
-		    DispatchMessage(KeyboardMsg);
-		  end;
-	end;
-
-	procedure SendKeyDown(VKey: Byte; NumTimes: Word; GenUpMsg: Boolean);
-	var
-	  Count: Word;
-	  ScanCode: Byte;
-	  NumState: Boolean;
-	  KeyBoardState: TKeyboardState;
-	begin
-  	if not SendEnabled then Exit;
-	  if (VKey = VK_NUMLOCK) then
-	  begin
-	    NumState := ByteBool(GetKeyState(VK_NUMLOCK) and 1);
-	    GetKeyBoardState(KeyBoardState);
-	    if NumState then
-	    	KeyBoardState[VK_NUMLOCK] := (KeyBoardState[VK_NUMLOCK] and not 1)
-	    else
-      	KeyBoardState[VK_NUMLOCK] := (KeyBoardState[VK_NUMLOCK] or 1);
-	    SetKeyBoardState(KeyBoardState);
-	    Exit;
-	  end;
-	  ScanCode := Lo(MapVirtualKey(VKey,0));
-    for Count := 1 to NumTimes do
-	    if VKey in ExtendedVKeys then
+  procedure KeyboardEvent(VKey, ScanCode: Byte; Flags: Longint);
+  var
+    KeyboardMsg: TMsg;
+  begin
+    if not SendEnabled then Exit;
+    keybd_event(VKey, ScanCode, Flags, 0);
+    if Wait then
+      while PeekMessage(KeyboardMsg, 0, WM_KEYFIRST, WM_KEYLAST, PM_REMOVE) do
       begin
-	      KeyboardEvent(VKey, ScanCode, KEYEVENTF_EXTENDEDKEY);
-	      if(GenUpMsg) then
-	        KeyboardEvent(VKey, ScanCode, KEYEVENTF_EXTENDEDKEY or KEYEVENTF_KEYUP)
-	    end
+        TranslateMessage(KeyboardMsg);
+        DispatchMessage(KeyboardMsg);
+      end;
+  end;
+
+  procedure SendKeyDown(VKey: Byte; NumTimes: Word; GenUpMsg: Boolean);
+  var
+    Count: Word;
+    ScanCode: Byte;
+    NumState: Boolean;
+    KeyBoardState: TKeyboardState;
+  begin
+    if not SendEnabled then Exit;
+    if (VKey = VK_NUMLOCK) then
+    begin
+      NumState := ByteBool(GetKeyState(VK_NUMLOCK) and 1);
+      GetKeyBoardState(KeyBoardState);
+      if NumState then
+        KeyBoardState[VK_NUMLOCK] := (KeyBoardState[VK_NUMLOCK] and not 1)
+      else
+        KeyBoardState[VK_NUMLOCK] := (KeyBoardState[VK_NUMLOCK] or 1);
+      SetKeyBoardState(KeyBoardState);
+      Exit;
+    end;
+    ScanCode := Lo(MapVirtualKey(VKey,0));
+    for Count := 1 to NumTimes do
+      if VKey in ExtendedVKeys then
+      begin
+        KeyboardEvent(VKey, ScanCode, KEYEVENTF_EXTENDEDKEY);
+        if(GenUpMsg) then
+          KeyboardEvent(VKey, ScanCode, KEYEVENTF_EXTENDEDKEY or KEYEVENTF_KEYUP)
+      end
       else
       begin
-	      KeyboardEvent(VKey, ScanCode, 0);
-				if GenUpMsg then
-        	KeyboardEvent(VKey, ScanCode, KEYEVENTF_KEYUP);
-	    end;
-	end;
+        KeyboardEvent(VKey, ScanCode, 0);
+        if GenUpMsg then
+          KeyboardEvent(VKey, ScanCode, KEYEVENTF_KEYUP);
+      end;
+  end;
 
-	procedure SendKeyUp(VKey: Byte);
-	var
-	  ScanCode: Byte;
-	begin
-  	if not SendEnabled then Exit;
-	  ScanCode := Lo(MapVirtualKey(VKey, 0));
-	  if VKey in ExtendedVKeys then
-	    KeyboardEvent(VKey, ScanCode, KEYEVENTF_EXTENDEDKEY and KEYEVENTF_KEYUP)
-	  else
+  procedure SendKeyUp(VKey: Byte);
+  var
+    ScanCode: Byte;
+  begin
+    if not SendEnabled then Exit;
+    ScanCode := Lo(MapVirtualKey(VKey, 0));
+    if VKey in ExtendedVKeys then
+      KeyboardEvent(VKey, ScanCode, KEYEVENTF_EXTENDEDKEY and KEYEVENTF_KEYUP)
+    else
       KeyboardEvent(VKey, ScanCode, KEYEVENTF_KEYUP);
-	end;
+  end;
 
-	procedure SendKey(MKey: Word; NumTimes: Word; GenDownMsg: Boolean);
-	begin
-  	if not SendEnabled then Exit;
-	  if (BitSet(Hi(MKey), VKKEYSCANSHIFTON)) then SendKeyDown(VK_SHIFT, 1, False);
-	  if (BitSet(Hi(MKey), VKKEYSCANCTRLON)) then SendKeyDown(VK_CONTROL, 1, False);
-	  if (BitSet(Hi(MKey), VKKEYSCANALTON)) then SendKeyDown(VK_MENU, 1, False);
-	  SendKeyDown(Lo(MKey), NumTimes, GenDownMsg);
-	  if (BitSet(Hi(MKey), VKKEYSCANSHIFTON)) then SendKeyUp(VK_SHIFT);
-	  if (BitSet(Hi(MKey), VKKEYSCANCTRLON)) then SendKeyUp(VK_CONTROL);
-	  if (BitSet(Hi(MKey), VKKEYSCANALTON)) then SendKeyUp(VK_MENU);
-	end;
+  procedure SendKey(MKey: Word; NumTimes: Word; GenDownMsg: Boolean);
+  begin
+    if not SendEnabled then Exit;
+    if (BitSet(Hi(MKey), VKKEYSCANSHIFTON)) then SendKeyDown(VK_SHIFT, 1, False);
+    if (BitSet(Hi(MKey), VKKEYSCANCTRLON)) then SendKeyDown(VK_CONTROL, 1, False);
+    if (BitSet(Hi(MKey), VKKEYSCANALTON)) then SendKeyDown(VK_MENU, 1, False);
+    SendKeyDown(Lo(MKey), NumTimes, GenDownMsg);
+    if (BitSet(Hi(MKey), VKKEYSCANSHIFTON)) then SendKeyUp(VK_SHIFT);
+    if (BitSet(Hi(MKey), VKKEYSCANCTRLON)) then SendKeyUp(VK_CONTROL);
+    if (BitSet(Hi(MKey), VKKEYSCANALTON)) then SendKeyUp(VK_MENU);
+  end;
 
-	{ Implements a simple binary search to locate special key name strings }
+  { Implements a simple binary search to locate special key name strings }
 
-	function StringToVKey(KeyString: ShortString): Word;
+  function StringToVKey(KeyString: ShortString): Word;
   var
     L, H, I, C: Integer;
   begin
     Result := INVALIDKEY;
-  	if not SendEnabled then Exit;
+    if not SendEnabled then Exit;
     L := Low(SpecialKeyRecord);
     H := High(SpecialKeyRecord);
     while L <= H do
@@ -452,149 +452,149 @@ var
         H := I - 1;
         if C = 0 then
         begin
-  	      Result := SpecialKeyRecord[I].VKey;
+          Result := SpecialKeyRecord[I].VKey;
           Break;
         end;
       end;
     end;
   end;
 
-	procedure PopUpShiftKeys;
-	begin
-  	if not SendEnabled then Exit;
-	  if not UsingParens then
+  procedure PopUpShiftKeys;
+  begin
+    if not SendEnabled then Exit;
+    if not UsingParens then
     begin
-	    if ShiftDown then SendKeyUp(VK_SHIFT);
-	    if ControlDown then SendKeyUp(VK_CONTROL);
-	    if AltDown then SendKeyUp(VK_MENU);
-	    ShiftDown := False;
-	    ControlDown := False;
-	    AltDown := False;
-	  end;
-	end;
+      if ShiftDown then SendKeyUp(VK_SHIFT);
+      if ControlDown then SendKeyUp(VK_CONTROL);
+      if AltDown then SendKeyUp(VK_MENU);
+      ShiftDown := False;
+      ControlDown := False;
+      AltDown := False;
+    end;
+  end;
 
 begin
   Result := False;
-	if not SendEnabled then
-  	Exit;
+  if not SendEnabled then
+    Exit;
   SendRunning := True;
   try
-	  UsingParens := False;
-	  ShiftDown := False;
-	  ControlDown := False;
-	  AltDown := False;
-	  I := 0;
-	  L := StrLen(SendKeysString);
-	  if L = 0 then
-	    Exit;
-	  while I < L do
-	  begin
-	  	if not SendEnabled then Exit;
-	    case SendKeysString[I] of
-	      '(':
-	        begin
-	            UsingParens := True;
-	            Inc(I);
-	          end;
-	      ')':
-	        begin
-	            UsingParens := False;
-	            PopUpShiftKeys;
-	            Inc(I);
-	          end;
-	      '&':
-	        begin
-	             AltDown := True;
-	             SendKeyDown(VK_MENU,1,False);
-	             Inc(I);
-	          end;
-	      '+':
-	         begin
-	             ShiftDown := True;
-	             SendKeyDown(VK_SHIFT,1,False);
-	             Inc(I);
-	           end;
-	      '^':
-	        begin
-	          ControlDown := True;
-	          SendKeyDown(VK_CONTROL,1,False);
-	          Inc(I);
-	        end;
-	      '{':
-	        begin
-	          NumTimes := 1;
-	          if SendKeysString[Succ(I)]= '{' then
-	          begin
-	            MKey := VK_LBRACKET;
-	            SetBit(Wbytes(MKey)[1], VKKEYSCANSHIFTON);
-	            SendKey(MKey, 1, True);
-	            PopUpShiftKeys;
-	            Inc(I, 3);
-	            Continue;
-	          end;
-	          KeyString := '';
-	          FoundClose := False;
-	          while I <= L do
-	          begin
-	            Inc(I);
-	            if(SendKeysString[I]='}') then
-	            begin
-	              FoundClose := True;
-	              Inc(I);
-	              Break;
-	            end;
-	            KeyString := KeyString+Upcase(SendKeysString[I]);
-	          end;
-	          if not FoundClose then
-	            Exit;
-	          if SendKeysString[I] = '}' then
-	          begin
-	            MKey := VK_RBRACKET;
-	            SetBit(Wbytes(MKey)[1],VKKEYSCANSHIFTON);
-	            SendKey(MKey,1,True);
-	            PopUpShiftKeys;
-	            Inc(I);
-	            Continue;
-	          end;
-	          PosSpace := Pos(' ', KeyString);
-	          if(PosSpace<>0) then begin
-	             NumTimes := StrToInt(Copy(KeyString, Succ(PosSpace), Length(KeyString) - PosSpace));
-	             KeyString := Copy(KeyString, 1, Pred(PosSpace));
-	          end;
-	          if Length(KeyString) = 1 then
-	            MKey := vkKeyScanA(KeyString[1])
-	          else
-	            MKey := StringToVKey(KeyString);
-	          if MKey = VK_PAUSE then
-	            Sleep(250)
-	          else if MKey <> INVALIDKEY then
-	          begin
-	            SendKey(MKey, NumTimes, True);
-	            PopUpShiftKeys;
-	            Continue;
-	          end;
-	        end;
-	      '~':
-	        begin
-	          SendKeyDown(VK_RETURN, 1, True);
-	          PopUpShiftKeys;
-	          Inc(I);
-	        end;
-	    else
-	      MKey := vkKeyScan(SendKeysString[I]);
-	      if MKey <> INVALIDKEY then
-	      begin
-	       SendKey(MKey, 1, True);
-	       PopUpShiftKeys;
-	      end;
-	      Inc(I);
-	    end;
-	  	if not SendEnabled then Exit;
-		end;
-	  Result := True;
-	  PopUpShiftKeys;
+    UsingParens := False;
+    ShiftDown := False;
+    ControlDown := False;
+    AltDown := False;
+    I := 0;
+    L := StrLen(SendKeysString);
+    if L = 0 then
+      Exit;
+    while I < L do
+    begin
+      if not SendEnabled then Exit;
+      case SendKeysString[I] of
+        '(':
+          begin
+              UsingParens := True;
+              Inc(I);
+            end;
+        ')':
+          begin
+              UsingParens := False;
+              PopUpShiftKeys;
+              Inc(I);
+            end;
+        '&':
+          begin
+               AltDown := True;
+               SendKeyDown(VK_MENU,1,False);
+               Inc(I);
+            end;
+        '+':
+           begin
+               ShiftDown := True;
+               SendKeyDown(VK_SHIFT,1,False);
+               Inc(I);
+             end;
+        '^':
+          begin
+            ControlDown := True;
+            SendKeyDown(VK_CONTROL,1,False);
+            Inc(I);
+          end;
+        '{':
+          begin
+            NumTimes := 1;
+            if SendKeysString[Succ(I)]= '{' then
+            begin
+              MKey := VK_LBRACKET;
+              SetBit(Wbytes(MKey)[1], VKKEYSCANSHIFTON);
+              SendKey(MKey, 1, True);
+              PopUpShiftKeys;
+              Inc(I, 3);
+              Continue;
+            end;
+            KeyString := '';
+            FoundClose := False;
+            while I <= L do
+            begin
+              Inc(I);
+              if(SendKeysString[I]='}') then
+              begin
+                FoundClose := True;
+                Inc(I);
+                Break;
+              end;
+              KeyString := KeyString+Upcase(SendKeysString[I]);
+            end;
+            if not FoundClose then
+              Exit;
+            if SendKeysString[I] = '}' then
+            begin
+              MKey := VK_RBRACKET;
+              SetBit(Wbytes(MKey)[1],VKKEYSCANSHIFTON);
+              SendKey(MKey,1,True);
+              PopUpShiftKeys;
+              Inc(I);
+              Continue;
+            end;
+            PosSpace := Pos(' ', KeyString);
+            if(PosSpace<>0) then begin
+               NumTimes := StrToInt(Copy(KeyString, Succ(PosSpace), Length(KeyString) - PosSpace));
+               KeyString := Copy(KeyString, 1, Pred(PosSpace));
+            end;
+            if Length(KeyString) = 1 then
+              MKey := vkKeyScanA(KeyString[1])
+            else
+              MKey := StringToVKey(KeyString);
+            if MKey = VK_PAUSE then
+              Sleep(250)
+            else if MKey <> INVALIDKEY then
+            begin
+              SendKey(MKey, NumTimes, True);
+              PopUpShiftKeys;
+              Continue;
+            end;
+          end;
+        '~':
+          begin
+            SendKeyDown(VK_RETURN, 1, True);
+            PopUpShiftKeys;
+            Inc(I);
+          end;
+      else
+        MKey := vkKeyScan(SendKeysString[I]);
+        if MKey <> INVALIDKEY then
+        begin
+         SendKey(MKey, 1, True);
+         PopUpShiftKeys;
+        end;
+        Inc(I);
+      end;
+      if not SendEnabled then Exit;
+    end;
+    Result := True;
+    PopUpShiftKeys;
   finally
-	  SendRunning := False;
+    SendRunning := False;
   end;
 end;
 

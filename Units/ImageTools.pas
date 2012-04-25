@@ -10,30 +10,30 @@ unit ImageTools;
 interface
 
 uses
-	Windows, Messages, ActiveX, SysUtils, Classes, ComObj, Graphics,
+  Windows, Messages, ActiveX, SysUtils, Classes, ComObj, Graphics,
   BaseTypes, GdiPlus, ImageCodecs;
 
 { TImageBitmap }
 
 type
-	TImageBitmapFormat = string;
+  TImageBitmapFormat = string;
 
 const
   BmpFormat = 'bmp';
   GifFormat = 'gif';
   JpgFormat = 'jpg';
-	PngFormat = 'png';
-	TifFormat = 'tiff';
+  PngFormat = 'png';
+  TifFormat = 'tiff';
 
 var
-	DefaultFormat: TImageBitmapFormat = PngFormat;
+  DefaultFormat: TImageBitmapFormat = PngFormat;
 
 type
-	TImageBitmap = class(TGraphic)
+  TImageBitmap = class(TGraphic)
   private
-  	FFactory: IWICImagingFactory;
-  	FCanvas: TCanvas;
-		FBitmap: TFastBitmap;
+    FFactory: IWICImagingFactory;
+    FCanvas: TCanvas;
+    FBitmap: TFastBitmap;
     FFormat: TImageBitmapFormat;
     FWidth: Integer;
     FHeight: Integer;
@@ -63,8 +63,8 @@ type
     procedure SetHeight(Value: Integer); override;
     procedure SetWidth(Value: Integer); override;
   public
-  	constructor Create; override;
-  	destructor Destroy; override;
+    constructor Create; override;
+    destructor Destroy; override;
     procedure RequestBitmap(out Bitmap: TFastBitmap);
     procedure Assign(Source: TPersistent); override;
     procedure Blit(DC: HDC; const Rect: TRect; Opacity: Byte = $FF); overload;
@@ -72,7 +72,7 @@ type
     procedure Blit(DC: HDC; const Rect: TRect; const Borders: TRect; Opacity: Byte = $FF); overload;
     procedure Clear(const Rect: TRect);
     procedure Load(Stream: TStream; const AFormat: TImageBitmapFormat);
-		procedure Save(Stream: TStream; const AFormat: TImageBitmapFormat);
+    procedure Save(Stream: TStream; const AFormat: TImageBitmapFormat);
     procedure LoadFromStream(Stream: TStream); override;
     procedure SaveToStream(Stream: TStream); override;
     procedure LoadFromFile(const Filename: string); override;
@@ -83,7 +83,7 @@ type
       var APalette: HPALETTE); override;
     procedure LoadFromResourceName(const ResName: string);
     procedure LoadFromResourceID(ResID: Integer);
-		property Format: TImageBitmapFormat read FFormat write SetImageBitmapFormat;
+    property Format: TImageBitmapFormat read FFormat write SetImageBitmapFormat;
     property Bitmap: TFastBitmap read GetBitmap;
     property Bits: Pointer read GetBits;
     property Canvas: TCanvas read GetCanvas;
@@ -111,7 +111,7 @@ procedure ImageGrayscale(Bitmap: TImageBitmap);
 implementation
 
 uses
-	Consts, StrConst;
+  Consts, StrConst;
 
 procedure InvalidOperation(Str: PResStringRec);
 begin
@@ -120,10 +120,10 @@ end;
 
 constructor TImageBitmap.Create;
 begin
-	inherited Create;
+  inherited Create;
   if LoadWinCodecs then
-	  CoCreateInstance(CLSID_WICImagingFactory, nil, CLSCTX_INPROC_SERVER,
-  	  IID_IWICImagingFactory, FFactory);
+    CoCreateInstance(CLSID_WICImagingFactory, nil, CLSCTX_INPROC_SERVER,
+      IID_IWICImagingFactory, FFactory);
   FFormat := DefaultFormat;
   FPixelDepth := pd32;
   FScaleX := 1;
@@ -133,66 +133,66 @@ end;
 
 destructor TImageBitmap.Destroy;
 begin
-	DestroyHandle;
+  DestroyHandle;
   inherited Destroy;
 end;
 
 procedure TImageBitmap.HandleNeeded(AllowChange: Boolean = True);
 begin
-	if IsFastBitmap(FBitmap) then Exit;
+  if IsFastBitmap(FBitmap) then Exit;
   if (FWidth < 1) or (FHeight < 1) then
     InvalidOperation(@SInvalidGraphicSize);
-	FBitmap := CreateFastBitmap(FWidth, -FHeight, FPixelDepth);
+  FBitmap := CreateFastBitmap(FWidth, -FHeight, FPixelDepth);
   FCanvas := TCanvas.Create;
   FCanvas.Handle := FBitmap.DC;
   FStride := ScanlineStride(FBitmap);
   if AllowChange then
-	  Changed(Self);
+    Changed(Self);
 end;
 
 procedure TImageBitmap.DestroyHandle;
 begin
-	if not IsFastBitmap(FBitmap) then Exit;
+  if not IsFastBitmap(FBitmap) then Exit;
   FreeAndNil(FCanvas);
-	DestroyFastBitmap(FBitmap);
+  DestroyFastBitmap(FBitmap);
   Changed(Self);
 end;
 
 procedure TImageBitmap.Assign(Source: TPersistent);
 var
-	Image: TImageBitmap absolute Source;
+  Image: TImageBitmap absolute Source;
 begin
-	if Source is TImageBitmap then
+  if Source is TImageBitmap then
   begin
-  	Height := Image.Height;
+    Height := Image.Height;
     Width := Image.Width;
     PixelDepth := Image.PixelDepth;
     Opacity := Image.Opacity;
     Format := Image.Format;
     ScaleX := Image.ScaleX;
     ScaleY := Image.ScaleY;
-  	if Image.Empty then
-    	DestroyHandle
-		else
+    if Image.Empty then
+      DestroyHandle
+    else
     begin
-    	HandleNeeded;
+      HandleNeeded;
       FStride := ScanlineStride(FBitmap);
       Move(Image.FBitmap.Bits^, FBitmap.Bits^, FStride * FHeight);
     end;
   end
   else
-	  inherited Assign(Source);
+    inherited Assign(Source);
 end;
 
 procedure TImageBitmap.RequestBitmap(out Bitmap: TFastBitmap);
 begin
-	HandleNeeded;
+  HandleNeeded;
   Bitmap := FBitmap;
 end;
 
 procedure TImageBitmap.Draw(ACanvas: TCanvas; const Rect: TRect);
 begin
-	Blit(ACanvas.Handle, Rect);
+  Blit(ACanvas.Handle, Rect);
 end;
 
 function TImageBitmap.AllowBlit(out Func: TBlendFunction; Opacity: Byte): Boolean;
@@ -203,19 +203,19 @@ begin
   if Empty then Exit;
   Alpha := Opacity;
   if Alpha = $FF then
-  	Alpha := FOpacity;
+    Alpha := FOpacity;
   if Alpha = 0 then
-  	Exit;
+    Exit;
   Result := True;
   FillChar(Func, SizeOf(Func), #0);
-	Func.SourceConstantAlpha := Alpha;
+  Func.SourceConstantAlpha := Alpha;
   if FPixelDepth = pd32 then
     Func.AlphaFormat := AC_SRC_ALPHA;
 end;
 
 procedure TImageBitmap.Blit(DC: HDC; const Rect: TRect; Opacity: Byte = $FF);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
   W, H: Integer;
 begin
   if AllowBlit(Func, Opacity) then
@@ -223,66 +223,66 @@ begin
     W := Width;
     H := Height;
     if FScaleX <> 1 then
-	  	W := Round(W * FScaleX);
+      W := Round(W * FScaleX);
     if FScaleY <> 1 then
-	  	H := Round(H * FScaleY);
-  	AlphaBlend(DC, Rect.Left, Rect.Top, W, H,
-    	FBitmap.DC, 0, 0, FWidth, FHeight, Func);
+      H := Round(H * FScaleY);
+    AlphaBlend(DC, Rect.Left, Rect.Top, W, H,
+      FBitmap.DC, 0, 0, FWidth, FHeight, Func);
   end;
 end;
 
 procedure TImageBitmap.Blit(DC: HDC; X, Y, Index: Integer; Opacity: Byte = $FF);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
   W, H: Integer;
 begin
   if AllowBlit(Func, Opacity) then
   begin
     if Width > Height then
-	    W := FHeight
-  	else
-	    W := FWidth;
-  	H := W;
+      W := FHeight
+    else
+      W := FWidth;
+    H := W;
     if FScaleX <> 1 then
-		  W := Round(W * FScaleX);
+      W := Round(W * FScaleX);
     if FScaleY <> 1 then
-	  	H := Round(H * FScaleY);
+      H := Round(H * FScaleY);
     { Support for both horizontal and vertical image strips }
     if Width > Height then
-		  AlphaBlend(DC, X, Y, W, H,
-    		FBitmap.DC, Index * FHeight, 0, FHeight, FHeight, Func)
-	  else
-		  AlphaBlend(DC, X, Y, W, H,
-    		FBitmap.DC, 0, Index * FWidth, FWidth, FWidth, Func);
+      AlphaBlend(DC, X, Y, W, H,
+        FBitmap.DC, Index * FHeight, 0, FHeight, FHeight, Func)
+    else
+      AlphaBlend(DC, X, Y, W, H,
+        FBitmap.DC, 0, Index * FWidth, FWidth, FWidth, Func);
   end;
 end;
 
 procedure TImageBitmap.Blit(DC: HDC; const Rect: TRect; const Borders: TRect; Opacity: Byte = $FF);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
   if AllowBlit(Func, Opacity) then
     with Borders do
     begin
-    	AlphaBlend(DC, Rect.Left, Rect.Top, Left, Top,
+      AlphaBlend(DC, Rect.Left, Rect.Top, Left, Top,
         FBitmap.DC, 0, 0, Left, Top, Func);
-    	AlphaBlend(DC, Rect.Left + Left, Rect.Top, WidthOf(Rect) - (Left + Right), Top,
+      AlphaBlend(DC, Rect.Left + Left, Rect.Top, WidthOf(Rect) - (Left + Right), Top,
         FBitmap.DC, Left, 0, Width - (Left + Right), Top, Func);
-    	AlphaBlend(DC, Rect.Right - Right, Rect.Top, Right, Top,
+      AlphaBlend(DC, Rect.Right - Right, Rect.Top, Right, Top,
         FBitmap.DC, Width - Right, 0, Right, Top, Func);
 
-    	AlphaBlend(DC, Rect.Left, Rect.Top + Top, Left, HeightOf(Rect) - (Top + Bottom),
+      AlphaBlend(DC, Rect.Left, Rect.Top + Top, Left, HeightOf(Rect) - (Top + Bottom),
         FBitmap.DC, 0, Top, Left, Height - (Top + Bottom), Func);
-    	AlphaBlend(DC, Rect.Left + Left, Rect.Top + Top, WidthOf(Rect) - (Left + Right), HeightOf(Rect) - (Top + Bottom),
+      AlphaBlend(DC, Rect.Left + Left, Rect.Top + Top, WidthOf(Rect) - (Left + Right), HeightOf(Rect) - (Top + Bottom),
         FBitmap.DC, Left, Top, Width - (Left + Right), Height - (Top + Bottom), Func);
-    	AlphaBlend(DC, Rect.Right - Right, Rect.Top + Top, Right, HeightOf(Rect) - (Top + Bottom),
+      AlphaBlend(DC, Rect.Right - Right, Rect.Top + Top, Right, HeightOf(Rect) - (Top + Bottom),
         FBitmap.DC, Width - Right, Top, Right, Height - (Top + Bottom), Func);
 
-    	AlphaBlend(DC, Rect.Left, Rect.Bottom - Bottom, Left, Bottom,
+      AlphaBlend(DC, Rect.Left, Rect.Bottom - Bottom, Left, Bottom,
         FBitmap.DC, 0, Height - Bottom, Left, Bottom, Func);
-    	AlphaBlend(DC, Rect.Left + Left, Rect.Bottom - Bottom, WidthOf(Rect) - (Left + Right), Bottom,
+      AlphaBlend(DC, Rect.Left + Left, Rect.Bottom - Bottom, WidthOf(Rect) - (Left + Right), Bottom,
         FBitmap.DC, Left, Height - Bottom, Width - (Left + Right), Bottom, Func);
-    	AlphaBlend(DC, Rect.Right - Right, Rect.Bottom - Bottom, Right, Bottom,
+      AlphaBlend(DC, Rect.Right - Right, Rect.Bottom - Bottom, Right, Bottom,
         FBitmap.DC, Width - Right, Height - Bottom, Right, Bottom, Func);
     end;
 end;
@@ -325,7 +325,7 @@ var
   P: PRGBA;
   R: Single;
 begin
-	if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
+  if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
   begin
     Mix := False;
     for H := 0 to Bitmap.Height - 1 do
@@ -470,47 +470,47 @@ end;
 
 procedure TImageBitmap.Load(Stream: TStream; const AFormat: TImageBitmapFormat);
 var
-	Adapter: IStream;
+  Adapter: IStream;
 
-	procedure LoadWicBitmap;
+  procedure LoadWicBitmap;
   var
     BitmapDecoder: IWICBitmapDecoder;
-	  BitmapFrameDecode: IWICBitmapFrameDecode;
-  	Converter: IWICFormatConverter;
-	  Source: IWICBitmapSource;
-	  W, H: LongWord;
-  	G: TGUID;
+    BitmapFrameDecode: IWICBitmapFrameDecode;
+    Converter: IWICFormatConverter;
+    Source: IWICBitmapSource;
+    W, H: LongWord;
+    G: TGUID;
   begin
-		OleCheck(FFactory.CreateDecoderFromStream(Adapter, nil,
+    OleCheck(FFactory.CreateDecoderFromStream(Adapter, nil,
       WICDecodeMetadataCacheOnLoad, BitmapDecoder));
-	  OleCheck(BitmapDecoder.GetFrame(0, BitmapFrameDecode));
-	  OleCheck(BitmapFrameDecode.GetPixelFormat(G));
-  	if IsGuidEqual(G, GUID_WICPixelFormat32bppBGRA) then
-    	Source := BitmapFrameDecode
-	  else
-  	begin
-	    OleCheck(FFactory.CreateFormatConverter(Converter));
-    	OleCheck(Converter.Initialize(BitmapFrameDecode, GUID_WICPixelFormat32bppBGRA,
-      	WICBitmapDitherTypeNone, nil, 0, WICBitmapPaletteTypeCustom));
-	    Source := Converter;
-  	end;
-  	OleCheck(Source.GetSize(W, H));
+    OleCheck(BitmapDecoder.GetFrame(0, BitmapFrameDecode));
+    OleCheck(BitmapFrameDecode.GetPixelFormat(G));
+    if IsGuidEqual(G, GUID_WICPixelFormat32bppBGRA) then
+      Source := BitmapFrameDecode
+    else
+    begin
+      OleCheck(FFactory.CreateFormatConverter(Converter));
+      OleCheck(Converter.Initialize(BitmapFrameDecode, GUID_WICPixelFormat32bppBGRA,
+        WICBitmapDitherTypeNone, nil, 0, WICBitmapPaletteTypeCustom));
+      Source := Converter;
+    end;
+    OleCheck(Source.GetSize(W, H));
     FWidth := W;
     FHeight := H;
     HandleNeeded(False);
     if IsFastBitmap(FBitmap) then
-	  	OleCheck(Source.CopyPixels(nil, FStride, FStride * FHeight, FBitmap.Bits))
+      OleCheck(Source.CopyPixels(nil, FStride, FStride * FHeight, FBitmap.Bits))
   end;
 
   procedure LoadGdiBitmap;
   var
-  	GdiBitmap: IGdiBitmap;
+    GdiBitmap: IGdiBitmap;
     Rect: TRectI;
     Data: TBitmapData;
   begin
-  	GdiBitmap := NewBitmap(Adapter);
+    GdiBitmap := NewBitmap(Adapter);
     if GdiBitmap.LastStatus <> Ok then
-    	Exit;
+      Exit;
     Rect.X := 0;
     Rect.Y := 0;
     Rect.Width := GdiBitmap.Width;
@@ -518,7 +518,7 @@ var
     FWidth := Rect.Width;
     FHeight := Rect.Height;
     HandleNeeded(False);
-		if GdiBitmap.LockBits(Rect, ImageLockModeRead, PixelFormat32bppARGB, Data) <> Ok then
+    if GdiBitmap.LockBits(Rect, ImageLockModeRead, PixelFormat32bppARGB, Data) <> Ok then
       InvalidOperation(@SCouldNotLockBits);
     Move(Data.Scan0^, FBitmap.Bits^, FStride *  FHeight);
     GdiBitmap.UnlockBits(Data);
@@ -527,36 +527,36 @@ var
 var
   Share: TSharedStream;
 begin
-	DestroyHandle;
+  DestroyHandle;
   FPixelDepth := pd32;
-	FWidth := 0;
+  FWidth := 0;
   FHeight := 0;
   FStride := 0;
   Format := LowerCase(AFormat);
   Share := TSharedStream.Create(Stream);
   Adapter := TStreamAdapter.Create(Share, soOwned);
   if FFactory <> nil then
-	  LoadWicBitmap
+    LoadWicBitmap
   else
     LoadGdiBitmap;
-	if IsFastBitmap(FBitmap) then
-  	Premultiply(FBitmap)
-	else
+  if IsFastBitmap(FBitmap) then
+    Premultiply(FBitmap)
+  else
   begin
-  	FHeight := 0;
+    FHeight := 0;
     FWidth := 0;
     FStride := 0;
-	end;
-	Changed(Self);
+  end;
+  Changed(Self);
 end;
 
 {var
   MustCopy: Boolean;
   Memory: TMemoryStream;
 begin
-	DestroyHandle;
+  DestroyHandle;
   FPixelDepth := pd32;
-	FWidth := 0;
+  FWidth := 0;
   FHeight := 0;
   FStride := 0;
   Format := LowerCase(AFormat);
@@ -569,50 +569,50 @@ begin
     if MustCopy then
     begin
       Memory.CopyFrom(Stream, Stream.Size - Stream.Position);
-  	  Adapter := TStreamAdapter.Create(Memory);
+      Adapter := TStreamAdapter.Create(Memory);
     end
     else
-  	  Adapter := TStreamAdapter.Create(Stream);
+      Adapter := TStreamAdapter.Create(Stream);
     if FFactory <> nil then
-		  LoadWicBitmap
+      LoadWicBitmap
     else
-  		LoadGdiBitmap;
+      LoadGdiBitmap;
   finally
     Memory.Free;
   end;
-	if IsFastBitmap(FBitmap) then
-  	Premultiply(FBitmap)
-	else
+  if IsFastBitmap(FBitmap) then
+    Premultiply(FBitmap)
+  else
   begin
-  	FHeight := 0;
+    FHeight := 0;
     FWidth := 0;
     FStride := 0;
-	end;
-	Changed(Self);
+  end;
+  Changed(Self);
 end;}
 
 procedure TImageBitmap.Save(Stream: TStream; const AFormat: TImageBitmapFormat);
 var
-	Adapter: IStream;
+  Adapter: IStream;
 
-	procedure SaveWicBitmap;
+  procedure SaveWicBitmap;
   var
-	  SaveStream: IWICStream;
-		BitmapInstance: IWICBitmap;
-	  BitmapSource: IWICBitmapSource;
-	  BitmapEncoder: IWICBitmapEncoder;
-	  BitmapFrameEncode: IWICBitmapFrameEncode;
-	  PropertyBag: IPropertyBag2;
-	  Converter: IWICFormatConverter;
-	  Palette: IWICPalette;
-	  S: WideString;
-	  G: TGUID;
+    SaveStream: IWICStream;
+    BitmapInstance: IWICBitmap;
+    BitmapSource: IWICBitmapSource;
+    BitmapEncoder: IWICBitmapEncoder;
+    BitmapFrameEncode: IWICBitmapFrameEncode;
+    PropertyBag: IPropertyBag2;
+    Converter: IWICFormatConverter;
+    Palette: IWICPalette;
+    S: WideString;
+    G: TGUID;
   begin
     OleCheck(FFactory.CreateBitmapFromMemory(FWidth, FHeight,
       GUID_WICPixelFormat32bppBGRA, FWidth * 4, FHeight * FWidth * 4, Bits,
       BitmapInstance));
-  	S := Format;
-  	OleCheck(WICMapShortNameToGuid(PWideChar(S), G));
+    S := Format;
+    OleCheck(WICMapShortNameToGuid(PWideChar(S), G));
     BitmapSource := BitmapInstance;
     OleCheck(FFactory.CreateEncoder(G, nil, BitmapEncoder));
     OleCheck(FFactory.CreateStream(SaveStream));
@@ -647,7 +647,7 @@ var
 
   procedure SaveGdiBitmap;
   var
-  	GdiBitmap: IGdiBitmap;
+    GdiBitmap: IGdiBitmap;
     Rect: TRectI;
     Data: TBitmapData;
     B: Boolean;
@@ -657,46 +657,46 @@ var
     Rect.Y := 0;
     Rect.Width := FWidth;
     Rect.Height := FHeight;
-  	GdiBitmap := NewBitmap(FWidth, FHeight);
-		if GdiBitmap.LockBits(Rect, ImageLockModeRead, PixelFormat32bppARGB, Data) <> Ok then
+    GdiBitmap := NewBitmap(FWidth, FHeight);
+    if GdiBitmap.LockBits(Rect, ImageLockModeRead, PixelFormat32bppARGB, Data) <> Ok then
       InvalidOperation(@SCouldNotLockBits);
-		Move(FBitmap.Bits^, Data.Scan0^, FWidth * FHeight * 4);
-		GdiBitmap.UnlockBits(Data);
+    Move(FBitmap.Bits^, Data.Scan0^, FWidth * FHeight * 4);
+    GdiBitmap.UnlockBits(Data);
     B := GetEncoderClsid('image/' + Format, G);
-		if B then
-	    GdiBitmap.Save(Adapter, G)
-		else
-    	InvalidOperation(@SInvalidGraphicFormat);
+    if B then
+      GdiBitmap.Save(Adapter, G)
+    else
+      InvalidOperation(@SInvalidGraphicFormat);
   end;
 
 begin
-	if Empty then Exit;
+  if Empty then Exit;
   HandleNeeded(False);
   Adapter := TStreamAdapter.Create(Stream);
   FFormat := LowerCase(AFormat);
   {if FFactory <> nil then
-		SaveWicBitmap
+    SaveWicBitmap
   else}
-		SaveGdiBitmap;
+    SaveGdiBitmap;
 end;
 
 procedure TImageBitmap.LoadFromStream(Stream: TStream);
 begin
-	Load(Stream, Format);
+  Load(Stream, Format);
 end;
 
 procedure TImageBitmap.SaveToStream(Stream: TStream);
 begin
-	Save(Stream, Format);
+  Save(Stream, Format);
 end;
 
 procedure TImageBitmap.LoadFromResourceName(const ResName: string);
 var
-	Stream: TStream;
+  Stream: TStream;
 begin
   Stream := TResourceStream.Create(HInstance, ResName, RT_RCDATA);
   try
-  	LoadFromStream(Stream);
+    LoadFromStream(Stream);
   finally
     Stream.Free;
   end;
@@ -704,30 +704,30 @@ end;
 
 procedure TImageBitmap.LoadFromResourceID(ResID: Integer);
 var
-	Stream: TStream;
+  Stream: TStream;
 begin
-	Stream := TResourceStream.CreateFromID(HInstance, ResID, RT_RCDATA);
+  Stream := TResourceStream.CreateFromID(HInstance, ResID, RT_RCDATA);
   try
-  	LoadFromStream(Stream);
+    LoadFromStream(Stream);
   finally
-  	Stream.Free;
+    Stream.Free;
   end;
 end;
 
 function ExtractFormat(const Filename: string): string;
 begin
-	Result := Copy(ExtractFileExt(LowerCase(Filename)), 2, MAX_PATH);
+  Result := Copy(ExtractFileExt(LowerCase(Filename)), 2, MAX_PATH);
 end;
 
 procedure TImageBitmap.LoadFromFile(const Filename: string);
 begin
-	Format := ExtractFormat(Filename);
+  Format := ExtractFormat(Filename);
   inherited LoadfromFile(Filename);
 end;
 
 procedure TImageBitmap.SaveToFile(const Filename: string);
 begin
-	Format := ExtractFormat(Filename);
+  Format := ExtractFormat(Filename);
   inherited SaveToFile(Filename);
 end;
 
@@ -743,7 +743,7 @@ end;
 
 function TImageBitmap.GetCanvas: TCanvas;
 begin
-	HandleNeeded;
+  HandleNeeded;
   Result := FCanvas;
 end;
 
@@ -754,8 +754,8 @@ end;
 
 function TImageBitmap.GetBits: Pointer;
 begin
-	HandleNeeded;
-	Result := FBitmap.Bits;
+  HandleNeeded;
+  Result := FBitmap.Bits;
 end;
 
 function TImageBitmap.GetBounds: TRect;
@@ -765,18 +765,18 @@ end;
 
 function TImageBitmap.GetScanline(Row: Integer): Pointer;
 var
-	B: PByte absolute Result;
+  B: PByte absolute Result;
 begin
-	HandleNeeded;
-	if (Row < 0) or (Row > FBitmap.Height - 1) then
-		InvalidOperation(@SScanLine);
-	Result := FBitmap.Bits;
+  HandleNeeded;
+  if (Row < 0) or (Row > FBitmap.Height - 1) then
+    InvalidOperation(@SScanLine);
+  Result := FBitmap.Bits;
   Inc(B, FStride * Row);
 end;
 
 function TImageBitmap.GetTransparent: Boolean;
 begin
-	Result := True;
+  Result := True;
 end;
 
 procedure TImageBitmap.SetTransparent(Value: Boolean);
@@ -785,81 +785,81 @@ end;
 
 function TImageBitmap.GetEmpty: Boolean;
 begin
-	Result := (FWidth = 0) or (FHeight = 0);
+  Result := (FWidth = 0) or (FHeight = 0);
 end;
 
 procedure TImageBitmap.SetHeight(Value: Integer);
 begin
-	if Value < 0 then
-	  Value := 0;
+  if Value < 0 then
+    Value := 0;
   if Value <> FHeight then
   begin
-  	FHeight := Value;
+    FHeight := Value;
     DestroyHandle;
-	end;
+  end;
 end;
 
 procedure TImageBitmap.SetWidth(Value: Integer);
 begin
-	if Value < 0 then
-	  Value := 0;
+  if Value < 0 then
+    Value := 0;
   if Value <> FWidth then
   begin
-  	FWidth := Value;
+    FWidth := Value;
     DestroyHandle;
-	end;
+  end;
 end;
 
 function TImageBitmap.GetHeight: Integer;
 begin
-	Result := FHeight;
+  Result := FHeight;
 end;
 
 function TImageBitmap.GetWidth: Integer;
 begin
-	Result := FWidth;
+  Result := FWidth;
 end;
 
 function TImageBitmap.GetSize: Integer;
 begin
-	if FWidth > FHeight then
-  	Result := FHeight
-	else
-  	Result := FWidth;
+  if FWidth > FHeight then
+    Result := FHeight
+  else
+    Result := FWidth;
 end;
 
 procedure TImageBitmap.SetImageBitmapFormat(const Value: string);
 var
-	Success: Boolean;
-	S: WideString;
+  Success: Boolean;
+  S: WideString;
   G: TGUID;
 begin
   if Value <> FFormat then
   begin
-  	Success := False;
-  	S := LowerCase(Value);
-  	if FFactory <> nil then
-  	begin
+    Success := False;
+    S := LowerCase(Value);
+    if FFactory <> nil then
+    begin
       Success := WICMapShortNameToGuid(PWideChar(S), G) = S_OK;
       if Success then
-  			FFormat := S;
+        FFormat := S;
     end;
-  	if not Success then
-    	if S = 'png' then
-  			FFormat := PngFormat
+    if not Success then
+      if S = 'png' then
+        FFormat := PngFormat
       else if S = 'bmp' then
-  			FFormat := BmpFormat
+        FFormat := BmpFormat
       else if S = 'jpg' then
-  			FFormat := JpgFormat
+        FFormat := JpgFormat
       else if S = 'jpeg' then
-  			FFormat := JpgFormat
+        FFormat := JpgFormat
       else if S = 'gif' then
-  			FFormat := GifFormat
+        FFormat := GifFormat
       else if S = 'tif' then
-  			FFormat := TifFormat
+        FFormat := TifFormat
       else if S = 'tiff' then
-  			FFormat := TifFormat;
-  		{ else use the current format }
+        FFormat := TifFormat;
+      { else use the current format }
   end;
 end;
 
@@ -867,7 +867,7 @@ procedure TImageBitmap.SetPixelDepth(const Value: TPixelDepth);
 begin
   if Value <> PixelDepth then
   begin
-  	FPixelDepth := Value;
+    FPixelDepth := Value;
     DestroyHandle;
   end;
 end;
@@ -941,7 +941,7 @@ var
 begin
   if Bitmap.Empty then
     Exit;
-	Bitmap.RequestBitmap(B);
+  Bitmap.RequestBitmap(B);
   RGBA := B.Bits;
   C := ColorToRGBA(Color);
   for I := 0 to B.Width * B.Height - 1 do
@@ -976,7 +976,7 @@ var
 begin
   if Bitmap.Empty then
     Exit;
-	Bitmap.RequestBitmap(B);
+  Bitmap.RequestBitmap(B);
   RGBA := B.Bits;
   A := 1;
   for Y := 0 to B.Height - 1 do
@@ -1043,15 +1043,15 @@ var
 begin
   if Bitmap.Empty then
     Exit;
-	Bitmap.RequestBitmap(B);
+  Bitmap.RequestBitmap(B);
   A := B.Bits;
   for Y := 0 to B.Height - 1 do
     for X := 0 to B.Width - 1 do
-		begin
-    	A.Red := Round(0.3 * A.Red + 0.6 * A.Green + 0.1 * A.Blue);
+    begin
+      A.Red := Round(0.3 * A.Red + 0.6 * A.Green + 0.1 * A.Blue);
       A.Blue := A.Red;
       A.Green := A.Red;
-			Inc(A);
+      Inc(A);
     end;
 end;
 

@@ -3,7 +3,7 @@ unit BannerCtrls;
 interface
 
 uses
-	Windows, Messages, SysUtils, Classes, Controls, Graphics, ImgList, Forms,
+  Windows, Messages, SysUtils, Classes, Controls, Graphics, ImgList, Forms,
   GraphTools, ProviderTools, FormTools, SuplCtrls, BaseTypes;
 
 { TBannerBook }
@@ -82,12 +82,12 @@ type
     procedure SetCaption(Value: TCaption);
     procedure SetImageIndex(Value: Integer);
     procedure SetVisible(Value: Boolean);
-	protected
-  	property ImageRect: TRect read FImageRect write FImageRect;
+  protected
+    property ImageRect: TRect read FImageRect write FImageRect;
   public
     constructor Create(Collection: TCollection); override;
     procedure Assign(Source: TPersistent); override;
-	published
+  published
     property ImageIndex: Integer read FImageIndex write SetImageIndex;
     property Caption: TCaption read FCaption write SetCaption;
     property Visible: Boolean read FVisible write SetVisible;
@@ -123,7 +123,7 @@ type
     FOnDrawItem: TDrawIndexDefaultEvent;
     FOnSelectItem: TNotifyEvent;
     FAutoHeight: Boolean;
-		FImageChangeLink: TChangeLink;
+    FImageChangeLink: TChangeLink;
     procedure ImageListChange(Sender: TObject);
     procedure SetBannerBook(Value: TBannerBook);
     procedure SetHotIndex(Value: Integer);
@@ -131,7 +131,7 @@ type
     procedure SetItemIndex(Value: Integer);
     procedure SetItems(Value: TBannerItems);
     procedure CMDesignHitTest(var Msg: TCMDesignHitTest); message CM_DESIGNHITTEST;
-		procedure CMEnabledChanged(var Msg: TMessage); message CM_ENABLEDCHANGED;
+    procedure CMEnabledChanged(var Msg: TMessage); message CM_ENABLEDCHANGED;
     procedure CMMouseLeave(var Msg: TMessage); message CM_MOUSELEAVE;
     procedure WMEraseBkgnd(var Msg: TWMEraseBkgnd); message WM_ERASEBKGND;
     procedure WMGetDlgCode(var Msg: TMessage); message WM_GETDLGCODE;
@@ -142,23 +142,23 @@ type
     procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState;
       X, Y: Integer); override;
-  	procedure Paint; override;
+    procedure Paint; override;
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
     property HotIndex: Integer read FHotIndex write SetHotIndex;
     procedure ItemsChanged;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     property Background: TGraphic read FBackground write FBackground;
   published
-  	property Align;
-  	property AutoHeight: Boolean read FAutoHeight write FAutoHeight default True;
+    property Align;
+    property AutoHeight: Boolean read FAutoHeight write FAutoHeight default True;
     property BannerBook: TBannerBook read FBannerBook write SetBannerBook;
-  	property Items: TBannerItems read FItems write SetItems;
+    property Items: TBannerItems read FItems write SetItems;
     property ItemIndex: Integer read FItemIndex write SetItemIndex;
     property Images: TCustomImageList read FImages write SetImages;
     property Visible;
-		property Font;
+    property Font;
     property ParentFont;
     property Enabled;
     property TabOrder;
@@ -168,7 +168,7 @@ type
   end;
 
 var
-	RegisterPages: procedure (PageClass: TClass);
+  RegisterPages: procedure (PageClass: TClass);
   PagesRegistered: Boolean;
 
 implementation
@@ -283,7 +283,7 @@ begin
   FBannerBook.PageIndex := Index;
   if csDesigning in FBannerBook.ComponentState then
   begin
-		Form := GetParentForm(FBannerBook);
+    Form := GetParentForm(FBannerBook);
     if (Form <> nil) and (Form.Designer <> nil) then
       Form.Designer.Modified;
   end;
@@ -322,28 +322,28 @@ end;
 
 procedure TBannerPage.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
 begin
-	FillRectColor(Msg.DC, ClientRect, Color);
-	if csDesigning in ComponentState then
-		FillRectOutline(Msg.DC, ClientRect, Blend(Color, 0));
-	Msg.Result := 1;
+  FillRectColor(Msg.DC, ClientRect, Color);
+  if csDesigning in ComponentState then
+    FillRectOutline(Msg.DC, ClientRect, Blend(Color, 0));
+  Msg.Result := 1;
 end;
 
 procedure TBannerPage.WMNCHitTest(var Msg: TWMNCHitTest);
 begin
-	Msg.Result := HTTRANSPARENT;
+  Msg.Result := HTTRANSPARENT;
 end;
 
 { TBannerBook }
 
 var
-	EmptyRect: TRect;
-	Registered: Boolean;
+  EmptyRect: TRect;
+  Registered: Boolean;
 
 constructor TBannerBook.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-	if not Registered then
-		RegisterPages(TBannerPage);
+  if not Registered then
+    RegisterPages(TBannerPage);
   Color := clBtnFace;
   Registered := True;
   Width := 150;
@@ -402,16 +402,16 @@ end;
 
 procedure TBannerBook.ShowControl(AControl: TControl);
 var
-	OldPage: Integer;
+  OldPage: Integer;
   I: Integer;
 begin
   for I := 0 to FPageList.Count - 1 do
     if FPageList[I] = AControl then
     begin
-    	OldPage :=  FPageIndex;
+      OldPage :=  FPageIndex;
       SetPageIndex(I);
       if OldPage > -1 then
-	      SetPageIndex(OldPage);
+        SetPageIndex(OldPage);
       Exit;
     end;
   inherited ShowControl(AControl);
@@ -419,117 +419,117 @@ end;
 
 procedure TBannerBook.SetPages(Value: TStrings);
 var
-	A, B: Integer;
+  A, B: Integer;
   S: string;
-	I: Integer;
+  I: Integer;
 begin
-	FPages.BeginUpdate;
-	try
- 		{ remove duplicates }
-  	for I := Value.Count - 1 downto 0 do
-		begin
-			S := Trim(Value[I]);
-			if S = '' then Continue;
-			if Value.IndexOf(S) < I then
-			Value.Delete(I);
-		end;
-		{ add new items }
-		for I := 0 to Value.Count - 1 do
-		begin
-			S := Trim(Value[I]);
-			if S = '' then Continue;
-			if FPages.IndexOf(S) < 0 then
-			FPages.Add(S);
-		end;
-		{ remove deleted items }
-		for I := FPages.Count - 1 downto 0 do
-		begin
-			S := Trim(FPages[I]);
-			if S = '' then Continue;
-			if Value.IndexOf(S) < 0 then
-			FPages.Delete(I);
-		end;
-		{ change item ordering }
-		for I := 0 to Value.Count - 1 do
-		begin
-			S := Trim(Value[I]);
-			if S = '' then Continue;
-			A := FPages.IndexOf(S);
-			B := Value.IndexOf(S);
-			if A <> B then
-			FPages.Move(A, B);
-		end;
-		if FPages.Count = 0 then FPages.Add('default');
-	finally
-		FPages.EndUpdate;
-	end;
+  FPages.BeginUpdate;
+  try
+     { remove duplicates }
+    for I := Value.Count - 1 downto 0 do
+    begin
+      S := Trim(Value[I]);
+      if S = '' then Continue;
+      if Value.IndexOf(S) < I then
+      Value.Delete(I);
+    end;
+    { add new items }
+    for I := 0 to Value.Count - 1 do
+    begin
+      S := Trim(Value[I]);
+      if S = '' then Continue;
+      if FPages.IndexOf(S) < 0 then
+      FPages.Add(S);
+    end;
+    { remove deleted items }
+    for I := FPages.Count - 1 downto 0 do
+    begin
+      S := Trim(FPages[I]);
+      if S = '' then Continue;
+      if Value.IndexOf(S) < 0 then
+      FPages.Delete(I);
+    end;
+    { change item ordering }
+    for I := 0 to Value.Count - 1 do
+    begin
+      S := Trim(Value[I]);
+      if S = '' then Continue;
+      A := FPages.IndexOf(S);
+      B := Value.IndexOf(S);
+      if A <> B then
+      FPages.Move(A, B);
+    end;
+    if FPages.Count = 0 then FPages.Add('default');
+  finally
+    FPages.EndUpdate;
+  end;
 end;
 
 function TBannerBook.GetPage: TObject;
 begin
-	if FPageIndex > -1 then
-		Result := TObject(FPageList[FPageIndex])
-	else
-		Result := nil;
+  if FPageIndex > -1 then
+    Result := TObject(FPageList[FPageIndex])
+  else
+    Result := nil;
 end;
 
 procedure TBannerBook.SetPageIndex(Value: Integer);
 var
-	ParentForm: TCustomForm;
+  ParentForm: TCustomForm;
 begin
-	if Value < 0 then Value := 0;
-	if csLoading in ComponentState then
-	begin
-		FPageIndex := Value;
-		Exit;
-	end;
-	if (Value <> FPageIndex) and (Value > -1) and (Value < FPageList.Count) then
-	begin
-		ParentForm := GetParentForm(Self);
-		if ParentForm <> nil then
-			if ContainsControl(ParentForm.ActiveControl) then
-				ParentForm.ActiveControl := Self;
-		with TBannerPage(FPageList[Value]) do
-		begin
-			BringToFront;
-			Visible := True;
-			Align := alClient;
-		end;
-		if (FPageIndex > -1) and (FPageIndex < FPageList.Count) then
-			TBannerPage(FPageList[FPageIndex]).Visible := False;
-		FPageIndex := Value;
-		if ParentForm <> nil then
-			if ParentForm.ActiveControl = Self then SelectFirst;
-		if Assigned(FOnPageChanged) then
-			FOnPageChanged(Self);
-	end;
+  if Value < 0 then Value := 0;
+  if csLoading in ComponentState then
+  begin
+    FPageIndex := Value;
+    Exit;
+  end;
+  if (Value <> FPageIndex) and (Value > -1) and (Value < FPageList.Count) then
+  begin
+    ParentForm := GetParentForm(Self);
+    if ParentForm <> nil then
+      if ContainsControl(ParentForm.ActiveControl) then
+        ParentForm.ActiveControl := Self;
+    with TBannerPage(FPageList[Value]) do
+    begin
+      BringToFront;
+      Visible := True;
+      Align := alClient;
+    end;
+    if (FPageIndex > -1) and (FPageIndex < FPageList.Count) then
+      TBannerPage(FPageList[FPageIndex]).Visible := False;
+    FPageIndex := Value;
+    if ParentForm <> nil then
+      if ParentForm.ActiveControl = Self then SelectFirst;
+    if Assigned(FOnPageChanged) then
+      FOnPageChanged(Self);
+  end;
 end;
 
 procedure TBannerBook.SetActivePage(const Value: string);
 begin
-	SetPageIndex(FPages.IndexOf(Value));
+  SetPageIndex(FPages.IndexOf(Value));
 end;
 
 function TBannerBook.GetActivePage: string;
 begin
-	Result := FPages[FPageIndex];
+  Result := FPages[FPageIndex];
 end;
 
 procedure TBannerBook.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
 begin
-	FillRectColor(Msg.DC, ClientRect, Color);
-	if csDesigning in ComponentState then
-		FillRectOutline(Msg.DC, ClientRect, Blend(Color, 0));
-	Msg.Result := 1;
+  FillRectColor(Msg.DC, ClientRect, Color);
+  if csDesigning in ComponentState then
+    FillRectOutline(Msg.DC, ClientRect, Blend(Color, 0));
+  Msg.Result := 1;
 end;
 
 { TBannerItem }
 
 constructor TBannerItem.Create(Collection: TCollection);
 begin
-	inherited Create(Collection);
+  inherited Create(Collection);
   FImageIndex := Collection.Count - 1;
-	FVisible := True;
+  FVisible := True;
 end;
 
 procedure TBannerItem.Assign(Source: TPersistent);
@@ -538,7 +538,7 @@ var
 begin
   if Source is TBannerItem then
   begin
-		FImageIndex := EditItem.ImageIndex;
+    FImageIndex := EditItem.ImageIndex;
     FCaption := EditItem.Caption;
     FVisible := EditItem.Visible;
     Changed(False);
@@ -572,8 +572,8 @@ begin
     FVisible := Value;
     Changed(False);
     if Collection.Owner is TComponent then
-	    if not (csDesigning in TComponent(Collection.Owner).ComponentState) then
-				FImageRect := EmptyRect;
+      if not (csDesigning in TComponent(Collection.Owner).ComponentState) then
+        FImageRect := EmptyRect;
   end;
 end;
 
@@ -603,7 +603,7 @@ procedure TBannerItems.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
   if GetOwner is TBanner then
-  	TBanner(GetOwner).ItemsChanged;
+    TBanner(GetOwner).ItemsChanged;
 end;
 
 function TBannerItems.Get(Index: Integer): TBannerItem;
@@ -623,7 +623,7 @@ begin
   inherited Create(AOwner);
   ControlStyle := [csAcceptsControls, csCaptureMouse];
   FAutoHeight := True;
-	FItems := TBannerItems.Create(Self);
+  FItems := TBannerItems.Create(Self);
   FItemIndex := -1;
   FHotIndex := -1;
   FDownIndex := -1;
@@ -639,96 +639,96 @@ end;
 
 destructor TBanner.Destroy;
 begin
-	BannerBook := nil;
+  BannerBook := nil;
   Images := nil;
   FImageChangeLink.Free;
-	inherited Destroy;
+  inherited Destroy;
 end;
 
 procedure TBanner.Notification(AComponent: TComponent; Operation: TOperation);
 begin
-	inherited Notification(AComponent, Operation);
-	if Operation = opRemove then
-   	if AComponent = FBannerBook then
-     	BannerBook := nil
-		else if AComponent = FImages then
-     	Images := nil;
+  inherited Notification(AComponent, Operation);
+  if Operation = opRemove then
+     if AComponent = FBannerBook then
+       BannerBook := nil
+    else if AComponent = FImages then
+       Images := nil;
 end;
 
 
 procedure TBanner.MouseMove(Shift: TShiftState; X, Y: Integer);
 var
-	P: TPoint;
+  P: TPoint;
   H: Integer;
-	I: Integer;
+  I: Integer;
 begin
-	if csDesigning in ComponentState then Exit;
-	P := Point(X, Y);
+  if csDesigning in ComponentState then Exit;
+  P := Point(X, Y);
   H := -1;
-	for I := 0 to FItems.Count - 1 do
-  	if PtInRect(FItems[I].ImageRect, P) then
+  for I := 0 to FItems.Count - 1 do
+    if PtInRect(FItems[I].ImageRect, P) then
     begin
-    	H := I;
+      H := I;
       Break;
     end;
-	HotIndex := H;
+  HotIndex := H;
   inherited MouseMove(Shift, X, Y);
 end;
 
 procedure TBanner.Paint;
 
-	function ImageHeight: Integer;
+  function ImageHeight: Integer;
   begin
-  	if FImages = nil then
-    	Result := 32
-		else
-    	Result := FImages.Height;
+    if FImages = nil then
+      Result := 32
+    else
+      Result := FImages.Height;
   end;
 
-	function ImageWidth: Integer;
+  function ImageWidth: Integer;
   begin
-  	if FImages = nil then
-    	Result := 32
-		else
-    	Result := FImages.Width;
+    if FImages = nil then
+      Result := 32
+    else
+      Result := FImages.Width;
   end;
 
 const
-	Border = 8;
+  Border = 8;
 var
   DefaultDraw: Boolean;
   State: TDrawState;
-	A, B: TRect;
+  A, B: TRect;
   H, W, ImgWidth, ImageDelta: Integer;
-	I: Integer;
+  I: Integer;
 begin
   if FBackground <> nil then
     Canvas.Draw(0, 0, FBackground)
   else
     DrawThemeSeperator(Canvas.Handle, ClientRect, Color, True);
-	if FItemIndex > Items.Count then
-  	FItemIndex := FItems.Count - 1;
- 	Canvas.Font := Font;
+  if FItemIndex > Items.Count then
+    FItemIndex := FItems.Count - 1;
+   Canvas.Font := Font;
    H := ImageHeight + Canvas.TextHeight('Wg');
    if H mod 10 > 0 then
-   	H := (H div 10) * 10 + 10;
-	if FAutoHeight and (H <> Height) then
+     H := (H div 10) * 10 + 10;
+  if FAutoHeight and (H <> Height) then
      Height := H;
-	A := ClientRect;
- 	Canvas.Font := Font;
+  A := ClientRect;
+   Canvas.Font := Font;
    A.Bottom := A.Bottom - 1;
    A.Right := 10;
-	ImgWidth := ImageWidth + Border * 2;
- 	for I := 0 to FItems.Count - 1 do
+  ImgWidth := ImageWidth + Border * 2;
+   for I := 0 to FItems.Count - 1 do
    begin
-   	W := Canvas.TextWidth(FItems[I].Caption) + Border * 2;
+     W := Canvas.TextWidth(FItems[I].Caption) + Border * 2;
      if W > ImgWidth then
-			ImageDelta := ((W - ImgWidth) shr 1) + Border
+      ImageDelta := ((W - ImgWidth) shr 1) + Border
      else
      begin
-     	ImageDelta := Border;
+       ImageDelta := Border;
        W := ImgWidth;
-		end;
+    end;
     if (not FItems[I].Visible) and (not (csDesigning in ComponentState)) then
     begin
     FItems[I].ImageRect := EmptyRect;
@@ -739,7 +739,7 @@ begin
     B.Right := B.Left + W;
     A := B;
     FItems[I].ImageRect := A;
-		InflateRect(A, -1, 0);
+    InflateRect(A, -1, 0);
     State := [dsBackground];
     if I = FHotIndex then
     begin
@@ -749,100 +749,100 @@ begin
     end;
     if I = FItemIndex then
     begin
-     	Canvas.Brush.Color := Blend(clInactiveCaptionText, clInactiveCaption, 70);
+       Canvas.Brush.Color := Blend(clInactiveCaptionText, clInactiveCaption, 70);
       State := State + [dsSelected];
     end
-   	else if I = FHotIndex then
-     	Canvas.Brush.Color := clInactiveCaptionText
+     else if I = FHotIndex then
+       Canvas.Brush.Color := clInactiveCaptionText
     else
       Canvas.Brush.Color := Color;
     DefaultDraw := True;
     if Assigned(FOnDrawItem) then
       FOnDrawItem(Self, Canvas, I, A, State, DefaultDraw);
     if DefaultDraw then
-  		Canvas.FillRect(A);
-		InflateRect(A, 1, 0);
+      Canvas.FillRect(A);
+    InflateRect(A, 1, 0);
      B.Top := B.Top + ImageHeight;
      if Trim(FItems[I].Caption) = '' then
-			ImageListDraw(FImages, Canvas, A.Left + ImageDelta, (Height - ImageHeight) shr 1,
-       	FItems[I].ImageIndex, Enabled)
+      ImageListDraw(FImages, Canvas, A.Left + ImageDelta, (Height - ImageHeight) shr 1,
+         FItems[I].ImageIndex, Enabled)
      else
      begin
-				ImageListDraw(FImages, Canvas, A.Left + ImageDelta, (B.Top + HeightOf(B) div 2 -
-					ImageHeight) shr 1, FItems[I].ImageIndex, Enabled);
-				if FImages = nil then
-        	B.Top := 0;
-				DrawCaption(Canvas.Handle, FItems[I].Caption, B, drCenter);
+        ImageListDraw(FImages, Canvas, A.Left + ImageDelta, (B.Top + HeightOf(B) div 2 -
+          ImageHeight) shr 1, FItems[I].ImageIndex, Enabled);
+        if FImages = nil then
+          B.Top := 0;
+        DrawCaption(Canvas.Handle, FItems[I].Caption, B, drCenter);
      end;
-	end;
+  end;
 end;
 
 procedure TBanner.ItemsChanged;
 var
-	Strings: TStrings;
+  Strings: TStrings;
   S: string;
-	I: Integer;
+  I: Integer;
 begin
-	Invalidate;
-	if (FBannerBook <> nil) and (csDesigning in ComponentState) then
+  Invalidate;
+  if (FBannerBook <> nil) and (csDesigning in ComponentState) then
   begin
-  	Strings := TStringList.Create;
-		try
-    	for I := 0 to Items.Count - 1 do
+    Strings := TStringList.Create;
+    try
+      for I := 0 to Items.Count - 1 do
       begin
-      	S := Items[I].Caption;
+        S := Items[I].Caption;
         if Strings.IndexOf(S) > -1 then Continue;
         Strings.Add(S);
       end;
-			FBannerBook.Pages := Strings;
+      FBannerBook.Pages := Strings;
       FBannerBook.PageIndex := FItemIndex;
     finally
-    	Strings.Free;
+      Strings.Free;
     end;
-	end;
+  end;
 end;
 
 procedure TBanner.SetHotIndex(Value: Integer);
 begin
-	if Value <> FHotIndex then
+  if Value <> FHotIndex then
   begin
-	  FHotIndex := Value;
+    FHotIndex := Value;
     Invalidate;
   end;
 end;
 
 procedure TBanner.SetImages(Value: TCustomImageList);
 begin
-	if Value <> FImages then
+  if Value <> FImages then
   begin
-  	if FImages <> nil then
+    if FImages <> nil then
     begin
-    	FImages.RemoveFreeNotification(Self);
-    	FImages.UnRegisterChanges(FImageChangeLink);
-		end;
-	  FImages := Value;
-  	if FImages <> nil then
+      FImages.RemoveFreeNotification(Self);
+      FImages.UnRegisterChanges(FImageChangeLink);
+    end;
+    FImages := Value;
+    if FImages <> nil then
     begin
-    	FImages.FreeNotification(Self);
-    	FImages.RegisterChanges(FImageChangeLink);
-		end;
-		Invalidate;
+      FImages.FreeNotification(Self);
+      FImages.RegisterChanges(FImageChangeLink);
+    end;
+    Invalidate;
   end;
 end;
 
 procedure TBanner.SetItemIndex(Value: Integer);
 begin
-	if Value < -1 then
-  	Value := -1;
-	if Value > FItems.Count - 1 then
-  	Value := FItems.Count -1;
+  if Value < -1 then
+    Value := -1;
+  if Value > FItems.Count - 1 then
+    Value := FItems.Count -1;
   if Value <> FItemIndex then
   begin
-  	FItemIndex := Value;
+    FItemIndex := Value;
     Invalidate;
     if FBannerBook <> nil then
-    	FBannerBook.PageIndex := FItemIndex;
-    if Assigned(FOnSelectItem) then	FOnSelectItem(Self);
+      FBannerBook.PageIndex := FItemIndex;
+    if Assigned(FOnSelectItem) then  FOnSelectItem(Self);
   end;
 end;
 
@@ -855,21 +855,21 @@ end;
 procedure TBanner.MouseDown(Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
 var
-	P: TPoint;
-	I: Integer;
+  P: TPoint;
+  I: Integer;
 begin
-	if Button = mbLeft then
+  if Button = mbLeft then
   begin
-  	if not (csDesigning in ComponentState) then
-		  SetFocus;
-		P := Point(X, Y);
-		for I := 0 to FItems.Count - 1 do
-  		if PtInRect(FItems[I].ImageRect, P) then
-	    begin
-  	  	FDownIndex := I;
+    if not (csDesigning in ComponentState) then
+      SetFocus;
+    P := Point(X, Y);
+    for I := 0 to FItems.Count - 1 do
+      if PtInRect(FItems[I].ImageRect, P) then
+      begin
+        FDownIndex := I;
         Invalidate;
-    	  Break;
-	    end;
+        Break;
+      end;
   end;
   inherited MouseDown(Button, Shift, X, Y);
 end;
@@ -877,28 +877,28 @@ end;
 procedure TBanner.MouseUp(Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
 var
-	Form: TCustomForm;
-	P: TPoint;
-	I: Integer;
+  Form: TCustomForm;
+  P: TPoint;
+  I: Integer;
 begin
-	if Button = mbLeft then
+  if Button = mbLeft then
   begin
-		P := Point(X, Y);
-		for I := 0 to FItems.Count - 1 do
-  		if PtInRect(FItems[I].ImageRect, P) then
-	    begin
-  	  	if FDownIndex = I then
+    P := Point(X, Y);
+    for I := 0 to FItems.Count - 1 do
+      if PtInRect(FItems[I].ImageRect, P) then
+      begin
+        if FDownIndex = I then
         begin
-        	ItemIndex := I;
-			    if csDesigning in ComponentState then
-			    begin
-      			Form := GetParentForm(Self);
-		  	    if (Form <> nil) and (Form.Designer <> nil) then
-    		    Form.Designer.Modified;
-			    end;
-				end;
-    	  Break;
-	    end;
+          ItemIndex := I;
+          if csDesigning in ComponentState then
+          begin
+            Form := GetParentForm(Self);
+            if (Form <> nil) and (Form.Designer <> nil) then
+            Form.Designer.Modified;
+          end;
+        end;
+        Break;
+      end;
     if FDownIndex > -1 then
     begin
       FDownIndex := -1;
@@ -910,42 +910,42 @@ end;
 
 procedure TBanner.KeyDown(var Key: Word; Shift: TShiftState);
 
-	function FindPriorItem: Integer;
+  function FindPriorItem: Integer;
   var
     I: Integer;
   begin
-  	Result := ItemIndex;
+    Result := ItemIndex;
     if Result < 0 then Exit;
     for I := Result - 1 downto 0 do
-    	if Items[I].Visible then
+      if Items[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
     for I := Items.Count - 1 downto 0 do
-    	if Items[I].Visible then
+      if Items[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
   end;
 
-	function FindNextItem: Integer;
+  function FindNextItem: Integer;
   var
     I: Integer;
   begin
-  	Result := ItemIndex;
+    Result := ItemIndex;
     if Result < 0 then Exit;
     for I := Result + 1 to Items.Count - 1 do
-    	if Items[I].Visible then
+      if Items[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
     for I := 0 to Items.Count - 1 do
-    	if Items[I].Visible then
+      if Items[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
   end;
@@ -953,56 +953,56 @@ procedure TBanner.KeyDown(var Key: Word; Shift: TShiftState);
 begin
   inherited KeyDown(Key, Shift);
   case Key of
-  	VK_UP, VK_LEFT: ItemIndex := FindPriorItem;
-		VK_DOWN, VK_RIGHT: ItemIndex := FindNextItem;
-	end;
+    VK_UP, VK_LEFT: ItemIndex := FindPriorItem;
+    VK_DOWN, VK_RIGHT: ItemIndex := FindNextItem;
+  end;
 end;
 
 procedure TBanner.ImageListChange(Sender: TObject);
 begin
-	Invalidate;
+  Invalidate;
 end;
 
 procedure TBanner.SetBannerBook(Value: TBannerBook);
 begin
-	if Value <> FBannerBook then
+  if Value <> FBannerBook then
   begin
-  	if FBannerBook <> nil then
-    	FBannerBook.RemoveFreeNotification(Self);
-	  FBannerBook := Value;
-  	if FBannerBook <> nil then
-    	FBannerBook.FreeNotification(Self);
+    if FBannerBook <> nil then
+      FBannerBook.RemoveFreeNotification(Self);
+    FBannerBook := Value;
+    if FBannerBook <> nil then
+      FBannerBook.FreeNotification(Self);
     if csDesigning in ComponentState then
-	    ItemsChanged;
+      ItemsChanged;
   end;
 end;
 
 procedure TBanner.CMDesignHitTest(var Msg: TCMDesignHitTest);
 var
-	P: TPoint;
-	I: Integer;
+  P: TPoint;
+  I: Integer;
 begin
-	inherited;
-	Msg.Result := 0;
+  inherited;
+  Msg.Result := 0;
   P := Point(Msg.XPos, Msg.YPos);
-	for I := 0 to FItems.Count - 1 do
- 		if PtInRect(FItems[I].ImageRect, P) then
+  for I := 0 to FItems.Count - 1 do
+     if PtInRect(FItems[I].ImageRect, P) then
     begin
-			Msg.Result := 1;
-   	  Break;
+      Msg.Result := 1;
+       Break;
     end;
 end;
 
 procedure TBanner.CMEnabledChanged(var Msg: TMessage);
 begin
-	inherited;
+  inherited;
   Invalidate;
 end;
 
 procedure TBanner.CMMouseLeave(var Msg: TMessage);
 begin
-	inherited;
-	HotIndex := -1;
+  inherited;
+  HotIndex := -1;
 end;
 
 procedure TBanner.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
@@ -1031,13 +1031,13 @@ end;
 
 procedure InternalRegisterPages(PageClass: TClass);
 begin
-	if not PageClass.InheritsFrom(TPersistent) then Exit;
+  if not PageClass.InheritsFrom(TPersistent) then Exit;
   if PagesRegistered then Exit;
-	if GetClass(PageClass.ClassName) = nil then
-		RegisterClass(TPersistentClass(PageClass));
-	PagesRegistered := True;
+  if GetClass(PageClass.ClassName) = nil then
+    RegisterClass(TPersistentClass(PageClass));
+  PagesRegistered := True;
 end;
 
 initialization
-	@RegisterPages := @InternalRegisterPages;
+  @RegisterPages := @InternalRegisterPages;
 end.

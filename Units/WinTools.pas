@@ -65,14 +65,14 @@ procedure HideTaskbarIcon(Wnd: HWND);
 
 type
   TWindowPosition = record
-  	case Boolean of
+    case Boolean of
      False: (
-	    Left: Integer;
-  	  Top: Integer;
-    	Width: Integer;
-	    Height: Integer);
-		True: (
-    	Pos: TPoint;
+      Left: Integer;
+      Top: Integer;
+      Width: Integer;
+      Height: Integer);
+    True: (
+      Pos: TPoint;
       Size: TPoint);
   end;
 
@@ -143,11 +143,11 @@ function IsWindowsXPOrLater: Boolean;
 { Task scheduling }
 
 type
-	TDay = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
+  TDay = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
   TDays = set of TDay;
 
 const
-	AllDays = [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday];
+  AllDays = [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday];
 
 {function ScheduleTask(Days: TDays; Time: TDateTime; const Command: string; Interactive: Boolean = False): Integer;
 procedure DeleteTask(Task: Integer);}
@@ -315,36 +315,36 @@ type
 
 { TCommandThread class }
 
-	TCommand = class
-		Kind: Integer;
-		Value: Variant;
+  TCommand = class
+    Kind: Integer;
+    Value: Variant;
     constructor Create(Kind: Integer); overload;
     constructor Create(Kind: Integer; Value: Variant); overload;
-	end;
+  end;
 
-	TCommandEvent = procedure(Sender: TObject; Command: TCommand) of object;
+  TCommandEvent = procedure(Sender: TObject; Command: TCommand) of object;
 
-	TCommandThread = class(TThread)
-	private
-  	FBusy: Boolean;
-		FCommandEvent: TCommandEvent;
-		FCommands: TList;
-		FMutex: THandle;
+  TCommandThread = class(TThread)
+  private
+    FBusy: Boolean;
+    FCommandEvent: TCommandEvent;
+    FCommands: TList;
+    FMutex: THandle;
     FWait: THandle;
     FWnd: HWND;
-	protected
-		procedure Execute; override;
-		function Pop: TCommand;
-	public
-		constructor Create(CommandEvent: TCommandEvent; Wnd: HWND = 0);
-		destructor Destroy; override;
+  protected
+    procedure Execute; override;
+    function Pop: TCommand;
+  public
+    constructor Create(CommandEvent: TCommandEvent; Wnd: HWND = 0);
+    destructor Destroy; override;
     procedure Wait;
     procedure Push(Kind: Integer); overload;
-		procedure Push(Kind: Integer; Value: Variant); overload;
+    procedure Push(Kind: Integer; Value: Variant); overload;
     function SendRequest(Msg: Cardinal): Pointer;
     property Wnd: HWND read FWnd;
     property Busy: Boolean read FBusy;
-	end;
+  end;
 
 { TGlobalData class }
 
@@ -503,32 +503,32 @@ uses
 function NumCpuCores: Integer;
 asm
   PUSH  EBX
-  MOV		EAX, 1
+  MOV    EAX, 1
   CPUID
-  MOV		EAX, EBX
-  AND		EAX, $FF0000
-  SHR		EAX, $000010
+  MOV    EAX, EBX
+  AND    EAX, $FF0000
+  SHR    EAX, $000010
   POP   EBX
-  TEST	EAX, EAX
+  TEST  EAX, EAX
   JNZ   @done
-  MOV		EAX, 1
+  MOV    EAX, 1
   @done:
 end;
 
 procedure ChangeUserAccess(Enabled: Boolean);
 const
-	Keys: array[0..3] of string = (
-		'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoLogoff',
-		'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableTaskMgr',
-		'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableLockWorkstation',
-		'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableChangePassword');
+  Keys: array[0..3] of string = (
+    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoLogoff',
+    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableTaskMgr',
+    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableLockWorkstation',
+    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableChangePassword');
 var
-	Flag: Integer;
+  Flag: Integer;
   I: Integer;
 begin
-	if Enabled then Flag := 0 else Flag := 1;
-	for I := Low(Keys) to High(Keys) do
-  	RegWriteInt(Keys[I], Flag);
+  if Enabled then Flag := 0 else Flag := 1;
+  for I := Low(Keys) to High(Keys) do
+    RegWriteInt(Keys[I], Flag);
 end;
 
 function GetWindowClassName(Wnd: HWND): string;
@@ -856,15 +856,15 @@ end;
 
 function InvalidateCallback(Wnd: HWND; Unused: Integer): BOOL; stdcall;
 begin
-	InvalidateRect(Wnd, nil, True);
-	EnumChildWindows(Wnd, @InvalidateCallback, 0);
+  InvalidateRect(Wnd, nil, True);
+  EnumChildWindows(Wnd, @InvalidateCallback, 0);
   Result := True;
 end;
 
 procedure InvalidateWindows(Wnd: HWND);
 begin
-	InvalidateRect(Wnd, nil, True);
-	EnumChildWindows(Wnd, @InvalidateCallback, 0);
+  InvalidateRect(Wnd, nil, True);
+  EnumChildWindows(Wnd, @InvalidateCallback, 0);
 end;
 
 function WindowFromPoint(const Point: TPoint): HWND;
@@ -936,13 +936,13 @@ var
 begin
   Result := 0;
   if InternalCreateProcess(AppName, ShowState, ProcessInfo) then
-	begin
-		WaitForInputIdle(ProcessInfo.hProcess, INFINITE);
-		WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+  begin
+    WaitForInputIdle(ProcessInfo.hProcess, INFINITE);
+    WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
     GetExitCodeProcess(ProcessInfo.hProcess, Result);
-		CloseHandle(ProcessInfo.hProcess);
-		CloseHandle(ProcessInfo.hThread);
-	end;
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+  end;
 end;
 
 function CreateProcessAndWait(const AppName: string; ShowState: Integer;
@@ -967,8 +967,8 @@ begin
   WaitForInputIdle(ProcessInfo.hProcess, INFINITE);
   WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
   GetExitCodeProcess(ProcessInfo.hProcess, Result);
-	CloseHandle(ProcessInfo.hProcess);
-	CloseHandle(ProcessInfo.hThread);
+  CloseHandle(ProcessInfo.hProcess);
+  CloseHandle(ProcessInfo.hThread);
 end;
 
 procedure CreateDesktopTask(const AppName, Desktop: string);
@@ -985,22 +985,22 @@ begin
   if CreateProcess(nil, PChar(AppName), nil, nil, False,
     CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, nil, nil, StartupInfo,
     ProcessInfo) then
-	begin
-		WaitForInputIdle(ProcessInfo.hProcess, INFINITE);
-		WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
-		CloseHandle(ProcessInfo.hProcess);
-		CloseHandle(ProcessInfo.hThread);
-	end;
+  begin
+    WaitForInputIdle(ProcessInfo.hProcess, INFINITE);
+    WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+  end;
 end;
 
 procedure CreateExclusiveProcess(const AppName: string);
 var
-	DesktopName: string;
-	OriginalThread, OriginalInput, NewDesktop: THandle;
+  DesktopName: string;
+  OriginalThread, OriginalInput, NewDesktop: THandle;
   ProcessInfo: TProcessInformation;
   StartupInfo: TStartupInfo;
 begin
-	DesktopName := 'ExclusiveDesktop';
+  DesktopName := 'ExclusiveDesktop';
   OriginalThread := GetThreadDesktop(GetCurrentThreadId);
   OriginalInput := OpenInputDesktop(0, False, DESKTOP_SWITCHDESKTOP);
   NewDesktop := CreateDesktop(PChar(DesktopName), nil, nil, 0, GENERIC_ALL, nil);
@@ -1016,12 +1016,12 @@ begin
   if CreateProcess(nil, PChar(AppName), nil, nil, False,
     CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, nil, nil, StartupInfo,
     ProcessInfo) then
-	begin
-		WaitForInputIdle(ProcessInfo.hProcess, INFINITE);
-		WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
-		CloseHandle(ProcessInfo.hProcess);
-		CloseHandle(ProcessInfo.hThread);
-	end;
+  begin
+    WaitForInputIdle(ProcessInfo.hProcess, INFINITE);
+    WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+  end;
   ChangeUserAccess(True);
   SwitchDesktop(OriginalInput);
   SetThreadDesktop(OriginalThread);
@@ -1143,38 +1143,38 @@ end;
 
 function ScheduleTask(Days: TDays; Time: TDateTime; const Command: string; Interactive: Boolean = False): Integer;
 var
-	TempFile, Params, S: string;
-	Process: THandle;
+  TempFile, Params, S: string;
+  Process: THandle;
   I: Integer;
 begin
-	Result := 0;
+  Result := 0;
   if not FileExists(Command) then Exit;
-	if Days = [] then Exit;
-	TempFile := GetTempFileName;
+  if Days = [] then Exit;
+  TempFile := GetTempFileName;
   Params := GetConsolePath + ' /c at.exe ' + FormatDateTime('hh:mm:ssAM/PM', Time);
-	if Days = AllDays then
-  	Days := [];
-	if Days <> [] then
-  	Params := Params + ' /every:' + GetEnumString(TypeInfo(TDay), Byte(Days), False);
+  if Days = AllDays then
+    Days := [];
+  if Days <> [] then
+    Params := Params + ' /every:' + GetEnumString(TypeInfo(TDay), Byte(Days), False);
   if Interactive then
-  	Params := Params + ' /interactive';
-	Params := Params + ' ' + GetShortFileName(Command) + ' > ' + TempFile;
+    Params := Params + ' /interactive';
+  Params := Params + ' ' + GetShortFileName(Command) + ' > ' + TempFile;
   if SysUtils.FindCmdLineSwitch('logtask') then
-		FileWriteString('task.bat', Params);
-	Process := CreateProcessAndReturn(Params, SW_HIDE);
+    FileWriteString('task.bat', Params);
+  Process := CreateProcessAndReturn(Params, SW_HIDE);
   if Process <> 0 then
   begin
-  	WaitForSingleObject(Process, INFINITE);
+    WaitForSingleObject(Process, INFINITE);
     Sleep(500);
     S := FileReadString(TempFile);
     for I := Length(S) downto 1 do
-    	if S[I] = ' ' then
+      if S[I] = ' ' then
       begin
-      	Result := StrToIntDef(Trim(Copy(S, I, Length(S))), 0);
+        Result := StrToIntDef(Trim(Copy(S, I, Length(S))), 0);
         Break;
       end;
     DeleteFile(TempFile);
-	end;
+  end;
 end;
 
 procedure DeleteTask(Task: Integer);
@@ -1778,48 +1778,48 @@ end;
 
 constructor TCommand.Create(Kind: Integer);
 begin
-	inherited Create;
-	Self.Kind := Kind;
+  inherited Create;
+  Self.Kind := Kind;
 end;
 
 constructor TCommand.Create(Kind: Integer; Value: Variant);
 begin
-	inherited Create;
-	Self.Kind := Kind;
-	Self.Value := Value;
+  inherited Create;
+  Self.Kind := Kind;
+  Self.Value := Value;
 end;
 
 { TCommandThread class }
 
 constructor TCommandThread.Create(CommandEvent: TCommandEvent; Wnd: HWND = 0);
 begin
-	FCommands := TList.Create;
-	FMutex := CreateMutex(nil, False, nil);
-	FWait := CreateMutex(nil, False, nil);
-	FCommandEvent := CommandEvent;
+  FCommands := TList.Create;
+  FMutex := CreateMutex(nil, False, nil);
+  FWait := CreateMutex(nil, False, nil);
+  FCommandEvent := CommandEvent;
   FWnd := Wnd;
-	inherited Create(False);
+  inherited Create(False);
 end;
 
 destructor TCommandThread.Destroy;
 begin
   Terminate;
-	inherited Destroy;
+  inherited Destroy;
   FCommands.Free;
-	CloseHandle(FMutex);
+  CloseHandle(FMutex);
 end;
 
 procedure TCommandThread.Wait;
 begin
   Terminate;
-	WaitForSingleObject(FWait, INFINITE);
-	CloseHandle(FWait);
+  WaitForSingleObject(FWait, INFINITE);
+  CloseHandle(FWait);
 end;
 
 function TCommandThread.Pop: TCommand;
 begin
-	Result := nil;
-	WaitForSingleObject(FMutex, INFINITE);
+  Result := nil;
+  WaitForSingleObject(FMutex, INFINITE);
   if FCommands.Count > 0 then
   begin
     Result := TCommand(FCommands[0]);
@@ -1830,14 +1830,14 @@ end;
 
 procedure TCommandThread.Push(Kind: Integer);
 begin
-	WaitForSingleObject(FMutex, INFINITE);
-	Push(Kind, 0);
+  WaitForSingleObject(FMutex, INFINITE);
+  Push(Kind, 0);
   ReleaseMutex(FMutex);
 end;
 
 procedure TCommandThread.Push(Kind: Integer; Value: Variant);
 begin
-	WaitForSingleObject(FMutex, INFINITE);
+  WaitForSingleObject(FMutex, INFINITE);
   FCommands.Add(TCommand.Create(Kind, Value));
   ReleaseMutex(FMutex);
 end;
@@ -1851,24 +1851,24 @@ end;
 
 procedure TCommandThread.Execute;
 var
-	Command: TCommand;
+  Command: TCommand;
 begin
-	WaitForSingleObject(FWait, INFINITE);
+  WaitForSingleObject(FWait, INFINITE);
   FreeOnTerminate := True;
   CoInitializeEx(nil, COINIT_APARTMENTTHREADED);
   FBusy := FCommands.Count > 0;
-	while FBusy or (not Terminated) do
-	begin
-		Command := Pop;
+  while FBusy or (not Terminated) do
+  begin
+    Command := Pop;
     if Command <> nil then
     try
       FCommandEvent(Self, Command);
-		finally
+    finally
       Command.Free;
-		end;
-		Sleep(100);
+    end;
+    Sleep(100);
     FBusy := FCommands.Count > 0;
-	end;
+  end;
   CoUninitialize;
   ReleaseMutex(FWait);
 end;

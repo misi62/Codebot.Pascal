@@ -3822,13 +3822,13 @@ begin
 end;
 
 type
-	TColorBytes = record
+  TColorBytes = record
     Blue: Byte;
     Green: Byte;
     Red: Byte;
     Alpha: Byte;
   end;
-	PColorBytes = ^TColorBytes;
+  PColorBytes = ^TColorBytes;
 
 function ColorBytes(R, G, B, A: Byte): TColorBytes;
 begin
@@ -3996,7 +3996,7 @@ var
   C: TColorBytes absolute Result;
 begin
   C := TColorBytes(Convert(Color));
-	C.Alpha := C.Blue;
+  C.Alpha := C.Blue;
   C.Blue := C.Red;
   C.Red := C.Alpha;
   C.Alpha := A;
@@ -4004,30 +4004,30 @@ end;
 
 function NewBlend(Color1, Color2: Longint; Percent: Byte = 50; A: Byte = $FF): TArgb;
 var
-	R, I: Single;
+  R, I: Single;
   C1, C2: TColorBytes;
   C: TColorBytes absolute Result;
 begin
-	if Percent > 99 then
-  	Result := NewColor(Color1, A)
-	else if Percent < 1 then
-  	Result := NewColor(Color2, A)
-	else
+  if Percent > 99 then
+    Result := NewColor(Color1, A)
+  else if Percent < 1 then
+    Result := NewColor(Color2, A)
+  else
   begin
-  	R := Percent / 100;
+    R := Percent / 100;
     I := 1 - R;
-	  C1 := TColorBytes(Convert(Color1));
-		C1.Alpha := C1.Blue;
-	  C1.Blue := C1.Red;
-	  C1.Red := C1.Alpha;
-	  C2 := TColorBytes(Convert(Color2));
-		C2.Alpha := C2.Blue;
-	  C2.Blue := C2.Red;
-	  C2.Red := C2.Alpha;
-		C.Red := Round(C1.Red * R + C2.Red * I);
-	  C.Green := Round(C1.Green * R + C2.Green * I);
-	  C.Blue := Round(C1.Blue * R + C2.Blue * I);
-	  C.Alpha := A;
+    C1 := TColorBytes(Convert(Color1));
+    C1.Alpha := C1.Blue;
+    C1.Blue := C1.Red;
+    C1.Red := C1.Alpha;
+    C2 := TColorBytes(Convert(Color2));
+    C2.Alpha := C2.Blue;
+    C2.Blue := C2.Red;
+    C2.Red := C2.Alpha;
+    C.Red := Round(C1.Red * R + C2.Red * I);
+    C.Green := Round(C1.Green * R + C2.Green * I);
+    C.Blue := Round(C1.Blue * R + C2.Blue * I);
+    C.Alpha := A;
   end;
 end;
 
@@ -4036,7 +4036,7 @@ var
   C: TColorBytes absolute Result;
 begin
   C := TColorBytes(Convert(Color));
-	C.Alpha := C.Blue;
+  C.Alpha := C.Blue;
   C.Blue := C.Red;
   C.Red := C.Alpha;
   C.Alpha := A;
@@ -4067,7 +4067,7 @@ begin
   if V < -2 then V := -2 else if V > 2 then V := 2;
   if Abs(V) > 1 then B := High(Byte) else B := 0;
   C := TColorBytes(Convert(Color));
-	C.Alpha := C.Blue;
+  C.Alpha := C.Blue;
   C.Blue := C.Red;
   C.Red := C.Alpha;
   C.Alpha := A;
@@ -8137,10 +8137,10 @@ end;
 
 procedure DestroyGraphicsBitmap(Bitmap: PGdiGraphicsBitmap);
 begin
-	if Bitmap <> nil then
+  if Bitmap <> nil then
   begin
-	  DeleteDC(Bitmap.DC);
-  	DeleteObject(Bitmap.Handle);
+    DeleteDC(Bitmap.DC);
+    DeleteObject(Bitmap.Handle);
     Dispose(Bitmap);
   end;
 end;
@@ -8466,60 +8466,60 @@ end;
 
 function GraphicsOverlay(Wnd: HWND; const Bitmap: PGdiGraphicsBitmap; Opacity: Byte = 0): Boolean;
 var
-	Blend: TBlendFunction;
+  Blend: TBlendFunction;
   Rect: TRect;
-	P1, P2: TPoint;
+  P1, P2: TPoint;
   S: TSize;
   DC: HDC;
 begin
-	Result := False;
-	if (Bitmap = nil) or (Bitmap.DC = 0) then Exit;
+  Result := False;
+  if (Bitmap = nil) or (Bitmap.DC = 0) then Exit;
   Result := True;
-	SetWindowLong(Wnd, GWL_EXSTYLE, GetWindowLong(Wnd, GWL_EXSTYLE) or WS_EX_LAYERED);
-	GetWindowRect(Wnd, Rect);
-	P1.X := Rect.Left;
-	P1.Y := Rect.Top;
-	with Blend do
-	begin
-		BlendOp := AC_SRC_OVER;
-		BlendFlags := 0;
-	  if Opacity = 0 then
-  		SourceConstantAlpha := Bitmap.Opacity
-		else
-			SourceConstantAlpha := Opacity;
-		AlphaFormat := AC_SRC_ALPHA;
-	end;
-	DC := GetDC(0);
-	P2.X := 0;
-	P2.Y := 0;
-	S.cx := Bitmap.Width;
-	S.cy := Bitmap.Height;
-	UpdateLayeredWindow(Wnd, DC, @P1, @S, Bitmap.DC,
-		@P2, 0, @Blend, ULW_ALPHA);
-	ReleaseDC(0, DC);
+  SetWindowLong(Wnd, GWL_EXSTYLE, GetWindowLong(Wnd, GWL_EXSTYLE) or WS_EX_LAYERED);
+  GetWindowRect(Wnd, Rect);
+  P1.X := Rect.Left;
+  P1.Y := Rect.Top;
+  with Blend do
+  begin
+    BlendOp := AC_SRC_OVER;
+    BlendFlags := 0;
+    if Opacity = 0 then
+      SourceConstantAlpha := Bitmap.Opacity
+    else
+      SourceConstantAlpha := Opacity;
+    AlphaFormat := AC_SRC_ALPHA;
+  end;
+  DC := GetDC(0);
+  P2.X := 0;
+  P2.Y := 0;
+  S.cx := Bitmap.Width;
+  S.cy := Bitmap.Height;
+  UpdateLayeredWindow(Wnd, DC, @P1, @S, Bitmap.DC,
+    @P2, 0, @Blend, ULW_ALPHA);
+  ReleaseDC(0, DC);
 end;
 
 function TGdiGraphics.Overlay(Wnd: HWND; Opacity: Byte = 0): TStatus;
 begin
-	if GraphicsOverlay(Wnd, FBitmap, Opacity) then
-  	Result := SetStatus(Ok)
-	else
+  if GraphicsOverlay(Wnd, FBitmap, Opacity) then
+    Result := SetStatus(Ok)
+  else
     Result := SetStatus(GenericError);
 end;
 
 function BitmapDraw(DC: HDC; X, Y, Width, Height: Integer; Bitmap: PGdiGraphicsBitmap): Boolean;
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
   Result := Bitmap <> nil;
-	if Result and (Bitmap.Opacity > 0) then
+  if Result and (Bitmap.Opacity > 0) then
   begin
     Func.BlendOp := 0;
     Func.BlendFlags := 0;
-		Func.SourceConstantAlpha := Bitmap.Opacity;
-		Func.AlphaFormat := AC_SRC_ALPHA;
-		AlphaBlend(DC, X, Y, Width, Height, Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
-	end;
+    Func.SourceConstantAlpha := Bitmap.Opacity;
+    Func.AlphaFormat := AC_SRC_ALPHA;
+    AlphaBlend(DC, X, Y, Width, Height, Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
+  end;
 end;
 
 function TGdiGraphics.Draw(DC: HDC; X, Y: Integer): TStatus;

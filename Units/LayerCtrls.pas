@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Windows, Messages, SysUtils, Classes, Controls, Graphics, Forms,
+  Windows, Messages, SysUtils, Classes, Controls, Graphics, Forms,
   GraphTools, FormTools;
 
 type

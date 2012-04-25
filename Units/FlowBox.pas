@@ -146,7 +146,7 @@ const
 
 constructor TFlowGroup.Create(Collection: TCollection);
 begin
-	inherited Create(Collection);
+  inherited Create(Collection);
   FHeight := 80;
   FVisible := True;
 end;
@@ -234,7 +234,7 @@ end;
 procedure TFlowGroups.Update(Item: TCollectionItem);
 begin
   if GetOwner is TFlowBox then
-  	TFlowBox(GetOwner).UpdateGroups;
+    TFlowBox(GetOwner).UpdateGroups;
 end;
 
 function TFlowGroups.Get(Index: Integer): TFlowGroup;
@@ -882,15 +882,15 @@ end;
 
 procedure TFlowBox.CMDesignHitTest(var Message: TCMDesignHitTest);
 var
-	P: TPoint;
+  P: TPoint;
   R: TRects;
   I: Integer;
 begin
-	inherited;
+  inherited;
   R := nil;
-	Message.Result := 0;
+  Message.Result := 0;
   if FSizeIndex > -1 then
-  	Message.Result := 1
+    Message.Result := 1
   else
   begin
     P := SmallPointToPoint(Message.Pos);
@@ -898,7 +898,7 @@ begin
     for I := Low(R) to High(R) do
       if PtInRect(R[I], P) then
       begin
-      	Message.Result := 1;
+        Message.Result := 1;
         Break;
       end;
   end;

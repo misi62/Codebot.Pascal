@@ -19,9 +19,9 @@ uses
 { TUtilityWindow class }
 
 type
-	TCreateInfo = record
+  TCreateInfo = record
     WndClass: TWndClass;
-  	X, Y, W, H: Integer;
+    X, Y, W, H: Integer;
     Style: Cardinal;
     ExStyle: Cardinal;
     Parent: HWND;
@@ -31,8 +31,8 @@ type
   private
     FOwner: TObject;
     FHandle: HWND;
-	protected
-  	procedure CreateInfo(var Info: TCreateInfo); virtual;
+  protected
+    procedure CreateInfo(var Info: TCreateInfo); virtual;
     property Owner: TObject read FOwner;
   public
     constructor Create(AOwner: TObject; Parent: HWND = 0; Style: Cardinal = 0; ExStyle: Cardinal = 0);
@@ -53,12 +53,12 @@ type
 
   TSyncObject = class(TObject)
   private
-  	FUtilityWindow: TUtilityWindow;
+    FUtilityWindow: TUtilityWindow;
     procedure WMSync(var Msg: TWMSync); message WM_USER;
   public
     constructor Create;
     destructor Destroy; override;
-  	procedure Sync(Proc: TSyncProc; Params: Pointer);
+    procedure Sync(Proc: TSyncProc; Params: Pointer);
   end;
 
 { Hooks routines }
@@ -135,7 +135,7 @@ begin
     WindowName := FOwner.ClassName
   else
     WindowName := ClassName;
-	FillChar(Info, SizeOf(Info), #0);
+  FillChar(Info, SizeOf(Info), #0);
   Info.Parent := Parent;
   Info.Style := Style;
   Info.ExStyle := ExStyle;
@@ -152,9 +152,9 @@ begin
   end;
   CreationWindow := Self;
   try
-  	with Info do
-	    CreateWindowEx(ExStyle, PChar(WindowClass), PChar(WindowName), Style,
-      	X, Y, W, H, Parent, 0, 0, nil);
+    with Info do
+      CreateWindowEx(ExStyle, PChar(WindowClass), PChar(WindowName), Style,
+        X, Y, W, H, Parent, 0, 0, nil);
   except
     CreationWindow := nil;
   end;
@@ -166,33 +166,33 @@ destructor TUtilityWindow.Destroy;
 begin
   if FHandle <> 0 then
   begin
-		SetWindowLong(FHandle, GWL_USERDATA, 0);
+    SetWindowLong(FHandle, GWL_USERDATA, 0);
     DestroyWindow(FHandle);
-	end;
+  end;
 end;
 
 { TSyncObject }
 
 constructor TSyncObject.Create;
 begin
-	inherited Create;
-	FUtilityWindow := TUtilityWindow.Create(Self);
+  inherited Create;
+  FUtilityWindow := TUtilityWindow.Create(Self);
 end;
 
 destructor TSyncObject.Destroy;
 begin
-	FUtilityWindow.Free;
-	inherited Destroy;
+  FUtilityWindow.Free;
+  inherited Destroy;
 end;
 
 procedure TSyncObject.Sync(Proc: TSyncProc; Params: Pointer);
 begin
-	SendMessage(FUtilityWindow.Handle, WM_USER, Longint(@Proc), Longint(Params));
+  SendMessage(FUtilityWindow.Handle, WM_USER, Longint(@Proc), Longint(Params));
 end;
 
 procedure TSyncObject.WMSync(var Msg: TWMSync);
 begin
-	Msg.Proc(Msg.Params);
+  Msg.Proc(Msg.Params);
 end;
 
 { Hook support routines }
@@ -375,10 +375,10 @@ begin
       Result := CallNextHookEx(Hook, Code, CurrentProcess, Integer(HookStruct))
     else
     begin
-			for I := 0 to Callbacks.Count - 1 do
+      for I := 0 to Callbacks.Count - 1 do
       begin
-    		Method := PMethod(Callbacks[I])^;
-      	Callback(HookStruct^);
+        Method := PMethod(Callbacks[I])^;
+        Callback(HookStruct^);
       end;
       Result := 0;
     end;
@@ -436,16 +436,16 @@ procedure ReleaseAllHooks;
   var
     I: Integer;
   begin
-	  with Hooks do
-  	  if Hook <> 0 then
-    	begin
-	      UnhookWindowsHookEx(Hook);
-  	    Hook := 0;
-    	  for I := 0 to Callbacks.Count - 1 do
+    with Hooks do
+      if Hook <> 0 then
+      begin
+        UnhookWindowsHookEx(Hook);
+        Hook := 0;
+        for I := 0 to Callbacks.Count - 1 do
         Dispose(Callbacks[I]);
-      	Callbacks.Free;
-	      Callbacks := nil;
-  	  end;
+        Callbacks.Free;
+        Callbacks := nil;
+      end;
   end;
 
 begin

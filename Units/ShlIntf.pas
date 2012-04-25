@@ -29,7 +29,7 @@ const
     D1:$00BB2765; D2:$6A77; D3:$11D0; D4:($A5,$35,$00,$C0,$4F,$D7,$D0,$62));
   CLSID_ExplorerBrowser: TGUID = (
     D1:$71F96385; D2:$DDD6; D3:$48D3; D4:($A0,$C1,$AE,$06,$E8,$B0,$55,$FB));
-	IID_IShellView2: TGUID = (
+  IID_IShellView2: TGUID = (
     D1:$88E39E80; D2:$3578; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
   IID_IFolderView: TGUID = (
     D1:$CDE725B0; D2:$CCC9; D3:$4519; D4:($91,$7E,$32,$5D,$72,$FA,$B4,$CE));
@@ -37,13 +37,13 @@ const
     D1:$2047E320; D2:$F2A9; D3:$11CE; D4:($AE,$65,$08,$00,$2B,$2E,$12,$62));
   IID_IServiceProvider: TGUID =(
     D1:$6D5140C1; D2:$7436; D3:$11CE; D4:($80,$34,$00,$AA,$00,$60,$09,$FA));
-	IID_ICommDlgBrowser2: TGUID = (
+  IID_ICommDlgBrowser2: TGUID = (
     D1:$10339516; D2:$2894; D3:$11D2; D4:($90,$39,$00,$C0,$4F,$8E,$EB,$3E));
-	IID_ICommDlgBrowser3: TGUID = (
+  IID_ICommDlgBrowser3: TGUID = (
     D1:$C8AD25A1; D2:$3294; D3:$41EE; D4:($81,$65,$71,$17,$4B,$D0,$1C,$57));
-	IID_IExplorerBrowserEvents: TGUID = (
+  IID_IExplorerBrowserEvents: TGUID = (
     D1:$361BBDC7; D2:$E6EE; D3:$BE58; D4:($BE,$58,$58,$E2,$24,$0C,$81,$0F));
-	IID_IExplorerBrowser: TGUID = (
+  IID_IExplorerBrowser: TGUID = (
     D1:$DFD3B6B5; D2:$C10C; D3:$4BE9; D4:($85,$F6,$A6,$69,$69,$F4,$02,$F6));
   IID_IAutoComplete: TGUID = (
     D1:$00BB2762; D2:$6A77; D3:$11D0; D4:($A5,$35,$00,$C0,$4F,$D7,$D0,$62));
@@ -61,7 +61,7 @@ const
     D1:$00BB2761; D2:$6A77; D3:$11D0; D4:($A5,$35,$00,$C0,$4F,$D7,$D0,$62));
 
 const
-	SID_IShellView2              = '{88E39E80-3578-11CF-AE69-08002B2E1262}';
+  SID_IShellView2              = '{88E39E80-3578-11CF-AE69-08002B2E1262}';
   SID_IFolderView              = '{CDE725B0-CCC9-4519-917E-325D72FAB4CE}';
   SID_IShellFolderViewCB       = '{2047E320-F2A9-11CE-AE65-08002B2E1262}';
   SID_IServiceProvider         = '{6D5140C1-7436-11CE-8034-00AA006009FA}';
@@ -76,57 +76,57 @@ const
   SID_ICurrentWorkingDirectory = '{91956D21-9276-11D1-921A-006097DF5BD4}';
   SID_IObjMgr                  = '{00BB2761-6A77-11D0-A535-00C04FD7D062}';
 
-	// 0057D0E0-3573-11CF-AE69-08002B2E1262
-	VID_LargeIcons: TGUID = (
-  	D1:$0057D0E0; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
-	// 089000C0-3573-11CF-AE69-08002B2E1262
-	VID_SmallIcons: TGUID = (
-  	D1:$089000C0; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
-	// 0E1FA5E0-3573-11CF-AE69-08002B2E1262
-	VID_List: TGUID = (
-  	D1:$0E1FA5E0; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
-	// 137E7700-3573-11CF-AE69-08002B2E1262
-	VID_Details: TGUID = (
-  	D1:$137E7700; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
-	// 5984FFE0-28D4-11CF-AE66-08002B2E1262
-	VID_Tile: TGUID = (
-  	D1:$65F125E5; D2:$7BE1; D3:$4810; D4:($BA,$9D,$D2,$71,$C8,$43,$2C,$E3));
-	// 8BEBB290-52D0-11d0-B7F4-00C04FD706EC
-	VID_Thumbnails: TGUID = (
-  	D1:$8BEBB290; D2:$52D0; D3:$11D0; D4:($B7,$F4,$00,$C0,$4F,$D7,$06,$EC));
-	// 8EEFA624-D1E9-445B-94B7-74FBCE2EA11A
-	VID_ThumbStrip: TGUID = (
-  	D1:$8EEFA624; D2:$D1E9; D3:$445B; D4:($94,$B7,$74,$FB,$CE,$2E,$A1,$1A));
+  // 0057D0E0-3573-11CF-AE69-08002B2E1262
+  VID_LargeIcons: TGUID = (
+    D1:$0057D0E0; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
+  // 089000C0-3573-11CF-AE69-08002B2E1262
+  VID_SmallIcons: TGUID = (
+    D1:$089000C0; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
+  // 0E1FA5E0-3573-11CF-AE69-08002B2E1262
+  VID_List: TGUID = (
+    D1:$0E1FA5E0; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
+  // 137E7700-3573-11CF-AE69-08002B2E1262
+  VID_Details: TGUID = (
+    D1:$137E7700; D2:$3573; D3:$11CF; D4:($AE,$69,$08,$00,$2B,$2E,$12,$62));
+  // 5984FFE0-28D4-11CF-AE66-08002B2E1262
+  VID_Tile: TGUID = (
+    D1:$65F125E5; D2:$7BE1; D3:$4810; D4:($BA,$9D,$D2,$71,$C8,$43,$2C,$E3));
+  // 8BEBB290-52D0-11d0-B7F4-00C04FD706EC
+  VID_Thumbnails: TGUID = (
+    D1:$8BEBB290; D2:$52D0; D3:$11D0; D4:($B7,$F4,$00,$C0,$4F,$D7,$06,$EC));
+  // 8EEFA624-D1E9-445B-94B7-74FBCE2EA11A
+  VID_ThumbStrip: TGUID = (
+    D1:$8EEFA624; D2:$D1E9; D3:$445B; D4:($94,$B7,$74,$FB,$CE,$2E,$A1,$1A));
 
   WM_GETISHELLBROWSER = WM_USER + 7;
 
-	FWF_AUTOARRANGE	= $1;
-	FWF_ABBREVIATEDNAMES = $2;
-	FWF_SNAPTOGRID = $4;
-	FWF_OWNERDATA = $8;
-	FWF_BESTFITWINDOW = $10;
-	FWF_DESKTOP = $20;
-	FWF_SINGLESEL = $40;
-	FWF_NOSUBFOLDERS = $80;
-	FWF_TRANSPARENT = $100;
-	FWF_NOCLIENTEDGE = $200;
-	FWF_NOSCROLL = $400;
-	FWF_ALIGNLEFT = $800;
-	FWF_NOICONS = $1000;
-	FWF_SHOWSELALWAYS = $2000;
-	FWF_NOVISIBLE = $4000;
-	FWF_SINGLECLICKACTIVATE = $8000;
-	FWF_NOWEBVIEW = $10000;
-	FWF_HIDEFILENAMES = $20000;
-	FWF_CHECKSELECT = $40000;
+  FWF_AUTOARRANGE  = $1;
+  FWF_ABBREVIATEDNAMES = $2;
+  FWF_SNAPTOGRID = $4;
+  FWF_OWNERDATA = $8;
+  FWF_BESTFITWINDOW = $10;
+  FWF_DESKTOP = $20;
+  FWF_SINGLESEL = $40;
+  FWF_NOSUBFOLDERS = $80;
+  FWF_TRANSPARENT = $100;
+  FWF_NOCLIENTEDGE = $200;
+  FWF_NOSCROLL = $400;
+  FWF_ALIGNLEFT = $800;
+  FWF_NOICONS = $1000;
+  FWF_SHOWSELALWAYS = $2000;
+  FWF_NOVISIBLE = $4000;
+  FWF_SINGLECLICKACTIVATE = $8000;
+  FWF_NOWEBVIEW = $10000;
+  FWF_HIDEFILENAMES = $20000;
+  FWF_CHECKSELECT = $40000;
 
-	FVM_ICON = 1;
-	FVM_SMALLICON = 2;
-	FVM_LIST = 3;
-	FVM_DETAILS = 4;
-	FVM_THUMBNAIL = 5;
-	FVM_TILE = 6;
-	FVM_THUMBSTRIP = 7;
+  FVM_ICON = 1;
+  FVM_SMALLICON = 2;
+  FVM_LIST = 3;
+  FVM_DETAILS = 4;
+  FVM_THUMBNAIL = 5;
+  FVM_TILE = 6;
+  FVM_THUMBSTRIP = 7;
 
   SVSI_DESELECT = $00000000;
   SVSI_SELECT = $00000001;
@@ -140,8 +140,8 @@ const
   SVSI_CHECK = $00000100;
   SVSI_NOSTATECHANGE = $80000000;
 
-	CDB2N_CONTEXTMENU_DONE = $00000001;
-	CDB2N_CONTEXTMENU_START = $00000002;
+  CDB2N_CONTEXTMENU_DONE = $00000001;
+  CDB2N_CONTEXTMENU_START = $00000002;
 
   CDB2GVF_SHOWALLFILES = $00000001;
 
@@ -163,18 +163,18 @@ const
 { EXPLORER_BROWSER_OPTIONS }
 
   EBO_NONE                = $0;
-	EBO_NAVIGATEONCE        = $1;
-	EBO_SHOWFRAMES          = $2;
-	EBO_ALWAYSNAVIGATE      = $4;
-	EBO_NOTRAVELLOG         = $8;
-	EBO_NOWRAPPERWINDOW     = $10;
-	EBO_HTMLSHAREPOINTVIEW  = $20;
+  EBO_NAVIGATEONCE        = $1;
+  EBO_SHOWFRAMES          = $2;
+  EBO_ALWAYSNAVIGATE      = $4;
+  EBO_NOTRAVELLOG         = $8;
+  EBO_NOWRAPPERWINDOW     = $10;
+  EBO_HTMLSHAREPOINTVIEW  = $20;
 
  { EXPLORER_BROWSER_FILL_FLAGS }
 
   EBF_NONE                 = $000;
-	EBF_SELECTFROMDATAOBJECT = $100;
-	EBF_NODROPTARGET         = $200;
+  EBF_SELECTFROMDATAOBJECT = $100;
+  EBF_NODROPTARGET         = $200;
 
   //                         uMsg   wParam             lParam
   SFVM_MERGEMENU          =  1;  // -                  LPQCMINFO
@@ -209,7 +209,7 @@ const
   SFVM_GETANIMATION       = 68;  // HINSTANCE *        WCHAR *
 
 type
-	TCVWParams = record
+  TCVWParams = record
     cbSize: DWORD;
     svPrev: IShellView;
     fs: PFolderSettings;
@@ -219,13 +219,13 @@ type
     hwndView: HWND;
   end;
 
-	IShellView2 = interface(IShellView)
-	  [SID_IShellView2]
-		function GetView(var vid: TGUID; View: Cardinal): HResult; stdcall;
-		function CreateViewWindow2(const Params: TCVWParams): HResult; stdcall;
+  IShellView2 = interface(IShellView)
+    [SID_IShellView2]
+    function GetView(var vid: TGUID; View: Cardinal): HResult; stdcall;
+    function CreateViewWindow2(const Params: TCVWParams): HResult; stdcall;
     function HandleRename(pidlNew: PItemIDList): HResult; stdcall;
-		function SelectAndPositionItem(pidlItem: PItemIDList; uFlags: Cardinal; ppt: PPoint): HResult; stdcall;
-	end;
+    function SelectAndPositionItem(pidlItem: PItemIDList; uFlags: Cardinal; ppt: PPoint): HResult; stdcall;
+  end;
 
   IFolderView = interface(IUnknown)
     [SID_IFolderView]
@@ -244,7 +244,7 @@ type
     // like IShellView::SelectItem() by index
     function SelectItem(iItem: integer; dwFlags: dword): HResult; stdcall;
     function SelectAndPositionItems(cidl: uint; apidl: PITEMIDLIST; apt: PPOINT;
-			dwFlags: dword): HResult; stdcall;
+      dwFlags: dword): HResult; stdcall;
   end;
 
   IShellFolderViewCB = interface(IUnknown)
@@ -259,22 +259,22 @@ type
   end;
 
   ICommDlgBrowser2 = interface(ICommDlgBrowser)
-		[SID_ICommDlgBrowser2]
+    [SID_ICommDlgBrowser2]
     function Notify(ppshv: IShellView; dwNotifyType: DWORD): HResult; stdcall;
     function GetDefaultMenuText(ppshv: IShellView; pszText: PWideChar;
-    	cchMax: Integer): HResult; stdcall;
+      cchMax: Integer): HResult; stdcall;
     function GetViewFlags(out pdwFlags: DWORD): HResult; stdcall;
-	end;
+  end;
 
   ICommDlgBrowser3 = interface(ICommDlgBrowser2)
-		[SID_ICommDlgBrowser3]
+    [SID_ICommDlgBrowser3]
     function OnColumnClicked(ppshv: IShellView; iColumn: Integer): HResult; stdcall;
     function GetCurrentFilter(pszFileSpec:  PWideChar; cchFileSpec: Integer): HResult; stdcall;
     function OnPreViewCreated(ppshv: IShellView): HResult; stdcall;
   end;
 
   IExplorerBrowserEvents = interface(IUnknown)
-		[SID_IExplorerBrowserEvents]
+    [SID_IExplorerBrowserEvents]
     function OnNavigationPending(pidlFolder: PItemIDList): HResult; stdcall;
     function OnViewCreated(dv: IShellView): HResult; stdcall;
     function OnNavigationComplete(pidlFolder: PItemIDList): HResult; stdcall;
@@ -282,7 +282,7 @@ type
   end;
 
   IExplorerBrowser = interface(IUnknown)
-		[SID_IExplorerBrowser]
+    [SID_IExplorerBrowser]
     function Initialize(hwndParent: HWND; const rc: TRect;
       const fs: TFolderSettings): HResult; stdcall;
     function Destroy: HResult; stdcall;

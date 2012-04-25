@@ -26,8 +26,8 @@ uses
 type
   TGripForm = class(TVersionForm)
   private
-  	FRatioX: Double;
-  	FRatioY: Double;
+    FRatioX: Double;
+    FRatioY: Double;
     FAnchors: TAnchorDataArray;
     FHitBounds: TRect;
     FHitTest: Integer;
@@ -137,7 +137,7 @@ begin
   begin
     Control := Controls[I];
     if Supports(Control, IIgnoreMargin) then
-    	Continue;
+      Continue;
     if ((Control <> FGripBox)) and (Control.Parent = Self) and (Control.Visible) then
     begin
       MaxWidth := Max(Control.Left + Control.Width + Round(Size.cx * FRatioX), MaxWidth);

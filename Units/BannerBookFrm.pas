@@ -12,7 +12,7 @@ type
     OkButton: TButton;
     CancelButton: TButton;
     procedure FormCreate(Sender: TObject);
-	end;
+  end;
 
 function EditBannerBook(BannerBook: TBannerBook): Boolean;
 
@@ -22,30 +22,30 @@ implementation
 
 function EditBannerBook(BannerBook: TBannerBook): Boolean;
 var
-	Form: TBannerBookForm;
+  Form: TBannerBookForm;
   S: string;
-	I: Integer;
+  I: Integer;
 begin
-	Form := TBannerBookForm.Create(Application);
+  Form := TBannerBookForm.Create(Application);
   try
-  	for I := 0 to BannerBook.Pages.Count - 1 do
+    for I := 0 to BannerBook.Pages.Count - 1 do
     begin
-			S := Trim(BannerBook.Pages[I]);
+      S := Trim(BannerBook.Pages[I]);
       if S <> '' then
-      	Form.Pages.Lines.Add(S);
-		end;
+        Form.Pages.Lines.Add(S);
+    end;
     Result := Form.ShowModal = mrOk;
     if Result then
-    	BannerBook.Pages := Form.Pages.Lines;
+      BannerBook.Pages := Form.Pages.Lines;
   finally
-  	Form.Free;
+    Form.Free;
   end;
 end;
 
 procedure TBannerBookForm.FormCreate(Sender: TObject);
 begin
-	ClientHeight := Pages.Top + CancelButton.Top + CancelButton.Height;
-	ClientWidth := Pages.Left + CancelButton.Left + CancelButton.Width;
+  ClientHeight := Pages.Top + CancelButton.Top + CancelButton.Height;
+  ClientWidth := Pages.Left + CancelButton.Left + CancelButton.Width;
 end;
 
 end.

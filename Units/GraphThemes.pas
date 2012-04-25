@@ -31,7 +31,7 @@ const
   HTTB_RESIZINGBORDER_RIGHT  = $0040;
   HTTB_RESIZINGBORDER_BOTTOM = $0080;
   HTTB_RESIZINGBORDER        = HTTB_RESIZINGBORDER_LEFT or
-  	HTTB_RESIZINGBORDER_TOP or HTTB_RESIZINGBORDER_RIGHT or
+    HTTB_RESIZINGBORDER_TOP or HTTB_RESIZINGBORDER_RIGHT or
     HTTB_RESIZINGBORDER_BOTTOM;
   HTTB_SIZINGTEMPLATE        = $0100;
   HTTB_SYSTEMSIZINGMARGINS   = $0200;
@@ -59,9 +59,9 @@ type
   THEMESIZE = DWORD;
 
 const
-	TS_MIN = 0;
-	TS_TRUE = 1;
-	TS_DRAW = 2;
+  TS_MIN = 0;
+  TS_TRUE = 1;
+  TS_DRAW = 2;
 
 type
   _MARGINS = record
@@ -100,7 +100,7 @@ var
   GetThemeBackgroundContentRect: function(hTheme: HTHEME; hdc: HDC; iPartId, iStateId: Integer;
     const pBoundingRect: TRect; pContentRect: PRECT): HRESULT; stdcall;
   GetThemeBackgroundExtent: function(hTheme: HTHEME; hdc: HDC; iPartId, iStateId: Integer;
-  	const pContentRect: TRect; pExtentRect: PRECT): HRESULT; stdcall;
+    const pContentRect: TRect; pExtentRect: PRECT): HRESULT; stdcall;
   GetThemePartSize: function(hTheme: HTHEME; hdc: HDC; iPartId, iStateId: Integer; prc: PRECT; eSize: THEMESIZE;
     out psz: TSize): HRESULT; stdcall;
   GetThemeTextExtent: function(hTheme: HTHEME; hdc: HDC; iPartId, iStateId: Integer; pszText: LPCWSTR;
@@ -149,7 +149,7 @@ const
 
 var
   DrawThemeEdge: function(hTheme: HTHEME; hdc: HDC; iPartId, iStateId: Integer;
-  	const pDestRect: TRect; uEdge, uFlags: UINT; pContentRect: PRECT): HRESULT; stdcall;
+    const pDestRect: TRect; uEdge, uFlags: UINT; pContentRect: PRECT): HRESULT; stdcall;
 
   DrawThemeIcon: function(hTheme: HTHEME; hdc: HDC; iPartId, iStateId: Integer; const pRect: TRect; himl: HIMAGELIST;
     iImageIndex: Integer): HRESULT; stdcall;
@@ -480,14 +480,14 @@ const
   TMT_USERPICTURE                         = 5001;
   TMT_DEFAULTPANESIZE                     = 5002;
   TMT_BLENDCOLOR                          = 5003;
-  TMT_CUSTOMSPLITRECT	                    = 5004;
-  TMT_ANIMATIONBUTTONRECT	                = 5005;
-  TMT_ANIMATIONDURATION	                  = 5006;
-  TMT_TRANSITIONDURATIONS	                = 6000;
-  TMT_SCALEDBACKGROUND	                  = 7001;
-  TMT_ATLASIMAGE	                        = 8000;
-  TMT_ATLASINPUTIMAGE	                    = 8001;
-  TMT_ATLASRECT	                          = 8002;
+  TMT_CUSTOMSPLITRECT                      = 5004;
+  TMT_ANIMATIONBUTTONRECT                  = 5005;
+  TMT_ANIMATIONDURATION                    = 5006;
+  TMT_TRANSITIONDURATIONS                  = 6000;
+  TMT_SCALEDBACKGROUND                    = 7001;
+  TMT_ATLASIMAGE                          = 8000;
+  TMT_ATLASINPUTIMAGE                      = 8001;
+  TMT_ATLASRECT                            = 8002;
 
 
   WP_CAPTION                              = 1;
@@ -918,13 +918,13 @@ const
 
   EP_EDITTEXT                             = 1;
   EP_CARET                                = 2;
-	EP_BACKGROUND                           = 3;
-	EP_PASSWORD                             = 4;
-	EP_BACKGROUNDWITHBORDER                 = 5;
-	EP_EDITBORDER_NOSCROLL                  = 6;
-	EP_EDITBORDER_HSCROLL                   = 7;
-	EP_EDITBORDER_VSCROLL                   = 8;
-	EP_EDITBORDER_HVSCROLL                  = 9;
+  EP_BACKGROUND                           = 3;
+  EP_PASSWORD                             = 4;
+  EP_BACKGROUNDWITHBORDER                 = 5;
+  EP_EDITBORDER_NOSCROLL                  = 6;
+  EP_EDITBORDER_HSCROLL                   = 7;
+  EP_EDITBORDER_VSCROLL                   = 8;
+  EP_EDITBORDER_HVSCROLL                  = 9;
 
   ETS_NORMAL                              = 1;
   ETS_HOT                                 = 2;
@@ -934,81 +934,81 @@ const
   ETS_READONLY                            = 6;
   ETS_ASSIST                              = 7;
 
-	EBS_NORMAL                              = 1;
-	EBS_HOT                                 = 2;
-	EBS_DISABLED                            = 3;
-	EBS_FOCUSED                             = 4;
-	EBS_READONLY                            = 5;
-	EBS_ASSIST                              = 6;
+  EBS_NORMAL                              = 1;
+  EBS_HOT                                 = 2;
+  EBS_DISABLED                            = 3;
+  EBS_FOCUSED                             = 4;
+  EBS_READONLY                            = 5;
+  EBS_ASSIST                              = 6;
 
-	EBWBS_NORMAL                            = 1;
-	EBWBS_HOT                               = 2;
-	EBWBS_DISABLED                          = 3;
-	EBWBS_FOCUSED                           = 4;
+  EBWBS_NORMAL                            = 1;
+  EBWBS_HOT                               = 2;
+  EBWBS_DISABLED                          = 3;
+  EBWBS_FOCUSED                           = 4;
 
-	EPSN_NORMAL                             = 1;
-	EPSN_HOT                                = 2;
-	EPSN_FOCUSED                            = 3;
-	EPSN_DISABLED                           = 4;
+  EPSN_NORMAL                             = 1;
+  EPSN_HOT                                = 2;
+  EPSN_FOCUSED                            = 3;
+  EPSN_DISABLED                           = 4;
 
-	EPSH_NORMAL                             = 1;
-	EPSH_HOT                                = 2;
-	EPSH_FOCUSED                            = 3;
-	EPSH_DISABLED                           = 4;
+  EPSH_NORMAL                             = 1;
+  EPSH_HOT                                = 2;
+  EPSH_FOCUSED                            = 3;
+  EPSH_DISABLED                           = 4;
 
-	EPSV_NORMAL                             = 1;
-	EPSV_HOT                                = 2;
-	EPSV_FOCUSED                            = 3;
-	EPSV_DISABLED                           = 4;
+  EPSV_NORMAL                             = 1;
+  EPSV_HOT                                = 2;
+  EPSV_FOCUSED                            = 3;
+  EPSV_DISABLED                           = 4;
 
-	EPSHV_NORMAL                            = 1;
-	EPSHV_HOT                               = 2;
-	EPSHV_FOCUSED                           = 3;
-	EPSHV_DISABLED                          = 4;
+  EPSHV_NORMAL                            = 1;
+  EPSHV_HOT                               = 2;
+  EPSHV_FOCUSED                           = 3;
+  EPSHV_DISABLED                          = 4;
 
   CP_DROPDOWNBUTTON                       = 1;
-	CP_BACKGROUND                           = 2;
-	CP_TRANSPARENTBACKGROUND                = 3;
-	CP_BORDER                               = 4;
-	CP_READONLY                             = 5;
-	CP_DROPDOWNBUTTONRIGHT                  = 6;
-	CP_DROPDOWNBUTTONLEFT                   = 7;
-	CP_CUEBANNER                            = 8;
+  CP_BACKGROUND                           = 2;
+  CP_TRANSPARENTBACKGROUND                = 3;
+  CP_BORDER                               = 4;
+  CP_READONLY                             = 5;
+  CP_DROPDOWNBUTTONRIGHT                  = 6;
+  CP_DROPDOWNBUTTONLEFT                   = 7;
+  CP_CUEBANNER                            = 8;
 
   CBXS_NORMAL                             = 1;
   CBXS_HOT                                = 2;
   CBXS_PRESSED                            = 3;
   CBXS_DISABLED                           = 4;
 
-	CBXSR_NORMAL                            = 1;
-	CBXSR_HOT                               = 2;
-	CBXSR_PRESSED                           = 3;
-	CBXSR_DISABLED                          = 4;
+  CBXSR_NORMAL                            = 1;
+  CBXSR_HOT                               = 2;
+  CBXSR_PRESSED                           = 3;
+  CBXSR_DISABLED                          = 4;
 
-	CBXSL_NORMAL                            = 1;
-	CBXSL_HOT                               = 2;
-	CBXSL_PRESSED                           = 3;
-	CBXSL_DISABLED                          = 4;
+  CBXSL_NORMAL                            = 1;
+  CBXSL_HOT                               = 2;
+  CBXSL_PRESSED                           = 3;
+  CBXSL_DISABLED                          = 4;
 
-	CBTBS_NORMAL                            = 1;
-	CBTBS_HOT                               = 2;
-	CBTBS_DISABLED                          = 3;
-	CBTBS_FOCUSED                           = 4;
+  CBTBS_NORMAL                            = 1;
+  CBTBS_HOT                               = 2;
+  CBTBS_DISABLED                          = 3;
+  CBTBS_FOCUSED                           = 4;
 
-	CBB_NORMAL                              = 1;
-	CBB_HOT                                 = 2;
-	CBB_FOCUSED                             = 3;
-	CBB_DISABLED                            = 4;
+  CBB_NORMAL                              = 1;
+  CBB_HOT                                 = 2;
+  CBB_FOCUSED                             = 3;
+  CBB_DISABLED                            = 4;
 
-	CBRO_NORMAL                             = 1;
-	CBRO_HOT                                = 2;
-	CBRO_PRESSED                            = 3;
-	CBRO_DISABLED                           = 4;
+  CBRO_NORMAL                             = 1;
+  CBRO_HOT                                = 2;
+  CBRO_PRESSED                            = 3;
+  CBRO_DISABLED                           = 4;
 
-	CBCB_NORMAL                             = 1;
-	CBCB_HOT                                = 2;
-	CBCB_PRESSED                            = 3;
-	CBCB_DISABLED                           = 4;
+  CBCB_NORMAL                             = 1;
+  CBCB_HOT                                = 2;
+  CBCB_PRESSED                            = 3;
+  CBCB_DISABLED                           = 4;
 
   CLP_TIME                                = 1;
 
@@ -1168,11 +1168,11 @@ begin
       EnableTheming := GetProcAddress(ThemeLibrary, 'EnableTheming');
     end;
   end;
-	Result := (ThemeLibrary > 0) and (@OpenThemeData <> nil);
+  Result := (ThemeLibrary > 0) and (@OpenThemeData <> nil);
 end;
 
 var
-	ComCtlVersion: Integer = 0;
+  ComCtlVersion: Integer = 0;
 
 function GetComCtlVersion: Integer;
 var

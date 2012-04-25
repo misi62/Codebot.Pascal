@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Windows, Messages, ActiveX, ShellAPI, ShlObj, SysUtils, Classes, ComObj;
+  Windows, Messages, ActiveX, ShellAPI, ShlObj, SysUtils, Classes, ComObj;
 
 { FileOperation function }
 
@@ -204,7 +204,7 @@ type
     function Add(Node: TShellNode): TShellNode;
     procedure Remove(Node: TShellNode);
     procedure Rename(Node: TShellNode); virtual;
-		function Execute(Wnd: HWND; const Verb: string): Boolean;
+    function Execute(Wnd: HWND; const Verb: string): Boolean;
     procedure Lock;
     procedure Unlock;
     function GetAttributes(Flags: UINT): UINT;
@@ -293,7 +293,7 @@ procedure TrayNotify(Handle: HWND; Kind: TTrayMessageKind; const Title, Tip: str
 implementation
 
 uses
-	StrConst;
+  StrConst;
 
 var
   Malloc: IMalloc;
@@ -319,30 +319,30 @@ begin
     A := nil;
     if Source <> '' then
     begin
-  	  GetMem(A, Length(Source) + 2);
+      GetMem(A, Length(Source) + 2);
       FillChar(A^, Length(Source) + 2, #0);
-	    Move(PChar(@Source[1])^, A^, Length(Source));
+      Move(PChar(@Source[1])^, A^, Length(Source));
     end;
     pFrom := A;
     if A <> nil then
-    	while A^ <> #0 do
+      while A^ <> #0 do
       begin
-      	if A^ = ',' then A^ := #0;
+        if A^ = ',' then A^ := #0;
         Inc(A);
       end;
-		A := pFrom;
+    A := pFrom;
     B := nil;
     if Dest <> '' then
     begin
-  	  GetMem(B, Length(Dest) + 2);
+      GetMem(B, Length(Dest) + 2);
       FillChar(B^, Length(Dest) + 2, #0);
-	    Move(PChar(@Dest[1])^, B^, Length(Dest));
+      Move(PChar(@Dest[1])^, B^, Length(Dest));
     end;
     pTo := B;
     if B <> nil then
-    	while B^ <> #0 do
+      while B^ <> #0 do
       begin
-      	if B^ = ',' then B^ := #0;
+        if B^ = ',' then B^ := #0;
         Inc(B);
       end;
     B := pTo;
@@ -354,14 +354,14 @@ begin
     hNameMappings := nil;
     lpszProgressTitle := nil;
     try
-	    if SHFileOperation(FileOpStruct) = 0 then
-  	    Result := not fAnyOperationsAborted;
-		finally
-    	if A <> nil then
-				FreeMem(A);
-			if B <> nil then
-				FreeMem(B);
-		end;
+      if SHFileOperation(FileOpStruct) = 0 then
+        Result := not fAnyOperationsAborted;
+    finally
+      if A <> nil then
+        FreeMem(A);
+      if B <> nil then
+        FreeMem(B);
+    end;
   finally
     SetErrorMode(LastMode);
   end
@@ -391,15 +391,15 @@ procedure FileDelete(FileName: string; Recycle: Boolean = False);
 var
   SHFileOpStruct : TSHFileOpStruct;
 begin
-	FillChar(SHFileOpStruct, SizeOf(SHFileOpStruct), #0);
+  FillChar(SHFileOpStruct, SizeOf(SHFileOpStruct), #0);
   with SHFileOpStruct do
   begin
     wFunc := FO_DELETE;
     pFrom := PChar(FileName + #0 + #0);
     if Recycle then
-	    fFlags := FOF_SILENT or FOF_NOCONFIRMATION	or FOF_ALLOWUNDO
+      fFlags := FOF_SILENT or FOF_NOCONFIRMATION  or FOF_ALLOWUNDO
     else
-	    fFlags := FOF_NOCONFIRMATION or FOF_SILENT;
+      fFlags := FOF_NOCONFIRMATION or FOF_SILENT;
   end;
   SHFileOperation(SHFileOpStruct);
 end;
@@ -437,7 +437,7 @@ var
   R, WorkArea: TRect;
 begin
   Result := 0;
-	if uMsg = BFFM_INITIALIZED then
+  if uMsg = BFFM_INITIALIZED then
   begin
     if GetClientRect(Wnd, R) then
     begin
@@ -456,25 +456,25 @@ var
   BrowseInfo: TBrowseInfo;
   Pidl: PItemIDList;
 begin
-	Directory := '';
+  Directory := '';
   FillChar(BrowseInfo, SizeOf(BrowseInfo), #0);
   BrowseInfo.ulFlags := BIF_RETURNONLYFSDIRS or BIF_RETURNONLYFSDIRS;
   BrowseInfo.hwndOwner := 0;
   BrowseInfo.pszDisplayName := Buffer;
   BrowseInfo.lpszTitle := PChar(HelpText);
   BrowseInfo.lpfn := @BrowseProc;
-	Pidl := SHBrowseForFolder(BrowseInfo);
-	if (Pidl <> nil) and (SHGetPathFromIDList(Pidl, Buffer)) then
+  Pidl := SHBrowseForFolder(BrowseInfo);
+  if (Pidl <> nil) and (SHGetPathFromIDList(Pidl, Buffer)) then
   begin
-  	Result := True;
+    Result := True;
     Directory := Buffer;
     Directory := IncludeTrailingPathDelimiter(Directory);
-	end
-	else
-  	Result := False;
-	if Pidl <> nil then
-		CoTaskMemFree(Pidl);
-	if BrowseInfo.pidlRoot <> nil then
+  end
+  else
+    Result := False;
+  if Pidl <> nil then
+    CoTaskMemFree(Pidl);
+  if BrowseInfo.pidlRoot <> nil then
     CoTaskMemFree(BrowseInfo.pidlRoot);
 end;
 
@@ -542,25 +542,25 @@ const
 
 var
   pidlDesktop: PItemIDList;
-	Folders: array of TIdentMapEntry;
+  Folders: array of TIdentMapEntry;
 
 procedure InitFolderMap;
 var
   Node: TShellNode;
-	Folder: TSpecialFolder;
+  Folder: TSpecialFolder;
   I: Byte absolute Folder;
 begin
-	if Length(Folders) = 0 then
+  if Length(Folders) = 0 then
   begin
-  	Setlength(Folders, Ord(High(Folder)) +1);
+    Setlength(Folders, Ord(High(Folder)) +1);
     for Folder := Low(Folder) to High(Folder) do
     begin
-    	Folders[I].Value := I;
+      Folders[I].Value := I;
       Node := TShellNode.CreateFromFolder(Folder);
       try
-      	Folders[I].Name := Node.Name;
+        Folders[I].Name := Node.Name;
       finally
-      	Node.Free;
+        Node.Free;
       end;
     end;
   end;
@@ -568,27 +568,27 @@ end;
 
 function ILCreateFromPath(const Path: string): PItemIDList;
 var
-	Folder: TSpecialFolder;
+  Folder: TSpecialFolder;
   I: Byte absolute Folder;
   J: Integer;
-	S: string;
+  S: string;
   Desktop: IShellFolder;
   WideName: array[0..MAX_PATH] of WideChar;
   Dummy: Cardinal;
 begin
-	Result := nil;
+  Result := nil;
   InitFolderMap;
-	S := Trim(Path);
+  S := Trim(Path);
   if S = '' then Exit;
-	if IdentToInt(S, J, Folders) then
-	begin
-  	I := J;
-  	if Folder = sfDesktop then
-	    Result := ILClone(pidlDesktop)
-		else if SHGetSpecialFolderLocation(0, SpecialFolderMap[Folder], Result) <> S_OK then
-    	Result := nil;
-	end
-	else
+  if IdentToInt(S, J, Folders) then
+  begin
+    I := J;
+    if Folder = sfDesktop then
+      Result := ILClone(pidlDesktop)
+    else if SHGetSpecialFolderLocation(0, SpecialFolderMap[Folder], Result) <> S_OK then
+      Result := nil;
+  end
+  else
   begin
     OleCheck(SHGetDesktopFolder(Desktop));
     StringToWideChar(S, WideName, MAX_PATH);
@@ -668,7 +668,7 @@ begin
   else if ILIsEqual(pidl, )
 end;}
 begin
-	Result := UndocumentedILClone(pidl);
+  Result := UndocumentedILClone(pidl);
 end;
 
 function ILCloneFirst(pidl: PItemIDList): PItemIDList;
@@ -757,15 +757,15 @@ function ILIsChild(pidlParent, pidlChild: PItemIDList): Boolean;
 var
   Size: Integer;
 begin
-	Result := False;
-	if ILGetCount(pidlParent) = 1 then
-  	Result := ILIsRoot(pidlParent) and (not (ILIsRoot(pidlChild)));
+  Result := False;
+  if ILGetCount(pidlParent) = 1 then
+    Result := ILIsRoot(pidlParent) and (not (ILIsRoot(pidlChild)));
   if not Result then
   begin
-	  Size := ILGetSize(pidlParent);
-  	if Size < ILGetSize(pidlChild) then
-  		Result := CompareMem(pidlParent, pidlChild, Size);
-	end;
+    Size := ILGetSize(pidlParent);
+    if Size < ILGetSize(pidlChild) then
+      Result := CompareMem(pidlParent, pidlChild, Size);
+  end;
 end;
 
 function UndocumentedILIsEqual(pidl1, pidl2: PItemIDList): Boolean; stdcall; external shell32 index 21;
@@ -980,11 +980,11 @@ var
   CommandInfo: TCMInvokeCommandInfo;
   S: AnsiString;
 begin
-	if FParent = nil then
+  if FParent = nil then
   begin
-		Result := False;
-  	Exit;
-	end;
+    Result := False;
+    Exit;
+  end;
   S := AnsiString(Verb);
   OleCheck(FParent.ShellFolder.GetUIObjectOf(Wnd, 1,
     FRelativeList, IID_IContextMenu, nil, ContextMenu));
@@ -1213,9 +1213,9 @@ end;
 function TShellNode.GetHasChildren: Boolean;
 begin
   if FParent <> nil then
-		Result := GetAttributes(SFGAO_HASSUBFOLDER) and SFGAO_HASSUBFOLDER = SFGAO_HASSUBFOLDER
+    Result := GetAttributes(SFGAO_HASSUBFOLDER) and SFGAO_HASSUBFOLDER = SFGAO_HASSUBFOLDER
   else
-  	Result := True;
+    Result := True;
 end;
 
 function TShellNode.GetItem(Index: Integer): TShellNode;
@@ -1234,7 +1234,7 @@ var
 begin
   FillChar(SHFileInfo, SizeOf(TSHFileInfo), #0);
   SHGetFileInfo(PChar(pidl), 0, SHFileInfo, SizeOf(TSHFileInfo), Flags);
-	Result := StrPas(SHFileInfo.szDisplayName)
+  Result := StrPas(SHFileInfo.szDisplayName)
 end;
 
 function TShellNode.GetName: string;
@@ -1262,24 +1262,24 @@ end;
 
 function StrToNode(const Ident: string): TShellNode;
 var
-	pidl: PItemIDList;
+  pidl: PItemIDList;
 begin
-	pidl := ILCreateFromPath(Ident);
+  pidl := ILCreateFromPath(Ident);
   if pidl <> nil then
-  	Result := TShellNode.CreateFromList(pidl)
+    Result := TShellNode.CreateFromList(pidl)
   else
-		raise EConvertError(SInvalidPropertyValue);
+    raise EConvertError(SInvalidPropertyValue);
 end;
 
 function StrToNodeDef(const Ident: string; const Default: TShellNode): TShellNode;
 var
-	pidl: PItemIDList;
+  pidl: PItemIDList;
 begin
-	pidl := ILCreateFromPath(Ident);
+  pidl := ILCreateFromPath(Ident);
   if pidl <> nil then
-  	Result := TShellNode.CreateFromList(pidl)
+    Result := TShellNode.CreateFromList(pidl)
   else
-		Result := Default;
+    Result := Default;
 end;
 
 function NodeToStr(Node: TShellNode): string;
@@ -1287,21 +1287,21 @@ begin
   Result := '';
   if Node <> nil then
   begin
-	  Result := Node.Path;
+    Result := Node.Path;
     if Result = '' then
-    	Result := Node.Name;
-	end;
+      Result := Node.Name;
+  end;
 end;
 
 function SpecialFolderToStr(Folder: TSpecialFolder): string;
 var
-	Node: TShellNode;
+  Node: TShellNode;
 begin
-	Node := TShellNode.CreateFromFolder(Folder);
+  Node := TShellNode.CreateFromFolder(Folder);
   try
-  	Result := NodeToStr(Node);
+    Result := NodeToStr(Node);
   finally
-		Node.Free;
+    Node.Free;
   end;
 end;
 

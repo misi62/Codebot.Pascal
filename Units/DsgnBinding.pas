@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Classes, ProviderTools, ComponentBindingFrm,
+  Classes, ProviderTools, ComponentBindingFrm,
   { design time units }
   DesignEditors;
 

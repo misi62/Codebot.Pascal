@@ -25,7 +25,7 @@ function CharInSet(C: AnsiChar; const CharSet: TSysCharSet): Boolean;
 
 type
   TDrawStateItem = (dsDisabled, dsPressed, dsSelected, dsHot, dsFocused, dsChecked,
-  	dsExpanded, dsDefaulted, dsThin, dsFlat, dsBackground, dsCustom);
+    dsExpanded, dsDefaulted, dsThin, dsFlat, dsBackground, dsCustom);
   TDrawState = set of TDrawStateItem;
 
 function OwnerToDrawState(State: TOwnerDrawState): TDrawState;
@@ -55,15 +55,15 @@ type
     Green: Byte;
     Red: Byte;
   end;
-	PRGB = ^TRGB;
+  PRGB = ^TRGB;
 
-	TRGBA = record
+  TRGBA = record
     Blue: Byte;
     Green: Byte;
     Red: Byte;
     Alpha: Byte;
   end;
-	PRGBA = ^TRGBA;
+  PRGBA = ^TRGBA;
 
   THSL = record
     Hue: Single;
@@ -72,7 +72,7 @@ type
   end;
   PHSL = ^THSL;
 
-	TRGBAFloat = record
+  TRGBAFloat = record
     Blue: Single;
     Green: Single;
     Red: Single;
@@ -320,7 +320,7 @@ function HeightOf(const Rect: TRect): Integer;
 function WidthOf(const Rect: TRect): Integer;
 
 type
-	TPixelDepth = (pd24, pd32);
+  TPixelDepth = (pd24, pd32);
 
   TFastBitmap = record
     DC: HDC;
@@ -380,9 +380,9 @@ procedure DebugLog(const S: string);
 
 {$IFDEF D5}
 const
-	AC_SRC_OVER = $00;
-	AC_SRC_ALPHA = $01;
-	AC_SRC_NO_PREMULT_ALPHA = $01;
+  AC_SRC_OVER = $00;
+  AC_SRC_ALPHA = $01;
+  AC_SRC_NO_PREMULT_ALPHA = $01;
 {$ENDIF}
 
 implementation
@@ -547,7 +547,7 @@ begin
   if Divisor = 0 then
     Result := 0
   else
-	  Result := Quotient - Trunc(Quotient / Divisor) * Divisor;
+    Result := Quotient - Trunc(Quotient / Divisor) * Divisor;
 end;
 
 function Compare(P1, P2: Pointer; Length: Integer): Boolean;
@@ -1220,18 +1220,18 @@ end;
 
 procedure DestroyFastBitmap(var Bitmap: TFastBitmap);
 begin
-	if Bitmap.DC <> 0 then
+  if Bitmap.DC <> 0 then
   begin
-  	SelectObject(Bitmap.DC, Bitmap.OldBitmap);
-  	DeleteObject(Bitmap.Handle);
-	  DeleteDC(Bitmap.DC);
-	  FillChar(Bitmap, SizeOf(Bitmap), #0);
+    SelectObject(Bitmap.DC, Bitmap.OldBitmap);
+    DeleteObject(Bitmap.Handle);
+    DeleteDC(Bitmap.DC);
+    FillChar(Bitmap, SizeOf(Bitmap), #0);
   end;
 end;
 
 function IsFastBitmap(const Bitmap: TFastBitmap): Boolean;
 begin
-	Result := Bitmap.DC <> 0;
+  Result := Bitmap.DC <> 0;
 end;
 
 function ScanlineStride(const Bitmap: TFastBitmap): Integer;
@@ -1246,15 +1246,15 @@ end;
 
 procedure FillColor(const Bitmap: TFastBitmap; RGBA: TRGBA);
 var
-	C: PRGBA;
-	I: Integer;
+  C: PRGBA;
+  I: Integer;
 begin
-	if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
+  if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
   begin
-  	C := Bitmap.Bits;
+    C := Bitmap.Bits;
     for I := 0 to Bitmap.Height * Bitmap.Width do
     begin
-    	C^ := RGBA;
+      C^ := RGBA;
       Inc(C);
     end;
   end;
@@ -1280,7 +1280,7 @@ begin
     biBitCount := Depths[Depth];
     biCompression := BI_RGB;
   end;
-	StretchDIBits(DC, X, Y, Width, Height, 0, 0, Width,
+  StretchDIBits(DC, X, Y, Width, Height, 0, 0, Width,
     Height, Bits, BitmapInfo, DIB_RGB_COLORS, SRCCOPY);
 end;
 
@@ -1291,35 +1291,35 @@ end;
 
 procedure AlphaDraw(DC: HDC; X, Y: Integer; const Bitmap: TFastBitmap; Opacity: Byte = $FF);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
-	if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
+  if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
   begin
     Func.BlendOp := 0;
     Func.BlendFlags := 0;
-		Func.SourceConstantAlpha := Opacity;
-		Func.AlphaFormat := AC_SRC_ALPHA;
-		AlphaBlend(DC, X, Y, Bitmap.Width,
-  		Bitmap.Height, Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
-	end;
+    Func.SourceConstantAlpha := Opacity;
+    Func.AlphaFormat := AC_SRC_ALPHA;
+    AlphaBlend(DC, X, Y, Bitmap.Width,
+      Bitmap.Height, Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
+  end;
 end;
 
 procedure AlphaDraw(DC: HDC; const Rect: TRect; const Bitmap: TFastBitmap; Opacity: Byte = $FF);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
-	if IsFastBitmap(Bitmap) and (Opacity > 0) then
+  if IsFastBitmap(Bitmap) and (Opacity > 0) then
   begin
     Func.BlendOp := 0;
     Func.BlendFlags := 0;
-		Func.SourceConstantAlpha := Opacity;
+    Func.SourceConstantAlpha := Opacity;
     if Bitmap.Depth = pd32 then
-  		Func.AlphaFormat := AC_SRC_ALPHA
+      Func.AlphaFormat := AC_SRC_ALPHA
     else
-  		Func.AlphaFormat := 0;
-		AlphaBlend(DC, Rect.Left, Rect.Top, WidthOf(Rect),
-  		HeightOf(Rect), Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
-	end;
+      Func.AlphaFormat := 0;
+    AlphaBlend(DC, Rect.Left, Rect.Top, WidthOf(Rect),
+      HeightOf(Rect), Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
+  end;
 end;
 
 function HeightOf(const Rect: TRect): Integer;
@@ -1334,17 +1334,17 @@ end;
 
 procedure AlphaDrawRect(DC: HDC; const Source: TRect; const Bitmap: TFastBitmap; const Dest: TRect; Opacity: Byte = $FF);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
-	if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
+  if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
   begin
-	  FillChar(Func, SizeOf(Func), #0);
-		Func.SourceConstantAlpha := Opacity;
-		Func.AlphaFormat := AC_SRC_ALPHA;
-		AlphaBlend(DC, Source.Left, Source.Top, WidthOf(Source),
-  		HeightOf(Source), Bitmap.DC, Dest.Left, Dest.Top, WidthOf(Dest),
-  		HeightOf(Dest), Func);
-	end;
+    FillChar(Func, SizeOf(Func), #0);
+    Func.SourceConstantAlpha := Opacity;
+    Func.AlphaFormat := AC_SRC_ALPHA;
+    AlphaBlend(DC, Source.Left, Source.Top, WidthOf(Source),
+      HeightOf(Source), Bitmap.DC, Dest.Left, Dest.Top, WidthOf(Dest),
+      HeightOf(Dest), Func);
+  end;
 end;
 
 procedure AlphaFill(Bitmap: TFastBitmap; Alpha: Byte = $FF);
@@ -1352,7 +1352,7 @@ var
   P: PRGBA;
   X, Y: Integer;
 begin
-	if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
+  if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
   begin
     P := Bitmap.Bits;
     for X := 0 to Bitmap.Width - 1 do
@@ -1361,7 +1361,7 @@ begin
         P.Alpha := Alpha;
         Inc(P);
       end;
-	end;
+  end;
 end;
 
 procedure AlphaRect(Bitmap: TFastBitmap; Rect: TRect; Alpha: Byte = $FF);
@@ -1369,7 +1369,7 @@ var
   P: PRGBA;
   X, Y: Integer;
 begin
-	if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
+  if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
   begin
     if Rect.Left < 0 then Rect.Left := 0;
     if Rect.Top < 0 then Rect.Top := 0;
@@ -1385,7 +1385,7 @@ begin
         Inc(P)
       end;
     end;
-	end;
+  end;
 end;
 
 function IntToStr(I: Integer): string;
@@ -1545,7 +1545,7 @@ end;
 
 procedure FileWriteLn(const FileName, Value: string);
 begin
-	FileWrite(FileName, Value + #13#10);
+  FileWrite(FileName, Value + #13#10);
 end;
 
 {.$DEFINE DEBUGLOG}

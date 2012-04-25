@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Classes, AutoComplete, Balloon, ImgListEx, BlendTools, FormTools, BannerCtrls,
+  Classes, AutoComplete, Balloon, ImgListEx, BlendTools, FormTools, BannerCtrls,
   SuplCtrls, PaneCtrls, CtrlBox, FlowCtrls, BtnEdit, ScrollCtrls, InspectCtrls,
   InspectEditors, BtnCtrls, FolderCtrls, ShlCtrls, WebCtrls, AlphaSplash,
   DropMgr, CameraCtrls, PhotoCtrls, ProgressCtrls, GridCtrls, // MacroTools,
@@ -31,14 +31,14 @@ implementation
 procedure Register;
 begin
   RegisterComponents('Codebot Components', [TAutoCompletion, TBalloonHint,
-  	TGlassImageList, TAlphaSplashScreen, TDropFiles, TNamedStringCollector]); //TMacroRecorder,
+    TGlassImageList, TAlphaSplashScreen, TDropFiles, TNamedStringCollector]); //TMacroRecorder,
   RegisterComponents('Codebot Containers', [TFramedWindow, TBanner, TBannerBook,
-  	TCaptionBox, THeaderSectionBox, TPaneControl,	TControlBox, TControlBoxButton,
-    	TFlowSite, TFlowbar, TDrawTabs, TNullPanel, TPaintPanel, TFlowBox]);
+    TCaptionBox, THeaderSectionBox, TPaneControl,  TControlBox, TControlBoxButton,
+      TFlowSite, TFlowbar, TDrawTabs, TNullPanel, TPaintPanel, TFlowBox]);
   RegisterComponents('Codebot Data', [
-  	TDBDrawList, TDBReportView, TADOUpdateQuery, TADOUpdateSQL, TUpdateQuery]);
+    TDBDrawList, TDBReportView, TADOUpdateQuery, TADOUpdateSQL, TUpdateQuery]);
   RegisterComponents('Codebot Controls', [
-  	TBackground, TButtonEdit, TWebBrowserEx, TDocBrowser, TDatePopupEdit, TIntegerEdit, TCashEdit, TListEdit,
+    TBackground, TButtonEdit, TWebBrowserEx, TDocBrowser, TDatePopupEdit, TIntegerEdit, TCashEdit, TListEdit,
     TCheckListEdit, TImageListEdit, TDrawList,
     TInspector, TFolderView, TImageSpeedButton, TImageButton, TCheckListButton,
     TColorGridButton, TBrushButton, TPenButton, TThemeGlyphButton, TSlideBar, TSlideEdit,
@@ -47,7 +47,7 @@ begin
     THuePicker, TSaturationPicker, TAlphaPicker, TAnglePicker, TColorSlideEdit,
     TPaintPanel, TStepBubbles, TPaintImage, TWrapLabel]);
   RegisterComponents('Codebot Shell', [
-  	TShellBubbles, TShellEdit, TShellTree, TShellView, TShellPathEditBar, TShellBinding,
+    TShellBubbles, TShellEdit, TShellTree, TShellView, TShellPathEditBar, TShellBinding,
     TLargeShellImages, TSmallShellImages]);
   RegisterNoIcon([TPaneSheet]);
   RegisterPropertyEditor(TStrings.ClassInfo, nil, '', TDefaultStringsProperty);

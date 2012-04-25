@@ -64,19 +64,19 @@ procedure DrawInfoBox(DC: HDC; Rect: TRect; ForeColor: TColor; Radius: Integer =
 { TShadowLabel }
 
 type
-	TShadowLabel = class(TLabel)
+  TShadowLabel = class(TLabel)
   private
     FShadow: Boolean;
     FShadowColor: TColor;
     procedure SetShadow(Value: Boolean);
     procedure SetShadowColor(const Value: TColor);
-	protected
+  protected
     procedure AdjustBounds; override;
-		procedure DoDrawText(var Rect: TRect; Flags: Longint); override;
-	public
-  	constructor Create(AOwner: TComponent); override;
+    procedure DoDrawText(var Rect: TRect; Flags: Longint); override;
+  public
+    constructor Create(AOwner: TComponent); override;
   published
-  	property Shadow: Boolean read FShadow write SetShadow;
+    property Shadow: Boolean read FShadow write SetShadow;
     property ShadowColor: TColor read FShadowColor write SetShadowColor;
   end;
 
@@ -170,7 +170,7 @@ type
 
 { TExpandableBox }
 
-	TExpandableStyle = (esGroupBox, esButtonBox, esExploreBar);
+  TExpandableStyle = (esGroupBox, esButtonBox, esExploreBar);
 
   TExpandableBox = class(TCustomControl)
   private
@@ -193,7 +193,7 @@ type
     procedure SetExpanded(Value: Boolean);
     procedure SetExpandedHeight(const Value: Integer);
     procedure SetStyle(Value: TExpandableStyle);
-		procedure CMColorChanged(var Message: TMessage); message CM_COLORCHANGED;
+    procedure CMColorChanged(var Message: TMessage); message CM_COLORCHANGED;
     procedure CMFontChanged(var Message: TMessage); message CM_FONTCHANGED;
     procedure CMTextChanged(var Message: TMessage); message CM_TEXTCHANGED;
     procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); message WM_ERASEBKGND;
@@ -482,11 +482,11 @@ type
 
   TBackground = class(TGraphicControl)
   private
-  	FOnPaint: TNotifyEvent;
+    FOnPaint: TNotifyEvent;
   protected
     procedure Paint; override;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     procedure Draw;
     procedure PlaceControl(Control: TControl);
     property Canvas;
@@ -514,11 +514,11 @@ type
     property OnStartDrag;
   end;
 
-	{ THorizontalBar }
+  { THorizontalBar }
 
   THorizontalBar = class(TGraphicControl, IUnknown, IIgnoreMargin)
   private
-  	FOnPaint: TNotifyEvent;
+    FOnPaint: TNotifyEvent;
     FThemed: Boolean;
     FTransparent: Boolean;
     FFlat: Boolean;
@@ -530,7 +530,7 @@ type
   protected
     procedure Paint; override;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     procedure Draw;
     property Canvas;
   published
@@ -746,7 +746,7 @@ end;
 
 constructor TShadowLabel.Create(AOwner: TComponent);
 begin
-	inherited Create(AOwner);
+  inherited Create(AOwner);
   FShadowColor := clWhite;
   ParentFont := False;
   Font := Screen.IconFont;
@@ -756,66 +756,66 @@ end;
 
 procedure TShadowLabel.DoDrawText(var Rect: TRect; Flags: Integer);
 
-	procedure InternalDraw(var Rect: TRect; Flags: Integer; Color: TColor);
-	var
-	  Text: string;
-	begin
-	  Text := GetLabelText;
-	  if (Flags and DT_CALCRECT <> 0) and ((Text = '') or ShowAccelChar and
-	    (Text[1] = '&') and (Text[2] = #0)) then Text := Text + ' ';
-	  if not ShowAccelChar then Flags := Flags or DT_NOPREFIX;
-	  Flags := DrawTextBiDiModeFlags(Flags);
+  procedure InternalDraw(var Rect: TRect; Flags: Integer; Color: TColor);
+  var
+    Text: string;
+  begin
+    Text := GetLabelText;
+    if (Flags and DT_CALCRECT <> 0) and ((Text = '') or ShowAccelChar and
+      (Text[1] = '&') and (Text[2] = #0)) then Text := Text + ' ';
+    if not ShowAccelChar then Flags := Flags or DT_NOPREFIX;
+    Flags := DrawTextBiDiModeFlags(Flags);
     Canvas.Font.Color := Color;
-	  if not Enabled then
-	  begin
-	    OffsetRect(Rect, 1, 1);
-	    Canvas.Font.Color := clBtnHighlight;
-	    DrawText(Canvas.Handle, PChar(Text), Length(Text), Rect, Flags);
-	    OffsetRect(Rect, -1, -1);
-	    Canvas.Font.Color := clBtnShadow;
-	    DrawText(Canvas.Handle, PChar(Text), Length(Text), Rect, Flags);
-	  end
-	  else
-	    DrawText(Canvas.Handle, PChar(Text), Length(Text), Rect, Flags);
-	end;
+    if not Enabled then
+    begin
+      OffsetRect(Rect, 1, 1);
+      Canvas.Font.Color := clBtnHighlight;
+      DrawText(Canvas.Handle, PChar(Text), Length(Text), Rect, Flags);
+      OffsetRect(Rect, -1, -1);
+      Canvas.Font.Color := clBtnShadow;
+      DrawText(Canvas.Handle, PChar(Text), Length(Text), Rect, Flags);
+    end
+    else
+      DrawText(Canvas.Handle, PChar(Text), Length(Text), Rect, Flags);
+  end;
 
 var
-	R: TRect;
+  R: TRect;
 begin
-	Canvas.Font := Font;
+  Canvas.Font := Font;
   if Enabled and FShadow then
   begin
-		R := Rect;
+    R := Rect;
     OffsetRect(R, 1, 1);
-  	InternalDraw(R, Flags, FShadowColor);
-		R := Rect;
+    InternalDraw(R, Flags, FShadowColor);
+    R := Rect;
     OffsetRect(R, 1, 1);
-  	InternalDraw(R, Flags, FShadowColor);
-		R := Rect;
-  	InternalDraw(R, Flags, Font.Color);
-		Inc(R.Right, 2);
-		Inc(R.Bottom, 2);
+    InternalDraw(R, Flags, FShadowColor);
+    R := Rect;
+    InternalDraw(R, Flags, Font.Color);
+    Inc(R.Right, 2);
+    Inc(R.Bottom, 2);
     Rect := R;
   end
   else
-  	InternalDraw(Rect, Flags, Font.Color);
+    InternalDraw(Rect, Flags, Font.Color);
 end;
 
 procedure TShadowLabel.SetShadow(Value: Boolean);
 begin
-	if Value <> FShadow then
+  if Value <> FShadow then
   begin
-	  FShadow := Value;
+    FShadow := Value;
     Repaint;
-	end;
+  end;
 end;
 
 procedure TShadowLabel.SetShadowColor(const Value: TColor);
 begin
-	if FShadowColor <> Value then
+  if FShadowColor <> Value then
   begin
-  	FShadowColor := Value;
-	  Repaint;
+    FShadowColor := Value;
+    Repaint;
   end;
 end;
 
@@ -968,12 +968,12 @@ begin
   if Value <> FStyle then
   begin
     FStyle := Value;
-		FButton.Visible := True;
+    FButton.Visible := True;
     case FStyle of
-    	csClose: FButton.Kind := tgClose;
-			csStick: FButton.Kind := tgPin;
+      csClose: FButton.Kind := tgClose;
+      csStick: FButton.Kind := tgPin;
     else
-    	FButton.Visible := False;
+      FButton.Visible := False;
     end;
     Repaint;
   end;
@@ -1042,37 +1042,37 @@ end;
 
 procedure TExpandableBox.AlignControls(AControl: TControl; var Rect: TRect);
 var
-	H: Integer;
-	C: TControl;
-	I: Integer;
+  H: Integer;
+  C: TControl;
+  I: Integer;
 begin
-	inherited AlignControls(AControl, Rect);
+  inherited AlignControls(AControl, Rect);
   if not (FAutoHeight and FExpanded) then Exit;
   H := CaptionRect.Bottom;
   for I := 0 to ControlCount - 1 do
   begin
-		C := Controls[I];
+    C := Controls[I];
     if akBottom in C.Anchors then Exit;
     if C.Top + C.Height > H then
-    	H := C.Top + C.Height;
-	end;
+      H := C.Top + C.Height;
+  end;
   if FStyle = esGroupBox then
-  	Inc(H, 2);
-	if H < CaptionRect.Bottom then
-  	H := CaptionRect.Bottom;
-	ExpandedHeight := H;
+    Inc(H, 2);
+  if H < CaptionRect.Bottom then
+    H := CaptionRect.Bottom;
+  ExpandedHeight := H;
 end;
 
 procedure TExpandableBox.DblClick;
 begin
   if not FBoxClick then
-		Expanded := not Expanded;
+    Expanded := not Expanded;
 end;
 
 procedure TExpandableBox.KeyDown(var Key: Word; Shift: TShiftState);
 begin
-	if (Key = VK_SPACE) or (Key = VK_RETURN) then
-		Expanded := not Expanded;
+  if (Key = VK_SPACE) or (Key = VK_RETURN) then
+    Expanded := not Expanded;
 end;
 
 procedure TExpandableBox.MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -1091,8 +1091,8 @@ begin
       FNodeDown := True;
       InvalidateRect(Handle, @Rect, True);
     end;
-	  if (Button = mbLeft) and TabStop then
-  		SetFocus;
+    if (Button = mbLeft) and TabStop then
+      SetFocus;
   end;
   inherited MouseDown(Button, Shift, X, Y);
 end;
@@ -1103,9 +1103,9 @@ var
 begin
   Rect := NodeRect;
   if PtInRect(Rect, Point(X, Y)) then
-  	Cursor := crHandPoint
-	else
-  	Cursor := crDefault;
+    Cursor := crHandPoint
+  else
+    Cursor := crDefault;
   if FNodePressed and (PtInRect(Rect, Point(X, Y)) <> FNodeDown) and FAllowCollapse then
   begin
     FNodeDown := not FNodeDown;
@@ -1133,33 +1133,33 @@ end;
 
 procedure DrawThemeExplorerBar(DC: HDC; const Caption: string; const Rect: TRect; State: TDrawState);
 {var
-	R: TRect;
+  R: TRect;
   C: TColor;}
 begin
-	SelectClipRgn(DC, 0);
+  SelectClipRgn(DC, 0);
 end;
 
 procedure DrawThemeExpandableBand(DC: HDC; const Caption: string; const Rect: TRect; State: TDrawState);
 var
-	R: TRect;
+  R: TRect;
   C: TColor;
 begin
-	SelectClipRgn(DC, 0);
-	R := Rect;
+  SelectClipRgn(DC, 0);
+  R := Rect;
   R.Bottom := R.Top + FontHeight(DC) * 2;
   if not ThemePainter.Enabled then
-  	FillRectColor(DC, R, clBtnFace);
+    FillRectColor(DC, R, clBtnFace);
   DrawThemeThinButton(DC, R, [dsHot]);
   R.Right := R.Left + HeightOf(R);
-	DrawThemeNode(DC, R, State);
+  DrawThemeNode(DC, R, State);
   OffsetRect(R, HeightOf(R), 0);
   R.Right := Rect.Right - 2;
   DrawCaption(DC, Caption, R, drLeft, State * [dsDisabled] = []);
   if dsFocused in State then
   begin
-  	with CalcCaptionSize(DC, Caption) do
+    with CalcCaptionSize(DC, Caption) do
     begin
-	  	R.Right := R.Left + cX;
+      R.Right := R.Left + cX;
       R.Top := (HeightOf(R) - cY) shr 1;
       R.Bottom := R.Top + cY;
     end;
@@ -1184,9 +1184,9 @@ begin
   if FExpanded then State := State + [dsExpanded];
   if Focused then State := State + [dsFocused];
   if FStyle = esExploreBar then
-		DrawThemeExplorerBar(DC, Caption, Rect, State)
+    DrawThemeExplorerBar(DC, Caption, Rect, State)
   else if FStyle = esButtonBox then
-		DrawThemeExpandableBand(DC, Caption, Rect, State)
+    DrawThemeExpandableBand(DC, Caption, Rect, State)
   else if FAllowCollapse then
     DrawThemeExpandableBox(DC, Caption, Rect, State)
   else
@@ -1199,25 +1199,25 @@ var
 begin
   Result := inherited GetClientRect;
   with Result do
-  	if FStyle = esButtonBox then
+    if FStyle = esButtonBox then
     begin
-    	Result := Rect(0, 0, Width, Height);
+      Result := Rect(0, 0, Width, Height);
       Result.Top := CaptionRect.Bottom + 1;
       Result.Left := HeightOf(CaptionRect) shr 1;
     end
     else
-	  begin
-	    I := HeightOf(CaptionRect);
-	    if FAllowCollapse and (I < NodeSize) then
-	      I := NodeSize;
-	    Top := I + 1;
-	    if FAllowCollapse then
-	      Left := Left + NodeSize div 2 + 2
-	    else
-	      Left := Left + 2;
-	    Right := Right - 2;
-	    Bottom := Bottom - 2;
-	  end;
+    begin
+      I := HeightOf(CaptionRect);
+      if FAllowCollapse and (I < NodeSize) then
+        I := NodeSize;
+      Top := I + 1;
+      if FAllowCollapse then
+        Left := Left + NodeSize div 2 + 2
+      else
+        Left := Left + 2;
+      Right := Right - 2;
+      Bottom := Bottom - 2;
+    end;
 end;
 
 procedure TExpandableBox.Resize;
@@ -1239,7 +1239,7 @@ begin
     F := SelectObject(DC, Font.Handle);
     Size := CalcCaptionSize(DC, ' ');
     if FStyle = esButtonBox then
-    	Inc(Size.cy, Size.cy);
+      Inc(Size.cy, Size.cy);
     if Size.cy < NodeSize then
       Size.cy := NodeSize;
     FCaptionRect := Classes.Rect(0, 0, Width, Size.cy);
@@ -1260,7 +1260,7 @@ begin
     I := 0;
   Result := Rect(0, I, NodeSize, I + NodeSize);
   if FStyle = esButtonBox then
-  	OffsetRect(Result, (HeightOf(Result) - NodeSize) shr 1, 0);
+    OffsetRect(Result, (HeightOf(Result) - NodeSize) shr 1, 0);
 end;
 
 procedure TExpandableBox.SetAllowCollapse(Value: Boolean);
@@ -1278,11 +1278,11 @@ end;
 
 procedure TExpandableBox.SetAutoHeight(Value: Boolean);
 begin
-	if Value <> FAutoHeight then
+  if Value <> FAutoHeight then
   begin
-		FAutoHeight := Value;
+    FAutoHeight := Value;
     if FExpanded then
-    	Realign;
+      Realign;
   end;
 end;
 
@@ -1302,18 +1302,18 @@ begin
       Event := FOnExpand;
       if not (csDesigning in ComponentState) then
       begin
-  	    RestoreVisible(FVisibleData);
-	      FVisibleData := nil;
+        RestoreVisible(FVisibleData);
+        FVisibleData := nil;
       end;
-			DisableAlign;
-			for I := 0 to ControlCount - 1 do
-      	if Controls[I] is TWinControl then
+      DisableAlign;
+      for I := 0 to ControlCount - 1 do
+        if Controls[I] is TWinControl then
         begin
-        	W := TWinControl(Controls[I]);
+          W := TWinControl(Controls[I]);
           if W.Align = alTop then
-        		W.Top := W.TabOrder;
-      	end;
-			EnableAlign;
+            W.Top := W.TabOrder;
+        end;
+      EnableAlign;
     end
     else
     begin
@@ -1322,10 +1322,10 @@ begin
       else
         Height := NodeSize;
       Event := FOnCollapse;
-			if IsChild(Handle, GetFocus) then
-	    	SetFocus;
-	    if not (csDesigning in ComponentState) then
-		    FVisibleData := SaveVisible(Self);
+      if IsChild(Handle, GetFocus) then
+        SetFocus;
+      if not (csDesigning in ComponentState) then
+        FVisibleData := SaveVisible(Self);
     end;
     if Assigned(Event) then
       Event(Self);
@@ -1334,7 +1334,7 @@ begin
 end;
 
 var
-	EmptyRect: TRect;
+  EmptyRect: TRect;
 
 procedure TExpandableBox.SetExpandedHeight(const Value: Integer);
 begin
@@ -1343,19 +1343,19 @@ begin
     FExpandedHeight := Value;
     if Expanded then
       Height := FExpandedHeight;
-		Invalidate;
+    Invalidate;
   end;
 end;
 
 procedure TExpandableBox.SetStyle(Value: TExpandableStyle);
 begin
-	if Value <> FStyle then
+  if Value <> FStyle then
   begin
-  	FStyle := Value;
-  	FCaptionRect := EmptyRect;
+    FStyle := Value;
+    FCaptionRect := EmptyRect;
     if not Expanded then
-    	Height := CaptionRect.Bottom;
-		Realign;
+      Height := CaptionRect.Bottom;
+    Realign;
     Repaint;
   end;
 end;
@@ -1382,27 +1382,27 @@ end;
 
 procedure TExpandableBox.WMEraseBkgnd(var Message: TWMEraseBkgnd);
 var
-	R: TRect;
+  R: TRect;
 begin
-	R := inherited GetClientRect;
-	{if FStyle = esExplorerBar then
+  R := inherited GetClientRect;
+  {if FStyle = esExplorerBar then
   begin
   end
   else}
-		FillRectColor(Message.DC, R, Color);
+    FillRectColor(Message.DC, R, Color);
   Message.Result := 1;
 end;
 
 procedure TExpandableBox.WMSetFocus(var Message: TWMSetFocus);
 begin
-	Invalidate;
+  Invalidate;
   if Assigned(OnEnter) then OnEnter(Self);
   inherited;
 end;
 
 procedure TExpandableBox.WMKillFocus(var Message: TWMSetFocus);
 begin
-	Invalidate;
+  Invalidate;
   inherited;
 end;
 
@@ -1592,8 +1592,8 @@ begin
     FIntValue := Value;
     if (FMax <> 0) and (FMin <> 0) then
     begin
-	    if FIntValue > FMax then FIntValue := FMax;
-  	  if FIntValue < FMin then FIntValue := FMin;
+      if FIntValue > FMax then FIntValue := FMax;
+      if FIntValue < FMin then FIntValue := FMin;
     end;
     if (FIntValue = 0) and (not FDisplayZero) then
       Text := ''
@@ -1626,10 +1626,10 @@ begin
   if (not HandleAllocated) or (not Focused) then
   begin
     S := Trim(Text);
-  	if Trim(Text) = '' then
-	  	I := 0
-  	else
-	  	I := StrToIntDef(S, FIntValue);
+    if Trim(Text) = '' then
+      I := 0
+    else
+      I := StrToIntDef(S, FIntValue);
     IntValue := I;
     if (S <> Text) and (S = '') and (AllowBlank) then
       Text := '';
@@ -1652,10 +1652,10 @@ var
 begin
   inherited;
   S := Trim(Text);
-	if S = '' then
-		FIntValue := 0
-	else
-		FIntValue := StrToIntDef(Text, FIntValue);
+  if S = '' then
+    FIntValue := 0
+  else
+    FIntValue := StrToIntDef(Text, FIntValue);
   if (S = '') and AllowBlank then
     Text := ''
   else if (FIntValue = 0) and (not FDisplayZero) then
@@ -1755,13 +1755,13 @@ var
   S: string;
 begin
   inherited;
-	S := Trim(Text);
+  S := Trim(Text);
   if S <> '' then
   begin
     if S[1] = '$' then
     begin
       S[1] := ' ';
-    	S := Trim(S);
+      S := Trim(S);
     end;
   end;
   FAmount := Round(StrToFloatDef(S, FAmount), FDecimals);
@@ -1856,7 +1856,7 @@ end;
 
 constructor TBackground.Create(AOwner: TComponent);
 begin
-	inherited Create(AOwner);
+  inherited Create(AOwner);
   Color := clAppWorkspace;
   ParentColor := False;
   SetBounds(Left, Top, 150, 100);
@@ -1864,25 +1864,25 @@ end;
 
 procedure TBackground.Draw;
 begin
-	Paint;
+  Paint;
 end;
 
 procedure TBackground.Paint;
 begin
   FillRectColor(Canvas.Handle, ClientRect, Color);
-	DrawThemeBorder(Canvas.Handle, ClientRect, [], 1, Left, Top);
-	if Assigned(FOnPaint) then FOnPaint(Self);
+  DrawThemeBorder(Canvas.Handle, ClientRect, [], 1, Left, Top);
+  if Assigned(FOnPaint) then FOnPaint(Self);
 end;
 
 procedure TBackground.PlaceControl(Control: TControl);
 var
-	R: TRect;
+  R: TRect;
 begin
-	R := BoundsRect;
-	InflateRect(R, -1, -1);
+  R := BoundsRect;
+  InflateRect(R, -1, -1);
   if not ThemePainter.Enabled then
-		InflateRect(R, -1, -1);
-	Control.BoundsRect := R;
+    InflateRect(R, -1, -1);
+  Control.BoundsRect := R;
   Control.Anchors := Anchors;
 end;
 
@@ -1924,7 +1924,7 @@ end;
 
 procedure THorizontalBar.Draw;
 begin
-	Paint;
+  Paint;
 end;
 
 procedure THorizontalBar.Paint;
@@ -1947,32 +1947,32 @@ begin
   end
   else
     DrawThemeSeperator(Canvas.Handle, Rect, Color, FThemed, FTransparent, FFlat);
-	if Assigned(FOnPaint) then FOnPaint(Self);
+  if Assigned(FOnPaint) then FOnPaint(Self);
 end;
 
 procedure THorizontalBar.SetFlat(Value: Boolean);
 begin
-	if Value <> FFlat then
+  if Value <> FFlat then
   begin
-  	FFlat := Value;
+    FFlat := Value;
     Repaint;
   end;
 end;
 
 procedure THorizontalBar.SetThemed(Value: Boolean);
 begin
-	if Value <> FThemed then
+  if Value <> FThemed then
   begin
-	  FThemed := Value;
+    FThemed := Value;
     Repaint;
   end;
 end;
 
 procedure THorizontalBar.SetTransparent(Value: Boolean);
 begin
-	if Value <> FTransparent then
+  if Value <> FTransparent then
   begin
-	  FTransparent := Value;
+    FTransparent := Value;
     Repaint;
   end;
 end;

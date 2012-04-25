@@ -13,13 +13,13 @@ type
     PriorButton: TImageButton;
     FindButton: TImageButton;
     procedure CloseButtonClick(Sender: TObject);
-	private
-		procedure WMEraseBkgnd(var Msg: TWMEraseBkgnd); message WM_ERASEBKGND;
+  private
+    procedure WMEraseBkgnd(var Msg: TWMEraseBkgnd); message WM_ERASEBKGND;
     procedure WMNCPaint(var Msg: TMessage); message WM_NCPAINT;
-	protected
+  protected
     procedure AlignControls(AControl: TControl; var Rect: TRect); override;
-	public
-	  constructor Create(AOwner: TComponent); override;
+  public
+    constructor Create(AOwner: TComponent); override;
   end;
 
 implementation
@@ -38,37 +38,37 @@ end;
 procedure TSearchBar.AlignControls(AControl: TControl; var Rect: TRect);
 begin
   inherited AlignControls(AControl, Rect);
-	ClientHeight := NextButton.Top + NextButton.Height;
-	FindEdit.Top := (ClientHeight - FindEdit.Height) shr 1;
-	PriorButton.Left := NextButton.Left + NextButton.Width + 2
+  ClientHeight := NextButton.Top + NextButton.Height;
+  FindEdit.Top := (ClientHeight - FindEdit.Height) shr 1;
+  PriorButton.Left := NextButton.Left + NextButton.Width + 2
 end;
 
 procedure TSearchBar.CloseButtonClick(Sender: TObject);
 begin
-	Hide;
+  Hide;
 end;
 
 procedure TSearchBar.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
 begin
- 	FillRectColor(Msg.DC, ClientRect, clBtnFace);
+   FillRectColor(Msg.DC, ClientRect, clBtnFace);
   Msg.Result := 1;
 end;
 
 procedure TSearchBar.WMNCPaint(var Msg: TMessage);
 var
-	DC: HDC;
+  DC: HDC;
   R: TRect;
 begin
-	DC := GetWindowDC(Handle);
-	R := BoundsRect;
-	OffsetRect(R, -Left, -Top);
-	InflateRect(R, -BorderWidth, -BorderWidth);
-	SelectClipRect(DC, R, RGN_DIFF);
-	InflateRect(R, BorderWidth, BorderWidth);
-	FillRectColor(DC, R, clBtnFace);
+  DC := GetWindowDC(Handle);
+  R := BoundsRect;
+  OffsetRect(R, -Left, -Top);
+  InflateRect(R, -BorderWidth, -BorderWidth);
+  SelectClipRect(DC, R, RGN_DIFF);
+  InflateRect(R, BorderWidth, BorderWidth);
+  FillRectColor(DC, R, clBtnFace);
   R.Bottom := R.Top + 1;
-	FillRectColor(DC, R, clBtnShadow);
-	ReleaseDC(Handle, DC);
+  FillRectColor(DC, R, clBtnShadow);
+  ReleaseDC(Handle, DC);
   Msg.Result := 0;
 end;
 

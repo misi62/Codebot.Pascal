@@ -14,15 +14,15 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Windows, Messages, SysUtils, Classes, Controls, Graphics, ImgList, Forms,
+  Windows, Messages, SysUtils, Classes, Controls, Graphics, ImgList, Forms,
   ActnList, BlendTools, GraphTools, FormTools, WinTools, BtnCtrls, XMLParser;
 
 { TFlowSite }
 
 type
-	TFlowSite = class(TWinControl, IUnknown, IIgnoreResize, IIgnoreMargin)
+  TFlowSite = class(TWinControl, IUnknown, IIgnoreResize, IIgnoreMargin)
   private
-  	FDockControls: TList;
+    FDockControls: TList;
     FSize: Integer;
     function CalculateDockPoint(X, Y: Integer): TPoint;
     procedure WMEraseBkgnd(var Msg: TWMEraseBkgnd); message WM_ERASEBKGND;
@@ -31,22 +31,22 @@ type
     procedure AlignFlowBars; virtual;
     procedure AlignControls(AControl: TControl; var Rect: TRect); override;
     function ValidateDock(const Rect: TRect; var Point: TPoint): Boolean;
-	public
-  	constructor Create(AOwner: TComponent); override;
+  public
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure AdjustAlignment;
-  	procedure DockControl(Control: TControl; X, Y: Integer);
+    procedure DockControl(Control: TControl; X, Y: Integer);
     procedure UndockControl(Control: TControl);
-	published
-  	property Align;
+  published
+    property Align;
     property Size: Integer read FSize write SetSize;
-	end;
+  end;
 
 { TFlowButton }
 
   TFlowButton = class(TCollectionItem)
   private
-  	FAction: TBasicAction;
+    FAction: TBasicAction;
     FActionLink: TActionLink;
     FEnabled: Boolean;
     FHint: string;
@@ -66,16 +66,16 @@ type
     procedure SetSeparator(Value: Boolean);
     procedure SetVisible(Value: Boolean);
   public
-		constructor Create(Collection: TCollection); override;
+    constructor Create(Collection: TCollection); override;
     procedure Assign(Source: TPersistent); override;
-		procedure ActionChange(Sender: TObject);
-	published
-  	property Action: TBasicAction read FAction write SetAction;
-  	property Button: Integer read GetButton;
-  	property Caption: TCaption read FCaption write SetCaption;
-  	property Enabled: Boolean read FEnabled write SetEnabled;
+    procedure ActionChange(Sender: TObject);
+  published
+    property Action: TBasicAction read FAction write SetAction;
+    property Button: Integer read GetButton;
+    property Caption: TCaption read FCaption write SetCaption;
+    property Enabled: Boolean read FEnabled write SetEnabled;
     property Hint: string read FHint write SetHint;
-  	property ImageIndex: Integer read FImageIndex write SetImageIndex;
+    property ImageIndex: Integer read FImageIndex write SetImageIndex;
     property MenuArrow: Boolean read FMenuArrow write SetMenuArrow;
     property Name: string read FName write FName;
     property Separator: Boolean read FSeparator write SetSeparator;
@@ -87,7 +87,7 @@ type
   TFlowButtonActionLink = class(TActionLink)
   private
     FClient: TFlowButton;
-	protected
+  protected
     procedure AssignClient(AClient: TObject); override;
     function IsCaptionLinked: Boolean; override;
     function IsEnabledLinked: Boolean; override;
@@ -130,9 +130,9 @@ type
   TButtonClickEvent = procedure(Sender: TObject; Button: Integer) of object;
   TOrientation = (orHorizontal, orVertical);
 
-	TCustomFlowBar = class(TCustomForm)
+  TCustomFlowBar = class(TCustomForm)
   private
-  	FOwner: TComponent;
+    FOwner: TComponent;
     FShadowTracker: THotTracker;
     FDockTracker: THotTracker;
     FDockAlign: TOrientation;
@@ -148,10 +148,10 @@ type
     FOrientation: TOrientation;
     FShowCaptions: Boolean;
     FOnButtonClick: TButtonClickEvent;
-		procedure AlignButtons;
+    procedure AlignButtons;
     procedure ButtonClick(Sender: TObject);
     procedure ButtonDraw(Control: TWinControl; Rect: TRect;
-	    DrawState: TDrawState; var DefaultDraw: Boolean);
+      DrawState: TDrawState; var DefaultDraw: Boolean);
     procedure SetDragable(Value: Boolean);
     function GetFlowSite: TFlowSite;
     procedure SetFlowSite(Value: TFlowSite);
@@ -163,13 +163,13 @@ type
     procedure SetImages(Value: TCustomImageList);
     procedure SetShowCaptions(const Value: Boolean);
     procedure SetNewStyle(const Value: Boolean);
-		procedure CMEnabledChanged(var Msg: TMessage); message CM_ENABLEDCHANGED;
+    procedure CMEnabledChanged(var Msg: TMessage); message CM_ENABLEDCHANGED;
     procedure WMEnable(var Msg: TWMEnable); message WM_ENABLE;
-		procedure WMEraseBkgnd(var Msg: TWMEraseBkgnd); message WM_ERASEBKGND;
-		procedure WMExitSizeMove(var Msg: TMessage); message WM_EXITSIZEMOVE;
+    procedure WMEraseBkgnd(var Msg: TWMEraseBkgnd); message WM_ERASEBKGND;
+    procedure WMExitSizeMove(var Msg: TMessage); message WM_EXITSIZEMOVE;
     procedure WMMove(var Msg: TWMMove); message WM_MOVE;
     procedure WMMouseActivate(var Msg: TWMMouseActivate); message WM_MOUSEACTIVATE;
-		procedure WMNCActivate(var Msg: TMessage); message WM_NCACTIVATE;
+    procedure WMNCActivate(var Msg: TMessage); message WM_NCACTIVATE;
     procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
     procedure WMNCLButtonDown(var Msg: TWMNCLButtonDown); message WM_NCLBUTTONDOWN;
     procedure WMSize(var Msg: TWMSize); message WM_SIZE;
@@ -178,24 +178,24 @@ type
     procedure AlignControls(AControl: TControl; var Rect: TRect); override;
     procedure DoButtonClick(Button: Integer); dynamic;
     procedure Loaded; override;
-		procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
     procedure PaintWindow(DC: HDC); override;
-		procedure SetParent(AParent: TWinControl); override;
+    procedure SetParent(AParent: TWinControl); override;
     property AllowFocus: Boolean read FAllowFocus write SetAllowFocus default False;
     property Dragable: Boolean read FDragable write SetDragable default True;
     property Buttons: TFlowButtons read FButtons write SetButtons;
     property ShowCaptions: Boolean read FShowCaptions write SetShowCaptions default False;
     property FlowSite: TFlowSite read GetFlowSite write SetFlowSite default nil;
-  	property Images: TCustomImageList read FImages write SetImages;
+    property Images: TCustomImageList read FImages write SetImages;
     property NewStyle: Boolean read FNewStyle write SetNewStyle default False;
     property Orientation: TOrientation read FOrientation write SetOrientation default orHorizontal;
     property Size: Integer read GetSize;
-  	property OnButtonClick: TButtonClickEvent read FOnButtonClick write FOnButtonClick;
+    property OnButtonClick: TButtonClickEvent read FOnButtonClick write FOnButtonClick;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-	published
-  	property PixelsPerInch;
+  published
+    property PixelsPerInch;
   end;
 
 { TFlowBar }
@@ -203,41 +203,41 @@ type
   TFlowBar = class(TCustomFlowBar)
   published
     property AllowFocus;
-	  property Enabled;
-  	property ParentShowHint;
+    property Enabled;
+    property ParentShowHint;
     property ShowCaptions;
     property ShowHint;
     property Buttons;
     property Dragable;
     property FlowSite;
     property Orientation;
-  	property Images;
+    property Images;
     property NewStyle;
-  	property Visible;
-  	property OnButtonClick;
+    property Visible;
+    property OnButtonClick;
   end;
 
 implementation
 
 const
-	AlignBool: array[Boolean] of TOrientation = (orHorizontal, orVertical);
+  AlignBool: array[Boolean] of TOrientation = (orHorizontal, orVertical);
 
 function ConvertAlign(Align: TAlign): TOrientation;
 begin
-	Result := AlignBool[Align in [alLeft, alRight]];
+  Result := AlignBool[Align in [alLeft, alRight]];
 end;
 
 { TFlowSite }
 
 const
-	FlowAligns = [alTop..alRight];
+  FlowAligns = [alTop..alRight];
 
 constructor TFlowSite.Create(AOwner: TComponent);
 begin
   FDockControls := TList.Create;
   inherited Create(AOwner);
-	Align := alTop;
-	ControlStyle := [];
+  Align := alTop;
+  ControlStyle := [];
 end;
 
 destructor TFlowSite.Destroy;
@@ -248,168 +248,168 @@ end;
 
 function TFlowSite.CalculateDockPoint(X, Y: Integer): TPoint;
 begin
-	Result := Point(0, 0);
+  Result := Point(0, 0);
   if not (Align in FlowAligns) then Exit;
-	Result := ClientToScreen(Point(0, 0));
-	if Align in [alTop, alBottom] then
-	begin
+  Result := ClientToScreen(Point(0, 0));
+  if Align in [alTop, alBottom] then
+  begin
     if X - Result.X < -1 then
-    	X := Result.X - 1
-		else if X - Result.X > Width then
-    	X := Result.X + Width;
-		Y := Result.Y;
+      X := Result.X - 1
+    else if X - Result.X > Width then
+      X := Result.X + Width;
+    Y := Result.Y;
     Result := Point(X, Y);
   end
   else
   begin
     if Y - Result.Y < -1 then
-    	Y := Result.Y - 1
-		else if Y - Result.Y > Height then
-    	Y := Result.Y + Height;
-		X := Result.X;
+      Y := Result.Y - 1
+    else if Y - Result.Y > Height then
+      Y := Result.Y + Height;
+    X := Result.X;
     Result := Point(X, Y);
   end;
 end;
 
 procedure TFlowSite.AlignControls(AControl: TControl; var Rect: TRect);
 var
-	CalcSize, NewSize: Integer;
-	O: TOrientation;
+  CalcSize, NewSize: Integer;
+  O: TOrientation;
   F: TCustomFlowBar;
-	I: Integer;
+  I: Integer;
 begin
   if not (Align in FlowAligns) then
   begin
-  	inherited AlignControls(AControl, Rect);
+    inherited AlignControls(AControl, Rect);
     Exit;
   end;
   DisableAlign;
   if Align in [alLeft, alRight] then
-  	O := orVertical
-	else
-  	O := orHorizontal;
+    O := orVertical
+  else
+    O := orHorizontal;
   for I := 0 to FDockControls.Count - 1 do
-  	if TObject(FDockControls[I]) is TCustomFlowBar then
+    if TObject(FDockControls[I]) is TCustomFlowBar then
     begin
-			F := TCustomFlowBar(FDockControls[I]);
-			F.Orientation := O;
-		end;
-	CalcSize := 0;
-	if FDockControls.Count = 0 then
-  	CalcSize := FSize;
+      F := TCustomFlowBar(FDockControls[I]);
+      F.Orientation := O;
+    end;
+  CalcSize := 0;
+  if FDockControls.Count = 0 then
+    CalcSize := FSize;
   if (csDesigning in ComponentState) and (CalcSize < 4) then
-		CalcSize := 4;
-	for I := 0 to FDockControls.Count - 1 do
-	begin
-		if Align in [alLeft, alRight] then
-			NewSize := TControl(FDockControls[I]).Width
-		else
-			NewSize := TControl(FDockControls[I]).Height;
+    CalcSize := 4;
+  for I := 0 to FDockControls.Count - 1 do
+  begin
+    if Align in [alLeft, alRight] then
+      NewSize := TControl(FDockControls[I]).Width
+    else
+      NewSize := TControl(FDockControls[I]).Height;
     if NewSize > CalcSize then
-    	CalcSize := NewSize;
+      CalcSize := NewSize;
   end;
-	if Align in [alLeft, alRight] then
-		Width := CalcSize
-	else
-		Height := CalcSize;
+  if Align in [alLeft, alRight] then
+    Width := CalcSize
+  else
+    Height := CalcSize;
   EnableAlign;
   AlignFlowBars;
 end;
 
 function SortHorizontal(Item1, Item2: Pointer): Integer;
 var
-	A: TControl absolute Item1;
-	B: TControl absolute Item2;
+  A: TControl absolute Item1;
+  B: TControl absolute Item2;
 begin
-	if A = B then
-  	Result := 0
-	else if A.Left < B.Left then
-  	Result := -1
-	else
-  	Result := 1;
+  if A = B then
+    Result := 0
+  else if A.Left < B.Left then
+    Result := -1
+  else
+    Result := 1;
 end;
 
 function SortVertical(Item1, Item2: Pointer): Integer;
 var
-	A: TControl absolute Item1;
-	B: TControl absolute Item2;
+  A: TControl absolute Item1;
+  B: TControl absolute Item2;
 begin
-	if A = B then
-  	Result := 0
-	else if A.Top < B.Top then
-  	Result := -1
-	else
-  	Result := 1;
+  if A = B then
+    Result := 0
+  else if A.Top < B.Top then
+    Result := -1
+  else
+    Result := 1;
 end;
 
 procedure TFlowSite.AlignFlowBars;
 var
-	A, B: TControl;
-	I, J: Integer;
+  A, B: TControl;
+  I, J: Integer;
 begin
-	if not ((Align in FlowAligns) and (FDockControls.Count > 0)) then Exit;
+  if not ((Align in FlowAligns) and (FDockControls.Count > 0)) then Exit;
   DisableAlign;
   if Align in [alTop, alBottom] then
   begin
-  	FDockControls.Sort(SortHorizontal);
+    FDockControls.Sort(SortHorizontal);
     for I := 0 to FDockControls.Count - 1 do
     begin
-    	A := TControl(FDockControls[I]);
+      A := TControl(FDockControls[I]);
       if not A.Visible then Continue;
       TFlowBar(A).TabOrder := I;
       if A.Left < 0 then
-      	A.Left := 0;
-			for J := I + 1 to FDockControls.Count - 1 do
+        A.Left := 0;
+      for J := I + 1 to FDockControls.Count - 1 do
       begin
         B := TControl(FDockControls[J]);
         if B.Left < A.Left + A.Width then
-        	B.Left := A.Left + A.Width;
+          B.Left := A.Left + A.Width;
       end;
     end;
     for I := FDockControls.Count - 1 downto 0 do
     begin
-    	A := TControl(FDockControls[I]);
+      A := TControl(FDockControls[I]);
       if not A.Visible then Continue;
       if A.Left + A.Width > Width then
-      	A.Left := Width - A.Width;
-			for J := I - 1 downto 0 do
+        A.Left := Width - A.Width;
+      for J := I - 1 downto 0 do
       begin
         B := TControl(FDockControls[J]);
         if B.Left + B.Width > A.Left then
-        	B.Left := A.Left - B.Width;
+          B.Left := A.Left - B.Width;
       end;
-		end;
+    end;
   end
   else
   begin
-  	FDockControls.Sort(SortVertical);
+    FDockControls.Sort(SortVertical);
     for I := 0 to FDockControls.Count - 1 do
     begin
-    	A := TControl(FDockControls[I]);
+      A := TControl(FDockControls[I]);
       if not A.Visible then Continue;
       TFlowBar(A).TabOrder := I;
       if A.Top < 0 then
-      	A.Top := 0;
-			for J := I + 1 to FDockControls.Count - 1 do
+        A.Top := 0;
+      for J := I + 1 to FDockControls.Count - 1 do
       begin
         B := TControl(FDockControls[J]);
         if B.Top < A.Top + A.Height then
-        	B.Top := A.Top + A.Height;
+          B.Top := A.Top + A.Height;
       end;
     end;
     for I := FDockControls.Count - 1 downto 0 do
     begin
-    	A := TControl(FDockControls[I]);
+      A := TControl(FDockControls[I]);
       if not A.Visible then Continue;
       if A.Top + A.Height > Height then
-      	A.Top := Height - A.Height;
-			for J := I - 1 downto 0 do
+        A.Top := Height - A.Height;
+      for J := I - 1 downto 0 do
       begin
         B := TControl(FDockControls[J]);
         if B.Top + B.Height > A.Top then
-        	B.Top := A.Top - B.Height;
+          B.Top := A.Top - B.Height;
       end;
-		end;
+    end;
   end;
   EnableAlign;
 end;
@@ -417,153 +417,153 @@ end;
 procedure TFlowSite.AdjustAlignment;
 begin
   case Align of
-  	alLeft: Left := High(Word);
-  	alTop: Top := -High(Word);
-  	alRight: Left := High(Word);
-  	alBottom: Top := -High(Word);
-	end;
+    alLeft: Left := High(Word);
+    alTop: Top := -High(Word);
+    alRight: Left := High(Word);
+    alBottom: Top := -High(Word);
+  end;
 end;
 
 procedure TFlowSite.DockControl(Control: TControl; X, Y: Integer);
 var
-	OldSite: TFlowSite;
+  OldSite: TFlowSite;
   P: TPoint;
 begin
-	if not ((Align in FlowAligns) and (FDockControls.IndexOf(Control) < 0)) then Exit;
-	DisableAlign;
-	OldSite := nil;
-	if Control.Parent is TFlowSite then
+  if not ((Align in FlowAligns) and (FDockControls.IndexOf(Control) < 0)) then Exit;
+  DisableAlign;
+  OldSite := nil;
+  if Control.Parent is TFlowSite then
     OldSite := TFlowSite(Control.Parent);
   FDockControls.Add(Control);
   if OldSite <> Self then
-		Control.Parent := Self;
-	if (X = 0) and (Y = 0) then
-  	P := Point(0, 0)
-	else
-		P := ScreenToClient(Point(X, Y));
+    Control.Parent := Self;
+  if (X = 0) and (Y = 0) then
+    P := Point(0, 0)
+  else
+    P := ScreenToClient(Point(X, Y));
   if Align in [alTop, alBottom] then
   begin
-  	if P.X < -1 then
-	  	Control.Left := -1
-		else if P.X > Width  then
-    	Control.Left := Width
-		else
-    	Control.Left := P.X;
-	  Control.Top := 0;
+    if P.X < -1 then
+      Control.Left := -1
+    else if P.X > Width  then
+      Control.Left := Width
+    else
+      Control.Left := P.X;
+    Control.Top := 0;
   end
   else
   begin
-	  Control.Left := 0;
-  	if P.Y < -1 then
-	  	Control.Top := -1
-		else if P.Y > Height then
-    	Control.Top := Height
-		else
-    	Control.Top := P.Y;
+    Control.Left := 0;
+    if P.Y < -1 then
+      Control.Top := -1
+    else if P.Y > Height then
+      Control.Top := Height
+    else
+      Control.Top := P.Y;
   end;
   EnableAlign;
   AlignFlowBars;
   AdjustAlignment;
-	if (OldSite <> nil) and (OldSite <> Self) then
-		OldSite.FDockControls.Remove(Control);
+  if (OldSite <> nil) and (OldSite <> Self) then
+    OldSite.FDockControls.Remove(Control);
 end;
 
 procedure TFlowSite.UndockControl(Control: TControl);
 begin
-	if FDockControls.IndexOf(Control) = -1 then Exit;
-	FDockControls.Remove(Control);
+  if FDockControls.IndexOf(Control) = -1 then Exit;
+  FDockControls.Remove(Control);
   Control.Parent := nil;
   AdjustAlignment;
 end;
 
 function TFlowSite.ValidateDock(const Rect: TRect; var Point: TPoint): Boolean;
 var
-	A, B: TRect;
+  A, B: TRect;
 begin
-	Result := False;
+  Result := False;
   if not (Enabled and Visible and (Align in FlowAligns)) then Exit;
   B := ClientRect;
-	case Align of
-		alLeft: if B.Left = B.Right then Inc(B.Right, 2);
+  case Align of
+    alLeft: if B.Left = B.Right then Inc(B.Right, 2);
     alTop: if B.Top = B.Bottom then Inc(B.Bottom, 2);
     alRight: if B.Left = B.Right then Dec(B.Left, 2);
     alBottom: if B.Top = B.Bottom then Dec(B.Top, 2);
-	end;
+  end;
   with ClientToScreen(Classes.Point(0, 0)) do
-  	OffsetRect(B, X, Y);
+    OffsetRect(B, X, Y);
   if IntersectRect(A, B, Rect) then
   begin
-  	Point := CalculateDockPoint(Rect.Left, Rect.Top);
-  	Result := True;
+    Point := CalculateDockPoint(Rect.Left, Rect.Top);
+    Result := True;
   end;
 end;
 
 procedure TFlowSite.SetSize(Value: Integer);
 begin
-	if Value < 0 then
-  	Value := 0;
-	if Value <> FSize then
+  if Value < 0 then
+    Value := 0;
+  if Value <> FSize then
   begin
-	  FSize := Value;
+    FSize := Value;
     if FDockControls.Count = 0 then
-    	Realign;
+      Realign;
   end;
 end;
 
 procedure TFlowSite.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
 var
   Bitmap: TBitmap;
-	FlowBar: TCustomFlowBar;
-	R: TRect;
+  FlowBar: TCustomFlowBar;
+  R: TRect;
   P: HPEN;
   B: HBRUSH;
-	I: Integer;
+  I: Integer;
 begin
-	R := ClientRect;
+  R := ClientRect;
   if csDesigning in ComponentState then
   begin
-	  FillRectColor(Msg.DC, R, clBtnShadow);
-		P := SelectObject(Msg.DC, GetPen(clWindowText, psDash));
+    FillRectColor(Msg.DC, R, clBtnShadow);
+    P := SelectObject(Msg.DC, GetPen(clWindowText, psDash));
     B := SelectObject(Msg.DC, GetBrush(clWindowText, bsFDiagonal));
-		Rectangle(Msg.DC, R.Left, R.Top, R.Right, R.Bottom);
+    Rectangle(Msg.DC, R.Left, R.Top, R.Right, R.Bottom);
     OverwriteObject(Msg.DC, P);
     OverwriteObject(Msg.DC, B);
     if FDockControls.Count > 0 then
     begin
-		  Bitmap := TBitmap.Create;
+      Bitmap := TBitmap.Create;
       try
-			  for I := 0 to FDockControls.Count - 1 do
-		  		if TObject(FDockControls[I]) is TCustomFlowBar then
-	        begin
-			    	FlowBar := TCustomFlowBar(FDockControls[I]);
-			      Bitmap.Width := FlowBar.Width;
-    		    Bitmap.Height := FlowBar.Height;
-		  	    FlowBar.PaintTo(Bitmap.Canvas, 0, 0);
-						BitBlt(Msg.DC, FlowBar.Left, FlowBar.Top, Bitmap.Width, Bitmap.Height,
-    		    	Bitmap.Canvas.Handle, 0, 0, SRCCOPY);
-  	      end;
+        for I := 0 to FDockControls.Count - 1 do
+          if TObject(FDockControls[I]) is TCustomFlowBar then
+          begin
+            FlowBar := TCustomFlowBar(FDockControls[I]);
+            Bitmap.Width := FlowBar.Width;
+            Bitmap.Height := FlowBar.Height;
+            FlowBar.PaintTo(Bitmap.Canvas, 0, 0);
+            BitBlt(Msg.DC, FlowBar.Left, FlowBar.Top, Bitmap.Width, Bitmap.Height,
+              Bitmap.Canvas.Handle, 0, 0, SRCCOPY);
+          end;
       finally
-      	Bitmap.Free;
+        Bitmap.Free;
       end;
-		end;
+    end;
   end
   else
   begin
-		if Align in [alLeft, alRight] then
-  		Inc(R.Bottom, 5);
-		if FDockControls.Count = 0 then
-    	FillRectColor(Msg.DC, R, Color)
+    if Align in [alLeft, alRight] then
+      Inc(R.Bottom, 5);
+    if FDockControls.Count = 0 then
+      FillRectColor(Msg.DC, R, Color)
     else with ThemePainter do
-			if Enabled then
-		  	DrawElement(Msg.DC, GetDetails(trRebarRoot), R)
-			else
-		  begin
-		    FillRectColor(Msg.DC, R, Color);
-		    R.Top := R.Bottom - 1;
-		    FillRectColor(Msg.DC, R, Blend(Color, clWindowText, 75));
-		  end;
-	end;
-	Msg.Result := 1;
+      if Enabled then
+        DrawElement(Msg.DC, GetDetails(trRebarRoot), R)
+      else
+      begin
+        FillRectColor(Msg.DC, R, Color);
+        R.Top := R.Bottom - 1;
+        FillRectColor(Msg.DC, R, Blend(Color, clWindowText, 75));
+      end;
+  end;
+  Msg.Result := 1;
 end;
 
 { TFlowButton }
@@ -586,7 +586,7 @@ begin
     FHint := EditItem.FHint;
     FImageIndex := EditItem.FImageIndex;
     FVisible := EditItem.FVisible;
-		Changed(False);
+    Changed(False);
   end
   else
     inherited Assign(Source);
@@ -596,14 +596,14 @@ procedure TFlowButton.ActionChange(Sender: TObject);
 begin
   if (Sender = FAction) and (FAction is TCustomAction) then
     with TCustomAction(FAction) do
-	  begin
-			FCaption := Caption;
-			FEnabled := Enabled;
-			FHint := Hint;
-			FImageIndex := ImageIndex;
-			FVisible := Visible;
-	    Changed(False);
-		end;
+    begin
+      FCaption := Caption;
+      FEnabled := Enabled;
+      FHint := Hint;
+      FImageIndex := ImageIndex;
+      FVisible := Visible;
+      Changed(False);
+    end;
 end;
 
 procedure TFlowButton.SetAction(Value: TBasicAction);
@@ -615,7 +615,7 @@ begin
   end
   else
   begin
-  	FAction := Value;
+    FAction := Value;
     if FActionLink = nil then
       FActionLink := TFlowButtonActionLink.Create(Self);
     FActionLink.Action := FAction;
@@ -626,7 +626,7 @@ end;
 
 function TFlowButton.GetButton: Integer;
 begin
-	Result := ID;
+  Result := ID;
 end;
 
 procedure TFlowButton.SetCaption(const Value: TCaption);
@@ -700,7 +700,7 @@ end;
 function TFlowButtonActionLink.IsCaptionLinked: Boolean;
 begin
   Result := inherited IsCaptionLinked and
-		(FClient.Caption = (Action as TCustomAction).Caption);
+    (FClient.Caption = (Action as TCustomAction).Caption);
 end;
 
 function TFlowButtonActionLink.IsEnabledLinked: Boolean;
@@ -729,7 +729,7 @@ end;
 
 function TFlowButtonActionLink.IsOnExecuteLinked: Boolean;
 begin
-	Result := True;
+  Result := True;
 end;
 
 procedure TFlowButtonActionLink.SetCaption(const Value: string);
@@ -776,33 +776,33 @@ end;
 
 procedure TFlowButtons.Assign(Source: TPersistent);
 var
-	Strings: TStrings absolute Source;
-	Document: IDocument;
+  Strings: TStrings absolute Source;
+  Document: IDocument;
 begin
-	if Source is TStrings then
+  if Source is TStrings then
   begin
-  	Document := CreateDocument;
+    Document := CreateDocument;
     Document.Text := Strings.Text;
     LoadFromXML(Document.Root);
   end
   else
-  	inherited Assign(Source);
+    inherited Assign(Source);
 end;
 
 procedure TFlowButtons.AssignTo(Dest: TPersistent);
 var
-	Strings: TStrings absolute Dest;
-	Document: IDocument;
+  Strings: TStrings absolute Dest;
+  Document: IDocument;
 begin
-	if Dest is TStrings then
+  if Dest is TStrings then
   begin
-  	Document := CreateDocument;
-	  Document.Root := Document.CreateNode('FlowBar');
-  	SaveToXML(Document.Root);
-	  Strings.Text := Document.Text;
+    Document := CreateDocument;
+    Document.Root := Document.CreateNode('FlowBar');
+    SaveToXML(Document.Root);
+    Strings.Text := Document.Text;
   end
   else
-  	inherited;
+    inherited;
 end;
 
 function TFlowButtons.FindItemID(ID: Integer): TFlowButton;
@@ -819,7 +819,7 @@ procedure TFlowButtons.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
   if GetOwner is TCustomFlowBar then
-  	TCustomFlowBar(GetOwner).AlignButtons;
+    TCustomFlowBar(GetOwner).AlignButtons;
 end;
 
 function TFlowButtons.Get(Index: Integer): TFlowButton;
@@ -834,9 +834,9 @@ end;
 
 procedure TFlowButtons.SaveToFile(const FileName: string);
 var
-	Document: IDocument;
+  Document: IDocument;
 begin
-	Document := CreateDocument;
+  Document := CreateDocument;
   Document.Root := Document.CreateNode('FlowBar');
   SaveToXML(Document.Root);
   Document.SaveToFile(FileName);
@@ -844,28 +844,28 @@ end;
 
 procedure TFlowButtons.SaveToXML(Node: INode);
 var
-	Nodes: INodes;
+  Nodes: INodes;
   Child: INode;
   Filer: IFiler;
   Item: TFlowButton;
   I: Integer;
 begin
-	Nodes := Node.Nodes;
-	for I := 0 to Count - 1 do
+  Nodes := Node.Nodes;
+  for I := 0 to Count - 1 do
   begin
-  	Item := Items[I];
+    Item := Items[I];
     Child := Nodes.Add('button');
-  	Filer := Child.Attributes.Filer;
+    Filer := Child.Attributes.Filer;
     Filer.WriteInteger('id', Item.Button);
     Filer.WriteBool('enabled', Item.Enabled);
     Filer.WriteInteger('image', Item.ImageIndex);
     if Item.MenuArrow then
-	    Filer.WriteString('kind', 'menu')
-		else
-	    Filer.WriteString('kind', 'normal');
+      Filer.WriteString('kind', 'menu')
+    else
+      Filer.WriteString('kind', 'normal');
     Filer.WriteString('name', Item.Name);
     if Item.Separator then
-	    Filer.WriteBool('separator', Item.Separator);
+      Filer.WriteBool('separator', Item.Separator);
     Filer.WriteBool('visible', Item.Visible);
     Filer := Child.Filer;
     Filer.WriteString('caption', Item.Caption);
@@ -875,65 +875,65 @@ end;
 
 procedure TFlowButtons.LoadFromFile(const FileName: string);
 var
-	Document: IDocument;
+  Document: IDocument;
 begin
-	Document := CreateDocument;
+  Document := CreateDocument;
   Document.LoadFromFile(FileName);
   Clear;
-	LoadFromXML(Document.Root);
+  LoadFromXML(Document.Root);
 end;
 
 procedure TFlowButtons.LoadFromXML(Node: INode);
 var
-	Nodes: INodes;
+  Nodes: INodes;
   Child: INode;
   Filer: IFiler;
   Item: TFlowButton;
   I: Integer;
 begin
-	if (Node = nil) or (Node.Name <> 'FlowBar') then Exit;
+  if (Node = nil) or (Node.Name <> 'FlowBar') then Exit;
   Nodes := Node.FindNodes('button');
   if Nodes = nil then Exit;
   PInteger(@NextID)^ := 0;
-	BeginUpdate;
+  BeginUpdate;
   try
-  	for I := 0 to Nodes.Count - 1 do
+    for I := 0 to Nodes.Count - 1 do
     begin
-	  	Item := Add;
-    	Child := Nodes[I];
+      Item := Add;
+      Child := Nodes[I];
       Filer := Child.Attributes.Filer;
-  	  Item.Enabled := Filer.ReadBool('enabled');
-    	Item.ImageIndex := Filer.ReadInteger('image');
+      Item.Enabled := Filer.ReadBool('enabled');
+      Item.ImageIndex := Filer.ReadInteger('image');
       Item.MenuArrow := Filer.ReadString('kind') = 'menu';
       Item.Name := Filer.ReadString('name');
       Item.Separator := Filer.ReadBool('separator');
-	    Item.Visible := Filer.ReadBool('visible');
-  	  Filer := Child.Filer;
-	    Item.Caption := Filer.ReadString('caption');
-	    Item.Hint := Filer.ReadString('hint');
+      Item.Visible := Filer.ReadBool('visible');
+      Filer := Child.Filer;
+      Item.Caption := Filer.ReadString('caption');
+      Item.Hint := Filer.ReadString('hint');
     end;
   finally
-  	EndUpdate;
+    EndUpdate;
   end;
 end;
 
 { TFlowDesigner }
 
 type
-	IFlowDesigner = interface(IDesignerHook)
-	['{A0637657-5823-40E9-A7FC-344491DA2129}']
+  IFlowDesigner = interface(IDesignerHook)
+  ['{A0637657-5823-40E9-A7FC-344491DA2129}']
   end;
 
-	TFlowDesigner = class(TInterfacedObject, IDesignerNotify, IDesignerHook,
-  	IFlowDesigner)
+  TFlowDesigner = class(TInterfacedObject, IDesignerNotify, IDesignerHook,
+    IFlowDesigner)
   private
-  	FOwner: TComponent;
-  	FNotify: IDesignerHook;
-	protected
-  	{ IDesignerNotify }
+    FOwner: TComponent;
+    FNotify: IDesignerHook;
+  protected
+    { IDesignerNotify }
     procedure Modified;
     procedure Notification(AnObject: TPersistent; Operation: TOperation);
-  	{ IDesignerNotify }
+    { IDesignerNotify }
     function GetCustomForm: TCustomForm;
     procedure SetCustomForm(Value: TCustomForm);
     function GetIsControl: Boolean;
@@ -944,9 +944,9 @@ type
       const CurName, NewName: string);
     function UniqueName(const BaseName: string): string;
     function GetRoot: TComponent;
-	public
-  	constructor Create(AOwner: TComponent; Notify: IDesignerHook);
-	end;
+  public
+    constructor Create(AOwner: TComponent; Notify: IDesignerHook);
+  end;
 
 constructor TFlowDesigner.Create(AOwner: TComponent; Notify: IDesignerHook);
 begin
@@ -959,12 +959,12 @@ end;
 
 procedure TFlowDesigner.Modified;
 begin
-	FNotify.Modified;
+  FNotify.Modified;
 end;
 
 procedure TFlowDesigner.Notification(AnObject: TPersistent; Operation: TOperation);
 begin
-	FNotify.Notification(AnObject, Operation);
+  FNotify.Notification(AnObject, Operation);
 end;
 
 { TFlowDesigner.IDesignerNotify }
@@ -987,63 +987,63 @@ end;
 function TFlowDesigner.IsDesignMsg(Sender: TControl;
   var Message: TMessage): Boolean;
 begin
-	Result := FNotify.IsDesignMsg(Sender, Message);
+  Result := FNotify.IsDesignMsg(Sender, Message);
 end;
 
 procedure TFlowDesigner.PaintGrid;
 var
   Bitmap: TBitmap;
-	FlowBar: TCustomFlowBar;
+  FlowBar: TCustomFlowBar;
   DC: HDC;
-	I: Integer;
+  I: Integer;
 begin
-	FNotify.PaintGrid;
-	DC := GetDC(TCustomForm(FOwner).Handle);
-	SelectClipRgn(DC, 0);
+  FNotify.PaintGrid;
+  DC := GetDC(TCustomForm(FOwner).Handle);
+  SelectClipRgn(DC, 0);
   Bitmap := TBitmap.Create;
   try
-	  for I := 0 to FOwner.ComponentCount - 1 do
-  		if FOwner.Components[I] is TCustomFlowBar then
-    	begin
-	    	FlowBar := TCustomFlowBar(FOwner.Components[I]);
+    for I := 0 to FOwner.ComponentCount - 1 do
+      if FOwner.Components[I] is TCustomFlowBar then
+      begin
+        FlowBar := TCustomFlowBar(FOwner.Components[I]);
         if FlowBar.Parent <> FOwner then Continue;
-	      Bitmap.Width := FlowBar.Width;
+        Bitmap.Width := FlowBar.Width;
         Bitmap.Height := FlowBar.Height;
-  	    FlowBar.PaintTo(Bitmap.Canvas, 0, 0);
-				BitBlt(DC, FlowBar.Left, FlowBar.Top, Bitmap.Width, Bitmap.Height,
-        	Bitmap.Canvas.Handle, 0, 0, SRCCOPY);
-    	end;
-	finally
-  	Bitmap.Free;
-		ReleaseDC(TCustomForm(FOwner).Handle, DC);
+        FlowBar.PaintTo(Bitmap.Canvas, 0, 0);
+        BitBlt(DC, FlowBar.Left, FlowBar.Top, Bitmap.Width, Bitmap.Height,
+          Bitmap.Canvas.Handle, 0, 0, SRCCOPY);
+      end;
+  finally
+    Bitmap.Free;
+    ReleaseDC(TCustomForm(FOwner).Handle, DC);
   end;
 end;
 
 procedure TFlowDesigner.SetCustomForm(Value: TCustomForm);
 begin
-	FNotify.SetCustomForm(Value);
+  FNotify.SetCustomForm(Value);
 end;
 
 procedure TFlowDesigner.SetIsControl(Value: Boolean);
 begin
-	FNotify.SetIsControl(Value);
+  FNotify.SetIsControl(Value);
 end;
 
 function TFlowDesigner.UniqueName(const BaseName: string): string;
 begin
-	FNotify.UniqueName(BaseName);
+  FNotify.UniqueName(BaseName);
 end;
 
 procedure TFlowDesigner.ValidateRename(AComponent: TComponent;
   const CurName, NewName: string);
 begin
-	FNotify.ValidateRename(AComponent, CurName, NewName);
+  FNotify.ValidateRename(AComponent, CurName, NewName);
 end;
 
 { TCustomFlowBar }
 
 const
-	ButtonDefaultSize = 16;
+  ButtonDefaultSize = 16;
   ButtonBorder = 4;
   ButtonSeparator = 6;
   ButtonGrip = 11;
@@ -1052,31 +1052,31 @@ constructor TCustomFlowBar.Create(AOwner: TComponent);
 begin
   FOwner := AOwner;
   if FOwner = nil then
-  	FOwner := Application;
+    FOwner := Application;
   if FOwner <> Application then
-  	FOwner.FreeNotification(Self);
+    FOwner.FreeNotification(Self);
   if FOwner is TCustomForm then
-  	FHook := TCustomForm(AOwner).Designer
-	else
-  	FHook := nil;
-	if FHook = nil then
-	  inherited CreateNew(FOwner)
-	else
+    FHook := TCustomForm(AOwner).Designer
+  else
+    FHook := nil;
+  if FHook = nil then
+    inherited CreateNew(FOwner)
+  else
   begin
-  	inherited CreateNew(FOwner);
-		if not Supports(FHook, IFlowDesigner) then
-	  	TCustomForm(FOwner).Designer := TFlowDesigner.Create(FOwner, FHook);
-	end;
+    inherited CreateNew(FOwner);
+    if not Supports(FHook, IFlowDesigner) then
+      TCustomForm(FOwner).Designer := TFlowDesigner.Create(FOwner, FHook);
+  end;
   BorderStyle := bsNone;
-	ControlStyle := [];
+  ControlStyle := [];
   TabStop := False;
   if csDesigning in FOwner.ComponentState then
   begin
-  	Width := 400;
-	  Height := ButtonDefaultSize + ButtonBorder * 2;
-  	Visible := True;
-	end;
-	FButtons := TFlowButtons.Create(Self);
+    Width := 400;
+    Height := ButtonDefaultSize + ButtonBorder * 2;
+    Visible := True;
+  end;
+  FButtons := TFlowButtons.Create(Self);
   FDragable := True;
   FImageChangeLink := TChangeLink.Create;
   FImageChangeLink.OnChange := ImageListChange;
@@ -1085,138 +1085,138 @@ end;
 
 destructor TCustomFlowBar.Destroy;
 begin
-	FImages := nil;
-	FreeAndNil(FDockTracker);
-	FreeAndNil(FShadowTracker);
-	inherited Destroy;
+  FImages := nil;
+  FreeAndNil(FDockTracker);
+  FreeAndNil(FShadowTracker);
+  inherited Destroy;
 end;
 
 procedure TCustomFlowBar.AlignButtons;
 var
   Button: TImageButton;
-	Item: TFlowButton;
+  Item: TFlowButton;
   X: Integer;
-	I: Integer;
+  I: Integer;
 begin
-	for I := ControlCount - 1 downto FButtons.Count do
-  	Controls[I].Free;
-	for I := ControlCount to FButtons.Count - 1 do
+  for I := ControlCount - 1 downto FButtons.Count do
+    Controls[I].Free;
+  for I := ControlCount to FButtons.Count - 1 do
   begin
-		Button := TImageButton.Create(Self);
+    Button := TImageButton.Create(Self);
     Button.FocusedRect := False;
     Button.Parent := Self;
   end;
   if FDragable then
-		X := ButtonGrip
-	else
-  	X := 2;
-	for I := 0 to FButtons.Count - 1 do
+    X := ButtonGrip
+  else
+    X := 2;
+  for I := 0 to FButtons.Count - 1 do
   begin
-  	Button := Controls[I] as TImageButton;
-		Button.HandleNeeded;
+    Button := Controls[I] as TImageButton;
+    Button.HandleNeeded;
     Item := FButtons[I];
     Button.AutoSize := True;
     Button.AllowFocus := FAllowFocus;
     Button.Caption := Item.Caption;
     if FShowCaptions and (Button.Caption <> '') and (FOrientation = orHorizontal) then
-	    Button.CaptionPosition := cpRight
-		else
-	    Button.CaptionPosition := cpHidden;
-		if Item.MenuArrow and (FOrientation = orHorizontal) then
-	    Button.Kind := bkMenuButton
-		else
-	    Button.Kind := bkButton;
+      Button.CaptionPosition := cpRight
+    else
+      Button.CaptionPosition := cpHidden;
+    if Item.MenuArrow and (FOrientation = orHorizontal) then
+      Button.Kind := bkMenuButton
+    else
+      Button.Kind := bkButton;
     Button.Hint := Item.Hint;
     Button.ImageIndex := Item.ImageIndex;
     Button.ParentShowHint := True;
-		Button.Enabled := Item.Enabled and Enabled;
+    Button.Enabled := Item.Enabled and Enabled;
     Button.Visible := Item.Visible;
     Button.TabStop := True;
     Button.Style := bsFlat;
-		Button.Tag := Item.Button;
+    Button.Tag := Item.Button;
     //Button.Images := nil;
     Button.Images := FImages;
     if Item.Action <> nil then
-	    Button.OnClick := Item.Action.OnExecute
+      Button.OnClick := Item.Action.OnExecute
     else
-	    Button.OnClick := ButtonClick;
+      Button.OnClick := ButtonClick;
     Button.OnCustomDraw := ButtonDraw;
     if Item.Visible then
     begin
-		  if FOrientation = orHorizontal then
+      if FOrientation = orHorizontal then
       begin
-	    	Button.Left := X;
-  	    Button.Top := 2;
-      	Inc(X, Button.Width);
-			end
+        Button.Left := X;
+        Button.Top := 2;
+        Inc(X, Button.Width);
+      end
       else
       begin
-	    	Button.Top := X;
-  	    Button.Left := 2;
-      	Inc(X, Button.Height);
-			end;
-			if Item.Separator then
-				Inc(X, ButtonSeparator);
+        Button.Top := X;
+        Button.Left := 2;
+        Inc(X, Button.Height);
+      end;
+      if Item.Separator then
+        Inc(X, ButtonSeparator);
     end;
   end;
   if FOrientation = orHorizontal then
-		Width := X + 2
+    Width := X + 2
   else
-		Height := X + 2;
+    Height := X + 2;
   if (csDesigning in ComponentState) and (Parent <> nil) then
-  	Parent.Invalidate;
+    Parent.Invalidate;
 end;
 
 procedure TCustomFlowBar.ButtonClick(Sender: TObject);
 begin
-	DoButtonClick((Sender as TComponent).Tag);
+  DoButtonClick((Sender as TComponent).Tag);
 end;
 
 procedure TCustomFlowBar.ButtonDraw(Control: TWinControl; Rect: TRect;
   DrawState: TDrawState; var DefaultDraw: Boolean);
 var
-	DC: HDC;
+  DC: HDC;
 begin
-	DefaultDraw := not ((dsBackground in DrawState) and FNewStyle);
+  DefaultDraw := not ((dsBackground in DrawState) and FNewStyle);
   if not DefaultDraw then
   begin
-  	DC := TImageButton(Control).Canvas.Handle;
-  	if dsHot in DrawState then
-    	DrawStyleRect(DC, Rect);
+    DC := TImageButton(Control).Canvas.Handle;
+    if dsHot in DrawState then
+      DrawStyleRect(DC, Rect);
   end;
 end;
 
 procedure TCustomFlowBar.ImageListChange(Sender: TObject);
 begin
-	Realign;
-	AlignButtons;
+  Realign;
+  AlignButtons;
 end;
 
 procedure TCustomFlowBar.AlignControls(AControl: TControl; var Rect: TRect);
 var
-	I: Integer;
+  I: Integer;
 begin
-	if Align in [alLeft, alRight] then Exit;
-	if FImages = nil then
-  	I := ButtonDefaultSize
-	else
-  	I := FImages.Height;
-	if FOrientation = orHorizontal then
-		if Height <> I + ButtonBorder * 2 then Height := I + ButtonBorder * 2
+  if Align in [alLeft, alRight] then Exit;
+  if FImages = nil then
+    I := ButtonDefaultSize
+  else
+    I := FImages.Height;
+  if FOrientation = orHorizontal then
+    if Height <> I + ButtonBorder * 2 then Height := I + ButtonBorder * 2
     else
   else
-		if Width <> I + ButtonBorder * 2 then Width := I + ButtonBorder * 2;
+    if Width <> I + ButtonBorder * 2 then Width := I + ButtonBorder * 2;
 end;
 
 procedure TCustomFlowBar.DoButtonClick(Button: Integer);
 begin
-	if Assigned(FOnButtonClick) then
-  	FOnButtonClick(Self, Button);
+  if Assigned(FOnButtonClick) then
+    FOnButtonClick(Self, Button);
 end;
 
 procedure TCustomFlowBar.Loaded;
 begin
-	inherited Loaded;
+  inherited Loaded;
   AlignButtons;
 end;
 
@@ -1225,95 +1225,95 @@ procedure TCustomFlowBar.Notification(AComponent: TComponent;
 begin
   inherited Notification(AComponent, Operation);
   if Operation = opRemove then
-		if AComponent = FImages then
+    if AComponent = FImages then
       FImages := nil
-		else if AComponent = FOwner then
+    else if AComponent = FOwner then
     begin
-    	RemoveFreeNotification(FOwner);
-    	FOwner := nil;
+      RemoveFreeNotification(FOwner);
+      FOwner := nil;
       Free;
     end;
 end;
 
 procedure TCustomFlowBar.PaintWindow(DC: HDC);
 var
-	Bitmap: TBitmap;
+  Bitmap: TBitmap;
   Control: TWinControl;
-	Rect : TRect;
-	I: Integer;
+  Rect : TRect;
+  I: Integer;
 begin
-	Rect := ClientRect;
+  Rect := ClientRect;
   if FDragable then
   begin
-		if FOrientation = orHorizontal then
-	  	Rect.Right := ButtonGrip
-		else
-	  	Rect.Bottom := ButtonGrip;
-		InflateRect(Rect, -1, -1);
-		DrawThemeGripper(DC, Rect, Color, FOrientation = orHorizontal);
+    if FOrientation = orHorizontal then
+      Rect.Right := ButtonGrip
+    else
+      Rect.Bottom := ButtonGrip;
+    InflateRect(Rect, -1, -1);
+    DrawThemeGripper(DC, Rect, Color, FOrientation = orHorizontal);
   end;
-	for I := 0 to Buttons.Count - 1 do
-  	if Buttons[I].Separator then
+  for I := 0 to Buttons.Count - 1 do
+    if Buttons[I].Separator then
     begin
-    	Rect := Controls[I].BoundsRect;
+      Rect := Controls[I].BoundsRect;
       if FOrientation = orHorizontal then
       begin
-	      InflateRect(Rect, 0, -2);
-  	    Slide(Rect, drRight);
-    	  Rect.Right := Rect.Left + ButtonSeparator;
-      	with ThemePainter do
-      		if Enabled then
-		      	DrawElement(DC, GetDetails(ttbSeparatorNormal), Rect)
-					else
-						DrawSeparator(DC, Rect, Color, True);
-			end
+        InflateRect(Rect, 0, -2);
+        Slide(Rect, drRight);
+        Rect.Right := Rect.Left + ButtonSeparator;
+        with ThemePainter do
+          if Enabled then
+            DrawElement(DC, GetDetails(ttbSeparatorNormal), Rect)
+          else
+            DrawSeparator(DC, Rect, Color, True);
+      end
       else
       begin
-	      InflateRect(Rect, -2, 0);
-  	    Slide(Rect);
-    	  Rect.Bottom := Rect.Top + ButtonSeparator;
-      	with ThemePainter do
-      		if Enabled then
-		      	DrawElement(DC, GetDetails(ttbSeparatorVertNormal), Rect)
-					else
-						DrawSeparator(DC, Rect, Color, False);
+        InflateRect(Rect, -2, 0);
+        Slide(Rect);
+        Rect.Bottom := Rect.Top + ButtonSeparator;
+        with ThemePainter do
+          if Enabled then
+            DrawElement(DC, GetDetails(ttbSeparatorVertNormal), Rect)
+          else
+            DrawSeparator(DC, Rect, Color, False);
       end;
-	  end;
-	if csDesigning in ComponentState then
+    end;
+  if csDesigning in ComponentState then
   begin
-		Bitmap := TBitmap.Create;
+    Bitmap := TBitmap.Create;
     try
-			for I := 0 to ControlCount - 1 do
-      	if Controls[I] is TWinControl then
+      for I := 0 to ControlCount - 1 do
+        if Controls[I] is TWinControl then
         begin
-        	Control := TWinControl(Controls[I]);
+          Control := TWinControl(Controls[I]);
           if not Control.Visible then Continue;
           Bitmap.Width := Control.Width;
           Bitmap.Height := Control.Height;
           Control.PaintTo(Bitmap.Canvas, 0, 0);
-					BitBlt(DC, Control.Left, Control.Top, Bitmap.Width, Bitmap.Height,
-  	      	Bitmap.Canvas.Handle, 0, 0, SRCCOPY);
+          BitBlt(DC, Control.Left, Control.Top, Bitmap.Width, Bitmap.Height,
+            Bitmap.Canvas.Handle, 0, 0, SRCCOPY);
         end;
-		finally
-			Bitmap.Free;
+    finally
+      Bitmap.Free;
     end;
-		FillRectOutline(DC, ClientRect, clBtnShadow);
+    FillRectOutline(DC, ClientRect, clBtnShadow);
   end
   else
   begin
-		if Parent = nil then
-			FillRectOutline(DC, ClientRect, clBtnShadow);
-		ValidateHotTracker;
+    if Parent = nil then
+      FillRectOutline(DC, ClientRect, clBtnShadow);
+    ValidateHotTracker;
   end;
 end;
 
 procedure TCustomFlowBar.ValidateHotTracker;
 begin
-	if IsWindowEnabled(Handle) and (Parent = nil) then
+  if IsWindowEnabled(Handle) and (Parent = nil) then
   begin
     if FShadowTracker <> nil then Exit;
-		FShadowTracker := THotTracker.Create;
-		with FShadowTracker do
+    FShadowTracker := THotTracker.Create;
+    with FShadowTracker do
     begin
       Associate := Self.Handle;
       Border := 2;
@@ -1322,22 +1322,22 @@ begin
       Opacity := $60;
       X := 3;
       Y := 3;
-	    Update;
+      Update;
     end;
-	end
+  end
   else if FShadowTracker <> nil then
-  	FreeAndNil(FShadowTracker);
+    FreeAndNil(FShadowTracker);
 end;
 
 procedure TCustomFlowBar.SetAllowFocus(Value: Boolean);
 var
-	I: Integer;
+  I: Integer;
 begin
-	if Value <> FAllowFocus then
+  if Value <> FAllowFocus then
   begin
-	  FAllowFocus := Value;
-		for I := 0 to ControlCount - 1 do
-    	TImageButton(Controls[I]).AllowFocus := FAllowFocus;
+    FAllowFocus := Value;
+    for I := 0 to ControlCount - 1 do
+      TImageButton(Controls[I]).AllowFocus := FAllowFocus;
   end;
 end;
 
@@ -1348,46 +1348,46 @@ end;
 
 procedure TCustomFlowBar.SetDragable(Value: Boolean);
 begin
-	if Value <> FDragable then
+  if Value <> FDragable then
   begin
-	  FDragable := Value;
-		AlignButtons;
+    FDragable := Value;
+    AlignButtons;
     Invalidate;
   end;
 end;
 
 function TCustomFlowBar.GetFlowSite: TFlowSite;
 begin
-	if Parent is TFlowSite then
-  	Result := TFlowSite(Parent)
-	else
-  	Result := nil;
+  if Parent is TFlowSite then
+    Result := TFlowSite(Parent)
+  else
+    Result := nil;
 end;
 
 procedure TCustomFlowBar.SetFlowSite(Value: TFlowSite);
 begin
-	if Value <> nil then
-  	Value.DockControl(Self, 0, 0)
-	else
-  	Parent := GetParentForm(Self);
+  if Value <> nil then
+    Value.DockControl(Self, 0, 0)
+  else
+    Parent := GetParentForm(Self);
 end;
 
 procedure TCustomFlowBar.SetImages(Value: TCustomImageList);
 begin
-	if Value <> FImages then
+  if Value <> FImages then
   begin
-	  if FImages <> nil then
+    if FImages <> nil then
     begin
-    	FImages.UnRegisterChanges(FImageChangeLink);
-			FImages.RemoveFreeNotification(Self);
-		end;
-  	FImages := Value;
-	  if FImages <> nil then
-  	begin
-    	FImages.RegisterChanges(FImageChangeLink);
-	    FImages.FreeNotification(Self);
+      FImages.UnRegisterChanges(FImageChangeLink);
+      FImages.RemoveFreeNotification(Self);
+    end;
+    FImages := Value;
+    if FImages <> nil then
+    begin
+      FImages.RegisterChanges(FImageChangeLink);
+      FImages.FreeNotification(Self);
       AlignButtons;
-  	end;
+    end;
   end;
 end;
 
@@ -1395,248 +1395,248 @@ procedure TCustomFlowBar.SetNewStyle(const Value: Boolean);
 begin
   if Value <> FNewStyle then
   begin
-  	FNewStyle := Value;
+    FNewStyle := Value;
     if HandleAllocated then
-			InvalidateWindows(Handle);
+      InvalidateWindows(Handle);
   end;
 end;
 
 procedure TCustomFlowBar.SetOrientation(Value: TOrientation);
 begin
-	if Value <> FOrientation then
+  if Value <> FOrientation then
   begin
-	  FOrientation := Value;
+    FOrientation := Value;
     Realign;
-		AlignButtons;
+    AlignButtons;
     Invalidate;
   end;
 end;
 
 procedure TCustomFlowBar.SetParent(AParent: TWinControl);
 var
-	FlowSite: TFlowSite;
+  FlowSite: TFlowSite;
   OldParent: TWinControl;
 begin
-	OldParent := Parent;
-	inherited SetParent(AParent);
-	if (csDesigning in ComponentState) and (OldParent <> nil) then
-		OldParent.Invalidate;
-	FDockTarget := nil;
+  OldParent := Parent;
+  inherited SetParent(AParent);
+  if (csDesigning in ComponentState) and (OldParent <> nil) then
+    OldParent.Invalidate;
+  FDockTarget := nil;
   if Parent is TFlowSite then
-	begin
-  	FlowSite := TFlowSite(Parent);
-  	if FlowSite.Align in [alLeft, alRight] then
-    	Orientation := orVertical
-		else
-    	Orientation := orHorizontal;
-		FlowSite.DockControl(Self, 0, 0);
-  	FDockTarget := FlowSite;
+  begin
+    FlowSite := TFlowSite(Parent);
+    if FlowSite.Align in [alLeft, alRight] then
+      Orientation := orVertical
+    else
+      Orientation := orHorizontal;
+    FlowSite.DockControl(Self, 0, 0);
+    FDockTarget := FlowSite;
   end;
-	if (csDesigning in ComponentState) and (Parent <> nil) then
-		Parent.Invalidate;
+  if (csDesigning in ComponentState) and (Parent <> nil) then
+    Parent.Invalidate;
 end;
 
 procedure TCustomFlowBar.SetShowCaptions(const Value: Boolean);
 begin
   if Value <> FShowCaptions then
   begin
-  	FShowCaptions := Value;
-		AlignButtons;
+    FShowCaptions := Value;
+    AlignButtons;
   end;
 end;
 
 function TCustomFlowBar.GetSize: Integer;
 begin
-	if FOrientation = orHorizontal then
-  	Result := Height
-	else
-  	Result := Width;
+  if FOrientation = orHorizontal then
+    Result := Height
+  else
+    Result := Width;
 end;
 
 procedure TCustomFlowBar.CMEnabledChanged(var Msg: TMessage);
 var
-	I: Integer;
+  I: Integer;
 begin
-	inherited;
-	for I := 0 to ControlCount - 1 do
-  	Controls[I].Enabled := Enabled and Buttons[I].Enabled;
+  inherited;
+  for I := 0 to ControlCount - 1 do
+    Controls[I].Enabled := Enabled and Buttons[I].Enabled;
   if (csDesigning in ComponentState) and (Parent <> nil) then
-  	Parent.Invalidate;
+    Parent.Invalidate;
 end;
 
 procedure TCustomFlowBar.WMEnable(var Msg: TWMEnable);
 begin
-	inherited;
-	ValidateHotTracker;
+  inherited;
+  ValidateHotTracker;
 end;
 
 procedure TCustomFlowBar.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
 var
-	R: TRect;
+  R: TRect;
 begin
-	R := ClientRect;
+  R := ClientRect;
   if FOrientation = orVertical then
-  	Inc(R.Bottom, 5);
-	with ThemePainter do
-		if Enabled then
-	  	DrawElement(Msg.DC, GetDetails(trRebarRoot), R)
-		else
-	  begin
-	    FillRectColor(Msg.DC, R, Color);
-	    R.Top := R.Bottom - 1;
-	    FillRectColor(Msg.DC, R, Blend(Color, clWindowText, 75));
-	  end;
-	Msg.Result := 1;
+    Inc(R.Bottom, 5);
+  with ThemePainter do
+    if Enabled then
+      DrawElement(Msg.DC, GetDetails(trRebarRoot), R)
+    else
+    begin
+      FillRectColor(Msg.DC, R, Color);
+      R.Top := R.Bottom - 1;
+      FillRectColor(Msg.DC, R, Blend(Color, clWindowText, 75));
+    end;
+  Msg.Result := 1;
 end;
 
 procedure TCustomFlowBar.WMExitSizeMove(var Msg: TMessage);
 begin
-	inherited;
-	if (Parent = nil) and (FDockTarget <> nil) then
-		TFlowSite(FDockTarget).DockControl(Self, FDockPoint.X, FDockPoint.Y);
-	if Parent = nil then
-	  FDockTarget := nil;
-	FreeAndNil(FDockTracker);
+  inherited;
+  if (Parent = nil) and (FDockTarget <> nil) then
+    TFlowSite(FDockTarget).DockControl(Self, FDockPoint.X, FDockPoint.Y);
+  if Parent = nil then
+    FDockTarget := nil;
+  FreeAndNil(FDockTracker);
 end;
 
 procedure TCustomFlowBar.WMMouseActivate(var Msg: TWMMouseActivate);
 begin
-	Msg.Result := MA_NOACTIVATE;
+  Msg.Result := MA_NOACTIVATE;
 end;
 
 procedure TCustomFlowBar.WMNCActivate(var Msg: TMessage);
 begin
-	Msg.Result := DefWindowProc(Handle, Msg.Msg, 1, Msg.LParam);
+  Msg.Result := DefWindowProc(Handle, Msg.Msg, 1, Msg.LParam);
   if FOwner is TWinControl then
-  	SendMessage(TWinControl(FOwner).Handle, WM_NCACTIVATE, 1, 0);
+    SendMessage(TWinControl(FOwner).Handle, WM_NCACTIVATE, 1, 0);
 end;
 
 procedure TCustomFlowBar.WMNCHitTest(var Msg: TWMNCHitTest);
 var
-	P: TPoint;
+  P: TPoint;
 begin
-	P := ScreenToClient(SmallPointToPoint(Msg.Pos));
+  P := ScreenToClient(SmallPointToPoint(Msg.Pos));
   if not FDragable then
-	  Msg.Result := HTCLIENT
+    Msg.Result := HTCLIENT
   else if (FOrientation = orHorizontal) and (P.X < ButtonGrip) then
-	 	Msg.Result := HTCAPTION
-	else if (FOrientation = orVertical) and (P.Y < ButtonGrip) then
-	 	Msg.Result := HTCAPTION
-	else
-	  Msg.Result := HTCLIENT;
+     Msg.Result := HTCAPTION
+  else if (FOrientation = orVertical) and (P.Y < ButtonGrip) then
+     Msg.Result := HTCAPTION
+  else
+    Msg.Result := HTCLIENT;
 end;
 
 procedure TCustomFlowBar.WMNCLButtonDown(var Msg: TWMNCLButtonDown);
 var
-	P: TPoint;
+  P: TPoint;
 begin
   if Parent <> nil then
   begin
-  	P := ScreenToClient(Point(Msg.XCursor, Msg.YCursor));
+    P := ScreenToClient(Point(Msg.XCursor, Msg.YCursor));
     if Orientation = orHorizontal then
-    	Top := -10000
-		else
-    	Left := -10000;
+      Top := -10000
+    else
+      Left := -10000;
     if Parent is TFlowSite then
-			TFlowSite(Parent).UndockControl(Self)
-		else
-	  	Parent := nil;
+      TFlowSite(Parent).UndockControl(Self)
+    else
+      Parent := nil;
     SetWindowPos(Handle, HWND_TOPMOST, Msg.XCursor - P.X, Msg.YCursor - P.Y,
-    	0, 0, SWP_NOSIZE or SWP_NOACTIVATE or SWP_SHOWWINDOW);
+      0, 0, SWP_NOSIZE or SWP_NOACTIVATE or SWP_SHOWWINDOW);
     ValidateHotTracker;
-	end;
-	inherited;
+  end;
+  inherited;
 end;
 
 procedure TCustomFlowBar.WMMove(var Msg: TWMMove);
 
   procedure AlignTracker(FlowSite: TFlowSite; Container: TWinControl; Force: Boolean = False);
   var
-  	R: TRect;
+    R: TRect;
     A, B: TPoint;
     X, Y: Integer;
   begin
-  	R := ClientRect;
+    R := ClientRect;
     A := FDockPoint;
     if (FlowSite.Align = alBottom) and (FlowSite.FDockControls.Count = 0) then
-    	Dec(A.Y, Size)
-		else if (FlowSite.Align = alRight) and (FlowSite.FDockControls.Count = 0) then
-    	Dec(A.X, Size);
-	  Force := Force or (ConvertAlign(FlowSite.Align) <> FDockAlign);
+      Dec(A.Y, Size)
+    else if (FlowSite.Align = alRight) and (FlowSite.FDockControls.Count = 0) then
+      Dec(A.X, Size);
+    Force := Force or (ConvertAlign(FlowSite.Align) <> FDockAlign);
     FDockAlign := ConvertAlign(FlowSite.Align);
-		if FDockAlign <> FOrientation then
-		begin
-     	X := WidthOf(R);
-			Y := HeightOf(R);
-			R.Right := R.Left + Y;
-			R.Bottom := R.Top + X;
-		end;
+    if FDockAlign <> FOrientation then
+    begin
+       X := WidthOf(R);
+      Y := HeightOf(R);
+      R.Right := R.Left + Y;
+      R.Bottom := R.Top + X;
+    end;
     B := FlowSite.ScreenToClient(FDockPoint);
     if FDockAlign = orHorizontal then
-	    if B.X + WidthOf(R) > FlowSite.Width then
-      	A.X := A.X + (FlowSite.Width - (B.X + WidthOf(R)));
+      if B.X + WidthOf(R) > FlowSite.Width then
+        A.X := A.X + (FlowSite.Width - (B.X + WidthOf(R)));
     if FDockAlign = orVertical then
-	    if B.Y + HeightOf(R) > FlowSite.Height then
-      	A.Y := A.Y + (FlowSite.Height - (B.Y + HeightOf(R)));
+      if B.Y + HeightOf(R) > FlowSite.Height then
+        A.Y := A.Y + (FlowSite.Height - (B.Y + HeightOf(R)));
     if Force then
-			FDockTracker.Update(@R, @A)
+      FDockTracker.Update(@R, @A)
     else
       FDockTracker.Move(@A);
   end;
 
 var
-	SiteContainer: TWinControl;
+  SiteContainer: TWinControl;
   FlowSite: TFlowSite;
-	R: TRect;
-	I: Integer;
+  R: TRect;
+  I: Integer;
 begin
-	inherited;
+  inherited;
   if FShadowTracker <> nil then
-  	FShadowTracker.Move;
-	if (Parent = nil) and (FOwner is TWinControl) then
+    FShadowTracker.Move;
+  if (Parent = nil) and (FOwner is TWinControl) then
   begin
-		FDockTarget := nil;
-  	SiteContainer := TWinControl(FOwner);
-  	R := BoundsRect;
+    FDockTarget := nil;
+    SiteContainer := TWinControl(FOwner);
+    R := BoundsRect;
     for I := 0 to SiteContainer.ComponentCount - 1 do
-    	if SiteContainer.Components[I] is TFlowSite then
+      if SiteContainer.Components[I] is TFlowSite then
       begin
-      	FlowSite := TFlowSite(SiteContainer.Components[I]);
+        FlowSite := TFlowSite(SiteContainer.Components[I]);
         if FlowSite.ValidateDock(R, FDockPoint) then
         begin
-					FDockTarget := FlowSite;
+          FDockTarget := FlowSite;
           if FDockTracker = nil then
           begin
-          	FDockTracker := THotTracker.Create;
+            FDockTracker := THotTracker.Create;
             with FDockTracker do
             begin
-            	Associate := Self.Handle;
+              Associate := Self.Handle;
               Blur := 0;
-            	Border := 0;
+              Border := 0;
               Opacity := $30;
               Color := 0;
-            	Radius := 0;
+              Radius := 0;
             end;
-						AlignTracker(FlowSite, SiteContainer, True);
+            AlignTracker(FlowSite, SiteContainer, True);
           end
           else
-						AlignTracker(FlowSite, SiteContainer);
-        	Break;
+            AlignTracker(FlowSite, SiteContainer);
+          Break;
         end;
       end;
-		if FDockTarget = nil then
-			FreeAndNil(FDockTracker);
+    if FDockTarget = nil then
+      FreeAndNil(FDockTracker);
   end;
   if (csDesigning in ComponentState) and (Parent <> nil) then
-  	Parent.Invalidate;
+    Parent.Invalidate;
 end;
 
 procedure TCustomFlowBar.WMSize(var Msg: TWMSize);
 begin
-	if FShadowTracker <> nil then
-  	FShadowTracker.Update;
+  if FShadowTracker <> nil then
+    FShadowTracker.Update;
   if (csDesigning in ComponentState) and (Parent <> nil) then
-  	Parent.Invalidate;
+    Parent.Invalidate;
 end;
 
 end.

@@ -234,7 +234,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-  	function Connect: Boolean;
+    function Connect: Boolean;
     procedure Disconnect;
     function GetCurrectDirectory: string;
     function FindFirst(const Path: string; out FindData: TRemoteFindData): Boolean;
@@ -250,7 +250,7 @@ type
     function PutFile(const LocalFile, RemoteFile: string): Boolean;
     function GetFile(const RemoteFile, LocalFile: string; Overwrite: Boolean = True): Boolean;
     property Connected: Boolean read GetConnected write SetConnected;
-  	property Host: string read FHost write FHost;
+    property Host: string read FHost write FHost;
     property Port: Word read FPort write FPort;
     property UserName: string read FUserName write FUserName;
     property Password: string read FPassword write FPassword;
@@ -343,12 +343,12 @@ end;
 
 function HttpResponse: string;
 const
-	Response =
-		'HTTP/1.1 200 OK'#13#10 +
-		'Connection: close'#13#10 +
-		'Server: terraserver/1.0'#13#10 +
-		'Content-Type: text/html'#13#10 +
-		#13#10;
+  Response =
+    'HTTP/1.1 200 OK'#13#10 +
+    'Connection: close'#13#10 +
+    'Server: terraserver/1.0'#13#10 +
+    'Content-Type: text/html'#13#10 +
+    #13#10;
 begin
   Result := Response;
 end;
@@ -658,11 +658,11 @@ begin
     else
       Addr.sin_addr.s_addr := HostToAddr(FHost);
     Addr.sin_port := htons(FPort);
-	except
-  	Error('lookup');
+  except
+    Error('lookup');
     Exit;
   end;
-	CreateHandle;
+  CreateHandle;
   if HandleCreated then
   begin
     AsyncSelect(FD_CONNECT or FD_CLOSE);
@@ -688,7 +688,7 @@ begin
     else if WinSock.listen(FHandle, SOMAXCONN) = SOCKET_ERROR then
       Error('listen')
     else
-	    AsyncSelect(FD_ACCEPT);
+      AsyncSelect(FD_ACCEPT);
   end;
 end;
 
@@ -1190,7 +1190,7 @@ begin
   if (Dir = '') or (Dir = '/') then
     Result := True
   else
-    Result := FindFirst(Dir, D) and (D.Attr and faDirectory	= faDirectory);
+    Result := FindFirst(Dir, D) and (D.Attr and faDirectory  = faDirectory);
   FindClose;
 end;
 
@@ -1198,7 +1198,7 @@ function TFileTransfer.FileExists(const FileName: string): Boolean;
 var
   D: TRemoteFindData;
 begin
-  Result := FindFirst(FileName, D) and (D.Attr and faDirectory	= 0);
+  Result := FindFirst(FileName, D) and (D.Attr and faDirectory  = 0);
   FindClose;
 end;
 
@@ -1278,12 +1278,12 @@ end;
 
 function SocketDownload(const URL: string): string;
 var
-	Socket: TTcpSocket;
+  Socket: TTcpSocket;
 begin
-	Socket := TTcpSocket.Create;
+  Socket := TTcpSocket.Create;
   try
   finally
-  	Socket.Free;
+    Socket.Free;
   end;
 end;
 

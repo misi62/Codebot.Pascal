@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Windows, Messages, SysUtils, Classes, Controls, Graphics, Forms,
+  Windows, Messages, SysUtils, Classes, Controls, Graphics, Forms,
   BaseTypes, GraphTools, FormTools, SuplCtrls;
 
 { TDrawTabItem }
@@ -30,13 +30,13 @@ type
     procedure SetCaption(Value: TCaption);
     procedure SetEnabled(Value: Boolean);
     procedure SetVisible(Value: Boolean);
-	protected
+  protected
     property TabRect: TRect read FTabRect write FTabRect;
-  	property CloseRect: TRect read FCloseRect write FCloseRect;
+    property CloseRect: TRect read FCloseRect write FCloseRect;
   public
     constructor Create(Collection: TCollection); override;
     procedure Assign(Source: TPersistent); override;
-	published
+  published
     property Caption: TCaption read FCaption write SetCaption;
     property Enabled: Boolean read FEnabled write SetEnabled;
     property Visible: Boolean read FVisible write SetVisible;
@@ -109,7 +109,7 @@ type
     { procedure SetTabLeft(Value: Integer); }
     procedure SetStyler(Value: TDrawTabStyler);
     procedure CMDesignHitTest(var Msg: TCMDesignHitTest); message CM_DESIGNHITTEST;
-		procedure CMEnabledChanged(var Msg: TMessage); message CM_ENABLEDCHANGED;
+    procedure CMEnabledChanged(var Msg: TMessage); message CM_ENABLEDCHANGED;
     procedure CMMouseLeave(var Msg: TMessage); message CM_MOUSELEAVE;
   protected
     function GetStyler: TDrawTabStyler;
@@ -126,7 +126,7 @@ type
     procedure Notification(AComponent: TComponent;
       Operation: TOperation); override;
     procedure TabsChanged;
-  	procedure Paint; override;
+    procedure Paint; override;
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
     property CloseHotIndex: Integer read FCloseHotIndex write SetCloseHotIndex;
     property TabIndex: Integer read FTabIndex write SetTabIndex;
@@ -140,10 +140,10 @@ type
     property OnMeasureTab: TMeasureTabEvent read FOnMeasureTab write FOnMeasureTab;
     property OnSelectItem: TNotifyEvent read FOnSelectItem write FOnSelectItem;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     property Canvas;
-  	property Tabs: TDrawTabItems read FTabs write SetTabs;
+    property Tabs: TDrawTabItems read FTabs write SetTabs;
   end;
 
 { TDrawTabs }
@@ -183,7 +183,7 @@ type
     property OnStartDrag;
     property Styler;
     property TabIndex;
-  	property Tabs;
+    property Tabs;
     property OnSelectItem;
     property OnCloseTab;
     property OnDrawBackground;
@@ -200,9 +200,9 @@ implementation
 
 constructor TDrawTabItem.Create(Collection: TCollection);
 begin
-	inherited Create(Collection);
+  inherited Create(Collection);
   FEnabled := True;
-	FVisible := True;
+  FVisible := True;
 end;
 
 procedure TDrawTabItem.Assign(Source: TPersistent);
@@ -272,7 +272,7 @@ procedure TDrawTabItems.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
   if GetOwner is TCustomDrawTabs then
-  	TCustomDrawTabs(GetOwner).TabsChanged;
+    TCustomDrawTabs(GetOwner).TabsChanged;
 end;
 
 function TDrawTabItems.Get(Index: Integer): TDrawTabItem;
@@ -502,15 +502,15 @@ type
 
 procedure DrawImage(DC: HDC; Image: TAlphaImage; const Rect: TRect);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
   if Image.Empty then Exit;
   FillChar(Func, SizeOf(Func), #0);
-	Func.SourceConstantAlpha := Image.Opacity;
+  Func.SourceConstantAlpha := Image.Opacity;
   if Image.Bitmap.Depth = pd32 then
-		Func.AlphaFormat := AC_SRC_ALPHA;
-	Windows.AlphaBlend(DC, Rect.Left, Rect.Top, WidthOf(Rect),
-  	HeightOf(Rect), Image.Bitmap.DC, 0, 0, Image.Width, Image.Height, Func);
+    Func.AlphaFormat := AC_SRC_ALPHA;
+  Windows.AlphaBlend(DC, Rect.Left, Rect.Top, WidthOf(Rect),
+    HeightOf(Rect), Image.Bitmap.DC, 0, 0, Image.Width, Image.Height, Func);
 end;
 
 procedure FillRoundRectColor(DC: HDC; const Rect: TRect; Radius: Integer; Color: TColor);
@@ -702,7 +702,7 @@ begin
   inherited Create(AOwner);
   ControlStyle := [csAcceptsControls, csCaptureMouse];
   DoubleBuffered := True;
-	FTabs := TDrawTabItems.Create(Self);
+  FTabs := TDrawTabItems.Create(Self);
   FTabIndex := -1;
   FTabDownIndex := -1;
   FTabHotIndex := -1;
@@ -797,29 +797,29 @@ end;
 procedure TCustomDrawTabs.MouseDown(Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
 var
-	P: TPoint;
+  P: TPoint;
   T: TDrawTabItem;
-	I: Integer;
+  I: Integer;
 begin
-	if Button = mbLeft then
+  if Button = mbLeft then
   begin
-		P := Point(X, Y);
+    P := Point(X, Y);
     FTabDownIndex := -1;
     FCloseDownIndex := -1;
-		for I := 0 to FTabs.Count - 1 do
+    for I := 0 to FTabs.Count - 1 do
     begin
       T := FTabs[I];
       if (csDesigning in ComponentState) or (T.Enabled and T.Visible) then
         if PtInRect(T.CloseRect, P) then
-	      begin
-  	    	FCloseDownIndex := I;
+        begin
+          FCloseDownIndex := I;
           Repaint;
-  	    end
+        end
         else if PtInRect(T.TabRect, P) then
-	      begin
-  	    	FTabDownIndex := I;
-      	  Break;
-  	    end;
+        begin
+          FTabDownIndex := I;
+          Break;
+        end;
     end;
   end;
   inherited MouseDown(Button, Shift, X, Y);
@@ -827,24 +827,24 @@ end;
 
 procedure TCustomDrawTabs.MouseMove(Shift: TShiftState; X, Y: Integer);
 var
-	P: TPoint;
+  P: TPoint;
   H, C: Integer;
-	I: Integer;
+  I: Integer;
 begin
-	if csDesigning in ComponentState then Exit;
-	P := Point(X, Y);
+  if csDesigning in ComponentState then Exit;
+  P := Point(X, Y);
   H := -1;
   C := -1;
-	for I := 0 to FTabs.Count - 1 do
+  for I := 0 to FTabs.Count - 1 do
   begin
-  	if PtInRect(FTabs[I].CloseRect, P) then
-    	C := I;
-  	if PtInRect(FTabs[I].TabRect, P) then
-    	H := I;
+    if PtInRect(FTabs[I].CloseRect, P) then
+      C := I;
+    if PtInRect(FTabs[I].TabRect, P) then
+      H := I;
     if (H > -1) or (C > -1) then
       Break;
   end;
-	TabHotIndex := H;
+  TabHotIndex := H;
   CloseHotIndex := C;
   inherited MouseMove(Shift, X, Y);
 end;
@@ -852,15 +852,15 @@ end;
 procedure TCustomDrawTabs.MouseUp(Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
 var
-	Form: TCustomForm;
+  Form: TCustomForm;
   T: TDrawTabItem;
-	P: TPoint;
-	I: Integer;
+  P: TPoint;
+  I: Integer;
 begin
-	if Button = mbLeft then
+  if Button = mbLeft then
   begin
-		P := Point(X, Y);
-		for I := FTabs.Count - 1 downto 0 do
+    P := Point(X, Y);
+    for I := FTabs.Count - 1 downto 0 do
     begin
       T := FTabs[I];
       if (csDesigning in ComponentState) or (T.Enabled and T.Visible) then
@@ -871,14 +871,14 @@ begin
         else if FTabDownIndex > -1 then
           if (FTabDownIndex = I) and PtInRect(FTabs[I].TabRect, P) then
           begin
-          	TabIndex := I;
-			      if csDesigning in ComponentState then
-			      begin
-        			Form := GetParentForm(Self);
-		    	    if (Form <> nil) and (Form.Designer <> nil) then
-        		    Form.Designer.Modified;
-          	  Break;
-  			    end;
+            TabIndex := I;
+            if csDesigning in ComponentState then
+            begin
+              Form := GetParentForm(Self);
+              if (Form <> nil) and (Form.Designer <> nil) then
+                Form.Designer.Modified;
+              Break;
+            end;
           end;
     end;
     if FCloseDownIndex > -1 then
@@ -976,23 +976,23 @@ end;
 
 procedure TCustomDrawTabs.TabsChanged;
 begin
-	Repaint;
+  Repaint;
 end;
 
 procedure TCustomDrawTabs.SetCloseHotIndex(Value: Integer);
 begin
-	if Value <> FCloseHotIndex then
+  if Value <> FCloseHotIndex then
   begin
-	  FCloseHotIndex := Value;
+    FCloseHotIndex := Value;
     Repaint;
   end;
 end;
 
 procedure TCustomDrawTabs.SetTabHotIndex(Value: Integer);
 begin
-	if Value <> FTabHotIndex then
+  if Value <> FTabHotIndex then
   begin
-	  FTabHotIndex := Value;
+    FTabHotIndex := Value;
     Repaint;
   end;
 end;
@@ -1029,42 +1029,42 @@ end;
 
 procedure TCustomDrawTabs.KeyDown(var Key: Word; Shift: TShiftState);
 
-	function FindPriorItem: Integer;
+  function FindPriorItem: Integer;
   var
     I: Integer;
   begin
-  	Result := TabIndex;
+    Result := TabIndex;
     if Result < 0 then Exit;
     for I := Result - 1 downto 0 do
-    	if Tabs[I].Visible then
+      if Tabs[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
     for I := Tabs.Count - 1 downto 0 do
-    	if Tabs[I].Visible then
+      if Tabs[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
   end;
 
-	function FindNextItem: Integer;
+  function FindNextItem: Integer;
   var
     I: Integer;
   begin
-  	Result := TabIndex;
+    Result := TabIndex;
     if Result < 0 then Exit;
     for I := Result + 1 to Tabs.Count - 1 do
-    	if Tabs[I].Visible then
+      if Tabs[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
     for I := 0 to Tabs.Count - 1 do
-    	if Tabs[I].Visible then
+      if Tabs[I].Visible then
       begin
-      	Result := I;
+        Result := I;
         Exit;
       end;
   end;
@@ -1072,37 +1072,37 @@ procedure TCustomDrawTabs.KeyDown(var Key: Word; Shift: TShiftState);
 begin
   inherited KeyDown(Key, Shift);
   {case Key of
-  	VK_UP, VK_LEFT: TabIndex := FindPriorItem;
-		VK_DOWN, VK_RIGHT: TabIndex := FindNextItem;
-	end}
+    VK_UP, VK_LEFT: TabIndex := FindPriorItem;
+    VK_DOWN, VK_RIGHT: TabIndex := FindNextItem;
+  end}
 end;
 
 procedure TCustomDrawTabs.CMDesignHitTest(var Msg: TCMDesignHitTest);
 var
-	P: TPoint;
-	I: Integer;
+  P: TPoint;
+  I: Integer;
 begin
-	inherited;
-	Msg.Result := 0;
+  inherited;
+  Msg.Result := 0;
   P := Point(Msg.XPos, Msg.YPos);
-	for I := 0 to FTabs.Count - 1 do
- 		if PtInRect(FTabs[I].TabRect, P) then
+  for I := 0 to FTabs.Count - 1 do
+     if PtInRect(FTabs[I].TabRect, P) then
     begin
-			Msg.Result := 1;
-   	  Break;
+      Msg.Result := 1;
+       Break;
     end;
 end;
 
 procedure TCustomDrawTabs.CMEnabledChanged(var Msg: TMessage);
 begin
-	inherited;
+  inherited;
   Repaint;
 end;
 
 procedure TCustomDrawTabs.CMMouseLeave(var Msg: TMessage);
 begin
-	inherited;
-	TabHotIndex := -1;
+  inherited;
+  TabHotIndex := -1;
 end;
 
 {procedure TCustomDrawTabs.WMEraseBkgnd(var Msg: TWMEraseBkgnd);

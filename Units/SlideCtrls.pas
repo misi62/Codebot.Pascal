@@ -23,8 +23,8 @@ type
 
   TCustomSlideBar = class(TGraphicControl)
   private
-  	FChanged: Boolean;
-  	FKind: TSlideBarKind;
+    FChanged: Boolean;
+    FKind: TSlideBarKind;
     FMin: Double;
     FMax: Double;
     FStep: Double;
@@ -178,7 +178,7 @@ begin
   FStep := 1;
   FTracking := True;
   if not Enabled then
-	  FDrawState := [dsDisabled];
+    FDrawState := [dsDisabled];
 end;
 
 destructor TCustomSlideBar.Destroy;
@@ -187,7 +187,7 @@ begin
   FOnDrawBackground := nil;
   FOnDrawThumb := nil;
   FOnFormat := nil;
-	Associate := nil;
+  Associate := nil;
   inherited Destroy;
 end;
 
@@ -195,7 +195,7 @@ function TCustomSlideBar.GetGripRect: TRect;
 var
   X, Y: Integer;
 begin
-	if FKind = sbVertical then
+  if FKind = sbVertical then
   begin
     X := Width div 2;
     Y := Height - (System.Round(Abs(Position - Min) * ((Height - 10) / (FMax - FMin))) + 5);
@@ -205,7 +205,7 @@ begin
     Result.Top := Y - 5;
     Result.Bottom := Y + 5;
     InflateRect(Result, 8, 4);
-	end
+  end
   else
   begin
     X := (System.Round(Abs(Position - Min) * ((Width - 10) / (FMax - FMin))) + 5);
@@ -221,73 +221,73 @@ end;
 
 procedure TCustomSlideBar.Change;
 begin
-	FChanged := True;
+  FChanged := True;
   if FTracking then
-  	DoChange;
+    DoChange;
 end;
 
 procedure TCustomSlideBar.DoChange;
 begin
-	if FChanged then
-	  if Assigned(FOnChange) then FOnChange(Self);
-	FChanged := False;
+  if FChanged then
+    if Assigned(FOnChange) then FOnChange(Self);
+  FChanged := False;
 end;
 
 procedure TCustomSlideBar.Notification(AComponent: TComponent; Operation: TOperation);
 begin
-	if (Operation = opRemove) and (FAssociate = AComponent) then
-  	Associate := nil;
+  if (Operation = opRemove) and (FAssociate = AComponent) then
+    Associate := nil;
 end;
 
 procedure TCustomSlideBar.MouseMove(Shift: TShiftState; X, Y: Integer);
 var
-	Range, Delta: Single;
+  Range, Delta: Single;
 begin
   inherited MouseMove(Shift, X, Y);
   if PtInRect(GetGripRect, Point(X, Y)) then
-		DrawState := DrawState + [dsHot]
+    DrawState := DrawState + [dsHot]
   else
-		DrawState := DrawState - [dsHot];
+    DrawState := DrawState - [dsHot];
   if FKind = sbVertical then
   begin
-  	Range := Height;
+    Range := Height;
     Delta := Y;
   end
   else
   begin
-  	Range := Width;
+    Range := Width;
     Delta := X;
   end;
   if Range = 0 then
-  	Range := 0.000001;
+    Range := 0.000001;
   if (dsFocused in DrawState) and (FMax > FMin) then
-	  if FKind = sbVertical then
-  	  Position := (Range - Delta) / (Range / (FMax - FMin)) + FMin
+    if FKind = sbVertical then
+      Position := (Range - Delta) / (Range / (FMax - FMin)) + FMin
     else
-  	  Position := (Delta / Range) * (FMax - FMin) + FMin;
+      Position := (Delta / Range) * (FMax - FMin) + FMin;
 end;
 
 procedure TCustomSlideBar.MouseDown(Button: TMouseButton; Shift: TShiftState;
-	X, Y: Integer);
+  X, Y: Integer);
 begin
-	inherited MouseDown(Button, Shift, X, Y);
+  inherited MouseDown(Button, Shift, X, Y);
   if Button = mbLeft then
   begin
     FMoving := True;
-	  DrawState := DrawState + [dsFocused];
+    DrawState := DrawState + [dsFocused];
   end;
 end;
 
 procedure TCustomSlideBar.MouseUp(Button: TMouseButton; Shift: TShiftState;
-	X, Y: Integer);
+  X, Y: Integer);
 begin
-	inherited MouseUp(Button, Shift, X, Y);
+  inherited MouseUp(Button, Shift, X, Y);
   if Button = mbLeft then
   begin
-	  DrawState := DrawState - [dsFocused];
+    DrawState := DrawState - [dsFocused];
     DoChange;
     FMoving := False;
-	end;
+  end;
 end;
 
 procedure TCustomSlideBar.ForcePaint;
@@ -361,20 +361,20 @@ end;
 
 procedure TCustomSlideBar.SetDrawState(Value: TDrawState);
 begin
-	if Value <> FDrawState then
+  if Value <> FDrawState then
   begin
-		FDrawState := Value;
+    FDrawState := Value;
     ForcePaint;
   end;
 end;
 
 procedure TCustomSlideBar.SetKind(Value: TSlideBarKind);
 var
-	I: Integer;
+  I: Integer;
 begin
-	if Value <> FKind then
+  if Value <> FKind then
   begin
-  	FKind := Value;
+    FKind := Value;
     if csLoading in ComponentState then Exit;
     I := Width;
     Width := Height;
@@ -387,11 +387,11 @@ procedure TCustomSlideBar.SetAssociate(Value: TControl);
 var
   I: Double;
 begin
-	if FAssociate <> nil then
-  	FAssociate.RemoveFreeNotification(Self);
-	FAssociate := Value;
-	if FAssociate <> nil then
-  	FAssociate.FreeNotification(Self);
+  if FAssociate <> nil then
+    FAssociate.RemoveFreeNotification(Self);
+  FAssociate := Value;
+  if FAssociate <> nil then
+    FAssociate.FreeNotification(Self);
   if FAssociate <> nil then
   begin
     I := FPosition;
@@ -432,17 +432,17 @@ end;
 
 procedure InvalidateControlRect(Control: TControl; Rect: TRect);
 var
-	WinControl: TWinControl absolute Control;
+  WinControl: TWinControl absolute Control;
 begin
-	if csDesigning in Control.ComponentState then
-  	Control.Invalidate
-	else if not Control.Visible then
-  	Exit
-	else if (Control is TGraphicControl) and
-  	(Control.Parent <> nil) and	Control.Parent.HandleAllocated then
+  if csDesigning in Control.ComponentState then
+    Control.Invalidate
+  else if not Control.Visible then
+    Exit
+  else if (Control is TGraphicControl) and
+    (Control.Parent <> nil) and  Control.Parent.HandleAllocated then
   begin
-  	with Control.BoundsRect do
-			OffsetRect(Rect, Left, Top);
+    with Control.BoundsRect do
+      OffsetRect(Rect, Left, Top);
     InvalidateRect(Control.Parent.Handle, @Rect, True)
   end
   else if (Control is TWinControl) and (WinControl.HandleAllocated) then
@@ -470,22 +470,22 @@ begin
         FOnFormat(Self, S);
       TCustomSlideBar(FAssociate).Text := S;
     end;
-  	ForcePaint;
+    ForcePaint;
   end;
 end;
 
 procedure TCustomSlideBar.CMEnabledChanged(var Message: TMessage);
 begin
-	inherited;
+  inherited;
   if Enabled then
-	  DrawState := DrawState - [dsDisabled]
+    DrawState := DrawState - [dsDisabled]
   else
-	  DrawState := DrawState + [dsDisabled];
+    DrawState := DrawState + [dsDisabled];
 end;
 
 procedure TCustomSlideBar.CMMouseLeave(var Message: TMessage);
 begin
-	inherited;
+  inherited;
   DrawState := DrawState - [dsHot];
 end;
 

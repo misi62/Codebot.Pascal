@@ -3,8 +3,8 @@ unit ShlObj2;
 interface
 
 uses
-	ShlObj, ShellApi2, Windows, ActiveX, CommCtrl, ShellAPI, RegStr, Messages,
-	WinInet, UrlMon;
+  ShlObj, ShellApi2, Windows, ActiveX, CommCtrl, ShellAPI, RegStr, Messages,
+  WinInet, UrlMon;
 
 const
   CLSID_NetworkPlaces: TGUID = (
@@ -933,8 +933,8 @@ type
                      fvmIcon = 1,
                      fvmSmallIcon = 2,
                      fvmList = 3,
-	                   fvmDetails = 4,
-	                   fvmThumbNail	= 5,
+                     fvmDetails = 4,
+                     fvmThumbNail  = 5,
                      fvmTile = 6,
                      fvmThumbStrip = 7,
                      fvmLast = 7);
@@ -1186,14 +1186,14 @@ type
   SPBEGINF = DWord;
 
 const
-  SPACTION_NONE	= 0;
+  SPACTION_NONE  = 0;
   SPACTION_MOVING = 1;
   SPACTION_COPYING = 2;
   SPACTION_RECYCLING = 3;
   SPACTION_APPLYINGATTRIBS = 4;
-  SPACTION_DOWNLOADING	= 5;
+  SPACTION_DOWNLOADING  = 5;
   SPACTION_SEARCHING_INTERNET = 6;
-  SPACTION_CALCULATING	= 7;
+  SPACTION_CALCULATING  = 7;
   SPACTION_UPLOADING = 8;
   SPACTION_SEARCHING_FILES = 9;
 
@@ -1202,7 +1202,7 @@ type
 
 const
   SPTEXT_ACTIONDESCRIPTION    = 1;
-  SPTEXT_ACTIONDETAIL	      = 2;
+  SPTEXT_ACTIONDETAIL        = 2;
 type
   SPTEXT = DWord;
 
@@ -1319,11 +1319,11 @@ const
   DBIMF_ADDTOFRONT            = $0200;
   DBIMF_TOPALIGN              = $0400;
 
-	DBID_PUSHCHEVRON	= 3;
-	DBID_DELAYINIT	= 4;
-	DBID_FINISHINIT	= 5;
-	DBID_SETWINDOWTHEME	= 6;
-	DBID_PERMITAUTOHIDE	= 7;
+  DBID_PUSHCHEVRON  = 3;
+  DBID_DELAYINIT  = 4;
+  DBID_FINISHINIT  = 5;
+  DBID_SETWINDOWTHEME  = 6;
+  DBID_PERMITAUTOHIDE  = 7;
 
   DBPC_SELECTFIRST    = DWORD(-1);
   DBPC_SELECTLAST     = DWORD(-2);
@@ -1496,7 +1496,7 @@ type
 //
 //-------------------------------------------------------------------------
 const
-  MBHANDCID_PIDLSELECT	= 0;
+  MBHANDCID_PIDLSELECT  = 0;
 
 type
   IMenuBand = interface
@@ -1559,8 +1559,8 @@ type
   PBandSiteInfo = ^TBandSiteInfo;
 
 const
-  BSID_BANDADDED	  = 0;
-	BSID_BANDREMOVED	= 1;
+  BSID_BANDADDED    = 0;
+  BSID_BANDREMOVED  = 1;
 
   BSIM_STATE             = $00000001;
   BSIM_STYLE             = $00000002;
@@ -1602,15 +1602,15 @@ type
   end;
 
 const
-  NSWF_NONE_IMPLIES_ALL	= $1;
-	NSWF_ONE_IMPLIES_ALL	= $2;
-	NSWF_DONT_TRAVERSE_LINKS	= $4;
-	NSWF_DONT_ACCUMULATE_RESULT	= $8;
-	NSWF_TRAVERSE_STREAM_JUNCTIONS	= $10;
-	NSWF_FILESYSTEM_ONLY	= $20;
-	NSWF_SHOW_PROGRESS	= $40;
-	NSWF_FLAG_VIEWORDER	= $80;
-	NSWF_IGNORE_AUTOPLAY_HIDA	= $100;
+  NSWF_NONE_IMPLIES_ALL  = $1;
+  NSWF_ONE_IMPLIES_ALL  = $2;
+  NSWF_DONT_TRAVERSE_LINKS  = $4;
+  NSWF_DONT_ACCUMULATE_RESULT  = $8;
+  NSWF_TRAVERSE_STREAM_JUNCTIONS  = $10;
+  NSWF_FILESYSTEM_ONLY  = $20;
+  NSWF_SHOW_PROGRESS  = $40;
+  NSWF_FLAG_VIEWORDER  = $80;
+  NSWF_IGNORE_AUTOPLAY_HIDA  = $100;
 
 type
   INamespaceWalk = interface
@@ -1662,18 +1662,18 @@ const
   MPOS_CHILDTRACKING = 5;         // the child got a tracking select (mouse moved over)
 
   // Flags for IMenuPopup::Popup
-  MPPF_SETFOCUS	= $1;
-	MPPF_INITIALSELECT	= $2;
-	MPPF_NOANIMATE	= $4;
-	MPPF_KEYBOARD	= $10;
-	MPPF_REPOSITION	= $20;
-	MPPF_FORCEZORDER	= $40;
-	MPPF_FINALSELECT	= $80;
-	MPPF_TOP	= $20000000;
-	MPPF_LEFT	= $40000000;
-	MPPF_RIGHT	= $60000000;
-	MPPF_BOTTOM	= $80000000;
-	MPPF_POS_MASK	= $e0000000;
+  MPPF_SETFOCUS  = $1;
+  MPPF_INITIALSELECT  = $2;
+  MPPF_NOANIMATE  = $4;
+  MPPF_KEYBOARD  = $10;
+  MPPF_REPOSITION  = $20;
+  MPPF_FORCEZORDER  = $40;
+  MPPF_FINALSELECT  = $80;
+  MPPF_TOP  = $20000000;
+  MPPF_LEFT  = $40000000;
+  MPPF_RIGHT  = $60000000;
+  MPPF_BOTTOM  = $80000000;
+  MPPF_POS_MASK  = $e0000000;
 
 type
   IMenuPopup = interface(IDeskBar)
@@ -1723,9 +1723,9 @@ type
 
 const
   PROPSTR_EXTENSIONCOMPLETIONSTATE = 'ExtensionCompletionState';
- 	CDBE_RET_DEFAULT	= 0;
-	CDBE_RET_DONTRUNOTHEREXTS	= 1;
-	CDBE_RET_STOPWIZARD	= 2;
+   CDBE_RET_DEFAULT  = 0;
+  CDBE_RET_DONTRUNOTHEREXTS  = 1;
+  CDBE_RET_STOPWIZARD  = 2;
 
 type
   ICDBurnExt = interface
@@ -4322,7 +4322,7 @@ type
   AASHELLMENUFILENAME = record
     cbTotal : shortint;
     rgbReserved : array[0..11] of byte;
-    szFileName : array[0..0] of WideChar; 	// variable length string
+    szFileName : array[0..0] of WideChar;   // variable length string
   end;
   PAAShellMenuFilename = ^AASHELLMENUFILENAME;
   TAAShellMenuFilename = AASHELLMENUFILENAME;
@@ -4332,7 +4332,7 @@ type
     iReserved : integer;
     uiReserved : UINT;
     lpName : PAAShellMenuFilename; // name of file
-    psz : LPWSTR; 			// text to use if no file
+    psz : LPWSTR;       // text to use if no file
   end;
   PAAShellMenuItem = ^AASHELLMENUITEM;
   TAAShellMenuItem = AASHELLMENUITEM;
@@ -4590,7 +4590,7 @@ begin
 
   if hinstDll > 0 then begin
     DllGetVersion := GetProcAddress(hinstDll,'DllGetVersion');
-		CDefFolderMenu_Create2 := GetProcAddress(hinstDll, MakeIntResource(701));
+    CDefFolderMenu_Create2 := GetProcAddress(hinstDll, MakeIntResource(701));
 
     if Assigned(DllGetVersion) then begin
       FillChar(dvi, sizeof(dvi),#0);

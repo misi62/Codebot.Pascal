@@ -65,7 +65,7 @@ implementation
 
 procedure TInspectorEditorsForm.FormCreate(Sender: TObject);
 begin
-	ListBox.ItemHeight := Round(Canvas.TextHeight('Wg') * 3.5);
+  ListBox.ItemHeight := Round(Canvas.TextHeight('Wg') * 3.5);
   ClientHeight := CancelButton.Top + 32;
   ClientWidth := ListBox.Left + CancelButton.Left + CancelButton.Width;
   GetEditorKindStrings(KindComboBox.Items);
@@ -107,13 +107,13 @@ end;
 
 procedure TInspectorEditorsForm.AddButtonClick(Sender: TObject);
 var
-	Editor: TInspectorEditor;
+  Editor: TInspectorEditor;
   Kind: TEditorKind;
 begin
   if Trim(Name) = '' then Exit;
   with KindComboBox do
     Kind := TEditorKind(Items.Objects[ItemIndex]);
-	Editor := Editors.Add(Kind);
+  Editor := Editors.Add(Kind);
   ListBox.Items.AddObject(NameEdit.Text, Editor);
   ListBox.ItemIndex := ListBox.Items.Count - 1;
   ListBoxClick(nil);
@@ -152,13 +152,13 @@ var
 begin
   if ListBox.ItemIndex > -1 then
   begin
-  	Editors.BeginUpdate;
+    Editors.BeginUpdate;
     Editors[ListBox.ItemIndex].Free;
     PriorIndex := ListBox.ItemIndex;
     ListBox.Items.Delete(ListBox.ItemIndex);
     if PriorIndex = ListBox.Items.Count then
       Dec(PriorIndex);
-  	Editors.EndUpdate;
+    Editors.EndUpdate;
     ListBox.ItemIndex := PriorIndex;
     ListBoxClick(nil);
   end;
@@ -183,22 +183,22 @@ end;
 
 procedure TInspectorEditorsForm.ValueEditExit(Sender: TObject);
 begin
-	if ListBox.ItemIndex < 0 then Exit;
+  if ListBox.ItemIndex < 0 then Exit;
   if ListBox.Items[ListBox.ItemIndex] = NameEdit.Text then
-	Editors[ListBox.ItemIndex].Text := ValueEdit.Text;
+  Editors[ListBox.ItemIndex].Text := ValueEdit.Text;
 end;
 
 
 function EditInspector(Inspector: TInspector): Boolean;
 begin
-	with TInspectorEditorsForm.Create(Application) do
-	try
-  	Editors := Inspector.Editors;
+  with TInspectorEditorsForm.Create(Application) do
+  try
+    Editors := Inspector.Editors;
     Result := ShowModal = mrOK;
     if Result then
       Inspector.Editors := Editors;
   finally
-  	Free;
+    Free;
   end;
 end;
 
@@ -209,7 +209,7 @@ begin
   begin
     Editors[ListBox.ItemIndex].Name := NameEdit.Text;
     ListBox.Repaint;
-	end;
+  end;
 end;
 
 procedure TInspectorEditorsForm.ValueEditChange(Sender: TObject);
@@ -218,43 +218,43 @@ begin
   begin
     Editors[ListBox.ItemIndex].Text := ValueEdit.Text;
     ListBox.Repaint;
-	end;
+  end;
 end;
 
 procedure TInspectorEditorsForm.ListBoxDrawItem(Control: TWinControl;
   Index: Integer; Rect: TRect; State: TOwnerDrawState);
 var
-	DC: HDC;
-	R: TRect;
-	S: string;
+  DC: HDC;
+  R: TRect;
+  S: string;
 begin
-	R := Rect;
-	with ListBox.Canvas do
+  R := Rect;
+  with ListBox.Canvas do
   begin
-  	FillRect(R);
+    FillRect(R);
     Inc(R.Top, 1);
     Inc(R.Left, 3);
     Font.Style := [fsBold];
-  	DC := Handle;
+    DC := Handle;
     R.Bottom := R.Top + TextHeight('Wg');
-		with KindComboBox.Items do
-			S := Strings[IndexOfObject(TObject(Editors[Index].Kind))];
-		DrawCaption(DC, S, R, drLeft);
+    with KindComboBox.Items do
+      S := Strings[IndexOfObject(TObject(Editors[Index].Kind))];
+    DrawCaption(DC, S, R, drLeft);
     Slide(R);
     R.Top := R.Top + (HeightOf(Rect) - (HeightOf(R) * 2 + (R.Top - Rect.Top))) div 2 - 2;
     R.Bottom := R.Top + TextHeight('Wg');
     Inc(R.Left, 5);
     Font.Style := [];
     DC := Handle;
-	  S := Trim(Editors[Index].Name);
-  	if S = '' then
-  		S := '<unnamed>';
-		DrawCaption(DC, 'Name: ' + S, R, drLeft);
+    S := Trim(Editors[Index].Name);
+    if S = '' then
+      S := '<unnamed>';
+    DrawCaption(DC, 'Name: ' + S, R, drLeft);
     Slide(R);
-		DrawCaption(DC, 'Value: ' + Editors[Index].Text, R, drLeft);
+    DrawCaption(DC, 'Value: ' + Editors[Index].Text, R, drLeft);
 {  Inc(Rect.Left, 8);
-	 + ': ' + S;
-	S := S + ' (' +  + ')';
+   + ': ' + S;
+  S := S + ' (' +  + ')';
   DrawCaption(ListBox.Canvas.Handle, S, Rect, drLeft);  }
   end;
 end;

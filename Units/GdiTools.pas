@@ -91,7 +91,7 @@ var
   C: TRGBA absolute Result;
 begin
   C := TRGBA(Convert(Color));
-	C.Alpha := C.Blue;
+  C.Alpha := C.Blue;
   C.Blue := C.Red;
   C.Red := C.Alpha;
   C.Alpha := A;
@@ -102,7 +102,7 @@ var
   C: TRGBA absolute Result;
 begin
   C := TRGBA(Convert(Color));
-	C.Alpha := C.Blue;
+  C.Alpha := C.Blue;
   C.Blue := C.Red;
   C.Red := C.Alpha;
   C.Alpha := A;
@@ -133,7 +133,7 @@ begin
   if V < -2 then V := -2 else if V > 2 then V := 2;
   if Abs(V) > 1 then B := High(Byte) else B := 0;
   C := TRGBA(Convert(Color));
-	C.Alpha := C.Blue;
+  C.Alpha := C.Blue;
   C.Blue := C.Red;
   C.Red := C.Alpha;
   C.Alpha := A;
@@ -436,7 +436,7 @@ end;
 
 function NewBitmap(ResID: Integer): IGdiBitmap;
 var
-	Stream: IStream;
+  Stream: IStream;
 begin
   Stream := TStreamAdapter.Create(TResourceStream.CreateFromID(HInstance,
     ResID, RT_RCDATA), soOwned);

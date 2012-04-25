@@ -31,7 +31,7 @@ type
     function GetCount: Integer; override;
     function GetObject(Index: Integer): TObject; override;
   public
-  	constructor Create;
+    constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     procedure Clear; override;
@@ -72,14 +72,14 @@ procedure VariantToComponent(const Data: OleVariant; var Instance: TComponent);
 
 
 const
-	TypeKindNames: array[TTypeKind] of string =
+  TypeKindNames: array[TTypeKind] of string =
 {$IFDEF D11_UP}
-		('Unknown', 'Integer', 'AnsiChar', 'Enumeration', 'Float',
+    ('Unknown', 'Integer', 'AnsiChar', 'Enumeration', 'Float',
     'AnsiString', 'Set', 'Class', 'Method', 'WideChar', 'WideChar', 'WideString',
     'Variant', 'Array', 'Record', 'Interface', 'Integer', 'DynamicArray',
     'UnicodeString', 'ClassRef', 'Pointer', 'Procedure');
 {$ELSE}
-		('Unknown', 'Integer', 'AnsiChar', 'Enumeration', 'Float',
+    ('Unknown', 'Integer', 'AnsiChar', 'Enumeration', 'Float',
     'AnsiString', 'Set', 'Class', 'Method', 'WideChar', 'WideChar', 'WideString',
     'Variant', 'Array', 'Record', 'Interface', 'Integer', 'DynamicArray');
 {$ENDIF}
@@ -92,7 +92,7 @@ uses
 
 constructor TClassPropertyStrings.Create;
 begin
-	inherited Create;
+  inherited Create;
   FTypeKinds := [tkClass];
 end;
 
@@ -146,7 +146,7 @@ end;
 function TClassPropertyStrings.Get(Index: Integer): string;
 begin
   if (Index < 0) or (Index >= FCount) then Error(@SListIndexError, Index);
-	Result := FPropList^[Index].Name;
+  Result := FPropList^[Index].Name;
 end;
 
 function TClassPropertyStrings.GetCount: Integer;
@@ -257,19 +257,19 @@ var
   Stream: TMemoryStream;
   Text: TStringStream;
 begin
-	Result := '';
+  Result := '';
   if Instance = nil then Exit;
   Stream := TMemoryStream.Create;
   Text := TStringStream.Create('');
   try
-	  Stream.WriteComponent(Instance);
-  	Stream.Seek(soFromBeginning, 0);
-	  ObjectBinaryToText(Stream, Text);
-  	Result := Text.DataString;
-	finally
-  	Text.Free;
-	  Stream.Free;
-	end;
+    Stream.WriteComponent(Instance);
+    Stream.Seek(soFromBeginning, 0);
+    ObjectBinaryToText(Stream, Text);
+    Result := Text.DataString;
+  finally
+    Text.Free;
+    Stream.Free;
+  end;
 end;
 
 procedure ComponentToVariant(Instance: TComponent; var Data: OleVariant);

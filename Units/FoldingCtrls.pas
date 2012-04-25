@@ -1200,14 +1200,14 @@ end;
 
 procedure TCustomFoldingView.WMSetFocus(var Message: TWMSetFocus);
 begin
-	inherited;
-	Invalidate;
+  inherited;
+  Invalidate;
 end;
 
 procedure TCustomFoldingView.WMKillFocus(var Message: TWMKillFocus);
 begin
-	inherited;
-	Invalidate;
+  inherited;
+  Invalidate;
 end;
 
 initialization

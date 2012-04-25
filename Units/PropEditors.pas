@@ -43,18 +43,18 @@ type
   TBalloonHintWizard = class(TMenuWizard)
   public
     procedure Execute; override;
-		function GetMenuText: string; override;
+    function GetMenuText: string; override;
   end;
 
 { TCustomImageIndexPropertyEditor}
 
   TCustomImageIndexPropertyEditor = class(TIntegerProperty{$IFDEF D6_UP},
-  	ICustomPropertyListDrawing{$ENDIF})
+    ICustomPropertyListDrawing{$ENDIF})
   public
     function GetAttributes: TPropertyAttributes; override;
     procedure GetValues(Proc: TGetStrProc); override;
     function GetImageListAt(Index: Integer): TCustomImageList; virtual;
- 		{ TCustomImageIndexPropertyEditor.ICustomPropertyListDrawing }
+     { TCustomImageIndexPropertyEditor.ICustomPropertyListDrawing }
     procedure ListMeasureHeight(const Value: string; ACanvas: TCanvas;
       var AHeight: Integer); {$IFNDEF D6_UP}override;{$ENDIF}
     procedure ListMeasureWidth(const Value: string; ACanvas: TCanvas;
@@ -158,7 +158,7 @@ type
 implementation
 
 uses
-	StrTools;
+  StrTools;
 
 { TBalloonHintEditor }
 
@@ -187,9 +187,9 @@ end;
 
 procedure TBalloonHintWizard.Execute;
 var
-	S: string;
+  S: string;
 begin
-	S := EditBalloonHint;
+  S := EditBalloonHint;
   if S <> '' then AddText(S);
 end;
 
@@ -218,15 +218,15 @@ end;
 
 function TCustomImageIndexPropertyEditor.GetImageListAt(Index: Integer): TCustomImageList;
 var
-	Component: TPersistent;
+  Component: TPersistent;
   CollectionItem: TCollectionItem absolute Component;
   PropInfo: PPropInfo;
 begin
   Result := nil;
-	Component := GetComponent(Index);
+  Component := GetComponent(Index);
   if (Component is TCollectionItem) then
-		Component := CollectionItem.Collection.Owner;
-	if Component = nil then Exit;
+    Component := CollectionItem.Collection.Owner;
+  if Component = nil then Exit;
   PropInfo := TypInfo.GetPropInfo(Component.ClassInfo, 'Images');
   if PropInfo = nil then Exit;
   Result := TCustomImageList(GetObjectProp(Component, PropInfo, TCustomImageList));
@@ -372,7 +372,7 @@ procedure TInspectorEditorsEditor.Edit;
 begin
   if EditInspector(TInspector(Component)) then
   begin
-		AddUnit(Component.Owner as TCustomForm, 'InspectEditors');
+    AddUnit(Component.Owner as TCustomForm, 'InspectEditors');
     Designer.Modified;
   end;
 end;
@@ -459,7 +459,7 @@ procedure TTransparentImageProperty.Edit;
 var
   Component: TPersistent;
 begin
-	Component := GetComponent(0);
+  Component := GetComponent(0);
   if Component is TTransparentImage then
     if EditTransparentImage(Component as TTransparentImage) then
       Designer.Modified;
@@ -502,7 +502,7 @@ var
 begin
   BannerBook := GetComponent(0);
   if (BannerBook is TBannerBook) and EditBannerBook(TBannerBook(BannerBook)) then
-		Designer.Modified;
+    Designer.Modified;
 end;
 
 function TBannerBookProperty.GetAttributes: TPropertyAttributes;
@@ -514,7 +514,7 @@ end;
 
 procedure TBannerBookEditor.Edit;
 begin
-	ExecuteVerb(0);
+  ExecuteVerb(0);
 end;
 
 procedure TBannerBookEditor.ExecuteVerb(Index: Integer);
@@ -528,34 +528,34 @@ begin
   if Pages = nil then Exit;
   if Pages.Count = 0 then Exit;
   NextPage := PageIndex;
-	case Index of
-  	0:
-    	begin
-      	Inc(NextPage);
+  case Index of
+    0:
+      begin
+        Inc(NextPage);
         if NextPage > Pages.Count - 1 then
-        	NextPage := 0;
-			end;
-  	1:
-    	begin
-      	Dec(NextPage);
+          NextPage := 0;
+      end;
+    1:
+      begin
+        Dec(NextPage);
         if NextPage < 0 then
-        	NextPage := Pages.Count - 1;
-			end;
+          NextPage := Pages.Count - 1;
+      end;
   end;
   if NextPage <> PageIndex then
   begin
-  	SetOrdProp(Component, 'PageIndex', NextPage);
-		Designer.Modified;
+    SetOrdProp(Component, 'PageIndex', NextPage);
+    Designer.Modified;
   end;
 end;
 
 function TBannerBookEditor.GetVerb(Index: Integer): string;
 begin
-	Result := '';
+  Result := '';
   case Index of
-  	0: Result := 'Next Page';
-  	1: Result := 'Previous Page';
-	end;
+    0: Result := 'Next Page';
+    1: Result := 'Previous Page';
+  end;
 end;
 
 function TBannerBookEditor.GetVerbCount: Integer;
@@ -565,27 +565,27 @@ end;
 
 procedure RegisterTransparentUnitsImplementation(AOwner: TComponent);
 begin
-	AddUnit(AOwner, 'PngTools');
+  AddUnit(AOwner, 'PngTools');
 end;
 
 procedure RegisterInspectorUnitsImplementation(AOwner: TComponent);
 begin
-	AddUnit(AOwner, 'InspectEditors');
+  AddUnit(AOwner, 'InspectEditors');
 end;
 
 procedure RegisterShellUnitsImplementation(AOwner: TComponent);
 begin
-	AddUnit(AOwner, 'ShellTools');
+  AddUnit(AOwner, 'ShellTools');
 end;
 
 const
   DM_PASTESELECTION = WM_USER + $0A;
-	DM_REMOVESELECTION = DM_PASTESELECTION + 1;
+  DM_REMOVESELECTION = DM_PASTESELECTION + 1;
 
 type
-	TPageNotifier = class(TInterfacedObject, IDesignNotification)
+  TPageNotifier = class(TInterfacedObject, IDesignNotification)
   private
-		FDesigner: IDesigner;
+    FDesigner: IDesigner;
     FSelection: IDesignerSelections;
     FPageClass: TClass;
     FPage: TObject;
@@ -602,8 +602,8 @@ type
       const ASelection: IDesignerSelections);
     procedure DesignerOpened(const ADesigner: IDesigner; AResurrecting: Boolean);
     procedure DesignerClosed(const ADesigner: IDesigner; AGoingDormant: Boolean);
-	public
-  	constructor Create(PageClass: TClass);
+  public
+    constructor Create(PageClass: TClass);
     destructor Destroy; override;
   end;
 
@@ -611,24 +611,24 @@ type
 
 constructor TPageNotifier.Create(PageClass: TClass);
 begin
-	inherited Create;
+  inherited Create;
   FPageClass := PageClass;
   FWindow := TUtilityWindow.Create(Self);
 end;
 
 destructor TPageNotifier.Destroy;
 begin
-	FDesigner := nil;
+  FDesigner := nil;
   FSelection := nil;
-	FWindow.Free;
+  FWindow.Free;
   inherited Destroy;
 end;
 
 procedure TPageNotifier.DMPasteSelection(var Msg: TMessage);
 begin
-	if FPages.Page = nil then Exit;
+  if FPages.Page = nil then Exit;
   FDesigner.CutSelection;
-	FDesigner.SelectComponent(TComponent(FPages.Page));
+  FDesigner.SelectComponent(TComponent(FPages.Page));
   FDesigner.PasteSelection;
   FDesigner.Modified;
   FDesigner := nil;
@@ -637,10 +637,10 @@ end;
 
 procedure TPageNotifier.DMRemoveSelection(var Msg: TMessage);
 begin
-	if FPage is TControl then
-  	FDesigner.SelectComponent(TControl(FPage).Parent)
-	else if FPage is TComponent then
-  	FDesigner.SelectComponent(TComponent(FPage).Owner);
+  if FPage is TControl then
+    FDesigner.SelectComponent(TControl(FPage).Parent)
+  else if FPage is TComponent then
+    FDesigner.SelectComponent(TComponent(FPage).Owner);
   FDesigner.Modified;
   FDesigner := nil;
 end;
@@ -661,29 +661,29 @@ end;
 
 procedure TPageNotifier.SelectionChanged(const ADesigner: IDesigner; const ASelection: IDesignerSelections);
 var
-	P: TPersistent;
-	I: Integer;
+  P: TPersistent;
+  I: Integer;
 begin
-	if FMoving then Exit;
-	for I := 0 to ASelection.Count - 1 do
+  if FMoving then Exit;
+  for I := 0 to ASelection.Count - 1 do
   begin
-  	P := ASelection.Items[I];
-  	if P is FPageClass then
+    P := ASelection.Items[I];
+    if P is FPageClass then
     begin
-    	FDesigner := ADesigner;
+      FDesigner := ADesigner;
       FPage := P;
-			PostMessage(FWindow.Handle, DM_REMOVESELECTION, 0, 0);
-    	Break;
+      PostMessage(FWindow.Handle, DM_REMOVESELECTION, 0, 0);
+      Break;
     end
     else if (P is TControl) and (TControl(P).Parent is TBannerBook) then
     begin
-    	FMoving := True;
-    	FDesigner := ADesigner;
+      FMoving := True;
+      FDesigner := ADesigner;
       FPages := TBannerBook(TControl(P).Parent);
-			PostMessage(FWindow.Handle, DM_PASTESELECTION, 0, 0);
-    	Break;
+      PostMessage(FWindow.Handle, DM_PASTESELECTION, 0, 0);
+      Break;
     end;
-	end;
+  end;
 end;
 
 procedure TPageNotifier.DesignerOpened(const ADesigner: IDesigner; AResurrecting: Boolean);
@@ -695,19 +695,19 @@ begin
 end;
 
 var
-	PageNotifier: TPageNotifier;
+  PageNotifier: TPageNotifier;
 
 procedure InternalRegisterPages(PageClass: TClass);
 begin
-	if PageNotifier = nil then
+  if PageNotifier = nil then
   begin
-  	PageNotifier := TPageNotifier.Create(PageClass);
+    PageNotifier := TPageNotifier.Create(PageClass);
     RegisterDesignNotificationProc(PageNotifier);
-		if PageClass.InheritsFrom(TPersistent) then
-			RegisterClass(TPersistentClass(PageClass));
-		if PageClass.InheritsFrom(TComponent) then
-			RegisterNoIcon([TComponentClass(PageClass)]);
-	end;
+    if PageClass.InheritsFrom(TPersistent) then
+      RegisterClass(TPersistentClass(PageClass));
+    if PageClass.InheritsFrom(TComponent) then
+      RegisterNoIcon([TComponentClass(PageClass)]);
+  end;
 end;
 
 initialization
@@ -716,6 +716,6 @@ initialization
   @RegisterInspectorUnits := @RegisterInspectorUnitsImplementation;
   @RegisterShellUnits := @RegisterShellUnitsImplementation;
 finalization
-	if PageNotifier <> nil then
-		UnregisterDesignNotificationProc(PageNotifier);
+  if PageNotifier <> nil then
+    UnregisterDesignNotificationProc(PageNotifier);
 end.

@@ -81,9 +81,9 @@ type
             Overloaded: Boolean;
             ClassMethodConvention: TCallingConvention);
           skProperty: (
-          	{ todo: fix }
-				    Promoted: Boolean;
-						Event: Boolean;
+            { todo: fix }
+            Promoted: Boolean;
+            Event: Boolean;
             Access: TPropertyAccess;
             Default: Boolean);
           skField: (

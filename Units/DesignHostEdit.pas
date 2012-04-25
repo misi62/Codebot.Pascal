@@ -36,19 +36,19 @@ implementation
 
 function EditDesignHost(Host: TDesignHost): Boolean;
 var
-	Form: TDesignHostEditorForm;
+  Form: TDesignHostEditorForm;
 begin
-	Form := TDesignHostEditorForm.Create(Application);
+  Form := TDesignHostEditorForm.Create(Application);
   try
-  	Form.Host := Host;
-  	Result := Form.ShowModal = mrOk;
+    Form.Host := Host;
+    Result := Form.ShowModal = mrOk;
     if Result then
     begin
-    	Host.Caption := Form.CaptionEdit.Text;
+      Host.Caption := Form.CaptionEdit.Text;
       Host.Hint := Form.HelpMemo.Text;
     end;
   finally
-  	Form.Free;
+    Form.Free;
   end;
 end;
 
@@ -60,11 +60,11 @@ begin
   KindLabel.Caption := ElementToStr(FHost.ControlKind, True);
   DataBindingLabel.Caption := FHost.DataBinding;
   if DataBindingLabel.Caption = '' then
-  	DataBindingLabel.Caption := SNoBinding;
-	CaptionEdit.Text := FHost.Caption;
+    DataBindingLabel.Caption := SNoBinding;
+  CaptionEdit.Text := FHost.Caption;
   HelpMemo.Text := FHost.Hint;
 end;
 
 initialization
-	DefaultHostEditorProc := EditDesignHost;
+  DefaultHostEditorProc := EditDesignHost;
 end.

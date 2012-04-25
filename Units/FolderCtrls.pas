@@ -773,9 +773,9 @@ begin
   inherited MouseDown(Button, Shift, X, Y);
   if Button = mbLeft then
   begin
-		FMouseDown := True;
-  	if not (csDesigning in ComponentState) then
-	    SetFocus;
+    FMouseDown := True;
+    if not (csDesigning in ComponentState) then
+      SetFocus;
     Point.X := X;
     Point.Y := Y;
     FButtons := [];
@@ -827,7 +827,7 @@ begin
   if not (csDesigning in ComponentState) then
     if Button = mbLeft then
     begin
-    	FMouseDown := False;
+      FMouseDown := False;
       Point.X := X;
       Point.Y := Y;
       if FButtons <> [] then
@@ -943,7 +943,7 @@ begin
     Shadow := LoadIcon(MainInstance, 'SHADOW');
   Rect := ClientRect;
   DC := Canvas.Handle;
-	FillRectColor(DC, Rect, Color);
+  FillRectColor(DC, Rect, Color);
   Brush := GetSysColorBrush(COLOR_BTNFACE);
   CheckeredBrush := GetBrush(CheckeredBitmap);
   for I := 0 to FFolders.Count -1 do
@@ -954,12 +954,12 @@ begin
     if ThemePainter.Enabled then
     begin
       FillRect(DC, DrawRect, ColorToRGB(Color));
-			Inc(DrawRect.Right, 10);
+      Inc(DrawRect.Right, 10);
       if Folder = Selected then
         ThemePainter.DrawElement(DC, ThemePainter.GetDetails(thHeaderItemHot), DrawRect)
       else
         ThemePainter.DrawElement(DC, ThemePainter.GetDetails(thHeaderItemNormal), DrawRect);
-			Dec(DrawRect.Right, 10);
+      Dec(DrawRect.Right, 10);
     end
     else
     begin
@@ -974,14 +974,14 @@ begin
     with Folder do
       if FFolderImages <> nil then
       begin
-      	J := -1;
-      	if Folder = Selected then
-        	J := SelectedIndex;
-				if J < 0 then
-        	J := ImageIndex;
+        J := -1;
+        if Folder = Selected then
+          J := SelectedIndex;
+        if J < 0 then
+          J := ImageIndex;
         if J > -1 then
-        	ImageListDraw(FFolderImages, Canvas, DrawRect.Left, DrawRect.Top +
-          	(FFolderHeight - FFolderImages.Height) div 2, J);
+          ImageListDraw(FFolderImages, Canvas, DrawRect.Left, DrawRect.Top +
+            (FFolderHeight - FFolderImages.Height) div 2, J);
         Inc(DrawRect.Left, FFolderImages.Width + 2);
       end;
     InflateRect(DrawRect, -1, -1);
@@ -1047,12 +1047,12 @@ begin
         end;
       if (FItemImages <> nil) and (Item.ImageIndex > -1) then
       begin
-      	if (Item = CaptureItem) and FMouseDown then
-					ImageListDraw(FItemImages, Canvas, Point.X + 1, Point.Y + 1, Item.ImageIndex,
-  	       	Item.Enabled)
+        if (Item = CaptureItem) and FMouseDown then
+          ImageListDraw(FItemImages, Canvas, Point.X + 1, Point.Y + 1, Item.ImageIndex,
+             Item.Enabled)
         else
-					ImageListDraw(FItemImages, Canvas, Point.X, Point.Y, Item.ImageIndex,
-  	      	Item.Enabled);
+          ImageListDraw(FItemImages, Canvas, Point.X, Point.Y, Item.ImageIndex,
+            Item.Enabled);
         if (not Item.Enabled) and (FOverlay.Height > 0) then
           with FOverlay, DrawRect do
             Canvas.Draw(Left + (Right - Left - Width) div 2 - FTextHeight div 4,
@@ -1062,11 +1062,11 @@ begin
       SetBkMode(DC, TRANSPARENT);
       Dec(DrawRect.Right, 4);
       DrawRect.Top := DrawRect.Bottom - Trunc(FTextHeight * 1.5);
-			if (Item = CaptureItem) and FMouseDown then
-      	OffsetRect(DrawRect, 1, 1);
+      if (Item = CaptureItem) and FMouseDown then
+        OffsetRect(DrawRect, 1, 1);
       DrawCaption(DC, Item.Caption, DrawRect, drCenter);
-			if (Item = CaptureItem) and FMouseDown then
-      	OffsetRect(DrawRect, -1, -1);
+      if (Item = CaptureItem) and FMouseDown then
+        OffsetRect(DrawRect, -1, -1);
       if (FCaptureItem <> nil) and (FCaptureItem = Item) then
       begin
         InflateRect(DrawRect, 1, 1);
@@ -1121,9 +1121,9 @@ begin
   end;
   if (Overlay = nil) or (Selected = nil) then
   begin
-  	Brush := CreateSolidBrush(ColorToRGB(Color));
+    Brush := CreateSolidBrush(ColorToRGB(Color));
     FillRect(DC, Rect, Brush);
-  	DeleteObject(Brush);
+    DeleteObject(Brush);
   end;
   inherited Paint;
 end;
@@ -1142,7 +1142,7 @@ begin
     FSelected := FFolders[FActiveIndex]
   else
     FSelected := nil;
-	Invalidate;
+  Invalidate;
   if csDesigning in ComponentState then
   begin
     Form := GetParentForm(Self);
@@ -1153,7 +1153,7 @@ end;
 
 function TCustomFolderView.GetButtonRect(Button: TFolderScrollButton): TRect;
 var
-	ButtonHeight: Integer;
+  ButtonHeight: Integer;
   Rect: TRect;
   Counter: Integer;
   I: Integer;
@@ -1329,12 +1329,12 @@ end;
 
 procedure TCustomFolderView.CMFolderImages(var Msg: TMessage);
 begin
-	Msg.Result := Integer(FFolderImages);
+  Msg.Result := Integer(FFolderImages);
 end;
 
 procedure TCustomFolderView.CMItemImages(var Msg: TMessage);
 begin
-	Msg.Result := Integer(FItemImages);
+  Msg.Result := Integer(FItemImages);
 end;
 
 procedure TCustomFolderView.CMItemDetails(var Msg: TMessage);

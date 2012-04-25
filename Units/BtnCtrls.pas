@@ -194,11 +194,11 @@ type
 { TImageButtonActionLink }
 
   TImageButtonActionLink = class(TWinControlActionLink)
-	protected
+  protected
     FClient: TCustomImageButton;
     procedure AssignClient(AClient: TObject); override;
     function IsImageIndexLinked: Boolean; override;
-		procedure SetImageIndex(Value: Integer); override;
+    procedure SetImageIndex(Value: Integer); override;
   end;
 
 { TImageButton }
@@ -207,7 +207,7 @@ type
   public
     property Canvas;
   published
-  	property Action;
+    property Action;
     property Anchors;
     property Align;
     property Caption;
@@ -232,11 +232,11 @@ type
     property ParentFont;
     property ParentShowHint;
     property PopupMenu;
-		property ShowHint;
+    property ShowHint;
     property Style;
     property TabOrder;
     property TabStop;
-		property Transparent;
+    property Transparent;
     property OnCanResize;
     property OnClick;
     property OnConstrainedResize;
@@ -443,7 +443,7 @@ type
 
 { TThemeGlyphButton }
 
-	TThemeGlyphKind = (tgToolClose, tgClose, tgPin);
+  TThemeGlyphKind = (tgToolClose, tgClose, tgPin);
 
   TThemeGlyphButton = class(TGraphicControl)
   private
@@ -466,7 +466,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-	published
+  published
     property Align;
     property Anchors;
     property Color;
@@ -664,7 +664,7 @@ end;
 { TCustomImageButton }
 
 const
-	FLAT_AUTO = 1;
+  FLAT_AUTO = 1;
   FLAT_SPACE = 8;
   FLAT_MENUWIDTH = 12;
 
@@ -686,18 +686,18 @@ begin
   Width := 75;
   FOptions := [boAutoFocus];
   FImageIndex := -1;
-	FImageIndex := -1;
-	FImageHotIndex := -1;
-	FImagePressedIndex := -1;
-	FImageDisabledIndex := -1;
+  FImageIndex := -1;
+  FImageHotIndex := -1;
+  FImagePressedIndex := -1;
+  FImageDisabledIndex := -1;
   FImageChangeLink := TChangeLink.Create;
   FImageChangeLink.OnChange := ImageListChange;
 end;
 
 destructor TCustomImageButton.Destroy;
 begin
-	Images := nil;
-	FImageChangeLink.Free;
+  Images := nil;
+  FImageChangeLink.Free;
   inherited Destroy;
 end;
 
@@ -711,16 +711,16 @@ end;
 
 procedure TCustomImageButton.ActionChange(Sender: TObject; CheckDefaults: Boolean);
 begin
-	inherited ActionChange(Sender, CheckDefaults);
+  inherited ActionChange(Sender, CheckDefaults);
   if (Sender = Action) and (Action is TCustomAction) then
-	begin
-		FImageHotIndex := -1;
-		FImagePressedIndex := -1;
-		FImageDisabledIndex := -1;
-   	Images := TCustomAction(Action).ActionList.Images;
-		ImageIndex := TCustomAction(Action).ImageIndex;
+  begin
+    FImageHotIndex := -1;
+    FImagePressedIndex := -1;
+    FImageDisabledIndex := -1;
+     Images := TCustomAction(Action).ActionList.Images;
+    ImageIndex := TCustomAction(Action).ImageIndex;
     Repaint;
-	end;
+  end;
 end;
 
 procedure TCustomImageButton.ImageListChange(Sender: TObject);
@@ -735,57 +735,57 @@ var
   S: string;
 begin
   if csLoading in ComponentState then Exit; //) or (not HandleAllocated)
-	if boAutoSize in FOptions then
+  if boAutoSize in FOptions then
   begin
-  	S := Caption;
+    S := Caption;
     if S = '' then S := 'Wg';
-		CaptionSize := CalcCaptionSize(Canvas.Handle, S);
-		if Caption = '' then
-    	CaptionSize.cx := 0;
+    CaptionSize := CalcCaptionSize(Canvas.Handle, S);
+    if Caption = '' then
+      CaptionSize.cx := 0;
     if CaptionPosition = cpHidden then
     begin
-			CaptionSize.cx := 0;
-     	CaptionSize.cy := 0;
+      CaptionSize.cx := 0;
+       CaptionSize.cy := 0;
     end
     else
     begin
       Inc(CaptionSize.cx, 2 + FPadding);
       Inc(CaptionSize.cy, 2 + FPadding);
     end;
-		if FImages <> nil then
+    if FImages <> nil then
     begin
-			ImageSize.cx := FImages.Width + FPadding;
-     	ImageSize.cy := FImages.Height + FPadding;
-		end
-		else
+      ImageSize.cx := FImages.Width + FPadding;
+       ImageSize.cy := FImages.Height + FPadding;
+    end
+    else
     begin
-			ImageSize.cx := FLAT_MENUWIDTH + FPadding;
-     	ImageSize.cy := FLAT_MENUWIDTH + FPadding;
+      ImageSize.cx := FLAT_MENUWIDTH + FPadding;
+       ImageSize.cy := FLAT_MENUWIDTH + FPadding;
     end;
     if CaptionSize.cy > ImageSize.cy then
-    	ImageSize.cy := CaptionSize.cy;
-		if FOptions * [boMenu, boWide] <> [] then
-    	Inc(CaptionSize.cx, FLAT_MENUWIDTH div 2);
-		{if CaptionPosition <> cpHidden then
-    	Inc(CaptionSize.cx, 3);}
+      ImageSize.cy := CaptionSize.cy;
+    if FOptions * [boMenu, boWide] <> [] then
+      Inc(CaptionSize.cx, FLAT_MENUWIDTH div 2);
+    {if CaptionPosition <> cpHidden then
+      Inc(CaptionSize.cx, 3);}
     SetWindowPos(Handle, 0, 0, 0, ImageSize.cx + CaptionSize.cx,
-    	ImageSize.cy, SWP_NOACTIVATE or SWP_NOMOVE or SWP_NOZORDER);
+      ImageSize.cy, SWP_NOACTIVATE or SWP_NOMOVE or SWP_NOZORDER);
     RequestAlign;
-	end
+  end
   else
-		inherited AdjustSize;
+    inherited AdjustSize;
 end;
 
 procedure TCustomImageButton.Loaded;
 begin
-	inherited Loaded;
+  inherited Loaded;
   AdjustSize;
 end;
 
 procedure TCustomImageButton.Click;
 begin
   if boToggle in FOptions then
-  	Down := not Down;
+    Down := not Down;
   if boAutoPopup in Options then
     Popup;
   inherited Click;
@@ -793,14 +793,14 @@ end;
 
 function TCustomImageButton.CustomDraw(Rect: TRect; DrawState: TDrawState): Boolean;
 begin
-	Result := True;
+  Result := True;
   if Assigned(FOnCustomDraw) then
     FOnCustomDraw(Self, Rect, DrawState, Result);
 end;
 
 function TCustomImageButton.GetActionLinkClass: TControlActionLinkClass;
 begin
-	Result := TImageButtonActionLink;
+  Result := TImageButtonActionLink;
 end;
 
 procedure TCustomImageButton.MenuButtonClick;
@@ -812,7 +812,7 @@ end;
 
 procedure TCustomImageButton.KeyDown(var Key: Word; Shift: TShiftState);
 begin
-	inherited KeyDown(Key, Shift);
+  inherited KeyDown(Key, Shift);
   if Key = VK_RETURN then
   begin
     Click;
@@ -820,19 +820,19 @@ begin
     Key := 0;
   end
   else if (Key = VK_SPACE) and (FPressedState <> psButtonDown) then
-	begin
-		SetCapture(0);
+  begin
+    SetCapture(0);
     FSpacePressed := True;
     FPressedState := psButtonDown;
     Repaint;
   end
   else if Key = VK_DOWN then
-  	Popup;
+    Popup;
 end;
 
 procedure TCustomImageButton.KeyUp(var Key: Word; Shift: TShiftState);
 begin
-	inherited KeyUp(Key, Shift);
+  inherited KeyUp(Key, Shift);
   if (Key = VK_SPACE) or (Key = VK_RETURN) then
     if FPressedState = psButtonDown then
     begin
@@ -852,8 +852,8 @@ begin
   if not (csDesigning in ComponentState) and
     (CanFocus or (GetParentForm(Self) = nil)) then
   begin
-  	if boAutoFocus in FOptions then
-	    SetFocus;
+    if boAutoFocus in FOptions then
+      SetFocus;
     SetCapture(Handle);
     FMouseInControl := True;
     if Button = mbLeft then
@@ -1263,11 +1263,11 @@ end;
 
 procedure TCustomImageButton.Popup;
 var
-	Handled: Boolean;
+  Handled: Boolean;
 begin
   if PopupMenu <> nil then
   begin
-  	Handled := False;
+    Handled := False;
     if Assigned(OnContextPopup) then
       OnContextPopup(Self, Mouse.CursorPos, Handled);
     if not Handled then
@@ -1275,11 +1275,11 @@ begin
       FPressedState := psNone;
       FDown := False;
       FMouseInControl := False;
-    	with ClientToScreen(Classes.Point(-1, Height + 1)) do
-      	PopupMenu.Popup(X, Y);
+      with ClientToScreen(Classes.Point(-1, Height + 1)) do
+        PopupMenu.Popup(X, Y);
       PostMessage(Handle, WM_CANCELMODE, 0, 0);
     end;
-	end;
+  end;
 end;
 
 procedure TCustomImageButton.SetCaptionPosition(Value: TCaptionPosition);
@@ -1309,7 +1309,7 @@ var
 begin
   if Value <> FDown then
   begin
-  	FDown := Value;
+    FDown := Value;
     if FDown and (boGrouped in FOptions) and (Parent <> nil) then
       for I := 0 to Parent.ControlCount - 1 do
       begin
@@ -1325,9 +1325,9 @@ end;
 
 procedure TCustomImageButton.SetImageIndex(Index: Integer; Value: Integer);
 var
-	I: PInteger;
+  I: PInteger;
 begin
-	I := @FImageIndex;
+  I := @FImageIndex;
   Inc(I, Index);
   if Value <> I^ then
   begin
@@ -1340,17 +1340,17 @@ procedure TCustomImageButton.SetImages(Value: TCustomImageList);
 begin
   if Value <> FImages then
   begin
-	  if FImages <> nil then
+    if FImages <> nil then
     begin
-    	FImages.UnRegisterChanges(FImageChangeLink);
-			FImages.RemoveFreeNotification(Self);
-		end;
-  	FImages := Value;
-	  if FImages <> nil then
-  	begin
-    	FImages.RegisterChanges(FImageChangeLink);
-	    FImages.FreeNotification(Self);
-  	end;
+      FImages.UnRegisterChanges(FImageChangeLink);
+      FImages.RemoveFreeNotification(Self);
+    end;
+    FImages := Value;
+    if FImages <> nil then
+    begin
+      FImages.RegisterChanges(FImageChangeLink);
+      FImages.FreeNotification(Self);
+    end;
     if (Parent = nil) or (not HandleAllocated)then Exit;
     AdjustSize;
     Repaint;
@@ -1365,7 +1365,7 @@ begin
     {if boAutoFocus in FOptions then
       TabStop := False;}
     if (not (boToggle in FOptions)) and FDown then
-    	FDown := False;
+      FDown := False;
     AdjustSize;
     // Realign ?
     Repaint;
@@ -1391,17 +1391,17 @@ end;
 
 function TCustomImageButton.GetTransparent: Boolean;
 begin
-	Result := csParentBackground in ControlStyle;
+  Result := csParentBackground in ControlStyle;
 end;
 
 procedure TCustomImageButton.SetTransparent(Value: Boolean);
 begin
-	if Value <> Transparent then
+  if Value <> Transparent then
   begin
-		if Value then
-    	ControlStyle := ControlStyle + [csParentBackground]
-		else
-    	ControlStyle := ControlStyle - [csParentBackground];
+    if Value then
+      ControlStyle := ControlStyle + [csParentBackground]
+    else
+      ControlStyle := ControlStyle - [csParentBackground];
     Repaint;
   end;
 end;
@@ -1457,9 +1457,9 @@ end;
 
 procedure TCustomImageButton.CMTabStopChanged(var Message: TMessage);
 begin
-	{if not (boAutoFocus in FOptions) then
-  	TabStop := False;}
-	inherited;
+  {if not (boAutoFocus in FOptions) then
+    TabStop := False;}
+  inherited;
 end;
 
 procedure TCustomImageButton.CMTextChanged(var Message: TMessage);
@@ -1511,7 +1511,7 @@ end;
 
 procedure TImageButtonActionLink.AssignClient(AClient: TObject);
 begin
-	inherited AssignClient(AClient);
+  inherited AssignClient(AClient);
   FClient := AClient as TCustomImageButton;
 end;
 
@@ -1526,8 +1526,8 @@ begin
   if IsImageIndexLinked then
   begin
     FClient.ImageIndex := Value;
-  	if Action is TCustomAction then
-			FClient.Images := TCustomAction(Action).ActionList.Images;;
+    if Action is TCustomAction then
+      FClient.Images := TCustomAction(Action).ActionList.Images;;
   end;
 end;
 
@@ -1744,16 +1744,16 @@ function TColorGridButton.CustomDraw(Rect: TRect; DrawState: TDrawState): Boolea
 var
   DC: HDC;
 begin
-	Result := True;
+  Result := True;
   DC := Canvas.Handle;
   Dec(Rect.Right);
   Dec(Rect.Bottom);
   InflateRect(Rect, -5, -5);
   if FOptions * [boMenu, boWide] <> [] then
-  	Dec(Rect.Right, FLAT_MENUWIDTH - 1);
-	FillRectColor(DC, Rect, clWindowText);
+    Dec(Rect.Right, FLAT_MENUWIDTH - 1);
+  FillRectColor(DC, Rect, clWindowText);
   InflateRect(Rect, -1, -1);
-	FillRectColor(DC, Rect, ActiveColor);
+  FillRectColor(DC, Rect, ActiveColor);
 end;
 
 function TColorGridButton.GetActiveColor: TColor;
@@ -1768,7 +1768,7 @@ end;
 
 procedure TColorGridButton.CNColorPick(var Msg: TMessage);
 begin
-	ActiveColor := Msg.WParam;
+  ActiveColor := Msg.WParam;
   Msg.Result := 0;
 end;
 
@@ -1785,13 +1785,13 @@ var
   DrawPen: HPEN;
   DrawBrush: HBRUSH;
 begin
-	Result := True;
+  Result := True;
   DC := Canvas.Handle;
   Dec(Rect.Right);
   Dec(Rect.Bottom);
   InflateRect(Rect, -5, -5);
   if FOptions * [boMenu, boWide] <> [] then
-  	Dec(Rect.Right, FLAT_MENUWIDTH - 1);
+    Dec(Rect.Right, FLAT_MENUWIDTH - 1);
   DrawBrush := GetStockObject(NULL_BRUSH);
   case (PopupForm as TPopupBrushForm).BrushStyle of
     bsSolid: DrawBrush := CreateSolidBrush(0);
@@ -1850,13 +1850,13 @@ var
   DC: HDC;
   DrawPen: HPEN;
 begin
-	Result := True;
+  Result := True;
   DC := Canvas.Handle;
   Dec(Rect.Right);
   Dec(Rect.Bottom);
   InflateRect(Rect, -5, -5);
   if FOptions * [boMenu, boWide] <> [] then
-  	Dec(Rect.Right, FLAT_MENUWIDTH - 1);
+    Dec(Rect.Right, FLAT_MENUWIDTH - 1);
   DrawPen := 0;
   case (PopupForm as TPopupPenForm).PenStyle of
     psSolid: DrawPen := CreatePen(PS_SOLID, 1, 0);
@@ -1907,7 +1907,7 @@ end;
 constructor TThemeGlyphButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-	ControlStyle := [csCaptureMouse, csClickEvents, csFixedWidth, csFixedHeight];
+  ControlStyle := [csCaptureMouse, csClickEvents, csFixedWidth, csFixedHeight];
   Color := clWindowFrame;
   Width := 22;
   Height := 22;
@@ -1922,9 +1922,9 @@ procedure TThemeGlyphButton.MouseDown(Button: TMouseButton; Shift: TShiftState;
   X, Y: Integer);
 begin
   inherited MouseDown(Button, Shift, X, Y);
-	if Button = mbLeft then
+  if Button = mbLeft then
   begin
-  	FDown := True;
+    FDown := True;
     Repaint;
   end;
 end;
@@ -1932,9 +1932,9 @@ end;
 procedure TThemeGlyphButton.MouseUp(Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
 begin
-	if Button = mbLeft then
+  if Button = mbLeft then
   begin
-  	FDown := False;
+    FDown := False;
     Repaint;
   end;
   inherited MouseUp(Button, Shift, X, Y);
@@ -1942,53 +1942,53 @@ end;
 
 procedure TThemeGlyphButton.Paint;
 var
-	DC: HDC;
-	Rect: TRect;
+  DC: HDC;
+  Rect: TRect;
   State: TDrawState;
 begin
   inherited Paint;
   DC := Canvas.Handle;
-	Rect := ClientRect;
+  Rect := ClientRect;
   if not Enabled then
-  	State := [dsDisabled]
+    State := [dsDisabled]
   else if FDown and FMouseInControl then
-  	State := [dsPressed]
-	else if FMouseInControl then
-		State := [dsHot]
-	else
-  	State := [];
+    State := [dsPressed]
+  else if FMouseInControl then
+    State := [dsHot]
+  else
+    State := [];
   if FStyle = bsBeveled then
-  	State := State + [dsThin]
+    State := State + [dsThin]
   else if FStyle = bsFlat then
-  	State := State + [dsFlat];
-	case FKind of
-  	tgToolClose: DrawThemeToolClose(DC, Rect, State, Color);
+    State := State + [dsFlat];
+  case FKind of
+    tgToolClose: DrawThemeToolClose(DC, Rect, State, Color);
     tgClose: DrawThemeClose(DC, Rect, State, Color);
     tgPin: DrawThemePin(DC, Rect, State, Color);
-	end;
+  end;
 end;
 
 procedure TThemeGlyphButton.SetKind(Value: TThemeGlyphKind);
 begin
-	if Value <> FKind then
+  if Value <> FKind then
   begin
-  	FKind := Value;
+    FKind := Value;
     Repaint;
   end;
 end;
 
 procedure TThemeGlyphButton.SetStyle(Value: TButtonStyle);
 begin
-	if Value <> FStyle then
+  if Value <> FStyle then
   begin
-  	FStyle := Value;
+    FStyle := Value;
     Repaint;
   end;
 end;
 
 procedure TThemeGlyphButton.CMEnabledChanged(var Message: TMessage);
 begin
-	inherited;
+  inherited;
   FDown := False;
   FMouseInControl := False;
   Repaint;
@@ -1996,21 +1996,21 @@ end;
 
 procedure TThemeGlyphButton.CMMouseEnter(var Message: TMessage);
 begin
-	inherited;
+  inherited;
   FMouseInControl := True;
   Repaint;
 end;
 
 procedure TThemeGlyphButton.CMMouseLeave(var Message: TMessage);
 begin
-	inherited;
+  inherited;
   FMouseInControl := False;
   Repaint;
 end;
 
 procedure TThemeGlyphButton.CMSysColorChange(var Message: TMessage);
 begin
-	inherited;
+  inherited;
   Repaint;
 end;
 

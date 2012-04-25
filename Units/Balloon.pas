@@ -18,21 +18,21 @@ uses
 
 type
   TBalloonKind = (bkInformation, bkConfirmation, bkWarning, bkError, bkCustom);
-	TBalloonPosition = (bpTopLeft, bpTopRight, bpBottomLeft, bpBottomRight);
+  TBalloonPosition = (bpTopLeft, bpTopRight, bpBottomLeft, bpBottomRight);
 
 procedure PreviewBalloonHint(DC: HDC; const Rect: TRect; const Caption, Text: string;
-	Icon: HICON; Kind: TBalloonKind; Position: TBalloonPosition);
+  Icon: HICON; Kind: TBalloonKind; Position: TBalloonPosition);
 
 procedure BalloonHint(const Caption, Text: string;
-	Kind: TBalloonKind; Position: TBalloonPosition; X, Y: Integer;
+  Kind: TBalloonKind; Position: TBalloonPosition; X, Y: Integer;
   Duration: Cardinal = 0); overload;
 
 procedure BalloonHint(const Caption, Text: string;
-	Icon: HICON; Position: TBalloonPosition; X, Y: Integer;
+  Icon: HICON; Position: TBalloonPosition; X, Y: Integer;
   Duration: Cardinal = 0); overload;
 
 type
-	TBalloonHint = class(TComponent)
+  TBalloonHint = class(TComponent)
   private
     FCaption: string;
     FDuration: Cardinal;
@@ -45,20 +45,20 @@ type
     function GetActive: Boolean;
     procedure SetActive(Value: Boolean);
     procedure SetIcon(Value: TIcon);
-	protected
-		procedure SetName(const Value: TComponentName); override;
+  protected
+    procedure SetName(const Value: TComponentName); override;
   public
-  	constructor Create(AOwner: TComponent); override;
-  	destructor Destroy; override;
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
   published
-  	property Active: Boolean read GetActive write SetActive;
-  	property Caption: string read FCaption write FCaption;
+    property Active: Boolean read GetActive write SetActive;
+    property Caption: string read FCaption write FCaption;
     property Duration: Cardinal read FDuration write FDuration;
     property Icon: TIcon read FIcon write SetIcon;
     property Kind: TBalloonKind read FKind write FKind;
     property Position: TBalloonPosition read FPosition write FPosition;
     property Text: string read FText write FText;
-  	property X: Integer read FX write FX;
+    property X: Integer read FX write FX;
     property Y: Integer read FY write FY;
   end;
 
@@ -67,52 +67,52 @@ function BalloonHintActive: Boolean;
 implementation
 
 const
-	DefaultDuration = 15000;
+  DefaultDuration = 15000;
   Icons: array[TBalloonKind] of PChar = (IDI_ASTERISK, IDI_QUESTION,
-  	IDI_EXCLAMATION, IDI_HAND, IDI_APPLICATION);
+    IDI_EXCLAMATION, IDI_HAND, IDI_APPLICATION);
   COLOR_TOOLTIP = $E1FFFF;
-	DT_FORMAT = DT_TOP or DT_LEFT or DT_NOCLIP or DT_NOPREFIX;
+  DT_FORMAT = DT_TOP or DT_LEFT or DT_NOCLIP or DT_NOPREFIX;
 
 function CreateBalloonRgn(const Rect: TRect; Placement: TBalloonPosition): HRGN;
 var
   Points: array[0..2] of TPoint;
-	A, B, C: HRGN;
+  A, B, C: HRGN;
 begin
   with Rect do
   begin
     A := CreateRectRgn(Left, Top, Right, Bottom);
     case Placement of
-			bpTopLeft, bpTopRight:
-				B := CreateRoundRectRgn(Left, Top, Right, Bottom - 16, 11, 11);
+      bpTopLeft, bpTopRight:
+        B := CreateRoundRectRgn(Left, Top, Right, Bottom - 16, 11, 11);
       else
-				B := CreateRoundRectRgn(Left, Top + 16, Right, Bottom, 11, 11);
-		end;
+        B := CreateRoundRectRgn(Left, Top + 16, Right, Bottom, 11, 11);
+    end;
     case Placement of
-			bpTopLeft:
-      	begin
-			    Points[0] := Point(Right - 16, Bottom - 20);
-    			Points[1] := Point(Right - 16, Bottom);
-			    Points[2] := Point(Right - 36, Bottom - 20);
+      bpTopLeft:
+        begin
+          Points[0] := Point(Right - 16, Bottom - 20);
+          Points[1] := Point(Right - 16, Bottom);
+          Points[2] := Point(Right - 36, Bottom - 20);
         end;
       bpTopRight:
-      	begin
-			    Points[0] := Point(Left + 16, Bottom - 20);
-    			Points[1] := Point(Left + 16, Bottom);
-			    Points[2] := Point(Left + 36, Bottom - 20);
+        begin
+          Points[0] := Point(Left + 16, Bottom - 20);
+          Points[1] := Point(Left + 16, Bottom);
+          Points[2] := Point(Left + 36, Bottom - 20);
         end;
       bpBottomLeft:
-      	begin
-			    Points[0] := Point(Right - 16, Top + 20);
-    			Points[1] := Point(Right - 16, Top);
-			    Points[2] := Point(Right - 36, Top + 20);
+        begin
+          Points[0] := Point(Right - 16, Top + 20);
+          Points[1] := Point(Right - 16, Top);
+          Points[2] := Point(Right - 36, Top + 20);
         end;
       bpBottomRight:
-      	begin
-			    Points[0] := Point(Left + 16, Top + 20);
-    			Points[1] := Point(Left + 16, Top);
-			    Points[2] := Point(Left + 36, Top + 20);
+        begin
+          Points[0] := Point(Left + 16, Top + 20);
+          Points[1] := Point(Left + 16, Top);
+          Points[2] := Point(Left + 36, Top + 20);
         end;
-		end;
+    end;
     C := CreatePolygonRgn(Points, 3, WINDING);
   end;
   CombineRgn(A, B, C, RGN_OR);
@@ -137,26 +137,26 @@ begin
 end;
 
 function CalcBallonRect(BoldFont, Font: HFONT;
-	const Caption, Text: string): TRect;
+  const Caption, Text: string): TRect;
 var
-	DC: HDC;
+  DC: HDC;
   PriorFont: HFONT;
   Size: TSize;
   X, Y: Integer;
   Strings: TStrings;
   I: Integer;
 begin
-	DC := GetDC(0);
+  DC := GetDC(0);
   PriorFont := SelectObject(DC, BoldFont);
   if Caption = '' then
-		Size := CalcCaptionSize(DC, ' ')
+    Size := CalcCaptionSize(DC, ' ')
   else
-		Size := CalcCaptionSize(DC, Caption);
+    Size := CalcCaptionSize(DC, Caption);
   X := Size.cx + 32;
   Y := Size.cy;
   if Text <> '' then
   begin
-	  SelectObject(DC, Font);
+    SelectObject(DC, Font);
     Strings := TStringList.Create;
     try
       Strings.Text := Text;
@@ -171,7 +171,7 @@ begin
     finally
       Strings.Free;
     end;
-	end;
+  end;
   SelectObject(DC, PriorFont);
   ReleaseDC(0, DC);
   Result.Left := 0;
@@ -188,7 +188,7 @@ type
     FIcon: HICON;
     FFont: HFONT;
     FBoldFont: HFONT;
-  	FDuration: Cardinal;
+    FDuration: Cardinal;
     FPosition: TBalloonPosition;
     FKind: TBalloonKind;
     FRect: TRect;
@@ -215,36 +215,36 @@ type
   end;
 
 var
-	BalloonForm: TBalloonForm;
+  BalloonForm: TBalloonForm;
 
 function BalloonHintActive: Boolean;
 begin
-	Result := BalloonForm <> nil;
+  Result := BalloonForm <> nil;
 end;
 
 constructor TBalloonForm.Create(AOwner: TComponent);
 begin
   inherited CreateNew(AOwner);
   if BalloonForm <> nil then
-  	BalloonForm.Release;
+    BalloonForm.Release;
   BalloonForm := Self;
   Color := COLOR_TOOLTIP;
-	Top := 0;
+  Top := 0;
   Left := 0;
   Width := 200;
   Height := 100;
-	HandleNeeded;
+  HandleNeeded;
   FThemeButton := TThemeGlyphButton.Create(Self);
   with FThemeButton do
   begin
-  	Parent := Self;
+    Parent := Self;
     OnClick := ButtonClick;
   end;
 end;
 
 procedure TBalloonForm.CreateParams(var Params: TCreateParams);
 begin
-	inherited CreateParams(Params);
+  inherited CreateParams(Params);
   with Params do
   begin
     Style := WS_POPUP;
@@ -255,24 +255,24 @@ end;
 destructor TBalloonForm.Destroy;
 begin
   if BalloonForm = Self then
-		BalloonForm := nil;
+    BalloonForm := nil;
   if FRegion <> 0 then
-  	DeleteObject(FRegion);
-	if FTimer <> 0 then
-  	KillTimer(Handle, FTimer);
+    DeleteObject(FRegion);
+  if FTimer <> 0 then
+    KillTimer(Handle, FTimer);
   if FFont <> 0 then
-  	DeleteObject(FFont);
+    DeleteObject(FFont);
   if FBoldFont <> 0 then
-  	DeleteObject(FBoldFont);
+    DeleteObject(FBoldFont);
   inherited Destroy;
 end;
 
 procedure TBalloonForm.Popup(X, Y: Integer);
 var
-	LogFont: TLogFont;
+  LogFont: TLogFont;
 begin
-	if FIcon = 0 then
-		FIcon := LoadIcon(0, Icons[FKind]);
+  if FIcon = 0 then
+    FIcon := LoadIcon(0, Icons[FKind]);
   SystemParametersInfo(SPI_GETICONTITLELOGFONT, SizeOf(LogFont), @LogFont, 0);
   FFont := CreateFontIndirect(LogFont);
   LogFont.lfWeight := FW_BOLD;
@@ -282,47 +282,47 @@ begin
   Height := HeightOf(FRect);
   case FPosition of
     bpTopLeft, bpTopRight:
-    	begin
-      	FThemeButton.Top := 4;
-				FThemeButton.Left := Width - FThemeButton.Width - 4;
+      begin
+        FThemeButton.Top := 4;
+        FThemeButton.Left := Width - FThemeButton.Width - 4;
         Y := Y - Height;
         if Position = bpTopLeft then
-        	X := X - Width + 16
+          X := X - Width + 16
         else
-        	X := X - 16;
+          X := X - 16;
       end;
-	else
-		FThemeButton.Top := 20;
+  else
+    FThemeButton.Top := 20;
     FThemeButton.Left := Width - FThemeButton.Width - 4;
-		if Position = bpBottomLeft then
-    	X := X - Width + 16
-		else
-    	X := X - 16;
+    if Position = bpBottomLeft then
+      X := X - Width + 16
+    else
+      X := X - 16;
   end;
   if FRegion <> 0 then
-  	DeleteObject(FRegion);
+    DeleteObject(FRegion);
   FRegion := CreateBalloonRgn(FRect, FPosition);
   SetBalloonWindow(Handle, FRect, FPosition);
-	SetWindowPos(Handle, HWND_TOPMOST, X, Y, Width, Height,
-		SWP_SHOWWINDOW or SWP_NOACTIVATE);
-	if FDuration = 0 then
-  	FDuration := DefaultDuration;
-	FTimer := SetTimer(Handle, 1, FDuration, nil);
+  SetWindowPos(Handle, HWND_TOPMOST, X, Y, Width, Height,
+    SWP_SHOWWINDOW or SWP_NOACTIVATE);
+  if FDuration = 0 then
+    FDuration := DefaultDuration;
+  FTimer := SetTimer(Handle, 1, FDuration, nil);
 end;
 
 procedure TBalloonForm.Paint;
 var
-	DC: HDC;
+  DC: HDC;
   PriorFont: HFONT;
-	R: TRect;
+  R: TRect;
 begin
-	DC := Canvas.Handle;
+  DC := Canvas.Handle;
   FillBalloonRgn(DC, FRegion);
-	R := FRect;
+  R := FRect;
   case FPosition of
     bpTopLeft, bpTopRight: R.Top := 8;
-	else
-		R.Top := 24;
+  else
+    R.Top := 24;
   end;
   Inc(R.Left, 8);
   SetBkMode(DC, TRANSPARENT);
@@ -334,10 +334,10 @@ begin
   Inc(R.Top, GraphTools.CalcCaptionSize(DC, ' ').cy + 8);
   if FText <> '' then
   begin
-  	SelectObject(DC, FFont);
-		DrawText(DC, PChar(FText), -1, R, DT_FORMAT or DT_WORDBREAK);
+    SelectObject(DC, FFont);
+    DrawText(DC, PChar(FText), -1, R, DT_FORMAT or DT_WORDBREAK);
   end;
-	SelectObject(DC, PriorFont);
+  SelectObject(DC, PriorFont);
 end;
 
 procedure TBalloonForm.ButtonClick(Sender: TObject);
@@ -347,8 +347,8 @@ end;
 
 procedure TBalloonForm.CMShowingChanged(var Message: TMessage);
 begin
-	SetWindowPos(Handle, HWND_TOPMOST, 8, 8, 200, 100,
-		SWP_SHOWWINDOW or SWP_NOACTIVATE);
+  SetWindowPos(Handle, HWND_TOPMOST, 8, 8, 200, 100,
+    SWP_SHOWWINDOW or SWP_NOACTIVATE);
 end;
 
 procedure TBalloonForm.WMMouseActivate(var Message: TMessage);
@@ -358,18 +358,18 @@ end;
 
 procedure TBalloonForm.WMTimer(var Message: TWMTimer);
 begin
-	KillTimer(Handle, FTimer);
-	FTimer := 0;
+  KillTimer(Handle, FTimer);
+  FTimer := 0;
   Release;
 end;
 
 procedure PreviewBalloonHint(DC: HDC; const Rect: TRect; const Caption, Text: string;
-	Icon: HICON; Kind: TBalloonKind; Position: TBalloonPosition);
+  Icon: HICON; Kind: TBalloonKind; Position: TBalloonPosition);
 var
-	LogFont: TLogFont;
-	Font, BoldFont, PriorFont: HFont;
-	HintIcon: HICON;
-	R, B: TRect;
+  LogFont: TLogFont;
+  Font, BoldFont, PriorFont: HFont;
+  HintIcon: HICON;
+  R, B: TRect;
   W, H: Integer;
   Rgn: HRGN;
 begin
@@ -389,16 +389,16 @@ begin
   DeleteObject(Rgn);
   case Position of
     bpTopLeft, bpTopRight: Inc(R.Top, 8);
-	else
-		Inc(R.Top, 24);
+  else
+    Inc(R.Top, 24);
   end;
   Inc(R.Left, 8);
   SetBkMode(DC, TRANSPARENT);
   PriorFont := SelectObject(DC, BoldFont);
   if (Kind = bkCustom) and (Icon <> 0) then
-  	HintIcon := Icon
- 	else
-		HintIcon := LoadIcon(0, Icons[Kind]);
+    HintIcon := Icon
+   else
+    HintIcon := LoadIcon(0, Icons[Kind]);
   DrawIconEx(DC, R.Left, R.Top, HintIcon, 16, 16, 0, 0, DI_NORMAL);
   B := R;
   with B do
@@ -415,40 +415,40 @@ begin
   Inc(R.Top, CalcCaptionSize(DC, ' ').cy + 8);
   if Text <> '' then
   begin
-  	SelectObject(DC, Font);
-		DrawText(DC, PChar(Text), -1, R, DT_FORMAT or DT_WORDBREAK);
+    SelectObject(DC, Font);
+    DrawText(DC, PChar(Text), -1, R, DT_FORMAT or DT_WORDBREAK);
   end;
-	SelectObject(DC, PriorFont);
+  SelectObject(DC, PriorFont);
 end;
 
 procedure BalloonHint(const Caption, Text: string;
-	Kind: TBalloonKind; Position: TBalloonPosition; X, Y: Integer;
+  Kind: TBalloonKind; Position: TBalloonPosition; X, Y: Integer;
   Duration: Cardinal = 0);
 var
   B: TBalloonForm;
 begin
-	B := TBalloonForm.Create(Application);
+  B := TBalloonForm.Create(Application);
   B.Caption := Caption;
   B.Text := Text;
   B.Kind := Kind;
   B.Position := Position;
-	B.Duration := Duration;
+  B.Duration := Duration;
   B.Popup(X, Y);
 end;
 
 procedure BalloonHint(const Caption, Text: string;
-	Icon: HICON; Position: TBalloonPosition; X, Y: Integer;
+  Icon: HICON; Position: TBalloonPosition; X, Y: Integer;
   Duration: Cardinal = 0);
 var
   B: TBalloonForm;
 begin
-	B := TBalloonForm.Create(Application);
+  B := TBalloonForm.Create(Application);
   B.Caption := Caption;
   B.Text := Text;
   B.Kind := bkCustom;
   B.Icon := Icon;
   B.Position := Position;
-	B.Duration := Duration;
+  B.Duration := Duration;
   B.Popup(X, Y);
 end;
 
@@ -457,14 +457,14 @@ end;
 constructor TBalloonHint.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-	FIcon := TIcon.Create;
+  FIcon := TIcon.Create;
   FX := Screen.Width div 2;
   FY := Screen.Height div 2;
 end;
 
 destructor TBalloonHint.Destroy;
 begin
-	FIcon.Free;
+  FIcon.Free;
   inherited Destroy;
 end;
 
@@ -475,11 +475,11 @@ end;
 
 procedure TBalloonHint.SetActive(Value: Boolean);
 begin
-	if csLoading in ComponentState then Exit;
-	if FKind = bkCustom then
-  	BalloonHint(Caption, Text, Icon.Handle, Position, X, Y, Duration)
+  if csLoading in ComponentState then Exit;
+  if FKind = bkCustom then
+    BalloonHint(Caption, Text, Icon.Handle, Position, X, Y, Duration)
   else
-  	BalloonHint(Caption, Text, Kind, Position, X, Y, Duration)
+    BalloonHint(Caption, Text, Kind, Position, X, Y, Duration)
 end;
 
 procedure TBalloonHint.SetName(const Value: TComponentName);

@@ -22,7 +22,7 @@ type
     constructor Create(Collection: TCollection); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-	published
+  published
     property Items: TStrings read FItems write SetItems;
     property Interfaces: TInterfaceList read FInterfaces;
     property Caption: TCaption read FCaption write SetCaption;
@@ -104,7 +104,7 @@ implementation
 
 constructor TGridSection.Create(Collection: TCollection);
 begin
-	inherited Create(Collection);
+  inherited Create(Collection);
   FItems := TStringList.Create;
   FInterfaces := TInterfaceList.Create;
 end;
@@ -122,7 +122,7 @@ begin
   if Source is TGridSection then
   begin
     FCaption := EditItem.Caption;
-		FItems.Assign(EditItem.Items);
+    FItems.Assign(EditItem.Items);
     FInterfaces.Clear;
     Changed(False);
   end
@@ -172,7 +172,7 @@ procedure TGridSections.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
   if FProvider is TGroupedItemProvider then
-  	TGroupedItemProvider(FProvider).SectionsChanged;
+    TGroupedItemProvider(FProvider).SectionsChanged;
 end;
 
 function TGridSections.Get(Index: Integer): TGridSection;

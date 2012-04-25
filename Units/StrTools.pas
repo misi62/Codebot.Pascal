@@ -245,7 +245,7 @@ procedure DecryptFile(const FileName: string; Key: Word);
 function StrToChar(const S: string): Char;
 
 function LicenseNumber(const First, Last: string; Middle: Char; Birthday: TDateTime;
-	Female: Boolean): string;
+  Female: Boolean): string;
 
 function RandomString(Length: Integer): string;
 
@@ -281,48 +281,48 @@ end;
 
 function LocalFile(const S: string): string;
 begin
-	Result := ExtractPath(ParamStr(0)) + S;
+  Result := ExtractPath(ParamStr(0)) + S;
 end;
 
 function LocalFileOle(const S: string): WideString;
 begin
-	Result := LocalFile(S);
+  Result := LocalFile(S);
 end;
 
 function LocalTypeLib(const FileName: string): ITypeLib;
 begin
-	if LoadTypeLib(PWideChar(LocalFileOle(FileName)), Result) <> S_OK then
-  	Result := nil;
+  if LoadTypeLib(PWideChar(LocalFileOle(FileName)), Result) <> S_OK then
+    Result := nil;
 end;
 
 function FindSwitch(const Switch: string): Boolean;
 var
-	S: string;
+  S: string;
 begin
-	Result := FindSwitch(Switch, S);
+  Result := FindSwitch(Switch, S);
 end;
 
 function FindSwitch(const Switch: string; var Param: string): Boolean;
 var
   S: string;
-	I: Integer;
+  I: Integer;
 begin
   S := LowerCase(Switch);
-	Param := '';
-	Result := False;
+  Param := '';
+  Result := False;
   for I := 1 to ParamCount do
-  	if Pos(Switch, LowerCase(ParamStr(I))) = 1 then
+    if Pos(Switch, LowerCase(ParamStr(I))) = 1 then
     begin
-    	if Length(ParamStr(I)) > Length(Switch) then
+      if Length(ParamStr(I)) > Length(Switch) then
       begin
-	    	Param := Copy(ParamStr(I), Length(Switch) + 1, Length(ParamStr(I)));
+        Param := Copy(ParamStr(I), Length(Switch) + 1, Length(ParamStr(I)));
         if Param[1] = '"' then
-        	Param[1] := ' ';
-				if Param[Length(Param)] = '"' then
-        	Param[Length(Param)] := ' ';
-				Param := Trim(Param);
+          Param[1] := ' ';
+        if Param[Length(Param)] = '"' then
+          Param[Length(Param)] := ' ';
+        Param := Trim(Param);
       end;
-    	Result := True;
+      Result := True;
       Break;
     end;
 end;
@@ -1099,7 +1099,7 @@ end;
 
 procedure FileWriteLn(const FileName, Value: string);
 begin
-	FileWrite(FileName, Value + #13#10);
+  FileWrite(FileName, Value + #13#10);
 end;
 
 function ExtractFieldPath(const S: string): TFieldPath;
@@ -1206,24 +1206,24 @@ var
   SubKey: string;
   Size: Integer;
 begin
-	Result := Default;
+  Result := Default;
   if RegFindKey(Key, RegKey, SubKey) then
   try
-  	Size := SizeOf(Result);
+    Size := SizeOf(Result);
     RegQueryValueEx(RegKey, PChar(SubKey), nil, nil, @Result, @Size);
   finally
     RegCloseKey(RegKey);
-	end;
+  end;
 end;
 
 procedure RegWriteInt(const Key: string; Value: Integer);
 var
-	RegKey: HKEY;
+  RegKey: HKEY;
   SubKey: string;
 begin
-	if RegFindKey(Key, RegKey, SubKey, True) then
+  if RegFindKey(Key, RegKey, SubKey, True) then
   try
-		RegSetValueEx(RegKey, PChar(SubKey), 0, REG_DWORD, @Value, SizeOf(Value));
+    RegSetValueEx(RegKey, PChar(SubKey), 0, REG_DWORD, @Value, SizeOf(Value));
   finally
     RegCloseKey(RegKey);
   end;
@@ -1466,63 +1466,63 @@ end;
 function LookupFirst(S: string): Integer;
 
 begin
-	S := UpperCase(S);
-	if S = '' then Result := 0
-	else if S = 'ALBERT' then Result := 20
-	else if S = 'ALICE' then Result := 20
-	else if S = 'ANN' then Result := 40
-	else if S = 'ANNA' then Result := 40
-	else if S = 'ANNE' then Result := 40
-	else if S = 'ANNIE' then Result := 40
-	else if S = 'ARTHUR' then Result := 40
-	else if S = 'BERNARD' then Result := 80
-	else if S = 'BETTE' then Result := 80
-	else if S = 'BETTIE' then Result := 80
-	else if S = 'BETTY' then Result := 80
-	else if S = 'CARL' then Result := 120
-	else if S = 'CATHERINE' then Result := 120
-	else if S = 'CHARLES' then Result := 140
-	else if S = 'DORTHY' then Result := 180
-	else if S = 'EDWARD' then Result := 220
-	else if S = 'ELIZABETH' then Result := 220
-	else if S = 'FLORENCE' then Result := 260
-	else if S = 'DONALD' then Result := 180
-	else if S = 'CLARA' then Result := 140
-	else if S = 'FRANK' then Result := 260
-	else if S = 'GEORGE' then Result := 300
-	else if S = 'GRACE' then Result := 300
-	else if S = 'HAROLD' then Result := 340
-	else if S = 'HARRIET' then Result := 340
-	else if S = 'HARRY' then Result := 360
-	else if S = 'HAZEL' then Result := 360
-	else if S = 'HELEN' then Result := 380
-	else if S = 'HENRY' then Result := 380
-	else if S = 'JAMES' then Result := 440
-	else if S = 'JANE' then Result := 440
-	else if S = 'JAYNE' then Result := 440
-	else if S = 'JEAN' then Result := 460
-	else if S = 'JOAN' then Result := 480
-	else if S = 'JOHN' then Result := 460
-	else if S = 'JOSEPH' then Result := 480
-	else if S = 'MARGARET' then Result := 560
-	else if S = 'MARTIN' then Result := 560
-	else if S = 'MARVIN' then Result := 580
-	else if S = 'MARY' then Result := 580
-	else if S = 'MELVIN' then Result := 600
-	else if S = 'MILDRED' then Result := 600
-	else if S = 'PATRICIA' then Result := 680
-	else if S = 'PAUL' then Result := 680
-	else if S = 'RICHARD' then Result := 740
-	else if S = 'ROBERT' then Result := 760
-	else if S = 'RUBY' then Result := 740
-	else if S = 'RUTH' then Result := 760
-	else if S = 'THELMA' then Result := 820
-	else if S = 'THOMAS' then Result := 820
-	else if S = 'WALTER' then Result := 900
-	else if S = 'WANDA' then Result := 900
-	else if S = 'WILLIAM' then Result := 920
-	else if S = 'WILMA' then Result := 920
-	else case S[1] of
+  S := UpperCase(S);
+  if S = '' then Result := 0
+  else if S = 'ALBERT' then Result := 20
+  else if S = 'ALICE' then Result := 20
+  else if S = 'ANN' then Result := 40
+  else if S = 'ANNA' then Result := 40
+  else if S = 'ANNE' then Result := 40
+  else if S = 'ANNIE' then Result := 40
+  else if S = 'ARTHUR' then Result := 40
+  else if S = 'BERNARD' then Result := 80
+  else if S = 'BETTE' then Result := 80
+  else if S = 'BETTIE' then Result := 80
+  else if S = 'BETTY' then Result := 80
+  else if S = 'CARL' then Result := 120
+  else if S = 'CATHERINE' then Result := 120
+  else if S = 'CHARLES' then Result := 140
+  else if S = 'DORTHY' then Result := 180
+  else if S = 'EDWARD' then Result := 220
+  else if S = 'ELIZABETH' then Result := 220
+  else if S = 'FLORENCE' then Result := 260
+  else if S = 'DONALD' then Result := 180
+  else if S = 'CLARA' then Result := 140
+  else if S = 'FRANK' then Result := 260
+  else if S = 'GEORGE' then Result := 300
+  else if S = 'GRACE' then Result := 300
+  else if S = 'HAROLD' then Result := 340
+  else if S = 'HARRIET' then Result := 340
+  else if S = 'HARRY' then Result := 360
+  else if S = 'HAZEL' then Result := 360
+  else if S = 'HELEN' then Result := 380
+  else if S = 'HENRY' then Result := 380
+  else if S = 'JAMES' then Result := 440
+  else if S = 'JANE' then Result := 440
+  else if S = 'JAYNE' then Result := 440
+  else if S = 'JEAN' then Result := 460
+  else if S = 'JOAN' then Result := 480
+  else if S = 'JOHN' then Result := 460
+  else if S = 'JOSEPH' then Result := 480
+  else if S = 'MARGARET' then Result := 560
+  else if S = 'MARTIN' then Result := 560
+  else if S = 'MARVIN' then Result := 580
+  else if S = 'MARY' then Result := 580
+  else if S = 'MELVIN' then Result := 600
+  else if S = 'MILDRED' then Result := 600
+  else if S = 'PATRICIA' then Result := 680
+  else if S = 'PAUL' then Result := 680
+  else if S = 'RICHARD' then Result := 740
+  else if S = 'ROBERT' then Result := 760
+  else if S = 'RUBY' then Result := 740
+  else if S = 'RUTH' then Result := 760
+  else if S = 'THELMA' then Result := 820
+  else if S = 'THOMAS' then Result := 820
+  else if S = 'WALTER' then Result := 900
+  else if S = 'WANDA' then Result := 900
+  else if S = 'WILLIAM' then Result := 920
+  else if S = 'WILMA' then Result := 920
+  else case S[1] of
     'A': Result := 0;
     'B': Result := 60;
     'C': Result := 100;
@@ -1556,57 +1556,57 @@ end;
 
 function LookupMiddle(C: Char): Integer;
 begin
-	case UpCase(C) of
-		'A': Result := 1;
-		'B': Result := 2;
-		'C': Result := 3;
-		'D': Result := 4;
-		'E': Result := 5;
-		'F': Result := 6;
-		'G': Result := 7;
-		'H': Result := 8;
-		'I': Result := 9;
-		'J': Result := 10;
-		'K': Result := 11;
-		'L': Result := 12;
-		'M': Result := 13;
-		'N': Result := 14;
-		'O': Result := 14;
-		'P': Result := 15;
-		'Q': Result := 15;
-		'R': Result := 16;
-		'S': Result := 17;
-		'T': Result := 18;
-		'U': Result := 18;
-		'V': Result := 18;
-		'W': Result := 19;
-		'X': Result := 19;
-		'Y': Result := 19;
-		'Z': Result := 19;
-	else
-  	Result := 0;
-	end;
+  case UpCase(C) of
+    'A': Result := 1;
+    'B': Result := 2;
+    'C': Result := 3;
+    'D': Result := 4;
+    'E': Result := 5;
+    'F': Result := 6;
+    'G': Result := 7;
+    'H': Result := 8;
+    'I': Result := 9;
+    'J': Result := 10;
+    'K': Result := 11;
+    'L': Result := 12;
+    'M': Result := 13;
+    'N': Result := 14;
+    'O': Result := 14;
+    'P': Result := 15;
+    'Q': Result := 15;
+    'R': Result := 16;
+    'S': Result := 17;
+    'T': Result := 18;
+    'U': Result := 18;
+    'V': Result := 18;
+    'W': Result := 19;
+    'X': Result := 19;
+    'Y': Result := 19;
+    'Z': Result := 19;
+  else
+    Result := 0;
+  end;
 end;
 
 function LookupDate(Birthday: TDateTime; Female: Boolean): string;
 var
-	Year, Day, Month: Word;
+  Year, Day, Month: Word;
   I: Integer;
 begin
-	DecodeDate(Birthday, Year, Month, Day);
+  DecodeDate(Birthday, Year, Month, Day);
   if Female then
-  	I := 500
+    I := 500
   else
-  	I := 0;
+    I := 0;
   Result := Format('%.2d-%.3d', [Year mod 100, (Month - 1) * 40 + Day + I]);
 end;
 
 function StrToChar(const S: string): Char;
 begin
-	if S <> '' then
-  	Result := S[1]
+  if S <> '' then
+    Result := S[1]
   else
-  	Result := #0;
+    Result := #0;
 end;
 
 const
@@ -1818,30 +1818,30 @@ begin
 end;
 
 function LicenseNumber(const First, Last: string; Middle: Char; Birthday: TDateTime;
-	Female: Boolean): string;
+  Female: Boolean): string;
 begin
-	Result := Format('%s-%.3d-%s-?', [SoundEx(Last), LookupFirst(First) +
-  	LookupMiddle(Middle), LookupDate(Birthday, Female)]);
+  Result := Format('%s-%.3d-%s-?', [SoundEx(Last), LookupFirst(First) +
+    LookupMiddle(Middle), LookupDate(Birthday, Female)]);
 end;
 
 function RandomString(Length: Integer): string;
 var
-	C: Char;
-	I: Integer;
+  C: Char;
+  I: Integer;
 begin
-	SetLength(Result, Length);
+  SetLength(Result, Length);
   Randomize;
   I := 1;
   while I < Length + 1 do
   begin
-	  C := Chr(Random(High(Byte)));
+    C := Chr(Random(High(Byte)));
     {$IFDEF D11_UP}
-		if CharInSet(C, ['0'..'9', 'A'..'Z', 'a'..'z']) then
+    if CharInSet(C, ['0'..'9', 'A'..'Z', 'a'..'z']) then
     {$ELSE}
-		if C in ['0'..'9', 'A'..'Z', 'a'..'z'] then
+    if C in ['0'..'9', 'A'..'Z', 'a'..'z'] then
     {$ENDIF}
     begin
-    	Result[I] := C;
+      Result[I] := C;
       Inc(I);
     end;
   end;
@@ -1850,7 +1850,7 @@ end;
 {$IFDEF DEBUGLOG}
 procedure DebugLog(const S: string);
 begin
-	FileWriteLn('c:\temp\debug\log.txt', S);
+  FileWriteLn('c:\temp\debug\log.txt', S);
 end;
 {$ENDIF}
 

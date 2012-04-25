@@ -821,18 +821,18 @@ begin
         finally
           L.Free;
         end;
-  	    RestoreVisible(FVisibleData);
-	      FVisibleData := nil;
+        RestoreVisible(FVisibleData);
+        FVisibleData := nil;
       end;
-			DisableAlign;
-			for I := 0 to ControlCount - 1 do
-      	if Controls[I] is TWinControl then
+      DisableAlign;
+      for I := 0 to ControlCount - 1 do
+        if Controls[I] is TWinControl then
         begin
-        	W := TWinControl(Controls[I]);
+          W := TWinControl(Controls[I]);
           if W.Align = alTop then
-        		W.Top := W.TabOrder;
-      	end;
-			EnableAlign;
+            W.Top := W.TabOrder;
+        end;
+      EnableAlign;
     end
     else
     begin
@@ -847,10 +847,10 @@ begin
         Inc(H, 4);
       Height := H;
       Event := FOnCollapse;
-			if IsChild(Handle, GetFocus) then
-	    	SetFocus;
-	    if not (csDesigning in ComponentState) then
-		    FVisibleData := SaveVisible(Self);
+      if IsChild(Handle, GetFocus) then
+        SetFocus;
+      if not (csDesigning in ComponentState) then
+        FVisibleData := SaveVisible(Self);
     end;
     if Assigned(Event) then
       Event(Self);
@@ -867,7 +867,7 @@ begin
     FExpandedHeight := Value;
     if FExpanded then
       Height := FExpandedHeight;
-		Invalidate;
+    Invalidate;
   end;
 end;
 

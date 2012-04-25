@@ -41,9 +41,9 @@ procedure ShortCutOpacity(Opacity: Byte);
 implementation
 
 var
-	InternalTips: TObject;
-	InternalHintFont: IInterface;
-	InternalShortcutFont: IInterface;
+  InternalTips: TObject;
+  InternalHintFont: IInterface;
+  InternalShortcutFont: IInterface;
   InternalHintingComponent: TComponent;
   InternalHintingControl: TControl;
 
@@ -174,19 +174,19 @@ begin
   begin
     WindowClass.Style := WindowClass.Style and (not CS_DROPSHADOW);
     Style := WS_POPUP or WS_DISABLED;
-	  ExStyle := WS_EX_TOPMOST	or WS_EX_TOOLWINDOW or WS_EX_TRANSPARENT;
+    ExStyle := WS_EX_TOPMOST  or WS_EX_TOOLWINDOW or WS_EX_TRANSPARENT;
   end;
 end;
 
 type
   TShortCutTip = class(TComponent)
   private
-  	FWindow: TUtilityWindow;
+    FWindow: TUtilityWindow;
     FChanged: Boolean;
     FTip: string;
     procedure SetTip(const Value: string);
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Change;
     procedure Show(Opacity: Byte);
@@ -200,30 +200,30 @@ constructor TShortCutTip.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWindow := TUtilityWindow.Create(Self, 0, WS_POPUP or WS_DISABLED,
-  	WS_EX_TOPMOST	or WS_EX_TOOLWINDOW or WS_EX_TRANSPARENT);
+    WS_EX_TOPMOST  or WS_EX_TOOLWINDOW or WS_EX_TRANSPARENT);
   FChanged:= True;
 end;
 
 destructor TShortCutTip.Destroy;
 begin
-	FWindow.Free;
+  FWindow.Free;
   inherited Destroy;
 end;
 
 procedure TShortCutTip.Change;
 begin
-	FChanged := True;
+  FChanged := True;
 end;
 
 procedure TShortCutTip.Show(Opacity: Byte);
 const
-	DefSize = 25;
+  DefSize = 25;
 var
-	Control: TControl;
+  Control: TControl;
   Parent, Focus: HWND;
   Point: TPoint;
-	Rect: TRect;
-	G: IGdiGraphics;
+  Rect: TRect;
+  G: IGdiGraphics;
   F: IGdiFont;
   R: TRectF;
   C: TArgb;
@@ -233,9 +233,9 @@ begin
   Focus := GetFocus;
   if (Parent = Focus) or IsChild(Parent, Focus) then
   begin
-  	if FChanged then
+    if FChanged then
     begin
-    	R := NewRectF(DefSize, DefSize);
+      R := NewRectF(DefSize, DefSize);
       C := NewColor(clHighlight);
       G := NewGraphics(DefSize, DefSize);
       F := InternalShortcutFont as IGdiFont;
@@ -243,7 +243,7 @@ begin
       G.FillEllipse(NewSolidBrush(C), R);
       InflateRectF(R, -2, -2);
       G.FillEllipse(NewSolidBrush(NewColor(clWindow)), R);
-    	R := NewRectF(DefSize, DefSize);
+      R := NewRectF(DefSize, DefSize);
       OffsetRectF(R, 1, 1);
       if (FTip <> '') and (FTip[1] in ['0'..'9']) then
         OffsetRectF(R, -1, 0);
@@ -254,11 +254,11 @@ begin
     Point.X := 0;
     Point.Y := 0;
     Point := Control.ClientToScreen(Point);
-  	Rect := Control.BoundsRect;
+    Rect := Control.BoundsRect;
     OffsetRect(Rect, Point.X - Rect.Left, Point.Y - Rect.Top);
     SetWindowPos(FWindow.Handle, 0, Rect.Left + (WidthOf(Rect) - DefSize) div 2,
-    	Rect.Top + (HeightOf(Rect) - DefSize) div 2, 0, 0,
-  		SWP_NOSIZE or SWP_NOZORDER or SWP_NOACTIVATE);
+      Rect.Top + (HeightOf(Rect) - DefSize) div 2, 0, 0,
+      SWP_NOSIZE or SWP_NOZORDER or SWP_NOACTIVATE);
     ShowWindow(FWindow.Handle, SW_SHOWNA);
   end;
 end;
@@ -270,17 +270,17 @@ end;
 
 procedure TShortCutTip.SetTip(const Value: string);
 begin
-	if Value <> FTip then
+  if Value <> FTip then
   begin
-  	FChanged := True;
-	  FTip := Value;
+    FChanged := True;
+    FTip := Value;
   end;
 end;
 
 type
-	TShortCutTips = class(TComponent)
+  TShortCutTips = class(TComponent)
   private
-  	FTips: TList;
+    FTips: TList;
     FShowing: Boolean;
     FOpacity: Byte;
     procedure MessageHook(const WinProcStruct: TCWPStruct);
@@ -289,7 +289,7 @@ type
   protected
     procedure Notification(AComponent: TComponent;
       Operation: TOperation); override;
-	public
+  public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Add(Tip: TShortCutTip);
@@ -301,12 +301,12 @@ type
 
 function ShortCutTips: TShortCutTips;
 begin
-	if InternalTips = nil then
+  if InternalTips = nil then
   begin
-  	InternalTips := TShortCutTips.Create(Application);
+    InternalTips := TShortCutTips.Create(Application);
     InternalShortcutFont := NewFont('Arial Black', 14, FontStyleRegular, UnitPixel);
   end;
-	Result := TShortCutTips(InternalTips);
+  Result := TShortCutTips(InternalTips);
 end;
 
 { TShortCutTips }
@@ -314,7 +314,7 @@ end;
 constructor TShortCutTips.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-	FTips := TList.Create;
+  FTips := TList.Create;
   FOpacity := $FF;
   HookMessage(MessageHook);
   HookKeyboard(KeyboardHook);
@@ -322,37 +322,37 @@ end;
 
 destructor TShortCutTips.Destroy;
 var
-	I: Integer;
+  I: Integer;
 begin
   UnhookKeyboard(KeyboardHook);
   UnhookMessage(MessageHook);
-	for I := 0 to FTips.Count - 1 do
+  for I := 0 to FTips.Count - 1 do
     RemoveFreeNotification(TComponent(FTips[I]));
-	FTips.Free;
+  FTips.Free;
   inherited Destroy;
 end;
 
 procedure TShortCutTips.KeyboardHook(Key: Word; State: Cardinal; var Remove: Boolean);
 begin
-	if Key = VK_CONTROL then
-  	if State and $80000000 = 0 then
-	  	ShowTips(FOpacity)
-		else
-    	HideTips;
+  if Key = VK_CONTROL then
+    if State and $80000000 = 0 then
+      ShowTips(FOpacity)
+    else
+      HideTips;
 end;
 
 procedure TShortCutTips.MessageHook(const WinProcStruct: TCWPStruct);
 var
-	W: TWinControl;
+  W: TWinControl;
 begin
-	W := FindControl(WinProcStruct.hwnd);
+  W := FindControl(WinProcStruct.hwnd);
   if W = nil then Exit;
-	if W is THintWindow then Exit;
-	case WinProcStruct.message of
-  	WM_MOVE,
+  if W is THintWindow then Exit;
+  case WinProcStruct.message of
+    WM_MOVE,
     WM_SIZE,
     WM_SETFOCUS:
-	  	HideTips;
+      HideTips;
   end;
 end;
 
@@ -360,7 +360,7 @@ procedure TShortCutTips.Notification(AComponent: TComponent;
   Operation: TOperation);
 begin
   if (AComponent is TShortCutTip) and (Operation = opRemove) then
-  	FTips.Remove(AComponent)
+    FTips.Remove(AComponent)
 end;
 
 procedure TShortCutTips.Add(Tip: TShortCutTip);
@@ -384,73 +384,73 @@ end;
 
 procedure TShortCutTips.SetOpacity(const Value: Byte);
 var
-	Tip: TShortCutTip;
-	I: Integer;
+  Tip: TShortCutTip;
+  I: Integer;
 begin
-	HideTips;
+  HideTips;
   if FOpacity <> Value then
   begin
     FOpacity := Value;
- 		for I := 0 to FTips.Count - 1 do
-	  begin
-  		Tip := TShortCutTip(FTips[I]);
-	    Tip.Change;
-  	end;
+     for I := 0 to FTips.Count - 1 do
+    begin
+      Tip := TShortCutTip(FTips[I]);
+      Tip.Change;
+    end;
   end;
 end;
 
 procedure TShortCutTips.ShowTips(Opacity: Byte);
 var
-	Tip: TShortCutTip;
-	I: Integer;
+  Tip: TShortCutTip;
+  I: Integer;
 begin
-	if not FShowing then
- 		for I := 0 to FTips.Count - 1 do
-	  begin
-  		Tip := TShortCutTip(FTips[I]);
-	    Tip.Show(Opacity);
-  	end;
-	FShowing := True;
+  if not FShowing then
+     for I := 0 to FTips.Count - 1 do
+    begin
+      Tip := TShortCutTip(FTips[I]);
+      Tip.Show(Opacity);
+    end;
+  FShowing := True;
 end;
 
 procedure TShortCutTips.HideTips;
 var
-	I: Integer;
+  I: Integer;
 begin
-	if FShowing then
-		for I := 0 to FTips.Count - 1 do
-  	  TShortCutTip(FTips[I]).Hide;
-	FShowing := False;
+  if FShowing then
+    for I := 0 to FTips.Count - 1 do
+      TShortCutTip(FTips[I]).Hide;
+  FShowing := False;
 end;
 
 procedure ShortCutTip(Control: TControl; const Tip: string);
 var
-	ShortCutTip: TShortCutTip;
-	I: Integer;
+  ShortCutTip: TShortCutTip;
+  I: Integer;
 begin
-	ShortCutTip := nil;
+  ShortCutTip := nil;
   for I := 0 to Control.ComponentCount - 1 do
-		if Control.Components[I] is TShortCutTip then
+    if Control.Components[I] is TShortCutTip then
     begin
       ShortCutTip := TShortCutTip(Control.Components[I]);
       Break;
     end;
-	if Tip <> '' then
+  if Tip <> '' then
   begin
-		if ShortCutTip = nil then
-	  begin
-			ShortCutTip := TShortCutTip.Create(Control);
-		 	ShortCutTips.Add(ShortCutTip);
-	  end;
-	  ShortCutTip.Tip := Tip;
+    if ShortCutTip = nil then
+    begin
+      ShortCutTip := TShortCutTip.Create(Control);
+       ShortCutTips.Add(ShortCutTip);
+    end;
+    ShortCutTip.Tip := Tip;
   end
   else if ShortCutTip <> nil then
-  	ShortCutTip.Free;
+    ShortCutTip.Free;
 end;
 
 procedure ShortCutOpacity(Opacity: Byte);
 begin
-	ShortCutTips.Opacity := Opacity;
+  ShortCutTips.Opacity := Opacity;
 end;
 
 end.

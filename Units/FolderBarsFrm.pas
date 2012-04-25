@@ -63,7 +63,7 @@ type
     procedure ListBoxMeasureItem(Control: TWinControl; Index: Integer;
       var Height: Integer);
   private
-  	FCurrent: TObject;
+    FCurrent: TObject;
     FFolderBars: TFolderBars;
     FFolderImages: TCustomImageList;
     FItemImages: TCustomImageList;
@@ -94,8 +94,8 @@ end;
 
 procedure TFolderBarsForm.RecreateList;
 var
-	FolderBar: TFolderBar;
-	Item: TFolderItem;
+  FolderBar: TFolderBar;
+  Item: TFolderItem;
   I, J: Integer;
 begin
     with ListBox.Items do
@@ -104,13 +104,13 @@ begin
       Clear;
       for I := 0 to FFolderBars.Count - 1 do
       begin
-      	FolderBar := FFolderBars[I];
+        FolderBar := FFolderBars[I];
         FCurrent := FolderBar;
         AddObject(FolderBar.Caption, FolderBar);
         for J := 0 to FFolderBars.Items[I].Items.Count - 1 do
         begin
-	        Item := FFolderBars.Items[I].Items[J];
-	        FCurrent := Item;
+          Item := FFolderBars.Items[I].Items[J];
+          FCurrent := Item;
           AddObject(Item.Caption, Item);
         end;
       end;
@@ -122,21 +122,21 @@ procedure TFolderBarsForm.SetFolderBars(Value: TFolderBars);
 begin
   if Value <> nil then
   begin
-  	if Value.Control <> nil then
+    if Value.Control <> nil then
     begin
-    	FFolderImages := TCustomImageList(
-      	Value.Control.Perform(CM_FOLDERIMAGES, 0, 0));
-  		FItemImages := TCustomImageList(
-      	Value.Control.Perform(CM_ITEMIMAGES, 0, 0));
+      FFolderImages := TCustomImageList(
+        Value.Control.Perform(CM_FOLDERIMAGES, 0, 0));
+      FItemImages := TCustomImageList(
+        Value.Control.Perform(CM_ITEMIMAGES, 0, 0));
     end;
     FFolderBars.Assign(Value);
     RecreateList;
 
-			if ListBox.Items.Count > 0 then
+      if ListBox.Items.Count > 0 then
       begin
-      	ListBox.ItemIndex := 0;
-    		ListBox.OnClick(ListBox);
-			end;
+        ListBox.ItemIndex := 0;
+        ListBox.OnClick(ListBox);
+      end;
   end;
 end;
 
@@ -144,68 +144,68 @@ procedure TFolderBarsForm.IndexSpinChangingEx(Sender: TObject;
   var AllowChange: Boolean; NewValue: Smallint;
   Direction: TUpDownDirection);
 var
-	FolderBar: TFolderBar;
+  FolderBar: TFolderBar;
   Item: TFolderItem;
 begin
-	AllowChange := False;
+  AllowChange := False;
   if CurrentFolder <> nil then
   begin
-  	FolderBar := CurrentFolder;
+    FolderBar := CurrentFolder;
     AllowChange := (NewValue > -1) and (NewValue < FolderBar.Collection.Count);
     if AllowChange then
     begin
-			FolderBar.Index := NewValue;
-			RecreateList;
-	    with ListBox, Items do
+      FolderBar.Index := NewValue;
+      RecreateList;
+      with ListBox, Items do
       begin
-    		ItemIndex := -1;
+        ItemIndex := -1;
         ItemIndex := IndexOfObject(FolderBar);
-			end;
-		end;
+      end;
+    end;
   end
   else if CurrentItem <> nil then
   begin
-  	Item := CurrentItem;
+    Item := CurrentItem;
     AllowChange := (NewValue > -1) and (NewValue < Item.Collection.Count);
     if AllowChange then
     begin
-			Item.Index := NewValue;
-			RecreateList;
-	    with ListBox, Items do
+      Item.Index := NewValue;
+      RecreateList;
+      with ListBox, Items do
       begin
-    		ItemIndex := -1;
+        ItemIndex := -1;
         ItemIndex := IndexOfObject(Item);
-			end;
-		end;
+      end;
+    end;
   end;
 end;
 
 function EditFolderBars(ABars: TFolderBars): Boolean;
 begin
-	with TFolderBarsForm.Create(Application) do
-	try
-  	FolderBars := ABars;
+  with TFolderBarsForm.Create(Application) do
+  try
+    FolderBars := ABars;
     Result := ShowModal = mrOK;
     if Result then
       ABars.Assign(FolderBars);
   finally
-  	Free;
+    Free;
   end;
 end;
 
 
 procedure TFolderBarsForm.ListBoxClick(Sender: TObject);
 var
-	FolderBar: TFolderBar;
+  FolderBar: TFolderBar;
   Item: TFolderItem;
 begin
-	IndexSpin.OnChangingEx := nil;
+  IndexSpin.OnChangingEx := nil;
   IndexEdit.OnChange := nil;
   ImageIndexEdit.OnChange := nil;
   SelectedIndexEdit.OnChange := nil;
-	if CurrentFolder <> nil then
+  if CurrentFolder <> nil then
   begin
-  	FolderBar := CurrentFolder;
+    FolderBar := CurrentFolder;
     GroupBox.Caption := 'Folder Bar:';
     CaptionEdit.Text := FolderBar.Caption;
     EnabledBox.Checked := True;
@@ -223,7 +223,7 @@ begin
   end
   else if CurrentItem <> nil then
   begin
-  	Item := CurrentItem;
+    Item := CurrentItem;
     GroupBox.Caption := 'Folder Item:';
     CaptionEdit.Text := Item.Caption;
     EnabledBox.Checked := Item.Enabled;
@@ -263,9 +263,9 @@ end;
 
 procedure TFolderBarsForm.NewBarButtonClick(Sender: TObject);
 var
-	FolderBar: TFolderBar;
+  FolderBar: TFolderBar;
 begin
-	FolderBar := FFolderBars.Add;
+  FolderBar := FFolderBars.Add;
   FolderBar.Caption := 'New Folder Bar';
   FCurrent := FolderBar;
   ListBox.Items.AddObject(FolderBar.Caption, FolderBar);
@@ -275,83 +275,83 @@ end;
 
 procedure TFolderBarsForm.NewItemButtonClick(Sender: TObject);
 var
-	FolderBar: TFolderBar;
+  FolderBar: TFolderBar;
   Item: TFolderItem;
   I: Integer;
 begin
-	if CurrentFolder <> nil then
-  	FolderBar := CurrentFolder
-	else if CurrentItem <> nil then
-  	FolderBar := TFolderItems(CurrentItem.Collection).Folder
-	else
-  	Exit;
-	Item := FolderBar.Items.Add;
+  if CurrentFolder <> nil then
+    FolderBar := CurrentFolder
+  else if CurrentItem <> nil then
+    FolderBar := TFolderItems(CurrentItem.Collection).Folder
+  else
+    Exit;
+  Item := FolderBar.Items.Add;
   Item.Caption := 'New Folder Item';
   with ListBox, Items do
   begin
-		I := ItemIndex + 1;
-	  while (I < Count) and (Objects[I] is TFolderItem) do
-    	Inc(I);
-	  FCurrent := Item;
-		if I = Count then
-  		AddObject(Item.Caption, Item)
-		else
-    	InsertObject(I, Item.Caption, Item);
-	  ItemIndex := I;
-	  OnClick(ListBox);
-	end;
+    I := ItemIndex + 1;
+    while (I < Count) and (Objects[I] is TFolderItem) do
+      Inc(I);
+    FCurrent := Item;
+    if I = Count then
+      AddObject(Item.Caption, Item)
+    else
+      InsertObject(I, Item.Caption, Item);
+    ItemIndex := I;
+    OnClick(ListBox);
+  end;
 end;
 
 procedure TFolderBarsForm.RemoveButtonClick(Sender: TObject);
 var
-	FolderBar: TFolderBar;
+  FolderBar: TFolderBar;
   Item: TFolderItem;
-	I: Integer;
+  I: Integer;
 begin
   if CurrentFolder <> nil then
-	begin
-  	FolderBar := CurrentFolder;
+  begin
+    FolderBar := CurrentFolder;
     with ListBox, Items do
     begin
-	  	I := ItemIndex;
-	    Delete(I);
-			while (I < Count) and (Objects[I] is TFolderItem) do
-		    Delete(I);
-	    if I = Count then
-      	Dec(I);
-			if I > -1 then
-      	ItemIndex := I;
-		end;
-		FolderBar.Free;
+      I := ItemIndex;
+      Delete(I);
+      while (I < Count) and (Objects[I] is TFolderItem) do
+        Delete(I);
+      if I = Count then
+        Dec(I);
+      if I > -1 then
+        ItemIndex := I;
+    end;
+    FolderBar.Free;
   end
   else if CurrentItem <> nil then
   begin
-  	Item := CurrentItem;
+    Item := CurrentItem;
     with ListBox, Items do
     begin
-	  	I := ItemIndex;
-	    Delete(I);
-	    if I = Count then
-      	Dec(I);
-			if I > -1 then
-      	ItemIndex := I;
-		end;
-		Item.Free;
+      I := ItemIndex;
+      Delete(I);
+      if I = Count then
+        Dec(I);
+      if I > -1 then
+        ItemIndex := I;
+    end;
+    Item.Free;
   end;
-	ListBox.OnClick(ListBox);
+  ListBox.OnClick(ListBox);
   RemoveButton.Enabled := (CurrentFolder <> nil) or (CurrentItem <> nil);
 end;
 
 procedure TFolderBarsForm.CaptionEditChange(Sender: TObject);
 begin
-	if CurrentFolder <> nil then
+  if CurrentFolder <> nil then
   begin
-  	CurrentFolder.Caption := CaptionEdit.Text;
+    CurrentFolder.Caption := CaptionEdit.Text;
     ListBox.Repaint;
-	end
+  end
   else if CurrentItem <> nil then
   begin
-  	CurrentItem.Caption := CaptionEdit.Text;
+    CurrentItem.Caption := CaptionEdit.Text;
     ListBox.Repaint;
   end;
 end;
@@ -361,8 +361,8 @@ begin
   if CurrentItem <> nil then
   begin
     CurrentItem.Enabled := EnabledBox.Checked;
-		ListBox.Repaint;
-	end;
+    ListBox.Repaint;
+  end;
 end;
 
 procedure TFolderBarsForm.VisibleBoxClick(Sender: TObject);
@@ -381,7 +381,7 @@ begin
     CurrentFolder.ImageIndex := NewValue
   else if CurrentItem <> nil then
     CurrentItem.ImageIndex := NewValue;
-	ListBox.Repaint;
+  ListBox.Repaint;
   AllowChange := True;
 end;
 
@@ -390,10 +390,10 @@ procedure TFolderBarsForm.SelectedIndexSpinChangingEx(Sender: TObject;
   Direction: TUpDownDirection);
 begin
   if CurrentFolder <> nil then
-	begin
+  begin
     CurrentFolder.SelectedIndex := NewValue;
     ListBox.Repaint;
-	end;
+  end;
   AllowChange := True;
 end;
 
@@ -403,7 +403,7 @@ begin
     CurrentFolder.ImageIndex := ImageIndexEdit.ImageIndex
   else if CurrentItem <> nil then
     CurrentItem.ImageIndex := ImageIndexEdit.ImageIndex;
-	ListBox.Repaint;
+  ListBox.Repaint;
 end;
 
 procedure TFolderBarsForm.SelectedIndexEditChange(Sender: TObject);
@@ -412,26 +412,26 @@ begin
   begin
     CurrentFolder.SelectedIndex := SelectedIndexEdit.ImageIndex;
     ImageIndexEdit.ImageIndex := SelectedIndexEdit.ImageIndex;
-	end;
-	ListBox.Repaint;
+  end;
+  ListBox.Repaint;
 end;
 
 function TFolderBarsForm.GetCurrentFolder: TFolderBar;
 begin
-	with ListBox, Items do
-		if (ItemIndex > -1) and (Objects[ItemIndex] is TFolderBar) then
-    	Result := TFolderBar(Objects[ItemIndex])
-		else
-    	Result := nil;
+  with ListBox, Items do
+    if (ItemIndex > -1) and (Objects[ItemIndex] is TFolderBar) then
+      Result := TFolderBar(Objects[ItemIndex])
+    else
+      Result := nil;
 end;
 
 function TFolderBarsForm.GetCurrentItem: TFolderItem;
 begin
-	with ListBox, Items do
-		if (ItemIndex > -1) and (Objects[ItemIndex] is TFolderItem) then
-    	Result := TFolderItem(Objects[ItemIndex])
-		else
-    	Result := nil;
+  with ListBox, Items do
+    if (ItemIndex > -1) and (Objects[ItemIndex] is TFolderItem) then
+      Result := TFolderItem(Objects[ItemIndex])
+    else
+      Result := nil;
 end;
 
 procedure TFolderBarsForm.ListBoxDrawItem(Control: TWinControl;
@@ -444,47 +444,47 @@ var
   S: string;
   I: Integer;
 begin
-	with ListBox, Items do
+  with ListBox, Items do
   begin
     Hot := odSelected in State;
-  	DC := Canvas.Handle;
+    DC := Canvas.Handle;
     R := Rect;
     if Hot then
     begin
-	    SetTextColor(DC, ColorToRGB(clHighlightText));
-			FillRectColor(DC, Rect, clHighlight);
+      SetTextColor(DC, ColorToRGB(clHighlightText));
+      FillRectColor(DC, Rect, clHighlight);
     end
     else
     begin
-	    SetTextColor(DC, ColorToRGB(clWindowText));
-			FillRectColor(DC, Rect, clWindow);
+      SetTextColor(DC, ColorToRGB(clWindowText));
+      FillRectColor(DC, Rect, clWindow);
     end;
-		Inc(Rect.Left, 5);
-  	if Objects[Index] is TFolderBar then
+    Inc(Rect.Left, 5);
+    if Objects[Index] is TFolderBar then
     begin
-    	Images := FFolderImages;
+      Images := FFolderImages;
       S := TFolderBar(Objects[Index]).Caption;
       if Hot then
-	      I := TFolderBar(Objects[Index]).SelectedIndex
-			else
-	      I := TFolderBar(Objects[Index]).ImageIndex;
-		end
-		else
+        I := TFolderBar(Objects[Index]).SelectedIndex
+      else
+        I := TFolderBar(Objects[Index]).ImageIndex;
+    end
+    else
     begin
-    	Images := FItemImages;
+      Images := FItemImages;
       S := TFolderItem(Objects[Index]).Caption;
-			I := TFolderItem(Objects[Index]).ImageIndex;
-			Inc(Rect.Left, 10);
-		end;
-		if Images <> nil then
+      I := TFolderItem(Objects[Index]).ImageIndex;
+      Inc(Rect.Left, 10);
+    end;
+    if Images <> nil then
     begin
-    	if I > -1 then
+      if I > -1 then
         ImageListDraw(Images, Canvas, Rect.Left, Rect.Top + 5, I);
-			Inc(Rect.Left, Images.Width + 5);
+      Inc(Rect.Left, Images.Width + 5);
     end;
     DrawCaption(DC, S, Rect, drLeft);
     SelectClipRect(DC, R, RGN_DIFF);
-	end;
+  end;
 end;
 
 procedure TFolderBarsForm.ListBoxMeasureItem(Control: TWinControl;
@@ -492,17 +492,17 @@ procedure TFolderBarsForm.ListBoxMeasureItem(Control: TWinControl;
 var
   Images: TCustomImageList;
 begin
-	with ListBox, Items do
+  with ListBox, Items do
   begin
-  	if FCurrent is TFolderBar then
-    	Images := FFolderImages
-		else
-    	Images := FItemImages;
+    if FCurrent is TFolderBar then
+      Images := FFolderImages
+    else
+      Images := FItemImages;
   end;
-		if Images <> nil then
+    if Images <> nil then
      Height := Images.Height + 10
-		else
-    	Height := ListBox.Canvas.TextHeight('Wg')
+    else
+      Height := ListBox.Canvas.TextHeight('Wg')
 end;
 
 end.

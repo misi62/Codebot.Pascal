@@ -87,8 +87,8 @@ type
     procedure SetStylizer(Value: TDesignStylizer);
     procedure InsertControl(Sender: TObject; X, Y: Integer;
       var Inserted: Boolean);
-	public
-  	property Stylizer: TDesignStylizer read FStylizer write SetStylizer;
+  public
+    property Stylizer: TDesignStylizer read FStylizer write SetStylizer;
   end;
 
 function EditStylizer(Stylizer: TDesignStylizer): Boolean;
@@ -99,16 +99,16 @@ implementation
 
 function EditStylizer(Stylizer: TDesignStylizer): Boolean;
 var
-	Form: TStylizerEditorForm;
+  Form: TStylizerEditorForm;
 begin
-	Form := TStylizerEditorForm.Create(Application);
-	try
-   //	Form.Stylizer := Stylizer;
-  	Result := Form.ShowModal = mrOk;
+  Form := TStylizerEditorForm.Create(Application);
+  try
+   //  Form.Stylizer := Stylizer;
+    Result := Form.ShowModal = mrOk;
     //if Result then
-    	//Stylizer.Assign(Form.Stylizer);
+      //Stylizer.Assign(Form.Stylizer);
   finally
-  	Form.Free;
+    Form.Free;
   end;
 end;
 
@@ -121,172 +121,172 @@ end;
 
 procedure TStylizerEditorForm.FormCreate(Sender: TObject);
 var
-	Document: IDocument;
+  Document: IDocument;
 begin
-	FDesigner := TDesignSurface.Create(Self);
+  FDesigner := TDesignSurface.Create(Self);
   FDesigner.Parent := DesignerFrame;
-	FDesigner.Align := alClient;
-	FStylizer := TDesignStylizer.Create(Self);
+  FDesigner.Align := alClient;
+  FStylizer := TDesignStylizer.Create(Self);
   FStylizer.Designer := FDesigner;
   FStylizer.Designing := Banner.ItemIndex = 0;
-	FStylizer.OnQueryInsert := InsertControl;
+  FStylizer.OnQueryInsert := InsertControl;
   FontNameBox.Items := Screen.Fonts;
   BackgroundView.Explore(Configuration.Path[CDesignerBackgroundImages]); //'C:\temp\dev\document');
   BackgroundClearButton.Style := bsTransparent;
   BackgroundEditButton.Style := bsTransparent;
-	BackgroundClearButton.Enabled := (Stylizer.Background.Graphic <> nil) and
-  	(not Stylizer.Background.Graphic.Empty);
-	BackgroundEditButton.Enabled := BackgroundClearButton.Enabled;
+  BackgroundClearButton.Enabled := (Stylizer.Background.Graphic <> nil) and
+    (not Stylizer.Background.Graphic.Empty);
+  BackgroundEditButton.Enabled := BackgroundClearButton.Enabled;
   FontItemBoxChange(FontItemBox);
   if FileExists('layout.xml') then
   begin
-  	Document := CreateDocument;
+    Document := CreateDocument;
     Document.LoadFromFile('layout.xml');
-		FStylizer.UndoList.Clear(Document);
-		FStylizer.RestoreState;
-	end;
+    FStylizer.UndoList.Clear(Document);
+    FStylizer.RestoreState;
+  end;
 end;
 
 procedure TStylizerEditorForm.InsertControl(Sender: TObject; X, Y: Integer;
-	var Inserted: Boolean);
+  var Inserted: Boolean);
 var
-	Kind: TDesignControl;
-	Control: TControl;
+  Kind: TDesignControl;
+  Control: TControl;
   Surface: IDesignSurface;
 begin
-	if ListBox1.ItemIndex < 0 then Exit;
+  if ListBox1.ItemIndex < 0 then Exit;
   Kind := TDesignControl(ListBox1.ItemIndex);
   ListBox1.ItemIndex := -1;
-	if Supports(Sender, IDesignSurface, Surface) then
+  if Supports(Sender, IDesignSurface, Surface) then
   begin
-  	Control := Surface.AddControl(Kind);
+    Control := Surface.AddControl(Kind);
     Control.Left := X;
     Control.Top := Y;
     Inserted := True;
-	  FStylizer.LayoutDesigner(FDesigner);
+    FStylizer.LayoutDesigner(FDesigner);
   end;
 end;
 
 procedure TStylizerEditorForm.BackgroundColorButtonChange(Sender: TObject);
 begin
- 	if BackgroundBox.ItemIndex = 0 then
-		FStylizer.BandColor := BackgroundColorButton.ActiveColor
+   if BackgroundBox.ItemIndex = 0 then
+    FStylizer.BandColor := BackgroundColorButton.ActiveColor
   else
-		FStylizer.Color := BackgroundColorButton.ActiveColor;
+    FStylizer.Color := BackgroundColorButton.ActiveColor;
   FStylizer.Update;
 end;
 
 procedure TStylizerEditorForm.Button1Click(Sender: TObject);
 begin
-	{if OpenPictureDialog.Execute then
-		FStylizer.Background.LoadFromFile(OpenPictureDialog.FileName);}
-	//FStylizer.LayoutDesigner(FDesigner);
+  {if OpenPictureDialog.Execute then
+    FStylizer.Background.LoadFromFile(OpenPictureDialog.FileName);}
+  //FStylizer.LayoutDesigner(FDesigner);
   ShowMessage(IntToStr(FDesigner.Controls[0].Height));
 end;
 
 procedure TStylizerEditorForm.BackgroundViewDefaultAction(Sender: TObject;
   Node: TShellNode; var AllowAction: Boolean);
 begin
-	AllowAction := False;
+  AllowAction := False;
   if FileExists(Node.Path) then
   begin
-		if BackgroundBox.ItemIndex = 0 then
+    if BackgroundBox.ItemIndex = 0 then
     begin
-	  	Stylizer.BandFileName := Node.Path;
-	    Stylizer.RestoreState;
-		end
+      Stylizer.BandFileName := Node.Path;
+      Stylizer.RestoreState;
+    end
     else
     begin
-	  	Stylizer.BackgroundFileName := Node.Path;
+      Stylizer.BackgroundFileName := Node.Path;
       Stylizer.Update;
-		end;
-		BackgroundClearButton.Enabled := True;
+    end;
+    BackgroundClearButton.Enabled := True;
     BackgroundEditButton.Enabled := True;
-	end;
+  end;
 end;
 
 procedure TStylizerEditorForm.BackgroundViewIncludeItem(Sender: TObject;
   Node: TShellNode; var AllowAction: Boolean);
 var
-	S: string;
+  S: string;
 begin
-	if Node.ShellFolder = nil then
+  if Node.ShellFolder = nil then
   begin
-	  S := ExtractFileExt(Node.Name);
-  	AllowAction := Pos(UpperCase(S), UpperCase(GraphicFileMask(TGraphic))) > 0;
-	end
+    S := ExtractFileExt(Node.Name);
+    AllowAction := Pos(UpperCase(S), UpperCase(GraphicFileMask(TGraphic))) > 0;
+  end
   else
-  	AllowAction := False;
+    AllowAction := False;
 end;
 
 procedure TStylizerEditorForm.BackgroundClearButtonClick(Sender: TObject);
 begin
-	if BackgroundBox.ItemIndex = 0 then
-		FStylizer.BandFileName := ''
-	else
-		FStylizer.BackgroundFileName := '';
+  if BackgroundBox.ItemIndex = 0 then
+    FStylizer.BandFileName := ''
+  else
+    FStylizer.BackgroundFileName := '';
   FStylizer.RestoreState;
   BackgroundBox.SetFocus;
-	BackgroundClearButton.Enabled := False;
-	BackgroundEditButton.Enabled := False;
+  BackgroundClearButton.Enabled := False;
+  BackgroundEditButton.Enabled := False;
 end;
 
 procedure TStylizerEditorForm.BackgroundEditButtonClick(Sender: TObject);
 begin
-	if FileExists(Stylizer.BackgroundFileName) then
-	  ShellExecute(Handle, 'open', PChar(Stylizer.BackgroundFileName), nil, nil, SW_SHOW);
+  if FileExists(Stylizer.BackgroundFileName) then
+    ShellExecute(Handle, 'open', PChar(Stylizer.BackgroundFileName), nil, nil, SW_SHOW);
 end;
 
 procedure TStylizerEditorForm.BannerSelectItem(Sender: TObject);
 begin
-	FStylizer.Designing := Banner.ItemIndex = 0;
+  FStylizer.Designing := Banner.ItemIndex = 0;
 end;
 
 procedure TStylizerEditorForm.BackgroundBoxChange(Sender: TObject);
 var
-	Picture: TPicture;
+  Picture: TPicture;
 begin
-	if BackgroundBox.ItemIndex = 0 then
+  if BackgroundBox.ItemIndex = 0 then
   begin
-		BackgroundView.Explore(Configuration.Path[CDesignerBandImages]);
-  	Picture := Stylizer.Band;
-	  BackgroundColorButton.ActiveColor := Stylizer.BandColor;
-	end
-	else
+    BackgroundView.Explore(Configuration.Path[CDesignerBandImages]);
+    Picture := Stylizer.Band;
+    BackgroundColorButton.ActiveColor := Stylizer.BandColor;
+  end
+  else
   begin
-		BackgroundView.Explore(Configuration.Path[CDesignerBackgroundImages]);
-  	Picture := Stylizer.Background;
-	  BackgroundColorButton.ActiveColor := Stylizer.Color;
-	end;
-	BackgroundClearButton.Enabled := (Picture.Graphic <> nil) and
-  	(not Picture.Graphic.Empty);
-	BackgroundEditButton.Enabled := BackgroundClearButton.Enabled;
+    BackgroundView.Explore(Configuration.Path[CDesignerBackgroundImages]);
+    Picture := Stylizer.Background;
+    BackgroundColorButton.ActiveColor := Stylizer.Color;
+  end;
+  BackgroundClearButton.Enabled := (Picture.Graphic <> nil) and
+    (not Picture.Graphic.Empty);
+  BackgroundEditButton.Enabled := BackgroundClearButton.Enabled;
 end;
 
 procedure TStylizerEditorForm.FontItemBoxChange(Sender: TObject);
 var
-	Font: TFont;
+  Font: TFont;
 begin
   FActiveFont := nil;
-	case FontItemBox.ItemIndex of
-  	0: Font := FStylizer.BandFont;
+  case FontItemBox.ItemIndex of
+    0: Font := FStylizer.BandFont;
     1: Font := FStylizer.CaptionFont;
-	else
-  	Font := FStylizer.ControlFont
-	end;
+  else
+    Font := FStylizer.ControlFont
+  end;
   FontNameBox.ItemIndex := FontNameBox.Items.IndexOf(Font.Name);
   FontNameBox.ItemIndex := FontNameBox.Items.IndexOf(Font.Name);
-	FontSizeSpinner.Position := Font.Size;
+  FontSizeSpinner.Position := Font.Size;
   FontBoldButton.Down := fsBold in Font.Style;
   FontItalicButton.Down := fsItalic in Font.Style;
   FontUnderlineButton.Down := fsUnderline in Font.Style;
   FontColorButton.ActiveColor := Font.Color;
   StyleBox.ItemIndex := Ord(Stylizer.Style);
   case FStylizer.CaptionPosition of
-  	cpLeft: PlacementBox.ItemIndex := 1;
+    cpLeft: PlacementBox.ItemIndex := 1;
     cpTop: PlacementBox.ItemIndex := 0;
     cpHidden: PlacementBox.ItemIndex := 2;
-	end;
+  end;
   GridSizeSpinner.Position := FStylizer.GridSize;
   FActiveFont := Font;
 end;
@@ -302,7 +302,7 @@ procedure TStylizerEditorForm.FontSizeSpinnerChangingEx(Sender: TObject;
   var AllowChange: Boolean; NewValue: Smallint;
   Direction: TUpDownDirection);
 begin
-	AllowChange := True;
+  AllowChange := True;
   if FActiveFont = nil then Exit;
   FActiveFont.Size := NewValue;
   FStylizer.RestoreState;
@@ -311,44 +311,44 @@ end;
 procedure TStylizerEditorForm.FontBoldButtonClick(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	if FontBoldButton.Down then
-		FActiveFont.Style := FActiveFont.Style + [fsBold]
-	else
-		FActiveFont.Style := FActiveFont.Style - [fsBold];
+  if FontBoldButton.Down then
+    FActiveFont.Style := FActiveFont.Style + [fsBold]
+  else
+    FActiveFont.Style := FActiveFont.Style - [fsBold];
   FStylizer.RestoreState;
 end;
 
 procedure TStylizerEditorForm.FontItalicButtonClick(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	if FontItalicButton.Down then
-		FActiveFont.Style := FActiveFont.Style + [fsItalic]
-	else
-		FActiveFont.Style := FActiveFont.Style - [fsItalic];
+  if FontItalicButton.Down then
+    FActiveFont.Style := FActiveFont.Style + [fsItalic]
+  else
+    FActiveFont.Style := FActiveFont.Style - [fsItalic];
   FStylizer.RestoreState;
 end;
 
 procedure TStylizerEditorForm.FontUnderlineButtonClick(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	if FontUnderlineButton.Down then
-		FActiveFont.Style := FActiveFont.Style + [fsUnderline]
-	else
-		FActiveFont.Style := FActiveFont.Style - [fsUnderline];
+  if FontUnderlineButton.Down then
+    FActiveFont.Style := FActiveFont.Style + [fsUnderline]
+  else
+    FActiveFont.Style := FActiveFont.Style - [fsUnderline];
   FStylizer.RestoreState;
 end;
 
 procedure TStylizerEditorForm.FontColorButtonChange(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	FActiveFont.Color := FontColorButton.ActiveColor;
+  FActiveFont.Color := FontColorButton.ActiveColor;
   FStylizer.Refresh;
 end;
 
 procedure TStylizerEditorForm.FontSizeEditExit(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	FontSizeSpinner.Position := StrToIntDef(FontSizeEdit.Text, FontSizeSpinner.Position);
+  FontSizeSpinner.Position := StrToIntDef(FontSizeEdit.Text, FontSizeSpinner.Position);
   FActiveFont.Size := FontSizeSpinner.Position;
   FStylizer.RestoreState;
 end;
@@ -356,23 +356,23 @@ end;
 procedure TStylizerEditorForm.OKButtonClick(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	FStylizer.UndoList.State.SaveToFile('layout.xml');
+  FStylizer.UndoList.State.SaveToFile('layout.xml');
 end;
 
 procedure TStylizerEditorForm.StyleBoxChange(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	FStylizer.Style := TDesignStyle(StyleBox.ItemIndex);
+  FStylizer.Style := TDesignStyle(StyleBox.ItemIndex);
 end;
 
 procedure TStylizerEditorForm.PlacementBoxChange(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	case PlacementBox.ItemIndex of
-  	0: FStylizer.CaptionPosition := cpTop;
+  case PlacementBox.ItemIndex of
+    0: FStylizer.CaptionPosition := cpTop;
     1: FStylizer.CaptionPosition := cpLeft;
     2: FStylizer.CaptionPosition := cpHidden;
-	end;
+  end;
   FStylizer.RestoreState;
 end;
 
@@ -380,7 +380,7 @@ procedure TStylizerEditorForm.GridSizeSpinnerChangingEx(Sender: TObject;
   var AllowChange: Boolean; NewValue: Smallint;
   Direction: TUpDownDirection);
 begin
-	AllowChange := True;
+  AllowChange := True;
   if FActiveFont = nil then Exit;
   FStylizer.GridSize := NewValue;
   FStylizer.RestoreState;
@@ -389,19 +389,19 @@ end;
 procedure TStylizerEditorForm.GridSizeEditExit(Sender: TObject);
 begin
   if FActiveFont = nil then Exit;
-	GridSizeSpinner.Position := StrToIntDef(GridSizeEdit.Text, GridSizeSpinner.Position);
+  GridSizeSpinner.Position := StrToIntDef(GridSizeEdit.Text, GridSizeSpinner.Position);
   FStylizer.GridSize := GridSizeSpinner.Position;
   FStylizer.RestoreState;
 end;
 
 procedure TStylizerEditorForm.AdvancedButtonClick(Sender: TObject);
 begin
-	with TAdvancedStylesForm.Create(Self) do
+  with TAdvancedStylesForm.Create(Self) do
   try
-  	Stylizer := Self.FStylizer;
-  	ShowModal;
+    Stylizer := Self.FStylizer;
+    ShowModal;
   finally
-  	Free;
+    Free;
   end;
 end;
 

@@ -3,7 +3,7 @@ unit UpQuery;
 interface
 
 uses
-	Windows, ActiveX, Classes, DB, ADOdb, SysUtils;
+  Windows, ActiveX, Classes, DB, ADOdb, SysUtils;
 
 { TUpdateQuery }
 
@@ -95,30 +95,30 @@ var
   BM: TBookmark;
   F: Boolean;
 begin
-	DisableControls;
-	BM := GetBookmark;
-	F := Filtered;
-	Filtered := False;
+  DisableControls;
+  BM := GetBookmark;
+  F := Filtered;
+  Filtered := False;
   try
     First;
     while not Eof do
-		begin
+    begin
       if RecordStatus = [rsNew] then
         UpdateObject.Apply(ukInsert) else
-			if RecordStatus = [rsModified] then
-				UpdateObject.Apply(ukModify);
+      if RecordStatus = [rsModified] then
+        UpdateObject.Apply(ukModify);
       Next;
-		end;
-		if not FDeleteRecords.IsEmpty then
-		begin
+    end;
+    if not FDeleteRecords.IsEmpty then
+    begin
       ApplyDeleteUpdates;
       ClearBuffer;
-		end;
+    end;
   finally
-		Filtered := F;
-		GotoBookmark(BM);
-		FreeBookmark(BM);
-		EnableControls;
+    Filtered := F;
+    GotoBookmark(BM);
+    FreeBookmark(BM);
+    EnableControls;
   end;
 end;
 
@@ -130,11 +130,11 @@ end;
 
 procedure TUpdateQuery.InitBuffer;
 begin
-	if FDeleteRecords.FieldDefs.Count = 0 then
+  if FDeleteRecords.FieldDefs.Count = 0 then
   begin
-	  FDeleteRecords.Connection := Connection;
-	  FDeleteRecords.FieldDefs.Assign(FieldDefs);
-	  TADODataSet(FDeleteRecords).CreateDataSet;
+    FDeleteRecords.Connection := Connection;
+    FDeleteRecords.FieldDefs.Assign(FieldDefs);
+    TADODataSet(FDeleteRecords).CreateDataSet;
   end;
 end;
 
@@ -147,8 +147,8 @@ end;
 
 procedure TUpdateQuery.ClearBuffer;
 begin
-	if not FDeleteRecords.IsEmpty then
-		while not FDeleteRecords.Bof do
+  if not FDeleteRecords.IsEmpty then
+    while not FDeleteRecords.Bof do
       FDeleteRecords.Delete;
 end;
 
@@ -158,8 +158,8 @@ var
 begin
   InitBuffer;
   FDeleteRecords.Append;
-	for I:= 0 to Fields.Count - 1 do
-		if Fields[I].FieldKind = fkData then
+  for I:= 0 to Fields.Count - 1 do
+    if Fields[I].FieldKind = fkData then
          FDeleteRecords.Fields[I].Assign(Fields[I]);
   FDeleteRecords.Post;
 end;
@@ -172,16 +172,16 @@ begin
   FUpdateObject.FDataSet := TUpdateQuery(FDeleteRecords);
   FDeleteRecords.First;
   while not FDeleteRecords.Eof do
-	begin
+  begin
     UpdateObject.Apply(ukDelete);
     FDeleteRecords.Next;
-	end;
+  end;
   FUpdateObject.FDataSet:=Q;
 end;
 
 procedure TUpdateQuery.CommitUpdates;
 begin
-	Requery;
+  Requery;
 end;
 
 function TUpdateQuery.GetSqlIndex(Index: Integer): TStrings;
@@ -299,27 +299,27 @@ var
 begin
   if FDataSet = nil then Exit;
   Q := Query[UpdateKind];
-	for I := 0 to Q.Parameters.Count - 1 do
-	begin
-		Param := Q.Parameters.Items[I];
-		Name := Param.Name;
-		Old := CompareText(Copy(Name, 1, 4), 'OLD_') = 0;
-		if Old then
-			System.Delete(Name, 1, 4);
+  for I := 0 to Q.Parameters.Count - 1 do
+  begin
+    Param := Q.Parameters.Items[I];
+    Name := Param.Name;
+    Old := CompareText(Copy(Name, 1, 4), 'OLD_') = 0;
+    if Old then
+      System.Delete(Name, 1, 4);
     Old:= Old and (UpdateKind <> ukDelete);
     Field := FDataSet.FindField(Name);
     if Field = nil then Continue;
     if Old then
-		begin
-			Param.DataType := Field.DataType;
-			Param.Value := Field.OldValue;
-		end
-		else
-		begin
-			Param.DataType := Field.DataType;
-			Param.Value := Field.Value;
-		end;
-	end;
+    begin
+      Param.DataType := Field.DataType;
+      Param.Value := Field.OldValue;
+    end
+    else
+    begin
+      Param.DataType := Field.DataType;
+      Param.Value := Field.Value;
+    end;
+  end;
 end;
 
 procedure TUpdateObject.Apply(UpdateKind: TUpdateKind);

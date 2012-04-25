@@ -3,7 +3,7 @@ unit ADOUpdate;
 interface
 
 uses
-	Windows, ActiveX, Classes, DB, ADOdb, SysUtils;
+  Windows, ActiveX, Classes, DB, ADOdb, SysUtils;
 
 { TADOUpdateQuery }
 
@@ -174,27 +174,27 @@ var
 begin
   if FDataSet = nil then Exit;
   Q := Query[UpdateKind];
-	for I := 0 to Q.Parameters.Count - 1 do
-	begin
-		Param := Q.Parameters.Items[I];
-		Name := Param.Name;
-		Old := CompareText(Copy(Name, 1, 4), 'OLD_') = 0;
-		if Old then
-			System.Delete(Name, 1, 4);
+  for I := 0 to Q.Parameters.Count - 1 do
+  begin
+    Param := Q.Parameters.Items[I];
+    Name := Param.Name;
+    Old := CompareText(Copy(Name, 1, 4), 'OLD_') = 0;
+    if Old then
+      System.Delete(Name, 1, 4);
     Old:= Old and (UpdateKind <> ukDelete);
     Field := FDataSet.FindField(Name);
     if Field = nil then Continue;
     if Old then
-		begin
-			Param.DataType := Field.DataType;
-			Param.Value := Field.OldValue;
-		end
-		else
-		begin
-			Param.DataType := Field.DataType;
-			Param.Value := Field.Value;
-		end;
-	end;
+    begin
+      Param.DataType := Field.DataType;
+      Param.Value := Field.OldValue;
+    end
+    else
+    begin
+      Param.DataType := Field.DataType;
+      Param.Value := Field.Value;
+    end;
+  end;
 end;
 
 procedure TADOUpdateSQL.Apply(UpdateKind: TUpdateKind);
@@ -210,30 +210,30 @@ var
   BM: TBookmark;
   F: Boolean;
 begin
-	DisableControls;
-	BM := GetBookmark;
-	F := Filtered;
-	Filtered := False;
+  DisableControls;
+  BM := GetBookmark;
+  F := Filtered;
+  Filtered := False;
   try
     First;
     while not Eof do
-		begin
+    begin
       if RecordStatus = [rsNew] then
         UpdateObject.Apply(ukInsert) else
-			if RecordStatus = [rsModified] then
-				UpdateObject.Apply(ukModify);
+      if RecordStatus = [rsModified] then
+        UpdateObject.Apply(ukModify);
       Next;
-		end;
-		if not FDelRecords.IsEmpty then
-		begin
+    end;
+    if not FDelRecords.IsEmpty then
+    begin
       ApplyDelUpdates;
       ClearBuffer;
-		end;
+    end;
   finally
-		Filtered := F;
-		GotoBookmark(BM);
-		FreeBookmark(BM);
-		EnableControls;
+    Filtered := F;
+    GotoBookmark(BM);
+    FreeBookmark(BM);
+    EnableControls;
   end;
 end;
 
@@ -252,11 +252,11 @@ end;
 
 procedure TADOUpdateQuery.InitBuffer;
 begin
-	if FDelRecords.FieldDefs.Count = 0 then
+  if FDelRecords.FieldDefs.Count = 0 then
   begin
-	  FDelRecords.Connection := Connection;
-	  FDelRecords.FieldDefs.Assign(FieldDefs);
-	  TADODataSet(FDelRecords).CreateDataSet;
+    FDelRecords.Connection := Connection;
+    FDelRecords.FieldDefs.Assign(FieldDefs);
+    TADODataSet(FDelRecords).CreateDataSet;
   end;
 end;
 
@@ -291,8 +291,8 @@ end;
 
 procedure TADOUpdateQuery.ClearBuffer;
 begin
-	if not FDelRecords.IsEmpty then
-		while not FDelRecords.Bof do
+  if not FDelRecords.IsEmpty then
+    while not FDelRecords.Bof do
       FDelRecords.Delete;
 end;
 
@@ -302,8 +302,8 @@ var
 begin
   InitBuffer;
   FDelRecords.Append;
-	for I:= 0 to Fields.Count - 1 do
-		if Fields[I].FieldKind = fkData then
+  for I:= 0 to Fields.Count - 1 do
+    if Fields[I].FieldKind = fkData then
          FDelRecords.Fields[I].Assign(Fields[I]);
   FDelRecords.Post;
 end;
@@ -316,16 +316,16 @@ begin
   FUpdateObject.FDataSet := TADOUpdateQuery(FDelRecords);
   FDelRecords.First;
   while not FDelRecords.Eof do
-	begin
+  begin
     UpdateObject.Apply(ukDelete);
     FDelRecords.Next;
-	end;
+  end;
   FUpdateObject.FDataSet:=Q;
 end;
 
 procedure TADOUpdateQuery.CommitUpdates;
 begin
-	Requery;
+  Requery;
 end;
 
 function TADOUpdateQuery.ReadVar(const FieldName: string): OleVariant;

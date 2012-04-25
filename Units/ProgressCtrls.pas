@@ -510,7 +510,7 @@ end;
 
 procedure TIndeterminateProgress.CMTextChanged(var Msg: TMessage);
 begin
-	inherited;
+  inherited;
   Invalidate;
 end;
 
@@ -568,30 +568,30 @@ end;
 
 procedure UpdateAlphaWindow(Wnd: HWND; const Bitmap: TFastBitmap; Opacity: Byte = $FF);
 var
-	Blend: TBlendFunction;
+  Blend: TBlendFunction;
   Rect: TRect;
-	P1, P2: TPoint;
+  P1, P2: TPoint;
   S: TSize;
   DC: HDC;
 begin
-	SetWindowLong(Wnd, GWL_EXSTYLE, GetWindowLong(Wnd, GWL_EXSTYLE) or WS_EX_LAYERED);
-	GetWindowRect(Wnd, Rect);
-	P1.X := Rect.Left;
-	P1.Y := Rect.Top;
-	with Blend do
-	begin
-		BlendOp := AC_SRC_OVER;
-		BlendFlags := 0;
-		SourceConstantAlpha := Opacity;
-		AlphaFormat := AC_SRC_ALPHA;
-	end;
-	DC := GetDC(0);
-	P2 := Point(0, 0);
-	S.cx := Bitmap.Width;
-	S.cy := Bitmap.Height;
-	UpdateLayeredWindow(Wnd, DC, @P1, @S, Bitmap.DC,
-		@P2, 0, @Blend, ULW_ALPHA);
-	ReleaseDC(0, DC);
+  SetWindowLong(Wnd, GWL_EXSTYLE, GetWindowLong(Wnd, GWL_EXSTYLE) or WS_EX_LAYERED);
+  GetWindowRect(Wnd, Rect);
+  P1.X := Rect.Left;
+  P1.Y := Rect.Top;
+  with Blend do
+  begin
+    BlendOp := AC_SRC_OVER;
+    BlendFlags := 0;
+    SourceConstantAlpha := Opacity;
+    AlphaFormat := AC_SRC_ALPHA;
+  end;
+  DC := GetDC(0);
+  P2 := Point(0, 0);
+  S.cx := Bitmap.Width;
+  S.cy := Bitmap.Height;
+  UpdateLayeredWindow(Wnd, DC, @P1, @S, Bitmap.DC,
+    @P2, 0, @Blend, ULW_ALPHA);
+  ReleaseDC(0, DC);
 end;
 
 procedure TDrawThread.Execute;

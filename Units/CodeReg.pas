@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Classes, AutoComplete, Balloon, ImgListEx, BlendTools, FormTools, BannerCtrls,
+  Classes, AutoComplete, Balloon, ImgListEx, BlendTools, FormTools, BannerCtrls,
   SuplCtrls, PaneCtrls, CtrlBox, FlowCtrls, BtnEdit, ScrollCtrls, InspectCtrls,
   InspectEditors, BtnCtrls, FolderCtrls, ShlCtrls, WebCtrls, AlphaSplash,
   DropMgr, MacroTools, CameraCtrls, PhotoCtrls, ProgressCtrls, GridCtrls,
@@ -33,14 +33,14 @@ implementation
 procedure Register;
 begin
   RegisterComponents('Codebot Components', [TAutoCompletion, TBalloonHint,
-  	TGlassImageList, TAlphaSplashScreen, TDropFiles, TMacroRecorder]);
+    TGlassImageList, TAlphaSplashScreen, TDropFiles, TMacroRecorder]);
   RegisterComponents('Codebot Containers', [TFramedWindow, TBanner, TBannerBook,
-  	TCaptionBox, THeaderSectionBox, TPaneControl,	TControlBox, TControlBoxButton,
-    	TFlowSite, TFlowbar, TDrawTabs, TNullPanel, TPaintPanel, TFlowBox]);
+    TCaptionBox, THeaderSectionBox, TPaneControl,  TControlBox, TControlBoxButton,
+      TFlowSite, TFlowbar, TDrawTabs, TNullPanel, TPaintPanel, TFlowBox]);
   RegisterComponents('Codebot Data', [
-  	TDBDrawList, TDBReportView]);
+    TDBDrawList, TDBReportView]);
   RegisterComponents('Codebot Controls', [
-  	TBackground, TButtonEdit, TWebBrowserEx, TDocBrowser, TDatePopupEdit, TIntegerEdit, TCashEdit, TListEdit,
+    TBackground, TButtonEdit, TWebBrowserEx, TDocBrowser, TDatePopupEdit, TIntegerEdit, TCashEdit, TListEdit,
     TCheckListEdit, TImageListEdit, TDrawList,
     TInspector, TFolderView, TImageSpeedButton, TImageButton, TCheckListButton,
     TColorGridButton, TBrushButton, TPenButton, TThemeGlyphButton, TSlideBar, TSlideEdit,
@@ -48,7 +48,7 @@ begin
     TLayerGrid, TCheckDrawList, TFoldingView, TInfoBox, TContentGrid,
     THuePicker, TSaturationPicker, TAlphaPicker, TPaintPanel]);
   RegisterComponents('Codebot Shell', [
-  	TShellBubbles, TShellEdit, TShellTree, TShellView, TLargeShellImages, TSmallShellImages]);
+    TShellBubbles, TShellEdit, TShellTree, TShellView, TLargeShellImages, TSmallShellImages]);
   RegisterComponents('ADO', [TADOUpdateQuery, TADOUpdateSQL, TUpdateQuery]);
   RegisterNoIcon([TPaneSheet]);
   RegisterPropertyEditor(TStrings.ClassInfo, nil, '', TDefaultStringsProperty);

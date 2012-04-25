@@ -3,7 +3,7 @@ unit PhotoCtrls;
 interface
 
 uses
-	Windows, Messages, SysUtils, Classes, Controls, ImgList, Graphics, BaseTypes,
+  Windows, Messages, SysUtils, Classes, Controls, ImgList, Graphics, BaseTypes,
   GraphTools,
   ScrollCtrls, Dialogs, ComCtrls, CommCtrl, Forms, ShlTools, ShellAPI, ExtCtrls,
   Jpeg;
@@ -12,8 +12,8 @@ type
   TPhotoItem = class(TCollectionItem)
   private
     FAttributes: TStrings;
-  	FFileName: string;
-  	FChecked: Boolean;
+    FFileName: string;
+    FChecked: Boolean;
     FSmallImage: TBitmap;
     FLargeImage: TBitmap;
     FWidth: Integer;
@@ -24,11 +24,11 @@ type
     procedure SetChecked(Value: Boolean);
   public
     constructor Create(Collection: TCollection); override;
-  	destructor Destroy; override;
+    destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     property Attributes: TStrings read FAttributes write SetAttributes;
-  	property FileName: string read FFileName write FFileName;
-  	property Checked: Boolean read GetChecked write SetChecked;
+    property FileName: string read FFileName write FFileName;
+    property Checked: Boolean read GetChecked write SetChecked;
     property Width: Integer read FWidth;
     property Height: Integer read FHeight;
     property SmallImage: TBitmap read FSmallImage write SetSmallImage;
@@ -56,15 +56,15 @@ type
 
 { TPhotoList }
 
-	TPhotoList = class(TScrollList)
+  TPhotoList = class(TScrollList)
   private
-  	FBrush: TBitmap;
-  	FPhotos: TPhotoItems;
+    FBrush: TBitmap;
+    FPhotos: TPhotoItems;
     FThreads: TList;
     FCheckIndex: Integer;
     FCheckDownIndex: Integer;
     procedure PhotoResize(Sender: TObject; const FileName: string;
-			Photo: TBitmap; Width, Height: Integer);
+      Photo: TBitmap; Width, Height: Integer);
     procedure SetPhotos(Value: TPhotoItems);
   protected
     function FindCheckIndex(X, Y: Integer): Integer;
@@ -75,17 +75,17 @@ type
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState;
       X, Y: Integer); override;
     procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
-  	procedure UpdateItems;
-	public
-  	constructor Create(AOwner: TComponent); override;
+    procedure UpdateItems;
+  public
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-		function AddPhoto(const FileName: string): TPhotoItem;
+    function AddPhoto(const FileName: string): TPhotoItem;
     procedure AddPhotos(Files: TStrings);
-  	property Photos: TPhotoItems read FPhotos write SetPhotos;
+    property Photos: TPhotoItems read FPhotos write SetPhotos;
     property ItemIndex;
     property TopIndex;
-	published
-		property Anchors;
+  published
+    property Anchors;
     property Align;
     property Enabled;
     property Visible;
@@ -107,7 +107,7 @@ type
   PLVBKImage = ^TLVBKImage;
 
 const
-	WM_CHECK = WM_USER + 20;
+  WM_CHECK = WM_USER + 20;
 
   LVM_SETBKIMAGE          = LVM_FIRST + 68;
   LVM_GETBKIMAGE          = LVM_FIRST + 69;
@@ -131,15 +131,15 @@ const
 type
   TPhotoView = class(TCustomListView)
   private
-	  FPhoto: TAlphaImage;
-  	FPhotos: TPhotoItems;
+    FPhoto: TAlphaImage;
+    FPhotos: TPhotoItems;
     FThreads: TList;
     FImageList: TImageList;
     FPreviewForm: TCustomForm;
     FPreviewItem: TListItem;
     FPreviewTimer: TTimer;
-		procedure PhotoResize(Sender: TObject; const FileName: string;
-			Photo: TBitmap; Width, Height: Integer);
+    procedure PhotoResize(Sender: TObject; const FileName: string;
+      Photo: TBitmap; Width, Height: Integer);
     procedure PreviewTimer(Sender: TObject);
     procedure StartPreview(Item: TListItem);
     procedure ShowPreview;
@@ -156,18 +156,18 @@ type
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
     procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
     procedure WndProc(var Msg: TMessage); override;
-		procedure UpdateItems;
-	public
-  	constructor Create(AOwner: TComponent); override;
+    procedure UpdateItems;
+  public
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-		function AddPhoto(const FileName: string): TPhotoItem;
+    function AddPhoto(const FileName: string): TPhotoItem;
     procedure AddPhotos(Files: TStrings);
     procedure Toggle;
     procedure Preview;
     procedure Recycle(Checked: Boolean = False);
-  	property Photos: TPhotoItems read FPhotos write SetPhotos;
-	published
-		property Anchors;
+    property Photos: TPhotoItems read FPhotos write SetPhotos;
+  published
+    property Anchors;
     property Align;
     property Color;
     property Enabled;
@@ -180,11 +180,11 @@ type
 
   TPhotoSizes = array of Integer;
   TPhotoResizeEvent = procedure(Sender: TObject; const FileName: string;
-  	Photo: TBitmap; Width, Height: Integer) of object;
+    Photo: TBitmap; Width, Height: Integer) of object;
 
-	TPhotoResizeThread = class(TThread)
+  TPhotoResizeThread = class(TThread)
   private
-  	FFiles: TStrings;
+    FFiles: TStrings;
     FSizes: TPhotoSizes;
     FFileName: string;
     FPhoto: TBitmap;
@@ -194,9 +194,9 @@ type
     FOnResize: TPhotoResizeEvent;
     procedure DoResize;
   protected
-  	procedure Execute; override;
-	public
-		constructor Create(Files: TStrings; const Sizes: TPhotoSizes);
+    procedure Execute; override;
+  public
+    constructor Create(Files: TStrings; const Sizes: TPhotoSizes);
     property Mode: TResizeMode read FMode write FMode;
     property OnResize: TPhotoResizeEvent read FOnResize write FOnResize;
   end;
@@ -208,7 +208,7 @@ implementation
 {$R photoctrls.res}
 
 const
-	DefSmallHeight = 72;
+  DefSmallHeight = 72;
   DefSmallWidth = 120;
   DefViewSmallHeight = 110;
   DefViewLargeHeight = 320;
@@ -216,70 +216,70 @@ const
 
 constructor TPhotoItem.Create(Collection: TCollection);
 begin
-	FAttributes := TStringList.Create;
-	FSmallImage := TBitmap.Create;
-	FLargeImage := TBitmap.Create;
-	inherited Create(Collection);
+  FAttributes := TStringList.Create;
+  FSmallImage := TBitmap.Create;
+  FLargeImage := TBitmap.Create;
+  inherited Create(Collection);
 end;
 
 destructor TPhotoItem.Destroy;
 var
-	PhotoView: TPhotoView;
+  PhotoView: TPhotoView;
   I: Integer;
 begin
   if (Collection is TPhotoItems) and (TPhotoItems(Collection).Owner is TPhotoView) then
   begin
-  	I := Index;
+    I := Index;
     PhotoView := TPhotoView(TPhotoItems(Collection).Owner);
     if I < PhotoView.Items.Count then
-    	PhotoView.Items[I].Free;
+      PhotoView.Items[I].Free;
   end;
-	FAttributes.Free;
-	FSmallImage.Free;
-	FLargeImage.Free;
-	inherited Destroy;
+  FAttributes.Free;
+  FSmallImage.Free;
+  FLargeImage.Free;
+  inherited Destroy;
 end;
 
 function TPhotoItem.GetChecked: Boolean;
 var
-	PhotoView: TPhotoView;
-	I: Integer;
+  PhotoView: TPhotoView;
+  I: Integer;
 begin
-	Result := FChecked;
+  Result := FChecked;
   if (Collection is TPhotoItems) and (TPhotoItems(Collection).Owner is TPhotoView) then
   begin
-  	I := Index;
+    I := Index;
     PhotoView := TPhotoView(TPhotoItems(Collection).Owner);
     if I < PhotoView.Items.Count then
-    	Result := PhotoView.Items[I].Checked;
+      Result := PhotoView.Items[I].Checked;
   end;
 end;
 
 procedure TPhotoItem.SetChecked(Value: Boolean);
 var
-	PhotoView: TPhotoView;
-	I: Integer;
+  PhotoView: TPhotoView;
+  I: Integer;
 begin
-	FChecked := Value;
+  FChecked := Value;
   if (Collection is TPhotoItems) and (TPhotoItems(Collection).Owner is TPhotoView) then
   begin
-  	I := Index;
+    I := Index;
     PhotoView := TPhotoView(TPhotoItems(Collection).Owner);
     if I < PhotoView.Items.Count then
-    	PhotoView.Items[I].Checked := FChecked;
+      PhotoView.Items[I].Checked := FChecked;
   end;
 end;
 
 procedure TPhotoItem.Assign(Source: TPersistent);
 var
-	Item:	TPhotoItem absolute Source;
+  Item:  TPhotoItem absolute Source;
 begin
-	if Source is TPhotoItem then
+  if Source is TPhotoItem then
   begin
-		FAttributes.Assign(Item.FAttributes);
-		FSmallImage.Assign(Item.FSmallImage);
-		FLargeImage.Assign(Item.FLargeImage);
-  	FFileName := Item.FFileName;
+    FAttributes.Assign(Item.FAttributes);
+    FSmallImage.Assign(Item.FSmallImage);
+    FLargeImage.Assign(Item.FLargeImage);
+    FFileName := Item.FFileName;
     FWidth  := Item.Width;
     FHeight := Item.Height;
   end
@@ -288,12 +288,12 @@ end;
 
 procedure TPhotoItem.SetAttributes(Value: TStrings);
 begin
-	FAttributes.Assign(Value);
+  FAttributes.Assign(Value);
 end;
 
 procedure TPhotoItem.SetSmallImage(Value: TBitmap);
 begin
-	FSmallImage.Assign(Value);
+  FSmallImage.Assign(Value);
 end;
 
 { TPhotoItems }
@@ -306,23 +306,23 @@ end;
 
 procedure TPhotoItems.BeginUpdate;
 begin
-	inherited BeginUpdate;
+  inherited BeginUpdate;
   if (Owner is TPhotoView) and ([csDestroying] * TPhotoView(Owner).ComponentState = []) then
-  	TPhotoView(Owner).Items.BeginUpdate;
+    TPhotoView(Owner).Items.BeginUpdate;
 end;
 
 procedure TPhotoItems.EndUpdate;
 begin
-	inherited BeginUpdate;
+  inherited BeginUpdate;
   if (Owner is TPhotoView) and ([csDestroying] * TPhotoView(Owner).ComponentState = []) then
-  	TPhotoView(Owner).Items.EndUpdate;
+    TPhotoView(Owner).Items.EndUpdate;
 end;
 
 function TPhotoItems.Add: TPhotoItem;
 begin
   Result := TPhotoItem(inherited Add);
   if Owner is TPhotoView then
-  	TPhotoView(Owner).Items.Add.Checked := True;
+    TPhotoView(Owner).Items.Add.Checked := True;
 end;
 
 function TPhotoItems.FindItemID(ID: Integer): TPhotoItem;
@@ -332,15 +332,15 @@ end;
 
 function TPhotoItems.FindItemFile(const FileName: string): TPhotoItem;
 var
-	S: string;
+  S: string;
   I: Integer;
 begin
-	Result := nil;
-	S := UpperCase(FileName);
+  Result := nil;
+  S := UpperCase(FileName);
   for I := 0 to Count - 1 do
-  	if UpperCase(Get(I).FileName) = S then
+    if UpperCase(Get(I).FileName) = S then
     begin
-    	Result := Get(I);
+      Result := Get(I);
       Break;
     end;
 end;
@@ -354,9 +354,9 @@ procedure TPhotoItems.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
   if GetOwner is TPhotoList then
-  	TPhotoList(GetOwner).UpdateItems
+    TPhotoList(GetOwner).UpdateItems
   else if GetOwner is TPhotoView then
-  	TPhotoView(GetOwner).UpdateItems;
+    TPhotoView(GetOwner).UpdateItems;
 end;
 
 function TPhotoItems.Get(Index: Integer): TPhotoItem;
@@ -376,36 +376,36 @@ begin
   inherited Create(AOwner);
   DoubleBuffered := True;
   ItemHeight := DefSmallHeight + 16;
-	FThreads := TList.Create;
-	FPhotos := TPhotoItems.Create(Self);
+  FThreads := TList.Create;
+  FPhotos := TPhotoItems.Create(Self);
 end;
 
 destructor TPhotoList.Destroy;
 var
-	Thread: TThread;
-	I: Integer;
+  Thread: TThread;
+  I: Integer;
 begin
-	for I := 0 to FThreads.Count - 1 do
+  for I := 0 to FThreads.Count - 1 do
   begin
-  	Thread := TThread(FThreads[I]);
-  	Thread.Terminate;
+    Thread := TThread(FThreads[I]);
+    Thread.Terminate;
     Thread.WaitFor;
     Thread.Free;
-	end;
-	FPhotos.Free;
+  end;
+  FPhotos.Free;
   FBrush.Free;
   inherited Destroy;
 end;
 
 procedure TPhotoList.PhotoResize(Sender: TObject; const FileName: string;
-	Photo: TBitmap; Width, Height: Integer);
+  Photo: TBitmap; Width, Height: Integer);
 var
-	Item: TPhotoItem;
+  Item: TPhotoItem;
 begin
-	Item := FPhotos.FindItemFile(FileName);
+  Item := FPhotos.FindItemFile(FileName);
   if Item = nil then
-  	Item := FPhotos.Add;
-	Item.FileName := FileName;
+    Item := FPhotos.Add;
+  Item.FileName := FileName;
   Item.SmallImage.Assign(Photo);
   // Item.Checked := True;
   Invalidate;
@@ -414,49 +414,49 @@ end;
 function TPhotoList.AddPhoto(const FileName: string): TPhotoItem;
 var
   Files: TStrings;
-	Sizes: TPhotoSizes;
-	Thread: TPhotoResizeThread;
+  Sizes: TPhotoSizes;
+  Thread: TPhotoResizeThread;
 begin
-	Result := FPhotos.FindItemFile(FileName);
-	if Result = nil then
+  Result := FPhotos.FindItemFile(FileName);
+  if Result = nil then
   begin
-		Result := FPhotos.Add;
-		Result.FileName := FileName;
+    Result := FPhotos.Add;
+    Result.FileName := FileName;
     Files := TStringList.Create;
     try
-    	Files.Add(FileName);
-			SetLength(Sizes, 1);
-			Sizes[0] := DefSmallHeight;
-			Thread := TPhotoResizeThread.Create(Files, Sizes);
-			Thread.OnResize := PhotoResize;
-			FThreads.Add(Thread);
-			Thread.Resume;
+      Files.Add(FileName);
+      SetLength(Sizes, 1);
+      Sizes[0] := DefSmallHeight;
+      Thread := TPhotoResizeThread.Create(Files, Sizes);
+      Thread.OnResize := PhotoResize;
+      FThreads.Add(Thread);
+      Thread.Resume;
     finally
-    	Files.Free;
+      Files.Free;
     end;
-	end;
+  end;
 end;
 
 procedure TPhotoList.AddPhotos(Files: TStrings);
 var
-	Item: TPhotoItem;
-	Sizes: TPhotoSizes;
-	Thread: TPhotoResizeThread;
+  Item: TPhotoItem;
+  Sizes: TPhotoSizes;
+  Thread: TPhotoResizeThread;
   S: string;
   I: Integer;
 begin
-	FPhotos.BeginUpdate;
+  FPhotos.BeginUpdate;
   try
-		for I := 0 to Files.Count - 1 do
+    for I := 0 to Files.Count - 1 do
     begin
-    	S := Files[I];
-			Item := FPhotos.FindItemFile(S);
+      S := Files[I];
+      Item := FPhotos.FindItemFile(S);
       if Item = nil then
-		  	Item := FPhotos.Add;
-			Item.FileName := S;
+        Item := FPhotos.Add;
+      Item.FileName := S;
     end;
   finally
-  	FPhotos.EndUpdate;
+    FPhotos.EndUpdate;
   end;
   SetLength(Sizes, 1);
   Sizes[0] := DefSmallHeight;
@@ -468,159 +468,159 @@ end;
 
 function TPhotoList.FindCheckIndex(X, Y: Integer): Integer;
 const
-	CheckSize = 10;
+  CheckSize = 10;
   CheckLeft = (CheckOffset - CheckSize) div 2 - CheckSize;
   CheckRight = CheckLeft + CheckSize * 2;
 var
-	CheckTop, CheckBottom: Integer;
+  CheckTop, CheckBottom: Integer;
 begin
-	Result := -1;
+  Result := -1;
   if (X > CheckLeft) and (X < CheckRight) then
   begin
-		CheckTop := Y div ItemHeight * ItemHeight + ItemHeight div 2 - CheckSize;
+    CheckTop := Y div ItemHeight * ItemHeight + ItemHeight div 2 - CheckSize;
     CheckBottom := CheckTop  + CheckSize * 2;
     if PtInRect(Rect(CheckLeft, CheckTop, CheckRight, CheckBottom), Point(X, Y)) then
-    	Result := TopIndex + Y div ItemHeight;
-		if Result > Count - 1 then
-    	Result := -1;
+      Result := TopIndex + Y div ItemHeight;
+    if Result > Count - 1 then
+      Result := -1;
   end;
 end;
 
 procedure TPhotoList.KeyDown(var Key: Word; Shift: TShiftState);
 begin
-	inherited KeyDown(Key, Shift);
-	if ItemIndex > -1 then
-  	case Key of
-    	VK_RETURN,
+  inherited KeyDown(Key, Shift);
+  if ItemIndex > -1 then
+    case Key of
+      VK_RETURN,
       VK_SPACE:
-      	begin
-	      	FPhotos[ItemIndex].Checked := not FPhotos[ItemIndex].Checked;
-          Invalidate;
-				end;
-			VK_DELETE:
-      	if MessageDlg('Delete this photo from your computer?',
-        	mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-				begin
-					DeleteFile(FPhotos[ItemIndex].FileName);
-					FPhotos[ItemIndex].Free;
-        end
-      	else if FPhotos[ItemIndex].Checked then
-      	begin
-        	FPhotos[ItemIndex].Checked := False;
+        begin
+          FPhotos[ItemIndex].Checked := not FPhotos[ItemIndex].Checked;
           Invalidate;
         end;
-		end;
+      VK_DELETE:
+        if MessageDlg('Delete this photo from your computer?',
+          mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+        begin
+          DeleteFile(FPhotos[ItemIndex].FileName);
+          FPhotos[ItemIndex].Free;
+        end
+        else if FPhotos[ItemIndex].Checked then
+        begin
+          FPhotos[ItemIndex].Checked := False;
+          Invalidate;
+        end;
+    end;
 end;
 
 procedure TPhotoList.MouseDown(Button: TMouseButton; Shift: TShiftState;
-	X, Y: Integer);
+  X, Y: Integer);
 begin
-	inherited MouseDown(Button, Shift, X, Y);
+  inherited MouseDown(Button, Shift, X, Y);
   if Button = mbLeft then
   begin
-  	FCheckDownIndex := FindCheckIndex(X, Y);
+    FCheckDownIndex := FindCheckIndex(X, Y);
     if FCheckDownIndex > -1 then
-    	Invalidate;
+      Invalidate;
   end;
 end;
 
 procedure TPhotoList.MouseUp(Button: TMouseButton; Shift: TShiftState;
-	X, Y: Integer);
+  X, Y: Integer);
 begin
-	inherited MouseUp(Button, Shift, X, Y);
+  inherited MouseUp(Button, Shift, X, Y);
   if Button = mbLeft then
   begin
     if FCheckDownIndex > FPhotos.Count then
-    	FCheckDownIndex := -1;
-		if FCheckDownIndex > -1 then
+      FCheckDownIndex := -1;
+    if FCheckDownIndex > -1 then
     begin
-    	if FCheckDownIndex = FindCheckIndex(X, Y) then
-				FPhotos[FCheckDownIndex].Checked := not FPhotos[FCheckDownIndex].Checked;
-			FCheckDownIndex := -1;
+      if FCheckDownIndex = FindCheckIndex(X, Y) then
+        FPhotos[FCheckDownIndex].Checked := not FPhotos[FCheckDownIndex].Checked;
+      FCheckDownIndex := -1;
       Invalidate;
-		end;
+    end;
   end;
 end;
 
 procedure TPhotoList.MouseMove(Shift: TShiftState; X, Y: Integer);
 var
-	I: Integer;
+  I: Integer;
 begin
-	inherited MouseMove(Shift, X, Y);
-	I := FindCheckIndex(X, Y);
+  inherited MouseMove(Shift, X, Y);
+  I := FindCheckIndex(X, Y);
   if I <> FCheckIndex then
   begin
-  	FCheckIndex := I;
+    FCheckIndex := I;
     Invalidate;
   end;
 end;
 
 procedure TPhotoList.UpdateItems;
 begin
-	Count := FPhotos.Count;
+  Count := FPhotos.Count;
 end;
 
 procedure TPhotoList.SetPhotos(Value: TPhotoItems);
 begin
-	FPhotos.Assign(Value);
+  FPhotos.Assign(Value);
 end;
 
 procedure TPhotoList.DrawItem(Index: Integer; var Rect: TRect;
   State: TDrawState);
 const
-	TextBorder = 8;
+  TextBorder = 8;
 var
-	DC: HDC;
+  DC: HDC;
   B: TGraphic;
   R: TRect;
   CheckState: TDrawState;
 begin
   if FBrush = nil then
   begin
-  	FBrush := TBitmap.Create;
+    FBrush := TBitmap.Create;
     FBrush.Width := 2;
     FBrush.Height := 1;
     FBrush.Canvas.Pixels[0, 0] := clBtnShadow;
     FBrush.Canvas.Pixels[1, 0] := clBtnHighlight;
   end;
   Canvas.Font := Font;
-	DC := Canvas.Handle;
+  DC := Canvas.Handle;
   if dsFocused in State then
-		DrawGradient(DC, Rect, Blend(clWindow, clHighlight, 75), Blend(clWindow, clHighlight), drDown)
+    DrawGradient(DC, Rect, Blend(clWindow, clHighlight, 75), Blend(clWindow, clHighlight), drDown)
   else if dsSelected in State then
-		FillRectColor(DC, Rect, Blend(clWindow, clHighlight))
+    FillRectColor(DC, Rect, Blend(clWindow, clHighlight))
   else if dsHot in State then
-		FillRectColor(DC, Rect, Blend(clWindow, clHighlight, 75))
-	else
-		FillRectColor(DC, Rect, clWindow);
-	B := FPhotos[Index].SmallImage;
+    FillRectColor(DC, Rect, Blend(clWindow, clHighlight, 75))
+  else
+    FillRectColor(DC, Rect, clWindow);
+  B := FPhotos[Index].SmallImage;
   if B.Empty then
-  	B := Blank;
+    B := Blank;
   R.Left := CheckOffset;
   R.Top := Rect.Top + (HeightOf(Rect) - DefSmallHeight) shr 1;
   R.Right := R.Left + B.Width;
   R.Bottom := R.Top + DefSmallHeight;
-	Canvas.Draw(R.Left, R.Top, B);
-	InflateRect(R, 1, 1);
-	FillRectOutline(DC, R, clHighlight);
+  Canvas.Draw(R.Left, R.Top, B);
+  InflateRect(R, 1, 1);
+  FillRectOutline(DC, R, clHighlight);
   R := Rect;
   R.Right := CheckOffset;
   CheckState := [];
   if Index = FCheckIndex then
   begin
-  	Include(CheckState, dsHot);
-		if Index = FCheckDownIndex then
-  		Include(CheckState, dsPressed);
-	end;
-	if FPhotos[Index].Checked then
-  	Include(CheckState, dsChecked);
+    Include(CheckState, dsHot);
+    if Index = FCheckDownIndex then
+      Include(CheckState, dsPressed);
+  end;
+  if FPhotos[Index].Checked then
+    Include(CheckState, dsChecked);
   DrawThemeCheckBox(DC, R, CheckState);
   R := Rect;
   if B.Width < DefSmallWidth + 2 then
-	  R.Left := DefSmallWidth + TextBorder * 2
-	else
-  	R.Left := B.Width + TextBorder * 2;
-	Dec(R.Right, TextBorder);
+    R.Left := DefSmallWidth + TextBorder * 2
+  else
+    R.Left := B.Width + TextBorder * 2;
+  Dec(R.Right, TextBorder);
   Inc(R.Top, TextBorder);
   {R.Bottom := R.Top + FontHeight(DC);}
   DrawCaption(DC, ExtractFileName(FPhotos[Index].FileName), R, drLeft);
@@ -636,14 +636,14 @@ begin
   R.Top := R.Bottom - 1;
   if FBrush = nil then
   begin
-  	FBrush := TBitmap.Create;
+    FBrush := TBitmap.Create;
     FBrush.Width := 2;
     FBrush.Height := 1;
     FBrush.Canvas.Pixels[0, 0] := clBtnShadow;
     FBrush.Canvas.Pixels[1, 0] := clBtnHighlight;
   end;
-	Canvas.Brush.Bitmap := FBrush;
-	Canvas.FillRect(R);
+  Canvas.Brush.Bitmap := FBrush;
+  Canvas.FillRect(R);
 end;
 
 (*function AdjustByte(B: Extended): Byte;
@@ -892,41 +892,41 @@ end;*)
 
 constructor TPhotoResizeThread.Create(Files: TStrings; const Sizes: TPhotoSizes);
 begin
-	inherited Create(True);
+  inherited Create(True);
   FFiles := TStringList.Create;
-	FFiles.Assign(Files);
+  FFiles.Assign(Files);
   FMode := rmNearest;
   FSizes := Sizes;
 end;
 
 procedure TPhotoResizeThread.DoResize;
 begin
-	if Assigned(FOnResize) then
-  	FOnResize(Self, FFileName, FPhoto, FWidth, FHeight);
+  if Assigned(FOnResize) then
+    FOnResize(Self, FFileName, FPhoto, FWidth, FHeight);
 end;
 
 procedure TPhotoResizeThread.Execute;
 var
-	Picture: TPicture;
+  Picture: TPicture;
   Scale, Aspect: Single;
-	I, J: Integer;
+  I, J: Integer;
 begin
-	if not Assigned(FOnResize) then Exit;
-	Picture := TPicture.Create;
-	FPhoto := TBitmap.Create;
+  if not Assigned(FOnResize) then Exit;
+  Picture := TPicture.Create;
+  FPhoto := TBitmap.Create;
   try
-		for I := 0 to FFiles.Count - 1 do
+    for I := 0 to FFiles.Count - 1 do
     begin
-			FFileName := FFiles[I];
-			if FileExists(FFileName) then
-			try
-				if Terminated then Exit;
-				Picture.LoadFromFile(FFileName);
-				if (Picture.Graphic.Height < 1) or (Picture.Graphic.Width < 1) then
-        	Continue;
-		  	for J := Low(FSizes) to High(FSizes) do
-				begin
-					if Terminated then Exit;
+      FFileName := FFiles[I];
+      if FileExists(FFileName) then
+      try
+        if Terminated then Exit;
+        Picture.LoadFromFile(FFileName);
+        if (Picture.Graphic.Height < 1) or (Picture.Graphic.Width < 1) then
+          Continue;
+        for J := Low(FSizes) to High(FSizes) do
+        begin
+          if Terminated then Exit;
           if FSizes[J] < 1 then Continue;
           FWidth := Picture.Graphic.Width;
           FHeight := Picture.Graphic.Height;
@@ -934,32 +934,32 @@ begin
           Aspect := Picture.Graphic.Height / Picture.Graphic.Width;
           if Aspect < 0.75 then
             Scale := Scale * (Aspect / 0.75);
-					FPhoto.Assign(Picture.Graphic);
-					ResizeBitmap(FPhoto, Round(FPhoto.Width * Scale),
-						Round(FPhoto.Height * Scale), FMode);
-					Synchronize(DoResize);
-				end;
+          FPhoto.Assign(Picture.Graphic);
+          ResizeBitmap(FPhoto, Round(FPhoto.Width * Scale),
+            Round(FPhoto.Height * Scale), FMode);
+          Synchronize(DoResize);
+        end;
       except
-				{ if the image is invalid, then proceed quietly to the next image }
-			end;
-		end;
-	finally
-  	FPhoto.Free;
+        { if the image is invalid, then proceed quietly to the next image }
+      end;
+    end;
+  finally
+    FPhoto.Free;
     Picture.Free;
   end;
 end;
 
 var
-	InternalBlank: TAlphaImage;
+  InternalBlank: TAlphaImage;
 
 function Blank: TAlphaImage;
 begin
-	if InternalBlank = nil then
-	begin
-		InternalBlank := TAlphaImage.Create;
-		InternalBlank.LoadFromResourceID(601);
-	end;
-	Result := InternalBlank;
+  if InternalBlank = nil then
+  begin
+    InternalBlank := TAlphaImage.Create;
+    InternalBlank.LoadFromResourceID(601);
+  end;
+  Result := InternalBlank;
 end;
 
 { TPhotoView }
@@ -998,54 +998,54 @@ end;
 
 procedure UpdateAlphaWindow(Wnd: HWND; Bitmap: TFastBitmap; Opacity: Byte = $FF);
 var
-	Blend: TBlendFunction;
+  Blend: TBlendFunction;
   Rect: TRect;
-	P1, P2: TPoint;
+  P1, P2: TPoint;
   S: TSize;
   DC: HDC;
 begin
-	if Bitmap.Height = 0 then Exit;
-	SetWindowLong(Wnd, GWL_EXSTYLE, GetWindowLong(Wnd, GWL_EXSTYLE) or WS_EX_LAYERED);
-	GetWindowRect(Wnd, Rect);
-	P1.X := Rect.Left;
-	P1.Y := Rect.Top;
-	SetWindowPos(Wnd, 0, 0, 0, Bitmap.Width, Bitmap.Height,
-		SWP_NOACTIVATE or SWP_NOMOVE);
-	with Blend do
-	begin
-		BlendOp := AC_SRC_OVER;
-		BlendFlags := 0;
-		SourceConstantAlpha := Opacity;
-		AlphaFormat := AC_SRC_ALPHA;
-	end;
-	DC := GetDC(0);
-	P2 := Point(0, 0);
-	S.cx := Bitmap.Width;
-	S.cy := Bitmap.Height;
-	UpdateLayeredWindow(Wnd, DC, @P1, @S, Bitmap.DC,
-		@P2, 0, @Blend, ULW_ALPHA);
-	ReleaseDC(0, DC);
+  if Bitmap.Height = 0 then Exit;
+  SetWindowLong(Wnd, GWL_EXSTYLE, GetWindowLong(Wnd, GWL_EXSTYLE) or WS_EX_LAYERED);
+  GetWindowRect(Wnd, Rect);
+  P1.X := Rect.Left;
+  P1.Y := Rect.Top;
+  SetWindowPos(Wnd, 0, 0, 0, Bitmap.Width, Bitmap.Height,
+    SWP_NOACTIVATE or SWP_NOMOVE);
+  with Blend do
+  begin
+    BlendOp := AC_SRC_OVER;
+    BlendFlags := 0;
+    SourceConstantAlpha := Opacity;
+    AlphaFormat := AC_SRC_ALPHA;
+  end;
+  DC := GetDC(0);
+  P2 := Point(0, 0);
+  S.cx := Bitmap.Width;
+  S.cy := Bitmap.Height;
+  UpdateLayeredWindow(Wnd, DC, @P1, @S, Bitmap.DC,
+    @P2, 0, @Blend, ULW_ALPHA);
+  ReleaseDC(0, DC);
 end;
 
 
 procedure Opaque(const Bitmap: TFastBitmap; const Rect: TRect);
 var
-	A: PRGBA;
+  A: PRGBA;
   Row, Col: Integer;
 begin
-	if (Rect.Left < 0) or (Rect.Top < 0) or (Rect.Right > Bitmap.Width) or
-  	(Rect.Bottom > Bitmap.Height) then	Exit;
-	for Row := Rect.Top to Rect.Bottom - 1 do
-	begin
-		A := Bitmap.Bits;
+  if (Rect.Left < 0) or (Rect.Top < 0) or (Rect.Right > Bitmap.Width) or
+    (Rect.Bottom > Bitmap.Height) then  Exit;
+  for Row := Rect.Top to Rect.Bottom - 1 do
+  begin
+    A := Bitmap.Bits;
     Inc(A, (Bitmap.Height - Row) * Bitmap.Width);
     Inc(A, Rect.Left);
     for Col := 0 to GraphTools.WidthOf(Rect) - 1 do
     begin
       A.Alpha := $FF;
-    	Inc(A);
+      Inc(A);
     end;
-	end;
+  end;
 end;
 
 procedure TPhotoPreviewForm.UpdateItem(PhotoView: TPhotoView; Item: TListItem);
@@ -1053,7 +1053,7 @@ var
   PhotoItem: TPhotoItem;
   Font: HFONT;
   B: TBitmap;
-	F: TBlendFunction;
+  F: TBlendFunction;
   R: TRect;
   P: TPoint;
 begin
@@ -1074,27 +1074,27 @@ begin
     FBitmap := CreateFastBitmap(Width, Height, pd32);
     FillChar(F, SizeOf(F), #0);
     F.SourceConstantAlpha := $FF;
-		F.AlphaFormat := AC_SRC_ALPHA;
+    F.AlphaFormat := AC_SRC_ALPHA;
     with FBitmap do
     begin
-    	Windows.AlphaBlend(DC, 0, 0, 20, 20, FFrame.Bitmap.DC,
-      	0, 0, 20, 20, F);
-    	Windows.AlphaBlend(DC, 20, 0, Width - 40, 20, FFrame.Bitmap.DC,
-      	20, 0, 60, 20, F);
-    	Windows.AlphaBlend(DC, Width - 20, 0, 20, 20, FFrame.Bitmap.DC,
-      	80, 0, 20, 20, F);
-    	Windows.AlphaBlend(DC, 0, 20, 20, Height - 40, FFrame.Bitmap.DC,
-      	0, 20, 20, 20, F);
-    	Windows.AlphaBlend(DC, 20, 20, Width - 40, Height - 40, FFrame.Bitmap.DC,
-      	20, 20, 60, 20, F);
-    	Windows.AlphaBlend(DC, Width - 20, 20, 20, Height - 40, FFrame.Bitmap.DC,
-      	80, 20, 20, 20, F);
-    	Windows.AlphaBlend(DC, 0, Height - 20, 20, 20, FFrame.Bitmap.DC,
-      	0, 80, 20, 20, F);
-    	Windows.AlphaBlend(DC, 20, Height - 20, Width - 40, 20, FFrame.Bitmap.DC,
-      	20, 80, 60, 20, F);
-    	Windows.AlphaBlend(DC, Width - 20, Height - 20, 20, 20, FFrame.Bitmap.DC,
-      	80, 80, 20, 20, F);
+      Windows.AlphaBlend(DC, 0, 0, 20, 20, FFrame.Bitmap.DC,
+        0, 0, 20, 20, F);
+      Windows.AlphaBlend(DC, 20, 0, Width - 40, 20, FFrame.Bitmap.DC,
+        20, 0, 60, 20, F);
+      Windows.AlphaBlend(DC, Width - 20, 0, 20, 20, FFrame.Bitmap.DC,
+        80, 0, 20, 20, F);
+      Windows.AlphaBlend(DC, 0, 20, 20, Height - 40, FFrame.Bitmap.DC,
+        0, 20, 20, 20, F);
+      Windows.AlphaBlend(DC, 20, 20, Width - 40, Height - 40, FFrame.Bitmap.DC,
+        20, 20, 60, 20, F);
+      Windows.AlphaBlend(DC, Width - 20, 20, 20, Height - 40, FFrame.Bitmap.DC,
+        80, 20, 20, 20, F);
+      Windows.AlphaBlend(DC, 0, Height - 20, 20, 20, FFrame.Bitmap.DC,
+        0, 80, 20, 20, F);
+      Windows.AlphaBlend(DC, 20, Height - 20, Width - 40, 20, FFrame.Bitmap.DC,
+        20, 80, 60, 20, F);
+      Windows.AlphaBlend(DC, Width - 20, Height - 20, 20, 20, FFrame.Bitmap.DC,
+        80, 80, 20, 20, F);
       BitBlt(DC, 21, 21, B.Width, B.Height, B.Canvas.Handle, 0, 0, SRCCOPY);
       R := Rect(20, 20, B.Width + 22, B.Height + 22);
       FillRectOutline(DC, R, clHighlight);
@@ -1144,13 +1144,13 @@ end;
 constructor TPhotoView.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-	FPhoto := TAlphaImage.Create;
+  FPhoto := TAlphaImage.Create;
   FPhoto.LoadFromResourceID(602);
   FImageList := TImageList.Create(Self);
   FImageList.Height := 120;
   FImageList.Width := 128 + 32;
-	FThreads := TList.Create;
-	FPhotos := TPhotoItems.Create(Self);
+  FThreads := TList.Create;
+  FPhotos := TPhotoItems.Create(Self);
   FPreviewTimer := TTimer.Create(Self);
   FPreviewTimer.Enabled := False;
   FPreviewTimer.Interval := 250;
@@ -1167,31 +1167,31 @@ end;
 
 destructor TPhotoView.Destroy;
 var
-	Thread: TThread;
-	I: Integer;
+  Thread: TThread;
+  I: Integer;
 begin
-	for I := 0 to FThreads.Count - 1 do
+  for I := 0 to FThreads.Count - 1 do
   begin
-  	Thread := TThread(FThreads[I]);
-  	Thread.Terminate;
+    Thread := TThread(FThreads[I]);
+    Thread.Terminate;
     Thread.WaitFor;
     Thread.Free;
-	end;
-	FPhotos.Free;
+  end;
+  FPhotos.Free;
   FPhoto.Free;
   inherited Destroy;
 end;
 
 procedure TPhotoView.CreateWnd;
 var
-	Bitmap: TBitmap;
+  Bitmap: TBitmap;
   Lib: THandle;
-	Image: TLVBKImage;
+  Image: TLVBKImage;
   A: PRGB;
   B, C: TRGBA;
   X, Y: Integer;
 begin
-	inherited CreateWnd;
+  inherited CreateWnd;
   SendMessage(Handle, LVM_SETEXTENDEDLISTVIEWSTYLE, LVS_EX_DOUBLEBUFFER, LVS_EX_DOUBLEBUFFER);
   FillChar(Image, SizeOf(Image), #0);
   Bitmap := TBitmap.Create;
@@ -1200,41 +1200,41 @@ begin
   else
     Lib := MainInstance;
   Bitmap.LoadFromResourceId(Lib, 603);
-	B := ColorToRGBA(clActiveCaption);
-	C := ColorToRGBA(clWindow);
+  B := ColorToRGBA(clActiveCaption);
+  C := ColorToRGBA(clWindow);
   for Y := 0 to Bitmap.Height - 1 do
   begin
-  	A := Bitmap.ScanLine[Y];
-  	for X := 0 to Bitmap.Width - 1 do
+    A := Bitmap.ScanLine[Y];
+    for X := 0 to Bitmap.Width - 1 do
     begin
-			A.Red :=  Round(B.Red * (($FF - A.Red) / $FF) + C.Red * (A.Red / $FF));
-			A.Green :=  Round(B.Green * (($FF - A.Green) / $FF) + C.Green * (A.Green / $FF));
-			A.Blue :=  Round(B.Blue * (($FF - A.Blue) / $FF) + C.Blue * (A.Blue / $FF));
-    	Inc(A);
+      A.Red :=  Round(B.Red * (($FF - A.Red) / $FF) + C.Red * (A.Red / $FF));
+      A.Green :=  Round(B.Green * (($FF - A.Green) / $FF) + C.Green * (A.Green / $FF));
+      A.Blue :=  Round(B.Blue * (($FF - A.Blue) / $FF) + C.Blue * (A.Blue / $FF));
+      Inc(A);
     end;
-	end;
-	Image.ulFlags := LVBKIF_TYPE_WATERMARK;
-	Image.hbm := Bitmap.Handle;
+  end;
+  Image.ulFlags := LVBKIF_TYPE_WATERMARK;
+  Image.hbm := Bitmap.Handle;
   Bitmap.ReleaseHandle;
   Bitmap.Free;
-	Image.xOffsetPercent := 100;
-	Image.yOffsetPercent := 100;
-	SendMessage(Handle, LVM_SETBKIMAGE, 0, Integer(@Image));
+  Image.xOffsetPercent := 100;
+  Image.yOffsetPercent := 100;
+  SendMessage(Handle, LVM_SETBKIMAGE, 0, Integer(@Image));
 end;
 
 procedure TPhotoView.PhotoResize(Sender: TObject; const FileName: string;
-	Photo: TBitmap; Width, Height: Integer);
+  Photo: TBitmap; Width, Height: Integer);
 var
-	Item: TPhotoItem;
+  Item: TPhotoItem;
 begin
-	Item := FPhotos.FindItemFile(FileName);
+  Item := FPhotos.FindItemFile(FileName);
   if Item = nil then
-  	Item := FPhotos.Add;
+    Item := FPhotos.Add;
   Item.FWidth := Width;
   Item.FHeight :=  Height;
   if Photo.Height <= DefViewSmallHeight then
   begin
-	  Item.FileName := FileName;
+    Item.FileName := FileName;
     Item.SmallImage.Assign(Photo);
     Invalidate;
     // Item.Checked := True;
@@ -1246,14 +1246,14 @@ end;
 function TPhotoView.AddPhoto(const FileName: string): TPhotoItem;
 var
   Files: TStrings;
-	Sizes: TPhotoSizes;
-	Thread: TPhotoResizeThread;
+  Sizes: TPhotoSizes;
+  Thread: TPhotoResizeThread;
 begin
-	Result := FPhotos.FindItemFile(FileName);
-	if Result = nil then
+  Result := FPhotos.FindItemFile(FileName);
+  if Result = nil then
   begin
-		Result := FPhotos.Add;
-		Result.FileName := FileName;
+    Result := FPhotos.Add;
+    Result.FileName := FileName;
   end;
   Files := TStringList.Create;
   try
@@ -1273,123 +1273,123 @@ end;
 
 procedure TPhotoView.AddPhotos(Files: TStrings);
 var
-	Item: TPhotoItem;
-	Sizes: TPhotoSizes;
-	Thread: TPhotoResizeThread;
+  Item: TPhotoItem;
+  Sizes: TPhotoSizes;
+  Thread: TPhotoResizeThread;
   S: string;
   I: Integer;
 begin
-	FPhotos.BeginUpdate;
+  FPhotos.BeginUpdate;
   try
-		for I := 0 to Files.Count - 1 do
+    for I := 0 to Files.Count - 1 do
     begin
-    	S := Files[I];
-			Item := FPhotos.FindItemFile(S);
+      S := Files[I];
+      Item := FPhotos.FindItemFile(S);
       if Item = nil then
-		  	Item := FPhotos.Add;
-			Item.FileName := S;
+        Item := FPhotos.Add;
+      Item.FileName := S;
     end;
   finally
-  	FPhotos.EndUpdate;
+    FPhotos.EndUpdate;
   end;
   SetLength(Sizes, 2);
   Sizes[0] := DefViewSmallHeight;
   Sizes[1] := DefViewLargeHeight;
   Thread := TPhotoResizeThread.Create(Files, Sizes);
-	Thread.Mode := rmNearest;
+  Thread.Mode := rmNearest;
   Thread.OnResize := PhotoResize;
   FThreads.Add(Thread);
   Thread.Resume;
 end;
 
 function TPhotoView.IsCustomDrawn(Target: TCustomDrawTarget;
-	Stage: TCustomDrawStage): Boolean;
+  Stage: TCustomDrawStage): Boolean;
 begin
-	Result := True;
+  Result := True;
 end;
 
 function TPhotoView.CustomDrawItem(Item: TListItem; State: TCustomDrawState;
-	Stage: TCustomDrawStage): Boolean;
+  Stage: TCustomDrawStage): Boolean;
 var
   DC: HDC;
   DrawRect: TRect;
-	R: TRect;
-	PhotoItem: TPhotoItem;
+  R: TRect;
+  PhotoItem: TPhotoItem;
   G: TGraphic;
   S: string;
   Size: TSize;
   I: Integer;
 begin
-	Canvas.Font := Font;
-	DC := Canvas.Handle;
+  Canvas.Font := Font;
+  DC := Canvas.Handle;
   Dec(DrawRect.Right, 12);
-	DrawRect := Item.DisplayRect(drIcon);
+  DrawRect := Item.DisplayRect(drIcon);
   DrawRect.Left := DrawRect.Right - (128 + 48);
-	if ThemePainter.Enabled then
+  if ThemePainter.Enabled then
   begin
-		Dec(DrawRect.Right, 12);
+    Dec(DrawRect.Right, 12);
     OffsetRect(DrawRect, -5,0);
   end
   else
-		Inc(DrawRect.Left, 16);
-	R := DrawRect;
-	//Dec(R.Bottom, Round(FontHeight(DC) * 1.5));
-	if [cdsSelected, cdsFocused] * State <> [] then
-	begin
-		if not ThemePainter.Enabled then
-			FillRectColor(DC, R, clBtnFace);
-		if cdsFocused in State then
-			DrawThemeButton(DC, R, [])
-		else
-			DrawThemeThinButton(DC, R, [dsHot]);
-	end;
-	{else
-		FillRectColor(DC, R, clWindow);}
-	PhotoItem := nil;
-	I := Item.Index;
-	if I < FPhotos.Count then
-		PhotoItem := FPhotos[I];
-	if (PhotoItem <> nil) and (not PhotoItem.SmallImage.Empty) then
-		G := PhotoItem.SmallImage
-	else
-		G := FPhoto;
-	R.Left := R.Left + (WidthOf(R) - G.Width) div 2;
-	R.Top := R.Top + (HeightOf(R) - G.Height) div 2;
-	Canvas.Draw(R.Left, R.Top, G);
-	if G <> FPhoto then
-	begin
-		R.Right := R.Left + G.Width;
-		R.Bottom := R.Top + G.Height;
-		InflateRect(R, 1, 1);
-		FillRectOutline(DC, R, clHighlight);
-	end;
+    Inc(DrawRect.Left, 16);
+  R := DrawRect;
+  //Dec(R.Bottom, Round(FontHeight(DC) * 1.5));
+  if [cdsSelected, cdsFocused] * State <> [] then
+  begin
+    if not ThemePainter.Enabled then
+      FillRectColor(DC, R, clBtnFace);
+    if cdsFocused in State then
+      DrawThemeButton(DC, R, [])
+    else
+      DrawThemeThinButton(DC, R, [dsHot]);
+  end;
+  {else
+    FillRectColor(DC, R, clWindow);}
+  PhotoItem := nil;
+  I := Item.Index;
+  if I < FPhotos.Count then
+    PhotoItem := FPhotos[I];
+  if (PhotoItem <> nil) and (not PhotoItem.SmallImage.Empty) then
+    G := PhotoItem.SmallImage
+  else
+    G := FPhoto;
+  R.Left := R.Left + (WidthOf(R) - G.Width) div 2;
+  R.Top := R.Top + (HeightOf(R) - G.Height) div 2;
+  Canvas.Draw(R.Left, R.Top, G);
+  if G <> FPhoto then
+  begin
+    R.Right := R.Left + G.Width;
+    R.Bottom := R.Top + G.Height;
+    InflateRect(R, 1, 1);
+    FillRectOutline(DC, R, clHighlight);
+  end;
   if PhotoItem <> nil then
   begin
-  	R := DrawRect;
+    R := DrawRect;
     R.Top := R.Bottom;
     R.Bottom := R.Bottom + Round(FontHeight(DC) * 1.5);
-		//R.Top := R.Bottom - Round(FontHeight(DC) * 1.5);
+    //R.Top := R.Bottom - Round(FontHeight(DC) * 1.5);
     InflateRect(R, -16, 0);
     S := ExtractFileName(PhotoItem.FileName);
     Size := CalcCaptionSize(DC, S);
     R.Top := R.Top + (HeightOf(R) - Size.cy) div 2;
     R.Bottom := R.Top + Size.cy + 1;
     if Size.cx < WidthOf(R) then
-    	R.Left := R.Left + (WidthOf(R) - Size.cx) div 2;
-		R.Right := R.Left + Size.cx;
+      R.Left := R.Left + (WidthOf(R) - Size.cx) div 2;
+    R.Right := R.Left + Size.cx;
     if Item.Selected then
     begin
-    	InflateRect(R, 3, 0);
-	    FillRectColor(DC, R, clHighlight);
-    	InflateRect(R, -3, 0);
+      InflateRect(R, 3, 0);
+      FillRectColor(DC, R, clHighlight);
+      InflateRect(R, -3, 0);
       SetTextColor(DC, ColorToRGB(clHighlightText));
     end
     else
       SetTextColor(DC, ColorToRGB(clWindowText));
     DrawCaption(DC, ExtractFileName(PhotoItem.FileName), R, drCenter);
-		InflateRect(R, 3, 0);
-		if Focused and Item.Focused then
-    	DrawFocusRect(DC, R);
+    InflateRect(R, 3, 0);
+    if Focused and Item.Focused then
+      DrawFocusRect(DC, R);
   end;
   Result := True;
 end;
@@ -1406,113 +1406,113 @@ end;
 
 procedure TPhotoView.Recycle(Checked: Boolean = False);
 
-	function Check(Item: TListItem): Boolean;
+  function Check(Item: TListItem): Boolean;
   begin
-  	if Checked then
-    	Result := not Item.Checked
-		else
-    	Result := Item.Selected;
+    if Checked then
+      Result := not Item.Checked
+    else
+      Result := Item.Selected;
   end;
 
 var
-	Form: TCustomForm;
+  Form: TCustomForm;
   Wnd: HWND;
   Strings: TStrings;
   S: string;
   I: Integer;
 begin
-	Form := GetParentForm(Self);
+  Form := GetParentForm(Self);
   if Form <> nil then
     Wnd := Form.Handle
   else
     Wnd := 0;
-	Strings := TStringList.Create;
+  Strings := TStringList.Create;
   try
-		with Items do
-			for I := 0 to Count - 1 do
-				if Check(Item[I]) then
-					Strings.Add(FPhotos[I].FileName);
-		S := Strings.CommaText;
-		S := StringReplace(S, Strings.QuoteChar, '', [rfReplaceAll]);
-		if FileOperation(Wnd, S, '', foDelete, [ooAllowUndo, ooFileOnly, ooSimpleProgress]) then
+    with Items do
+      for I := 0 to Count - 1 do
+        if Check(Item[I]) then
+          Strings.Add(FPhotos[I].FileName);
+    S := Strings.CommaText;
+    S := StringReplace(S, Strings.QuoteChar, '', [rfReplaceAll]);
+    if FileOperation(Wnd, S, '', foDelete, [ooAllowUndo, ooFileOnly, ooSimpleProgress]) then
     try
-    	FPhotos.BeginUpdate;
-			for I := Items.Count - 1 downto 0 do
-				if Check(Items[I]) then
-        	FPhotos[I].Free;
+      FPhotos.BeginUpdate;
+      for I := Items.Count - 1 downto 0 do
+        if Check(Items[I]) then
+          FPhotos[I].Free;
     finally
-    	FPhotos.EndUpdate;
+      FPhotos.EndUpdate;
     end;
   finally
-  	Strings.Free;
+    Strings.Free;
       EnableWindow(Form.Handle, True);
   end;
 end;
 
 procedure TPhotoView.Preview;
 var
-	Item: TListItem;
-	PhotoItem: TPhotoItem;
+  Item: TListItem;
+  PhotoItem: TPhotoItem;
   I: Integer;
   S: string;
 begin
-	Item := Selected;
+  Item := Selected;
   if Item = nil then Exit;
-	I := Item.Index;
-	if I < FPhotos.Count then
-		PhotoItem := FPhotos[I]
-	else
-  	PhotoItem := nil;
-	if PhotoItem <> nil then
+  I := Item.Index;
+  if I < FPhotos.Count then
+    PhotoItem := FPhotos[I]
+  else
+    PhotoItem := nil;
+  if PhotoItem <> nil then
   begin
-  	S := 'shimgvw.dll,ImageView_Fullscreen ' + PhotoItem.FileName;
-		ShellExecute(Handle, nil, 'rundll32.exe', PChar(S), nil, SW_SHOW);
-	end;
+    S := 'shimgvw.dll,ImageView_Fullscreen ' + PhotoItem.FileName;
+    ShellExecute(Handle, nil, 'rundll32.exe', PChar(S), nil, SW_SHOW);
+  end;
 end;
 
 procedure TPhotoView.Toggle;
 var
-	Item: TListItem;
-	I: Integer;
+  Item: TListItem;
+  I: Integer;
 begin
-	Item := Selected;
+  Item := Selected;
   if Item <> nil then
-  	for I := 0 to Items.Count - 1 do
-    	if (Item <> Items[I]) and (Items[I].Selected) then
-				Items[I].Checked := Item.Checked;
+    for I := 0 to Items.Count - 1 do
+      if (Item <> Items[I]) and (Items[I].Selected) then
+        Items[I].Checked := Item.Checked;
 end;
 
 procedure TPhotoView.DblClick;
 begin
-	inherited DblClick;
+  inherited DblClick;
   Preview;
 end;
 
 procedure TPhotoView.KeyDown(var Key: Word; Shift: TShiftState);
 var
-	Item: TListItem;
+  Item: TListItem;
   I, J: Integer;
 begin
-	inherited KeyDown(Key, Shift);
-	Item := Selected;
-	if Item <> nil then
-  	case Key of
-    	VK_RETURN:
-	      Preview;
-    	VK_SPACE:
-      	begin
-        	Item.Selected := True;
-        	J := 0;
+  inherited KeyDown(Key, Shift);
+  Item := Selected;
+  if Item <> nil then
+    case Key of
+      VK_RETURN:
+        Preview;
+      VK_SPACE:
+        begin
+          Item.Selected := True;
+          J := 0;
           for I := 0 to Items.Count - 1 do
-          	if Items[I].Selected then
-            	Inc(J);
-					if J  < 2 then Exit;
-					Item.Checked := not Item.Checked;
-        	PostMessage(Handle, WM_CHECK, 0, 0);
-				end;
-			VK_DELETE:
-				Recycle;
-		end;
+            if Items[I].Selected then
+              Inc(J);
+          if J  < 2 then Exit;
+          Item.Checked := not Item.Checked;
+          PostMessage(Handle, WM_CHECK, 0, 0);
+        end;
+      VK_DELETE:
+        Recycle;
+    end;
 end;
 
 procedure TPhotoView.PreviewTimer(Sender: TObject);
@@ -1567,8 +1567,8 @@ end;
 
 procedure TPhotoView.WndProc(var Msg: TMessage);
 begin
-	if Msg.Msg = WM_ERASEBKGND then
-  	DefaultHandler(Msg)
+  if Msg.Msg = WM_ERASEBKGND then
+    DefaultHandler(Msg)
   else inherited WndProc(Msg);
 end;
 
@@ -1580,12 +1580,12 @@ end;
 
 procedure TPhotoView.WMCheck(var Msg: TMessage);
 begin
-	Toggle;
+  Toggle;
 end;
 
 initialization
-	InternalBlank := nil;
+  InternalBlank := nil;
 finalization
-	InternalBlank.Free;
+  InternalBlank.Free;
   InternalBlank := nil;
 end.

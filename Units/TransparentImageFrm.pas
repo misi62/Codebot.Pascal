@@ -39,7 +39,7 @@ type
     FBrush: TBitmap;
     FImages: TTransparentImage;
   public
-  	constructor Create(Image: TTransparentImage); reintroduce;
+    constructor Create(Image: TTransparentImage); reintroduce;
     property FileName: string read FFileName;
     property Images: TTransparentImage read FImages;
   end;
@@ -52,20 +52,20 @@ implementation
 
 function EditTransparentImage(Image: TTransparentImage): Boolean;
 var
-	Form: TTransparentImageForm;
+  Form: TTransparentImageForm;
 begin
-	Form := TTransparentImageForm.Create(Image);
-	try
+  Form := TTransparentImageForm.Create(Image);
+  try
     Result := Form.ShowModal = mrOK;
     if Result then
-    	Image.Assign(Form.Images);
+      Image.Assign(Form.Images);
   finally
-  	Form.Free;
+    Form.Free;
   end;
 end;
 
 const
-	ImageOffset = 20;
+  ImageOffset = 20;
 
 constructor TTransparentImageForm.Create(Image: TTransparentImage);
 begin
@@ -76,7 +76,7 @@ end;
 
 procedure TTransparentImageForm.FormCreate(Sender: TObject);
 begin
- 	AdjustFontBorders(Self, Button4);
+   AdjustFontBorders(Self, Button4);
   FBrush := TBitmap.Create;
   FBrush.Height :=  ImageOffset;
   FBrush.Width := ImageOffset;
@@ -93,7 +93,7 @@ end;
 
 procedure TTransparentImageForm.Background1Paint(Sender: TObject);
 var
-	Size, Y, Index, I: Integer;
+  Size, Y, Index, I: Integer;
   R: TRect;
 begin
   Background1.Canvas.FillRect(Rect(2, 2, Background1.Width - 2, Background1.Height - 2));
@@ -105,8 +105,8 @@ begin
   R := Rect(2, Background1.Height - 22, Size + 2, Background1.Height - 2);
   for I := 0 to Background1.Width div Size - 1 do
   begin
-  	if Index + I > FImages.Count - 1 then Exit;
-  	FImages.Draw(Background1.Canvas, I * Size + ImageOffset div 2, Y, Index + I,
+    if Index + I > FImages.Count - 1 then Exit;
+    FImages.Draw(Background1.Canvas, I * Size + ImageOffset div 2, Y, Index + I,
      dsFocus, itImage);
     DrawCaption(Background1.Canvas.Handle, IntToStr(Index + I), R, drCenter);
     Slide(R, drRight);
@@ -115,39 +115,39 @@ end;
 
 procedure TTransparentImageForm.ScrollBar1Change(Sender: TObject);
 begin
-	Background1.Repaint;
+  Background1.Repaint;
 end;
 
 procedure TTransparentImageForm.Button1Click(Sender: TObject);
 begin
-	FImages.Unload;
+  FImages.Unload;
   ScrollBar1.Max := 0;
   Background1.Repaint;
 end;
 
 procedure TTransparentImageForm.Button2Click(Sender: TObject);
 var
-	I: Integer;
+  I: Integer;
 begin
   if OpenPictureDialog.Execute then
   begin
-  	FFileName := OpenPicturedialog.FileName;
-  	FImages.Load(FFileName);
-	  I := FImages.Count;
-	  if I > 0 then
-		  I := I - Background1.Width div (FImages.Size + ImageOffset);
-	  if I < 0 then
-  		I := 0;
-	  ScrollBar1.Max := I;
-	  Background1.Repaint;
-	end;
+    FFileName := OpenPicturedialog.FileName;
+    FImages.Load(FFileName);
+    I := FImages.Count;
+    if I > 0 then
+      I := I - Background1.Width div (FImages.Size + ImageOffset);
+    if I < 0 then
+      I := 0;
+    ScrollBar1.Max := I;
+    Background1.Repaint;
+  end;
 end;
 
 procedure TTransparentImageForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   // FImage := nil;
-	Action := caHide;
+  Action := caHide;
 end;
 
 end.

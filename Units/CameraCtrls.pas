@@ -25,120 +25,120 @@ type
 { Camera properties }
 
 const
-	prName = 1;
-	prMaxZoom = 2;
+  prName = 1;
+  prMaxZoom = 2;
 
-	FinderDelay = 1 / 24 / 60 / 60 / 4;
+  FinderDelay = 1 / 24 / 60 / 60 / 4;
 
 type
-	TCameraManager = class;
+  TCameraManager = class;
 
-	TCameraMode = (cmDisconnected, cmReady, cmRemote, cmViewfinder);
-	TImageSize = (isUnknown, isSmall, isMedium, isLarge, isExLarge);
+  TCameraMode = (cmDisconnected, cmReady, cmRemote, cmViewfinder);
+  TImageSize = (isUnknown, isSmall, isMedium, isLarge, isExLarge);
 
-	ICamera = interface(IUnknown)
-		['{96097929-5BA7-434B-B1F5-1AF14AF0751A}']
-		function GetFlash: Boolean;
-		procedure SetFlash(Value: Boolean);
-		function GetHandle: THandle;
-		function GetMode: TCameraMode;
-		procedure SetMode(Value: TCameraMode);
+  ICamera = interface(IUnknown)
+    ['{96097929-5BA7-434B-B1F5-1AF14AF0751A}']
+    function GetFlash: Boolean;
+    procedure SetFlash(Value: Boolean);
+    function GetHandle: THandle;
+    function GetMode: TCameraMode;
+    procedure SetMode(Value: TCameraMode);
     function GetOwner: TObject;
     procedure SetOwner(Value: TObject);
-		function GetImageSize: TImageSize;
-		procedure SetImageSize(Value: TImageSize);
-		function GetSnapshot: TGraphic;
-		function GetView: TGraphic;
-		function GetZoom: Single;
-		procedure SetZoom(Value: Single);
-		function Query(Prop: TCameraProp): Variant;
-		procedure Snap;
-		property Flash: Boolean read GetFlash write SetFlash;
+    function GetImageSize: TImageSize;
+    procedure SetImageSize(Value: TImageSize);
+    function GetSnapshot: TGraphic;
+    function GetView: TGraphic;
+    function GetZoom: Single;
+    procedure SetZoom(Value: Single);
+    function Query(Prop: TCameraProp): Variant;
+    procedure Snap;
+    property Flash: Boolean read GetFlash write SetFlash;
     property Mode: TCameraMode read GetMode write SetMode;
     property Owner: TObject read GetOwner write SetOwner;
-		property Handle: THandle read GetHandle;
-		property ImageSize: TImageSize read GetImageSize write SetImageSize;
-		property Snapshot: TGraphic read GetSnapshot;
-		property View: TGraphic read GetView;
-		property Zoom: Single read GetZoom write SetZoom;
-	end;
+    property Handle: THandle read GetHandle;
+    property ImageSize: TImageSize read GetImageSize write SetImageSize;
+    property Snapshot: TGraphic read GetSnapshot;
+    property View: TGraphic read GetView;
+    property Zoom: Single read GetZoom write SetZoom;
+  end;
 
 { TCamera }
 
-	TCamera = class(TObject)
-	private
+  TCamera = class(TObject)
+  private
     FManager: TCameraManager;
-		FCamera: ICamera;
+    FCamera: ICamera;
     FWindow: TUtilityWindow;
-		FThread: TCommandThread;
+    FThread: TCommandThread;
     procedure CommandExecute(Sender: TObject; Command: TCommand);
     function GetBusy: Boolean;
-		function GetCameraIndex: Integer;
-		function GetFlash: Boolean;
-		procedure SetFlash(Value: Boolean);
-		function GetHandle: THandle;
-		function GetMode: TCameraMode;
-		procedure SetMode(Value: TCameraMode);
-		function GetImageSize: TImageSize;
-		procedure SetImageSize(Value: TImageSize);
-		function GetSnapshot: TGraphic;
-		function GetView: TGraphic;
-		function GetZoom: Single;
-		procedure SetZoom(Value: Single);
-	public
-		constructor Create(Manager: TCameraManager; Camera: ICamera);
-		destructor Destroy; override;
-		function Query(Prop: TCameraProp): Variant;
-		procedure Snap;
+    function GetCameraIndex: Integer;
+    function GetFlash: Boolean;
+    procedure SetFlash(Value: Boolean);
+    function GetHandle: THandle;
+    function GetMode: TCameraMode;
+    procedure SetMode(Value: TCameraMode);
+    function GetImageSize: TImageSize;
+    procedure SetImageSize(Value: TImageSize);
+    function GetSnapshot: TGraphic;
+    function GetView: TGraphic;
+    function GetZoom: Single;
+    procedure SetZoom(Value: Single);
+  public
+    constructor Create(Manager: TCameraManager; Camera: ICamera);
+    destructor Destroy; override;
+    function Query(Prop: TCameraProp): Variant;
+    procedure Snap;
     property Busy: Boolean read GetBusy;
-		property CameraIndex: Integer read GetCameraIndex;
-		property Flash: Boolean read GetFlash write SetFlash;
+    property CameraIndex: Integer read GetCameraIndex;
+    property Flash: Boolean read GetFlash write SetFlash;
     property Mode: TCameraMode read GetMode write SetMode;
-		property Handle: THandle read GetHandle;
-		property ImageSize: TImageSize read GetImageSize write SetImageSize;
-		property Snapshot: TGraphic read GetSnapshot;
-		property View: TGraphic read GetView;
-		property Zoom: Single read GetZoom write SetZoom;
-	end;
+    property Handle: THandle read GetHandle;
+    property ImageSize: TImageSize read GetImageSize write SetImageSize;
+    property Snapshot: TGraphic read GetSnapshot;
+    property View: TGraphic read GetView;
+    property Zoom: Single read GetZoom write SetZoom;
+  end;
 
 { TCameraManager }
 
-	TCameraEvent = procedure(Sender: TObject; Camera: TCamera) of object;
+  TCameraEvent = procedure(Sender: TObject; Camera: TCamera) of object;
 
-	TCameraManager = class(TObject)
-	private
+  TCameraManager = class(TObject)
+  private
     FDestroying: Boolean;
-		FCameras: TList;
+    FCameras: TList;
     FWindow: TUtilityWindow;
-		FThread: TThread;
-		FOnChange: TNotifyEvent;
+    FThread: TThread;
+    FOnChange: TNotifyEvent;
     FOnModeChange: TCameraEvent;
-		FOnSnap: TCameraEvent;
-		FOnViewFinder: TCameraEvent;
-		function GetBusy: Boolean;
-		function GetCameraCount: Integer;
-		function GetCamera(Index: Integer): TCamera;
-	protected
-		procedure Change; virtual;
-	public
-		constructor Create;
-		destructor Destroy; override;
+    FOnSnap: TCameraEvent;
+    FOnViewFinder: TCameraEvent;
+    function GetBusy: Boolean;
+    function GetCameraCount: Integer;
+    function GetCamera(Index: Integer): TCamera;
+  protected
+    procedure Change; virtual;
+  public
+    constructor Create;
+    destructor Destroy; override;
     procedure DefaultHandler(var Msg); override;
-		procedure DetectCameras;
-		procedure ReleaseCameras;
-		procedure Snap;
-		property Busy: Boolean read GetBusy;
-		property CameraCount: Integer read GetCameraCount;
-		property Cameras[Index: Integer]: TCamera read GetCamera;
-		property OnChange: TNotifyEvent read FOnChange write FOnChange;
+    procedure DetectCameras;
+    procedure ReleaseCameras;
+    procedure Snap;
+    property Busy: Boolean read GetBusy;
+    property CameraCount: Integer read GetCameraCount;
+    property Cameras[Index: Integer]: TCamera read GetCamera;
+    property OnChange: TNotifyEvent read FOnChange write FOnChange;
     property OnModeChange: TCameraEvent read FOnModeChange write FOnModeChange;
-		property OnSnap: TCameraEvent read FOnSnap write FOnSnap;
-		property OnViewFinder: TCameraEvent read FOnViewFinder write FOnViewFinder;
-	end;
+    property OnSnap: TCameraEvent read FOnSnap write FOnSnap;
+    property OnViewFinder: TCameraEvent read FOnViewFinder write FOnViewFinder;
+  end;
 
 { TCameraScanner }
 
-	TCameraScanner = procedure(Wnd: HWND);
+  TCameraScanner = procedure(Wnd: HWND);
 
 procedure RegisterCameraScanner(Scanner: TCameraScanner);
 
@@ -165,7 +165,7 @@ const
 
 { Command constants }
 
-	coFlash = 3;
+  coFlash = 3;
   coImageSize = 4;
   coMode = 5;
   coZoom = 6;
@@ -175,12 +175,12 @@ const
 
 constructor TCamera.Create(Manager: TCameraManager; Camera: ICamera);
 begin
-	inherited Create;
+  inherited Create;
   FManager := Manager;
   Camera.Owner := Self;
-	FCamera := Camera;
+  FCamera := Camera;
   FWindow := TUtilityWindow.Create(Self);
-	FThread := TCommandThread.Create(CommandExecute, FWindow.Handle);
+  FThread := TCommandThread.Create(CommandExecute, FWindow.Handle);
   Mode := cmViewfinder;
 end;
 
@@ -188,7 +188,7 @@ destructor TCamera.Destroy;
 begin
   FWindow.Free;
   FThread.Wait;
-	inherited Destroy;
+  inherited Destroy;
 end;
 
 procedure TCamera.CommandExecute(Sender: TObject; Command: TCommand);
@@ -197,28 +197,28 @@ var
 begin
   Camera := FCamera;
   if Camera = nil then Exit;
-	case Command.Kind of
-		coFlash: Camera.Flash := Command.Value;
-		coImageSize: Camera.ImageSize := Command.Value;
+  case Command.Kind of
+    coFlash: Camera.Flash := Command.Value;
+    coImageSize: Camera.ImageSize := Command.Value;
     coMode: Camera.Mode := Command.Value;
-		coSnap: Camera.Snap;
-		coZoom: Camera.Zoom := Command.Value;
-	end;
+    coSnap: Camera.Snap;
+    coZoom: Camera.Zoom := Command.Value;
+  end;
 end;
 
 function TCamera.Query(Prop: TCameraProp): Variant;
 begin
-	Result := FCamera.Query(Prop);
+  Result := FCamera.Query(Prop);
 end;
 
 procedure TCamera.Snap;
 begin
-	FThread.Push(coSnap);
+  FThread.Push(coSnap);
 end;
 
 function TCamera.GetBusy: Boolean;
 begin
-	Result := FThread.Busy;
+  Result := FThread.Busy;
 end;
 
 function TCamera.GetCameraIndex: Integer;
@@ -228,90 +228,90 @@ end;
 
 function TCamera.GetHandle: THandle;
 begin
-	Result := FCamera.GetHandle;
+  Result := FCamera.GetHandle;
 end;
 
 function TCamera.GetMode: TCameraMode;
 begin
-	Result := FCamera.Mode;
+  Result := FCamera.Mode;
 end;
 
 procedure TCamera.SetMode(Value: TCameraMode);
 begin
-	FThread.Push(coMode, Value);
+  FThread.Push(coMode, Value);
 end;
 
 function TCamera.GetFlash: Boolean;
 begin
-	Result := FCamera.GetFlash;
+  Result := FCamera.GetFlash;
 end;
 
 procedure TCamera.SetFlash(Value: Boolean);
 begin
-	FThread.Push(coFlash, Value);
+  FThread.Push(coFlash, Value);
 end;
 
 function TCamera.GetImageSize: TImageSize;
 begin
-	Result := FCamera.GetImageSize;
+  Result := FCamera.GetImageSize;
 end;
 
 procedure TCamera.SetImageSize(Value: TImageSize);
 begin
-	FThread.Push(coImageSize, Value);
+  FThread.Push(coImageSize, Value);
 end;
 
 function TCamera.GetSnapshot: TGraphic;
 begin
-	Result := FCamera.Snapshot;
+  Result := FCamera.Snapshot;
 end;
 
 function TCamera.GetView: TGraphic;
 begin
-	Result := FCamera.GetView;
+  Result := FCamera.GetView;
 end;
 
 function TCamera.GetZoom: Single;
 begin
-	Result := FCamera.GetZoom;
+  Result := FCamera.GetZoom;
 end;
 
 procedure TCamera.SetZoom(Value: Single);
 begin
-	FThread.Push(coZoom, Value);
+  FThread.Push(coZoom, Value);
 end;
 
 { TScannerThread }
 
 type
-	PScannerLink = ^TScannerLink;
-	TScannerLink = record
-		Scanner: TCameraScanner;
-		Link: PScannerLink;
-	end;
+  PScannerLink = ^TScannerLink;
+  TScannerLink = record
+    Scanner: TCameraScanner;
+    Link: PScannerLink;
+  end;
 
 var
-	ScannerLinks: PScannerLink;
+  ScannerLinks: PScannerLink;
 
 type
-	TScannerThread = class(TThread)
-	private
-		FWnd: HWND;
-	protected
-		procedure Execute; override;
-	public
-		constructor Create(Wnd: HWND);
-	end;
+  TScannerThread = class(TThread)
+  private
+    FWnd: HWND;
+  protected
+    procedure Execute; override;
+  public
+    constructor Create(Wnd: HWND);
+  end;
 
 constructor TScannerThread.Create(Wnd: HWND);
 begin
-	FWnd := Wnd;
-	inherited Create(False);
+  FWnd := Wnd;
+  inherited Create(False);
 end;
 
 procedure TScannerThread.Execute;
 var
-	Link: PScannerLink;
+  Link: PScannerLink;
 begin
   FreeOnTerminate := True;
   CoInitializeEx(nil, COINIT_APARTMENTTHREADED);
@@ -320,7 +320,7 @@ begin
   begin
     Link.Scanner(FWnd);
     Link := Link.Link;
-	end;
+  end;
   CoUninitialize;
   NotifyScanDone(FWnd);
 end;
@@ -329,24 +329,24 @@ end;
 
 constructor TCameraManager.Create;
 begin
-	inherited Create;
-	FCameras := TList.Create;
+  inherited Create;
+  FCameras := TList.Create;
 end;
 
 destructor TCameraManager.Destroy;
 begin
   FDestroying := True;
   ReleaseCameras;
-	FCameras.Free;
-	inherited Destroy;
+  FCameras.Free;
+  inherited Destroy;
 end;
 
 procedure TCameraManager.Change;
 begin
   if Busy then
     Exit;
-	if Assigned(FOnChange) then
-		FOnChange(Self);
+  if Assigned(FOnChange) then
+    FOnChange(Self);
 end;
 
 procedure TCameraManager.DefaultHandler(var Msg);
@@ -393,13 +393,13 @@ procedure TCameraManager.ReleaseCameras;
 var
   I: Integer;
 begin
-	FWindow.Free;
+  FWindow.Free;
   FWindow := nil;
   FThread.Free;
-	for I := FCameras.Count - 1 downto 0 do
-		TCamera(FCameras[I]).Mode := cmDisconnected;
-	for I := FCameras.Count - 1 downto 0 do
-		TObject(FCameras[I]).Free;
+  for I := FCameras.Count - 1 downto 0 do
+    TCamera(FCameras[I]).Mode := cmDisconnected;
+  for I := FCameras.Count - 1 downto 0 do
+    TObject(FCameras[I]).Free;
   FCameras.Clear;
   Change;
 end;
@@ -408,62 +408,62 @@ procedure TCameraManager.Snap;
 var
   I: Integer;
 begin
-	for I := FCameras.Count - 1 downto 0 do
-		TCamera(FCameras[I]).Snap;
+  for I := FCameras.Count - 1 downto 0 do
+    TCamera(FCameras[I]).Snap;
 end;
 
 function TCameraManager.GetBusy: Boolean;
 begin
-	Result := FThread <> nil;
+  Result := FThread <> nil;
 end;
 
 function TCameraManager.GetCameraCount: Integer;
 begin
-	if Busy then
-		Result := 0
-	else
-		Result := FCameras.Count;
+  if Busy then
+    Result := 0
+  else
+    Result := FCameras.Count;
 end;
 
 function TCameraManager.GetCamera(Index: Integer): TCamera;
 begin
-	Result := TCamera(FCameras[Index]);
+  Result := TCamera(FCameras[Index]);
 end;
 
 { RegisterCameraScanner }
 
 procedure RegisterCameraScanner(Scanner: TCameraScanner);
 
-	procedure AddLink(var Link: PScannerLink);
-	begin
-		if Link = nil then
-		begin
-			New(Link);
-			Link.Scanner := Scanner;
-			Link.Link := nil;
-		end
-		else if @Link.Scanner <> @Scanner then
-			AddLink(Link.Link);
-	end;
+  procedure AddLink(var Link: PScannerLink);
+  begin
+    if Link = nil then
+    begin
+      New(Link);
+      Link.Scanner := Scanner;
+      Link.Link := nil;
+    end
+    else if @Link.Scanner <> @Scanner then
+      AddLink(Link.Link);
+  end;
 
 begin
-	if @Scanner <> nil then
-		AddLink(ScannerLinks);
+  if @Scanner <> nil then
+    AddLink(ScannerLinks);
 end;
 
 procedure DisposeLinks;
 
-	procedure DisposeLink(Link: PScannerLink);
-	begin
-		if Link <> nil then
-		begin
-			DisposeLink(Link.Link);
-			Dispose(Link);
-		end;
-	end;
+  procedure DisposeLink(Link: PScannerLink);
+  begin
+    if Link <> nil then
+    begin
+      DisposeLink(Link.Link);
+      Dispose(Link);
+    end;
+  end;
 
 begin
-	DisposeLink(ScannerLinks);
+  DisposeLink(ScannerLinks);
 end;
 
 { Notifications }
@@ -501,6 +501,6 @@ end;
 initialization
   CoInitializeEx(nil, COINIT_APARTMENTTHREADED);
 finalization
-	DisposeLinks;
+  DisposeLinks;
   CoUninitialize;
 end.

@@ -39,7 +39,7 @@ type
     procedure CMTextChanged(var Message: TMessage); message CM_TEXTCHANGED;
   public
     constructor Create(AOwner: TComponent); override;
-		destructor Destroy; override;
+    destructor Destroy; override;
     procedure Loaded; override;
     procedure Open;
     procedure Close;
@@ -164,24 +164,24 @@ end;
 
 destructor TPaneSheet.Destroy;
 begin
-	PaneControl := nil;
+  PaneControl := nil;
   inherited Destroy;
 end;
 
 function SortPaneSheets(Item1, Item2: Pointer): Integer;
 var
-	A: TPaneSheet absolute Item1;
-	B: TPaneSheet absolute Item2;
+  A: TPaneSheet absolute Item1;
+  B: TPaneSheet absolute Item2;
 begin
   Result := A.FPaneIndex - B.FPaneIndex;
 end;
 
 procedure TPaneSheet.Loaded;
 begin
-	inherited Loaded;
+  inherited Loaded;
   if FPaneControl <> nil then
   begin
-  	Visible := FPaneControl.ActivePane = Self;
+    Visible := FPaneControl.ActivePane = Self;
     FPaneControl.FPanes.Sort(SortPaneSheets);
   end;
 end;
@@ -223,7 +223,7 @@ begin
     begin
       if FOpened then
       begin
-      	Visible := True;
+        Visible := True;
         FPaneControl.ActivePane := Self;
         Inc(FPaneControl.FOpenCount);
       end
@@ -244,30 +244,30 @@ function TPaneSheet.GetPaneIndex: Integer;
 begin
   Result := -1;
   if FPaneControl <> nil then
-	  Result := FPaneControl.FPanes.IndexOf(Self);
+    Result := FPaneControl.FPanes.IndexOf(Self);
 end;
 
 procedure TPaneSheet.SetPaneIndex(Value: Integer);
 begin
-	if csLoading in ComponentState then
-		FPaneIndex := Value
+  if csLoading in ComponentState then
+    FPaneIndex := Value
   else if FPaneControl <> nil then
   begin
-	 	FPaneControl.FPanes.Move(PaneIndex, Value);
+     FPaneControl.FPanes.Move(PaneIndex, Value);
     FPaneControl.Invalidate;
   end;
 end;
 
 procedure TPaneSheet.SetPaneControl(Value: TCustomPaneControl);
 begin
-	if Value <> FPaneControl then
+  if Value <> FPaneControl then
   begin
-  	if FPaneControl <> nil then
-	    FPaneControl.RemovePane(Self);
+    if FPaneControl <> nil then
+      FPaneControl.RemovePane(Self);
     FPaneControl := Value;
-  	if FPaneControl <> nil then
+    if FPaneControl <> nil then
     begin
-	    FPaneControl.InsertPane(Self);
+      FPaneControl.InsertPane(Self);
       Inc(FPaneControl.FOpenCount);
     end;
   end;
@@ -282,20 +282,20 @@ end;
 { TCustomPaneControl }
 
 var
-	BitmapBrush: TBitmap;
+  BitmapBrush: TBitmap;
 
 function CheckeredBitmap: TBitmap;
 const
-	BackColor: TColor = 0;
+  BackColor: TColor = 0;
   ForeColor: TColor = 0;
 begin
-	if (BitmapBrush = nil) or (BackColor <> ColorToRGB(clWindow)) or
-  	(ForeColor <> ColorToRGB(clInfoBk)) then
+  if (BitmapBrush = nil) or (BackColor <> ColorToRGB(clWindow)) or
+    (ForeColor <> ColorToRGB(clInfoBk)) then
   begin
-  	BackColor := ColorToRGB(clWindow);
+    BackColor := ColorToRGB(clWindow);
     ForeColor := ColorToRGB(clInfoBk);
     BitmapBrush.Free;
-	  BitmapBrush := GetBitmap(BackColor, ForeColor);
+    BitmapBrush := GetBitmap(BackColor, ForeColor);
   end;
   Result := BitmapBrush;
 end;
@@ -383,7 +383,7 @@ end;
 
 function TCustomPaneControl.GetClientRect: TRect;
 begin
-	Result := inherited GetClientRect;
+  Result := inherited GetClientRect;
   Inc(Result.Top, FHeaderHeight + 3);
 end;
 
@@ -402,13 +402,13 @@ begin
          Break;
        end;
      if NewPane = nil then
-	     for I := 0 to ActivePane.PaneIndex do
+       for I := 0 to ActivePane.PaneIndex do
        if Panes[I].Opened then
        begin
          NewPane := Panes[I];
          Break;
        end;
-	    ActivePane := NewPane;
+      ActivePane := NewPane;
    end;
 end;
 
@@ -427,7 +427,7 @@ begin
          Break;
        end;
      if NewPane = nil then
-	     for I := FPanes.Count - 1 downto ActivePane.PaneIndex do
+       for I := FPanes.Count - 1 downto ActivePane.PaneIndex do
        if Panes[I].Opened then
        begin
          NewPane := Panes[I];
@@ -460,38 +460,38 @@ var
     State: TDrawState;
     Delta: Integer;
   begin
-  	State := [];
+    State := [];
     if FActivePane = nil then
-    	State := [dsDisabled]
-  	else if (PaneButton = pbLeftArrow) and (LeftIndex = 0) then
-    	State := [dsDisabled]
-  	else if (PaneButton = pbRightArrow) and (LeftIndex >= FOpenCount - 1) then
-    	State := [dsDisabled];
+      State := [dsDisabled]
+    else if (PaneButton = pbLeftArrow) and (LeftIndex = 0) then
+      State := [dsDisabled]
+    else if (PaneButton = pbRightArrow) and (LeftIndex >= FOpenCount - 1) then
+      State := [dsDisabled];
     Rect := ButtonRect[PaneButton];
     Delta := 0;
     if (PaneButton = Button) and (State * [dsDisabled] = []) then
       if MouseCapture then
       begin
-      	State := State + [dsPressed];
-				DrawThemeThinButton(DC, Rect, State);
+        State := State + [dsPressed];
+        DrawThemeThinButton(DC, Rect, State);
         Delta := 1;
       end
       else
       begin
         State := State + [dsHot];
-				// DrawThemeThinButton(DC, Rect, State);
+        // DrawThemeThinButton(DC, Rect, State);
       end;
     if Rect.Left < MaxRight then
-			DrawThemeThinButton(DC, Rect, [dsHot]);
+      DrawThemeThinButton(DC, Rect, [dsHot]);
     State := State + [dsFlat];
     OffsetRect(Rect, Delta, Delta);
     case PaneButton of
       pbClose:
-      	DrawThemeClose(DC, Rect, State);
+        DrawThemeClose(DC, Rect, State);
       pbLeftArrow:
-      	DrawThemeArrow(DC, drLeft, Rect, State, clWindowFrame, -1);
+        DrawThemeArrow(DC, drLeft, Rect, State, clWindowFrame, -1);
       pbRightArrow:
-      	DrawThemeArrow(DC, drRight, Rect, State, clWindowFrame, -1);
+        DrawThemeArrow(DC, drRight, Rect, State, clWindowFrame, -1);
     end;
     if ActivePane <> nil then with Rect do
       ExcludeClipRect(DC, Left - Delta, Top - Delta, Right - Delta, Bottom - Delta);
@@ -507,9 +507,9 @@ var
 begin
   DC := Canvas.Handle;
   {if FActivePane <> nil then
-	  with ClientRect do
-			ExcludeClipRect(DC, Left, Top, Right, Bottom);}
-	SelectClipRgn(DC, 0);
+    with ClientRect do
+      ExcludeClipRect(DC, Left, Top, Right, Bottom);}
+  SelectClipRgn(DC, 0);
   Rect := inherited GetClientRect;
   //FillRectColor(DC, Rect, clBtnFace);
   DrawRect := Rect;
@@ -519,15 +519,15 @@ begin
   FillRect(DC, DrawRect, Brush);
   DeleteObject(Brush);
   if ThemePainter.Enabled then
-	begin
-	  Pen := SelectObject(DC, GetPen(clThemeBorder));
-  	with DrawRect do
-	  begin
-  	  MoveToEx(DC, Left, Bottom - 1, nil);
-    	LineTo(DC, Right, Bottom - 1);
-		end;
-	  OverwriteObject(DC, Pen);
-	end;
+  begin
+    Pen := SelectObject(DC, GetPen(clThemeBorder));
+    with DrawRect do
+    begin
+      MoveToEx(DC, Left, Bottom - 1, nil);
+      LineTo(DC, Right, Bottom - 1);
+    end;
+    OverwriteObject(DC, Pen);
+  end;
   with Rect do
   begin
     ExcludeClipRect(DC, Left - 2, Top, Left, Bottom);
@@ -541,16 +541,16 @@ begin
       MaxRight := PaneRect[I].Right + 1;
       Break;
     end;
-	if FShowButtons then
+  if FShowButtons then
   begin
-	  DrawButton(DC, pbClose);
-  	DrawButton(DC, pbRightArrow);
-	  DrawButton(DC, pbLeftArrow);
+    DrawButton(DC, pbClose);
+    DrawButton(DC, pbRightArrow);
+    DrawButton(DC, pbLeftArrow);
   end;
   if FActivePane <> nil then
   begin
     DrawRect := PaneRect[FActivePane.PaneIndex];
-		DrawCaption(DC, FActivePane.Caption, DrawRect, drCenter);
+    DrawCaption(DC, FActivePane.Caption, DrawRect, drCenter);
     Brush := GetSysColorBrush(COLOR_BTNFACE);
     Inc(DrawRect.Bottom);
     FillRect(DC, DrawRect, Brush);
@@ -590,7 +590,7 @@ begin
       DrawCaption(DC, Panes[I].Caption, DrawRect, drCenter);
     end;
   DeleteObject(Brush);
-	inherited Paint;
+  inherited Paint;
 end;
 
 procedure TCustomPaneControl.ImagesChange(Sender: TObject);
@@ -600,7 +600,7 @@ end;
 
 function TCustomPaneControl.AddPane: TPaneSheet;
 begin
-	Result := TPaneSheet.Create(Owner);
+  Result := TPaneSheet.Create(Owner);
   InsertPane(Result);
 end;
 
@@ -613,7 +613,7 @@ begin
     FPanes.Add(PaneSheet);
     if ActivePane = nil then
       ActivePane := PaneSheet;
-  	PaneSheet.PaneControl := Self;
+    PaneSheet.PaneControl := Self;
     UpdateDisplay;
   end;
 end;
@@ -666,11 +666,11 @@ end;
 
 procedure TCustomPaneControl.RemovePane(PaneSheet: TPaneSheet);
 var
-	I: Integer;
+  I: Integer;
 begin
   if csDestroying in ComponentState then
     Exit;
-	I := FPanes.IndexOf(PaneSheet);
+  I := FPanes.IndexOf(PaneSheet);
   if I > -1 then
   begin
     FPanes.Delete(I);
@@ -699,7 +699,7 @@ var
 begin
   if Value <> FActivePane then
   begin
-  	P := FActivePane;
+    P := FActivePane;
     if FActivePane <> nil then
       FActivePane.Visible := False;
     FActivePane := Value;
@@ -708,8 +708,8 @@ begin
     begin
       FActivePane.Visible := True;
       FActivePane.BringToFront;
-		  if Focused or Windows.IsChild(Handle, Windows.GetFocus) then
-      	FActivePane.SelectFirst;
+      if Focused or Windows.IsChild(Handle, Windows.GetFocus) then
+        FActivePane.SelectFirst;
     end;
     if csDesigning in ComponentState then
     begin
@@ -739,7 +739,7 @@ end;
 
 function TCustomPaneControl.GetButtonRect(Index: TPaneButton): TRect;
 const
-	ButtonSize = 25;
+  ButtonSize = 25;
 begin
   SetRectEmpty(Result);
   if Index <> pbNone then
@@ -760,8 +760,8 @@ begin
       InflateRect(Result, -1, -1);
       if ThemePainter.Enabled then
       begin
-	      Top := (FHeaderHeight - ButtonSize) shr 1 + 2;
-  	    Bottom := Top + ButtonSize;
+        Top := (FHeaderHeight - ButtonSize) shr 1 + 2;
+        Bottom := Top + ButtonSize;
       end;
     end;
 end;
@@ -859,14 +859,14 @@ end;
 procedure TCustomPaneControl.CMDialogKey(var Message: TCMDialogKey);
 begin
   if IsChild(Handle, GetFocus) and (Message.CharCode = VK_TAB) and
-  	(GetKeyState(VK_CONTROL) < 0) then
+    (GetKeyState(VK_CONTROL) < 0) then
   begin
     if GetKeyState(VK_SHIFT) >= 0 then
-	    NextPane
+      NextPane
     else
-    	PriorPane;
-		if ActivePane <> nil then
-    	ActivePane.SelectFirst;
+      PriorPane;
+    if ActivePane <> nil then
+      ActivePane.SelectFirst;
     Message.Result := 1;
   end
   else
@@ -882,21 +882,21 @@ begin
   I := Canvas.TextHeight('Wg');
   FHeaderHeight := Trunc(I * 1.75) + 2;
   if ThemePainter.Enabled then
-  	Inc(FHeaderHeight);
+    Inc(FHeaderHeight);
   UpdateDisplay;
 end;
 
 procedure TCustomPaneControl.WMEraseBkgnd(var Message: TWMEraseBkgnd);
 var
-	B: HBRUSH;
+  B: HBRUSH;
   R: TRect;
 begin
-	B := GetBrush(CheckeredBitmap);
+  B := GetBrush(CheckeredBitmap);
   R := inherited GetClientRect;
-	FillRect(Message.DC, R, B);
+  FillRect(Message.DC, R, B);
   DeleteObject(B);
   R.Top := FHeaderHeight + 2;
-	FillRectColor(Message.DC, R, Color);
+  FillRectColor(Message.DC, R, Color);
   Message.Result := 1;
 end;
 
@@ -911,7 +911,7 @@ procedure TCustomPaneControl.SetShowButtons(const Value: Boolean);
 begin
   if FShowButtons <> Value then
   begin
-  	FShowButtons := Value;
+    FShowButtons := Value;
     LeftIndex := 0;
     Invalidate;
   end;
@@ -920,7 +920,7 @@ end;
 initialization
   BitmapBrush := nil;
   if Classes.GetClass(TPaneSheet.ClassName) = nil then
-	  Classes.RegisterClass(TPaneSheet);
+    Classes.RegisterClass(TPaneSheet);
 finalization
   BitmapBrush.Free;
 end.

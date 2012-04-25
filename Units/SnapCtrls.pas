@@ -91,12 +91,12 @@ end;
 type
   TSnapWindow = class(TUtilityWindow)
   protected
-		procedure CreateInfo(var Info: TCreateInfo); override;
+    procedure CreateInfo(var Info: TCreateInfo); override;
   end;
 
 procedure TSnapWindow.CreateInfo(var Info: TCreateInfo);
 begin
-	inherited CreateInfo(Info);
+  inherited CreateInfo(Info);
   Info.WndClass.style := CS_HREDRAW or CS_VREDRAW;
   Info.W := 200;
   Info.H := 150;
@@ -402,9 +402,9 @@ procedure TSnapGrabber.WMNCHitTest(var Message: TWMNCHitTest);
 const
   GripSize = 20;
 var
-	Rect, A, B: TRect;
-	P: TPoint;
-	I, X, Y: Integer;
+  Rect, A, B: TRect;
+  P: TPoint;
+  I, X, Y: Integer;
 begin
   GetWindowRect(FSnapWindow.Handle, Rect);
   P := SmallPointToPoint(Message.Pos);
@@ -419,35 +419,35 @@ begin
   end;
   for X := 0 to 2 do
   begin
-  	A := Rect;
-  	case X of
-  		0:
-  			begin
-  				A.Left := (WidthOf(Rect) - I) shr 1;
-  				A.Right := A.Left + I;
-  			end;
-  		1: A.Right := I;
-  		2: A.Left := A.Right - I;
-  	end;
-  	for Y := 0 to 2 do
-  	begin
-  		if (X = 0) and (Y = 0) then Continue;
-  		B := A;
-  		case Y of
-  			0:
-  				begin
-  					B.Top := (HeightOf(Rect) - I) shr 1;
-  					B.Bottom := B.Top + I;
-  				end;
-  			1: B.Bottom := I;
-  			2: B.Top := A.Bottom - I;
-  		end;
-  		if PtInRect(B, P) then
-  		begin
-  			Message.Result := 9 + Y * 3 + X;
-  			Exit;
-  		end;
-	  end;
+    A := Rect;
+    case X of
+      0:
+        begin
+          A.Left := (WidthOf(Rect) - I) shr 1;
+          A.Right := A.Left + I;
+        end;
+      1: A.Right := I;
+      2: A.Left := A.Right - I;
+    end;
+    for Y := 0 to 2 do
+    begin
+      if (X = 0) and (Y = 0) then Continue;
+      B := A;
+      case Y of
+        0:
+          begin
+            B.Top := (HeightOf(Rect) - I) shr 1;
+            B.Bottom := B.Top + I;
+          end;
+        1: B.Bottom := I;
+        2: B.Top := A.Bottom - I;
+      end;
+      if PtInRect(B, P) then
+      begin
+        Message.Result := 9 + Y * 3 + X;
+        Exit;
+      end;
+    end;
   end;
   Message.Result := HTCAPTION;
 end;

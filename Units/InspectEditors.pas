@@ -239,7 +239,7 @@ type
     function GetPopupClass: TPopupFormClass; override;
     function GetText: string; override;
     procedure SetText(const Value: string); override;
-	public
+  public
     property EditorValue: TShellNode read GetEditorValue write SetEditorValue;
   end;
 
@@ -257,11 +257,11 @@ type
   public
     constructor Create; override;
     destructor Destroy; override;
-  	function GoForward: Boolean;
+    function GoForward: Boolean;
     function GoBack: Boolean;
     procedure Remove(Instance: TObject);
     procedure Reset;
-		property Instance: TObject read FInstance write SetInstance;
+    property Instance: TObject read FInstance write SetInstance;
     property PropInfo: PPropInfo read GetPropInfo;
   end;
 
@@ -277,9 +277,9 @@ const
 
 function TStringInspectorEditor.GetAttributes: TEditorAttributes;
 begin
-	Result := inherited GetAttributes;
- //	if FShowButton then
-		Result := Result + [eaButton, eaEllipseButton];
+  Result := inherited GetAttributes;
+ //  if FShowButton then
+    Result := Result + [eaButton, eaEllipseButton];
 end;
 
 procedure TStringInspectorEditor.SetEditorValue(const Value: string);
@@ -340,7 +340,7 @@ end;
 
 procedure TFloatInspectorEditor.SetText(const Value: string);
 begin
-	EditorValue := StrToFloatDef(Value, EditorValue);
+  EditorValue := StrToFloatDef(Value, EditorValue);
 end;
 
 { TDateInspectorEditor }
@@ -361,7 +361,7 @@ end;
 
 procedure TDateInspectorEditor.SetText(const Value: string);
 begin
-	EditorValue := StrToDateDef(Value, EditorValue);
+  EditorValue := StrToDateDef(Value, EditorValue);
 end;
 
 { TMoneyInspectorEditor }
@@ -740,28 +740,28 @@ end;
 
 procedure TFontInspectorEditor.SetText(const Value: string);
 var
-	S: string;
-	I: Integer;
+  S: string;
+  I: Integer;
 begin
-	S := Trim(UpperCase(Value));
+  S := Trim(UpperCase(Value));
   for I := 0 to Screen.Fonts.Count - 1 do
-  	if Trim(UpperCase(Screen.Fonts[I])) = S then
+    if Trim(UpperCase(Screen.Fonts[I])) = S then
     begin
-    	FFont.Name := Screen.Fonts[I];
+      FFont.Name := Screen.Fonts[I];
       Break;
-		end;
+    end;
 end;
 
 { TFolderInspectorEditor }
 
 procedure TFolderInspectorEditor.Click;
 var
-	Tree: TShellTreePopupForm;
+  Tree: TShellTreePopupForm;
 begin
   Tree := Popup as TShellTreePopupForm;
   Tree.Width := Tree.Associate.Width;
   if Tree.Width < 200 then
-  	Tree.Width := 200;
+    Tree.Width := 200;
   inherited Click;
 end;
 
@@ -776,18 +776,18 @@ var
 begin
   if EditorValue <> nil then
   begin
-  	Node := EditorValue as TShellTreeNode;
-		Images := GetSysImages;
-		DC := Canvas.Handle;
+    Node := EditorValue as TShellTreeNode;
+    Images := GetSysImages;
+    DC := Canvas.Handle;
     R := Rect;
     if HeightOf(R) > ImageHeight - 1 then
     begin
-		  ImageList_Draw(Images, Node.ImageIndex, DC, R.Left,
-      	R.Top + (HeightOf(R) - ImageHeight) div 2, ILD_TRANSPARENT);
-	    Inc(R.Left, 2 + ImageHeight);
+      ImageList_Draw(Images, Node.ImageIndex, DC, R.Left,
+        R.Top + (HeightOf(R) - ImageHeight) div 2, ILD_TRANSPARENT);
+      Inc(R.Left, 2 + ImageHeight);
     end;
-		DrawText(DC, PChar(Text), -1, R, DefaultAlignment);
-	end
+    DrawText(DC, PChar(Text), -1, R, DefaultAlignment);
+  end
 end;
 
 function TFolderInspectorEditor.GetAttributes: TEditorAttributes;
@@ -802,30 +802,30 @@ end;
 
 function TFolderInspectorEditor.GetText: string;
 begin
-	Result := NodeToStr(EditorValue);
+  Result := NodeToStr(EditorValue);
 end;
 
 procedure TFolderInspectorEditor.SetText(const Value: string);
 var
-	Node: TShellNode;
+  Node: TShellNode;
 begin
-	Node := StrToNodeDef(Trim(Value), nil);
+  Node := StrToNodeDef(Trim(Value), nil);
   if Node <> nil then
   try
-  	EditorValue := Node;
+    EditorValue := Node;
   finally
-  	Node.Free;
+    Node.Free;
   end;
 end;
 
 function TFolderInspectorEditor.GetEditorValue: TShellNode;
 begin
-	Result := (Popup as TShellTreePopupForm).ShellTree.SelectedNode;
+  Result := (Popup as TShellTreePopupForm).ShellTree.SelectedNode;
 end;
 
 procedure TFolderInspectorEditor.SetEditorValue(Value: TShellNode);
 begin
-	(Popup as TShellTreePopupForm).ShellTree.SelectedNode := Value;
+  (Popup as TShellTreePopupForm).ShellTree.SelectedNode := Value;
 end;
 
 type
@@ -844,78 +844,78 @@ type
 constructor TPropertyInspectorEditor.Create(AOwner: TInspectorEditors;
   Instance: TObject; PropInfo: PPropInfo);
 var
-	I: Integer;
+  I: Integer;
 begin
   Name := PropInfo.Name;
-	FEditorValue := PropInfo;
+  FEditorValue := PropInfo;
   FValue := GetPropValue(Instance, Name, True);
   if PropInfo.PropType^^.Kind = tkClass then
   begin
-  	I := GetOrdProp(Instance, PropInfo);
+    I := GetOrdProp(Instance, PropInfo);
     if I <> 0 then
-    	FValue := '$' + IntToHex(I, 8)
-		else
-    	FValue := 'nil';
+      FValue := '$' + IntToHex(I, 8)
+    else
+      FValue := 'nil';
   end
   else if PropInfo.PropType^ = TypeInfo(TColor) then
-  	FValue := ColorToStr(TColor(GetOrdProp(Instance, PropInfo)));
+    FValue := ColorToStr(TColor(GetOrdProp(Instance, PropInfo)));
   inherited Create(AOwner);
 end;
 
 function TPropertyInspectorEditor.GetAttributes: TEditorAttributes;
 begin
-	Result := [eaReadOnly];
+  Result := [eaReadOnly];
   if FEditorValue.PropType^^.Kind = tkClass then
-		Result := Result + [eaButton, eaEllipseButton];
+    Result := Result + [eaButton, eaEllipseButton];
 end;
 
 function TPropertyInspectorEditor.GetText: string;
 begin
-	Result := FValue;
+  Result := FValue;
 end;
 
 { TPropertyInspector }
 
 constructor TPropertyInspector.Create;
 begin
-	inherited Create;
+  inherited Create;
   FList := TList.Create;
   FIndex := -1;
 end;
 
 destructor TPropertyInspector.Destroy;
 begin
-	FList.Free;
+  FList.Free;
   inherited Destroy;
 end;
 
 procedure TPropertyInspector.BuildEditors(Editors: TInspectorEditors);
 var
-	Strings: TClassPropertyStrings;
+  Strings: TClassPropertyStrings;
   I: Integer;
 begin
   if FInstance = nil then Exit;
   Strings := TClassPropertyStrings.Create;
   try
-  	Strings.TypeKinds := tkProperties;
-  	Strings.Instance := FInstance;
-		for I := 0 to Strings.Count - 1 do
+    Strings.TypeKinds := tkProperties;
+    Strings.Instance := FInstance;
+    for I := 0 to Strings.Count - 1 do
     try
-			TPropertyInspectorEditor.Create(Editors, FInstance, Strings.GetPropInfo(I));
-		except
-    	// delete property
+      TPropertyInspectorEditor.Create(Editors, FInstance, Strings.GetPropInfo(I));
+    except
+      // delete property
     end;
   finally
-  	Strings.Free;
+    Strings.Free;
   end;
 end;
 
 procedure TPropertyInspector.Edit;
 var
-	P: PPropInfo;
+  P: PPropInfo;
   O: TObject;
 begin
-	if FInstance = nil then Exit;
+  if FInstance = nil then Exit;
   P := PropInfo;
   if P = nil then Exit;
   O := TObject(GetOrdProp(FInstance, P));
@@ -926,77 +926,77 @@ end;
 
 function TPropertyInspector.GoForward: Boolean;
 begin
-	if FIndex < FList.Count - 1 then
-	begin
-  	Inc(FIndex);
-  	FInstance := TObject(FList[FIndex]);
-	  Recreate;
+  if FIndex < FList.Count - 1 then
+  begin
+    Inc(FIndex);
+    FInstance := TObject(FList[FIndex]);
+    Recreate;
   end;
   Result := FIndex < FList.Count - 1;
 end;
 
 function TPropertyInspector.GoBack: Boolean;
 begin
-	if FIndex > 0 then
-	begin
-  	Dec(FIndex);
-  	FInstance := TObject(FList[FIndex]);
-	  Recreate;
+  if FIndex > 0 then
+  begin
+    Dec(FIndex);
+    FInstance := TObject(FList[FIndex]);
+    Recreate;
   end;
   Result := FIndex > 0;
 end;
 
 procedure TPropertyInspector.Remove(Instance: TObject);
 var
-	I: Integer;
+  I: Integer;
 begin
-	if Instance = FInstance then
+  if Instance = FInstance then
   begin
-		Reset;
+    Reset;
     Exit;
-	end;
-	for I := FList.Count - 1 downto 0 do
-  	if FList[I] = Instance then
-    	FList.Delete(I);
-	if FIndex > FList.Count - 1 then
-  	FIndex := FList.Count - 1;
+  end;
+  for I := FList.Count - 1 downto 0 do
+    if FList[I] = Instance then
+      FList.Delete(I);
+  if FIndex > FList.Count - 1 then
+    FIndex := FList.Count - 1;
 end;
 
 procedure TPropertyInspector.Reset;
 begin
-	FList.Clear;
+  FList.Clear;
   FInstance := nil;
   FIndex := -1;
-	Recreate;
+  Recreate;
 end;
 
 function TPropertyInspector.GetPropInfo: PPropInfo;
 begin
-	if FInstance = nil then
-  	Result := nil
-	else if Editor is TPropertyInspectorEditor then
-  	Result := TPropertyInspectorEditor(Editor).EditorValue
-	else
-  	Result := nil;
+  if FInstance = nil then
+    Result := nil
+  else if Editor is TPropertyInspectorEditor then
+    Result := TPropertyInspectorEditor(Editor).EditorValue
+  else
+    Result := nil;
 end;
 
 procedure TPropertyInspector.SetInstance(const Value: TObject);
 var
-	I: Integer;
+  I: Integer;
 begin
-	if Value = nil then Exit;
-	if FInstance <> Value then
+  if Value = nil then Exit;
+  if FInstance <> Value then
   begin
-	  if not ((FIndex < FList.Count - 1) and (FList[FIndex] = Value)) then
-		begin
-	    if FIndex < FList.Count - 1 then
-  	  	for I := FList.Count - 1 downto FIndex + 1 do
-    	  	FList.Delete(I);
-			FList.Add(Value);
-  	  FIndex := FList.Count - 1;
+    if not ((FIndex < FList.Count - 1) and (FList[FIndex] = Value)) then
+    begin
+      if FIndex < FList.Count - 1 then
+        for I := FList.Count - 1 downto FIndex + 1 do
+          FList.Delete(I);
+      FList.Add(Value);
+      FIndex := FList.Count - 1;
     end;
-  	FInstance := Value;
-	  Recreate;
+    FInstance := Value;
+    Recreate;
   end;
 end;
 

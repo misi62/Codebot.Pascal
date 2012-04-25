@@ -56,7 +56,7 @@ type
   PVec4 = ^TVec4;
   TVec4Array = array of TVec4;
 
-	TRGBA = TVec4;
+  TRGBA = TVec4;
   PRGBA = PVec4;
   TVecColor = TVec4;
   TVecColors = TVec4Array;
@@ -258,7 +258,7 @@ const
 function NameToColor(const Name: string): TVecColor;
 
 type
-	TPixelDepth = (pd24 = 24, pd32 = 32);
+  TPixelDepth = (pd24 = 24, pd32 = 32);
 
   TFastBitmap = record
     DC: HDC;
@@ -729,7 +729,7 @@ var
   Bitmap: HBITMAP;
   Bitmapinfo: TBitmapInfo;
   Bits: Pointer;
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
   MemDC := CreateCompatibleDC(0);
   FillChar(BitmapInfo, SizeOf(BitmapInfo), #0);
@@ -742,14 +742,14 @@ begin
     biBitCount := 32;
     biCompression := BI_RGB;
   end;
-  Bitmap := CreateDibSection(MemDC, BitmapInfo, DIB_RGB_COLORS, Bits,	0, 0);
+  Bitmap := CreateDibSection(MemDC, BitmapInfo, DIB_RGB_COLORS, Bits,  0, 0);
   Bitmap := SelectObject(MemDC, Bitmap);
   Move(vgGetSurfacePixelsAM^, Bits^, SurfaceWidth * SurfaceHeight * 4);
   Func.BlendOp := 0;
   Func.BlendFlags := 0;
   Func.SourceConstantAlpha := $FF;
-	Func.AlphaFormat := AC_SRC_ALPHA;
-	AlphaBlend(DC, X, Y, SurfaceWidth, SurfaceHeight, MemDC, 0, 0, SurfaceWidth, SurfaceHeight, Func);
+  Func.AlphaFormat := AC_SRC_ALPHA;
+  AlphaBlend(DC, X, Y, SurfaceWidth, SurfaceHeight, MemDC, 0, 0, SurfaceWidth, SurfaceHeight, Func);
   Bitmap := SelectObject(MemDC, Bitmap);
   DeleteObject(Bitmap);
   DeleteDC(MemDC);
@@ -801,11 +801,11 @@ begin
     Gradient[J + 3] := Colors[I].B;
     Gradient[J + 4] := Colors[I].A;
   end;
-	vgSetParameteri(Paint, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
-	vgSetParameterfv(Paint, VG_PAINT_COLOR_RAMP_STOPS, Length(Gradient), @Gradient[0]);
+  vgSetParameteri(Paint, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
+  vgSetParameterfv(Paint, VG_PAINT_COLOR_RAMP_STOPS, Length(Gradient), @Gradient[0]);
   Line[0] := A;
   Line[1] := B;
-	vgSetParameterfv(Paint, VG_PAINT_LINEAR_GRADIENT, 4, @Line);
+  vgSetParameterfv(Paint, VG_PAINT_LINEAR_GRADIENT, 4, @Line);
   vgSetParameteri(Paint, VG_PAINT_COLOR_RAMP_SPREAD_MODE, Spreads[Spread]);
 end;
 
@@ -829,14 +829,14 @@ begin
     Gradient[J + 3] := Colors[I].B;
     Gradient[J + 4] := Colors[I].A;
   end;
-	vgSetParameteri(Paint, VG_PAINT_TYPE, VG_PAINT_TYPE_RADIAL_GRADIENT);
-	vgSetParameterfv(Paint, VG_PAINT_COLOR_RAMP_STOPS, Length(Gradient), @Gradient[0]);
+  vgSetParameteri(Paint, VG_PAINT_TYPE, VG_PAINT_TYPE_RADIAL_GRADIENT);
+  vgSetParameterfv(Paint, VG_PAINT_COLOR_RAMP_STOPS, Length(Gradient), @Gradient[0]);
   Line[0] := Center.X;
   Line[1] := Center.Y;
   Line[2] := Focus.X;
   Line[3] := Focus.Y;
   Line[4] := Radius;
-	vgSetParameterfv(Paint, VG_PAINT_RADIAL_GRADIENT, 5, @Line);
+  vgSetParameterfv(Paint, VG_PAINT_RADIAL_GRADIENT, 5, @Line);
   vgSetParameteri(Paint, VG_PAINT_COLOR_RAMP_SPREAD_MODE, Spreads[Spread]);
 end;
 
@@ -1294,32 +1294,32 @@ end;
 
 procedure DestroyFastBitmap(var Bitmap: TFastBitmap);
 begin
-	if Bitmap.DC <> 0 then
+  if Bitmap.DC <> 0 then
   begin
-	  DeleteDC(Bitmap.DC);
-  	DeleteObject(Bitmap.Handle);
-	  FillChar(Bitmap, SizeOf(Bitmap), #0);
+    DeleteDC(Bitmap.DC);
+    DeleteObject(Bitmap.Handle);
+    FillChar(Bitmap, SizeOf(Bitmap), #0);
   end;
 end;
 
 function IsFastBitmap(const Bitmap: TFastBitmap): Boolean;
 begin
-	Result := Bitmap.DC <> 0;
+  Result := Bitmap.DC <> 0;
 end;
 
 procedure AlphaDraw(DC: HDC; X, Y: Integer; const Bitmap: TFastBitmap; Opacity: Byte = $FF);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
-	if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
+  if IsFastBitmap(Bitmap) and (Bitmap.Depth = pd32) then
   begin
     Func.BlendOp := 0;
     Func.BlendFlags := 0;
-		Func.SourceConstantAlpha := Opacity;
-		Func.AlphaFormat := AC_SRC_ALPHA;
-		AlphaBlend(DC, X, Y, Bitmap.Width,
-  		Bitmap.Height, Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
-	end;
+    Func.SourceConstantAlpha := Opacity;
+    Func.AlphaFormat := AC_SRC_ALPHA;
+    AlphaBlend(DC, X, Y, Bitmap.Width,
+      Bitmap.Height, Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, Func);
+  end;
 end;
 
 { Vector Objects }

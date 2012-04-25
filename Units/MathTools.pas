@@ -252,7 +252,7 @@ begin
   if Divisor = 0 then
     Result := 0
   else
-	  Result := Quotient - Trunc(Quotient / Divisor) * Divisor;
+    Result := Quotient - Trunc(Quotient / Divisor) * Divisor;
 end;
 
 function IntegerPart(const Value: Double): Double;

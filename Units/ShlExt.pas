@@ -3,7 +3,7 @@ unit ShlExt;
 interface
 
 uses
-	CommCtrl, ActiveX, Windows, ShlObj, ShlObj2, Messages;
+  CommCtrl, ActiveX, Windows, ShlObj, ShlObj2, Messages;
 
 const
   // New Interface IDs
@@ -133,28 +133,28 @@ type
   PSFVCopyHookInfo = ^TSFVCopyHookInfo;
 
   TSFVM_WEBVIEW_LAYOUT_DATA = record
-	  flags : cardinal;
-	  pUnk : IUnknown; //IPreview3?
+    flags : cardinal;
+    pUnk : IUnknown; //IPreview3?
   end;
   PSFVM_WEBVIEW_LAYOUT_DATA = ^TSFVM_WEBVIEW_LAYOUT_DATA;
 
   TSFVM_WEBVIEW_CONTENT_DATA = packed record
-  	l1 : integer;
-	  l2 : integer;
-	  pUnk : IUnknown; // IUIElement
-	  pUnk2 : IUnknown; // IUIElement
-	  pEnum : IEnumIdList;
+    l1 : integer;
+    l2 : integer;
+    pUnk : IUnknown; // IUIElement
+    pUnk2 : IUnknown; // IUIElement
+    pEnum : IEnumIdList;
   end;
   PSFVM_WEBVIEW_CONTENT_DATA = ^TSFVM_WEBVIEW_CONTENT_DATA;
 
   TSFVM_WEBVIEW_TASKSECTION_DATA = record
-  	pEnum : IUnknown; // IEnumUICommand
-	  pEnum2 : IUnknown; // IEnumUICommand
+    pEnum : IUnknown; // IEnumUICommand
+    pEnum2 : IUnknown; // IEnumUICommand
   end;
   PSFVM_WEBVIEW_TASKSECTION_DATA = ^TSFVM_WEBVIEW_TASKSECTION_DATA;
 
   TSFVM_WEBVIEW_THEME_DATA = record
-  	pszTheme : PWideChar;
+    pszTheme : PWideChar;
   end;
   PSFVM_WEBVIEW_THEME_DATA = ^TSFVM_WEBVIEW_THEME_DATA;
 
@@ -169,29 +169,29 @@ type
 
   IShellItemArray = interface(IUnknown)
 //    ['{90CF20DE-73B4-4AA4-BA7A-82FF310AF24A}']
-  	// IShellItemArray methods
-	  function BindToHandler(pbc : IBindCtx; const rbhid : TGUID; const riid : TIID; out ppvOut): HResult; stdcall;
-	  function GetAttrributes(nEnum : integer; dwRequested : dword; out pdwResult : dword): HResult; stdcall;
-	  function GetCount(out pCount : UINT): HResult; stdcall;
-	  function GetItemAt(nIndex : uint; out ppItem : IShellItem) : HResult; stdcall;
-	  function EnumItems(out enumShellItems : IEnumShellItems): HResult; stdcall;
+    // IShellItemArray methods
+    function BindToHandler(pbc : IBindCtx; const rbhid : TGUID; const riid : TIID; out ppvOut): HResult; stdcall;
+    function GetAttrributes(nEnum : integer; dwRequested : dword; out pdwResult : dword): HResult; stdcall;
+    function GetCount(out pCount : UINT): HResult; stdcall;
+    function GetItemAt(nIndex : uint; out ppItem : IShellItem) : HResult; stdcall;
+    function EnumItems(out enumShellItems : IEnumShellItems): HResult; stdcall;
   end;
 
   IUIElement = interface(IUnknown)
     [SID_IUIElement]
-  	// IUIElement methods
-  	function get_Name(pItemArray : IShellItemArray; var bstrName : TBStr) : HResult; stdcall;
-	  function get_Icon(pItemArray : IShellItemArray; var bstrName : TBStr) : HResult; stdcall;
-	  function get_Tooltip(pItemArray : IShellItemArray; var bstrName : TBStr) : HResult; stdcall;
+    // IUIElement methods
+    function get_Name(pItemArray : IShellItemArray; var bstrName : TBStr) : HResult; stdcall;
+    function get_Icon(pItemArray : IShellItemArray; var bstrName : TBStr) : HResult; stdcall;
+    function get_Tooltip(pItemArray : IShellItemArray; var bstrName : TBStr) : HResult; stdcall;
   end;
 
   UISTATE = TOLEEnum;
 
   IUICommand = interface(IUIElement)
     [SID_IUICommand]
-  	function get_CanonicalName(Guid : TGUID) : HResult; stdcall;
-  	function get_State(pItemArray : IShellItemArray; nRequested : integer; var pState : UIState) : HResult; stdcall;
-	  function Invoke(pItemArray : IShellItemArray; pCtx : IBindCtx) : HResult; stdcall;
+    function get_CanonicalName(Guid : TGUID) : HResult; stdcall;
+    function get_State(pItemArray : IShellItemArray; nRequested : integer; var pState : UIState) : HResult; stdcall;
+    function Invoke(pItemArray : IShellItemArray; pCtx : IBindCtx) : HResult; stdcall;
   end;
 
   IEnumUICommand = interface(IUnknown)
@@ -265,7 +265,7 @@ const
   SFVM_KILLFOCUS          = 19; //         0               0
   SFVM_REGISTERCOPYHOOK   = 20;//         0               0
   SFVM_COPYHOOKCALLBACK   = 21;//         -               LPCOPYHOOKINFO
-  SFVM_NOTIFY	           	= 22;//         idFrom		      LPNOTIFY
+  SFVM_NOTIFY               = 22;//         idFrom          LPNOTIFY
   SFVM_ADDINGOBJECT       = 29;//         pidl            PDVSELCHANGEINFO
   SFVM_REMOVINGOBJECT     = 30;//         pidl            PDVSELCHANGEINFO
   SFVM_UPDATESTATUSBAR    = 31;//         -               lSelChangeInfo
@@ -378,19 +378,19 @@ const
 //---------------------------------------------------------------------------
 // Change the path of an existing folder.
 // wParam:
-//	0:		LPARAM is a string, handle the message immediately.
-//	CSP_HANDLE:	LPARAM is a handle. handle the message immediately
-//			and then free the handle.
-//	CSP_REPOST:	LPARAM is a string, copy the string and handle the
-// 			message later.
-// 	CSP_REPOST|CSP_HANDLE:
-//			LPARAM is a handle, just handle the message later
-//			and free the handle then.
+//  0:    LPARAM is a string, handle the message immediately.
+//  CSP_HANDLE:  LPARAM is a handle. handle the message immediately
+//      and then free the handle.
+//  CSP_REPOST:  LPARAM is a string, copy the string and handle the
+//       message later.
+//   CSP_REPOST|CSP_HANDLE:
+//      LPARAM is a handle, just handle the message later
+//      and free the handle then.
 // lParam: LPSTR or HANDLE of path.
 //
 const
   CSP_REPOST  = $0001;
-  CSP_HANDLE  =	$0002;
+  CSP_HANDLE  =  $0002;
 
 type
   // lpsv points to the Shell View extension that requested idle processing
@@ -409,27 +409,27 @@ type
 type
   TBrowserFrameOption = (bfoBrowserPersistSettings,
                          bfoRenameFolderOptionsToInternet,
-	                       bfoBothOptions,
+                         bfoBothOptions,
                          bfoPreferInternetShortcut,
-	                       bfoBrowseNoInNewProcess,
-	                       bfoEnableHyperlinkTracking,
+                         bfoBrowseNoInNewProcess,
+                         bfoEnableHyperlinkTracking,
                          bfoUseIEOfflineSupport,
-	                       bfoSubstituteInternetStartPage,
-	                       bfoUseIELogoBanding,
-	                       bfoAddIEToCaptionBar,
-	                       bfoUseDialupRef,
-	                       bfoUseIEToolbar,
-	                       bfoNoParentFolderSupport,
-	                       bfoNoReopenNextRestart,
-	                       bfoGoHomePage,
-	                       bfoPreferIEProcess,
-	                       bfoShowNavigationCancelled) ;
+                         bfoSubstituteInternetStartPage,
+                         bfoUseIELogoBanding,
+                         bfoAddIEToCaptionBar,
+                         bfoUseDialupRef,
+                         bfoUseIEToolbar,
+                         bfoNoParentFolderSupport,
+                         bfoNoReopenNextRestart,
+                         bfoGoHomePage,
+                         bfoPreferIEProcess,
+                         bfoShowNavigationCancelled) ;
 
   TBrowserFrameOptions = set of TBrowserFrameOption;
 
 const
   bfoNone = [];
-	bfoQueryAll	= [bfoBrowserPersistSettings..bfoShowNavigationCancelled];
+  bfoQueryAll  = [bfoBrowserPersistSettings..bfoShowNavigationCancelled];
 
 type
   IBrowserFrameOptions = interface(IUnknown)
@@ -582,7 +582,7 @@ const
   // get or set the FOLDERSETTINGS for a view
   // wParam: BOOL TRUE -> set to view info buffer, FALSE -> get view info buffer
   // lParam: LPFOLDERSETTINGS buffer to get or set view info
-  CWM_GETSETCURRENTINFO	= WM_USER + 4;
+  CWM_GETSETCURRENTINFO  = WM_USER + 4;
   // selects the specified item in the current view
   // wParam: BOOL TRUE -> select, FALSE -> deselect
   // lParam: LPCSTR of the item ID (not display name), NULL -> all items
@@ -901,10 +901,10 @@ const
   DFM_CMD_COPY = cardinal(-3);
   DFM_CMD_CREATESHORTCUT  = cardinal(-4);
 //  DFM_CMD_PROPERTIES  = UINT(-5);
-  DFM_CMD_NEWFOLDER	= cardinal(-6);
+  DFM_CMD_NEWFOLDER  = cardinal(-6);
   DFM_CMD_PASTE = cardinal(-7);
-  DFM_CMD_VIEWLIST	= cardinal(-8);
-  DFM_CMD_VIEWDETAILS	= cardinal(-9);
+  DFM_CMD_VIEWLIST  = cardinal(-8);
+  DFM_CMD_VIEWDETAILS  = cardinal(-9);
   DFM_CMD_PASTELINK = cardinal(-10);
   DFM_CMD_PASTESPECIAL = cardinal(-11);
   DFM_CMD_MODALPROP = cardinal(-12);

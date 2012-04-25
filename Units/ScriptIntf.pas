@@ -153,12 +153,12 @@ type
   PScriptState = ^TScriptState;
 
 const
-  SCRIPTSTATE_UNINITIALIZED	    = 0;
-  SCRIPTSTATE_INITIALIZED	    = 5;
-  SCRIPTSTATE_STARTED	            = 1;
-  SCRIPTSTATE_CONNECTED	            = 2;
-  SCRIPTSTATE_DISCONNECTED	    = 3;
-  SCRIPTSTATE_CLOSED	            = 4;
+  SCRIPTSTATE_UNINITIALIZED      = 0;
+  SCRIPTSTATE_INITIALIZED      = 5;
+  SCRIPTSTATE_STARTED              = 1;
+  SCRIPTSTATE_CONNECTED              = 2;
+  SCRIPTSTATE_DISCONNECTED      = 3;
+  SCRIPTSTATE_CLOSED              = 4;
 
 // script thread state values
 
@@ -169,8 +169,8 @@ type
   PScriptThreadState = ^TScriptThreadState;
 
 const
-  SCRIPTTHREADSTATE_NOTINSCRIPT	    = 0;
-  SCRIPTTHREADSTATE_RUNNING	    = 1;
+  SCRIPTTHREADSTATE_NOTINSCRIPT      = 0;
+  SCRIPTTHREADSTATE_RUNNING      = 1;
 
 // Thread IDs
 

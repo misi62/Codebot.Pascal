@@ -33,7 +33,7 @@ type
     procedure SetImageIndex(Value: Integer);
   public
     procedure Assign(Source: TPersistent); override;
-	published
+  published
     property Checked: Boolean read FChecked write SetChecked;
     property Caption: TCaption read FCaption write SetCaption;
     property Description: string read FDescription write SetDescription;
@@ -215,7 +215,7 @@ var
 begin
   if Source is TCheckItem then
   begin
-		FChecked := EditItem.FChecked;
+    FChecked := EditItem.FChecked;
     FCaption := EditItem.Caption;
     FDescription := EditItem.FDescription;
     FImageIndex := EditItem.ImageIndex;
@@ -287,7 +287,7 @@ procedure TCheckItems.Update(Item: TCollectionItem);
 begin
   inherited Update(Item);
   if GetOwner is TCheckDrawList then
-  	TCheckDrawList(GetOwner).ItemsChanged;
+    TCheckDrawList(GetOwner).ItemsChanged;
 end;
 
 function TCheckItems.Get(Index: Integer): TCheckItem;

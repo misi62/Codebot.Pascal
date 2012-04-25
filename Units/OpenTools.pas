@@ -17,9 +17,9 @@ uses
   Classes, Forms, ToolsAPI, SysUtils, Windows; //, PasParser;
 
 type
-	TWizard = class(TInterfacedObject, IOTANotifier, IOTAWizard)
+  TWizard = class(TInterfacedObject, IOTANotifier, IOTAWizard)
   protected
-  	{ IOTANotifier }
+    { IOTANotifier }
     procedure AfterSave; virtual;
     procedure BeforeSave; virtual;
     procedure Destroyed; virtual;
@@ -33,7 +33,7 @@ type
 
   TMenuWizard = class(TWizard, IOTAMenuWizard)
   protected
-  	{ IOTAMenuWizard }
+    { IOTAMenuWizard }
     function GetMenuText: string; virtual;
   end;
 
@@ -82,12 +82,12 @@ end;
 
 function TWizard.GetName: string;
 begin
-	Result := ClassName;
+  Result := ClassName;
 end;
 
 function TWizard.GetState: TWizardState;
 begin
-	Result := [wsEnabled];
+  Result := [wsEnabled];
 end;
 
 procedure TWizard.Modified;
@@ -98,7 +98,7 @@ end;
 
 function TMenuWizard.GetMenuText: string;
 begin
-	Result := ClassName;
+  Result := ClassName;
 end;
 
 { Reading and writing routines }
@@ -126,7 +126,7 @@ end;
 
 procedure WriteBuffer(Editor: IOTASourceEditor; const Text: string); overload;
 var
-	EditView: IOTAEditView;
+  EditView: IOTAEditView;
   EditPos: TOTAEditPos;
   CharPos: TOTACharPos;
   Pos: Integer;
@@ -138,10 +138,10 @@ var
   {$ENDIF}
 begin
   if Text = '' then Exit;
-	if Editor.GetEditViewCount < 1 then Exit;
-	EditView := Editor.GetEditView(0);
+  if Editor.GetEditViewCount < 1 then Exit;
+  EditView := Editor.GetEditView(0);
   EditPos := EditView.GetCursorPos;
-	EditView.ConvertPos(True, EditPos, CharPos);
+  EditView.ConvertPos(True, EditPos, CharPos);
   Pos := EditView.CharPosToPos(CharPos);
   Writer := Editor.CreateUndoableWriter;
   Writer.CopyTo(Pos);
@@ -178,12 +178,12 @@ end;
 
 procedure AddText(const Text: string);
 var
-	ModuleServices: IOTAModuleServices;
+  ModuleServices: IOTAModuleServices;
   Module: IOTAModule;
   Editor: IOTASourceEditor;
   I: Integer;
 begin
-	if BorlandIDEServices = nil then Exit;
+  if BorlandIDEServices = nil then Exit;
   if not Supports(BorlandIDEServices, IOTAModuleServices, ModuleServices) then Exit;
   Module := ModuleServices.CurrentModule;
   if Module = nil then Exit;
@@ -260,7 +260,7 @@ var
   S: string;
   I: Integer;
 begin
-	if Form = nil then Exit;
+  if Form = nil then Exit;
   Module := GetFormModule(Form);
   if Module = nil then Exit;
   Editor := nil;
@@ -320,11 +320,11 @@ begin
     begin
       if Project.GetModule(I).FormName = Form.Name then
       begin
-      	if Project.GetModule(I).ModuleType <> omtForm then Continue;
+        if Project.GetModule(I).ModuleType <> omtForm then Continue;
         Result := Project.GetModule(I).OpenModule;
         Break;
       end;
-		end;
+    end;
 end;*)
 
 { procedure GetOpenToolInterfaces(const Obj; Strings: TStrings);

@@ -22,13 +22,13 @@ type
 { IObjectStorage }
 
 type
-	IObjectStorage = interface(IUnknown)
-		['{D08F4BE4-DEF3-4395-A58B-D427A86AC140}']
+  IObjectStorage = interface(IUnknown)
+    ['{D08F4BE4-DEF3-4395-A58B-D427A86AC140}']
     function GetName: string;
     procedure WriteData(Node: INode);
     procedure ReadData(Node: INode);
     property Name: string read GetName;
-	end;
+  end;
 
 function MSXMLCreateDocument: IDocument;
 
@@ -38,10 +38,10 @@ procedure LoadObject(Instance: TObject; Document: IDocumentInterface);
 implementation
 
 uses
-	MSXMLParser;
+  MSXMLParser;
 
 const
-	FieldTerminator = '/';
+  FieldTerminator = '/';
   DefaultObjectName = 'DefaultObject';
   DocVersion = 'version="1.0" encoding="ISO-8859-1"';
 
@@ -119,8 +119,8 @@ type
 
   TNode = class(TElement, IDocumentInterface, ITextInterface, IElement, INode, IFiler)
   private
-  	FAttributes: IAttributes;
-  	FNodes: INodes;
+    FAttributes: IAttributes;
+    FNodes: INodes;
     { INode }
     function GetAttributes: IAttributes;
     function GetFiler: IFiler;
@@ -130,8 +130,8 @@ type
     function FindNode(const Name: string): INode;
     function FindNodes(const Name: string): INodes;
     function ForceNode(const Name: string): INode;
-		{ IFiler }
-		procedure ReadBinary(const Name: string; Stream: IStream);
+    { IFiler }
+    procedure ReadBinary(const Name: string; Stream: IStream);
     procedure WriteBinary(const Name: string; Stream: IStream);
     function ReadBool(const Name: string; Default: Boolean = False; Stored: Boolean = True): Boolean;
     procedure WriteBool(const Name: string; Value: Boolean);
@@ -174,7 +174,7 @@ type
     { cannot move attributes? }
     { procedure Move(CurIndex, NewIndex: Integer); }
     { IFiler }
-		procedure ReadBinary(const Name: string; Stream: IStream);
+    procedure ReadBinary(const Name: string; Stream: IStream);
     procedure WriteBinary(const Name: string; Stream: IStream);
     function ReadBool(const Name: string; Default: Boolean = False; Stored: Boolean = True): Boolean;
     procedure WriteBool(const Name: string; Value: Boolean);
@@ -245,17 +245,17 @@ var
 begin
   Result := nil;
   R := FDocument.lastChild;
-	if (R <> nil) and
+  if (R <> nil) and
     (R.nodeType = NODE_ELEMENT) then
     Result := TNode.Create(R);
 end;
 
 procedure TDocument.SetRoot(Node: INode);
 var
-	R: IXMLDOMNode;
+  R: IXMLDOMNode;
 begin
   R := FDocument.lastChild;
-	if (R <> nil) and
+  if (R <> nil) and
     (R.nodeType = NODE_ELEMENT) then
     FDocument.removeChild(R);
   if Node <> nil then
@@ -264,17 +264,17 @@ end;
 
 function TDocument.GetStyleSheet: string;
 var
-	Node: IXMLDOMNode;
+  Node: IXMLDOMNode;
   S: string;
   I, J: Integer;
 begin
-	Result := '';
-	for I := 0 to FDocument.childNodes.length - 1 do
+  Result := '';
+  for I := 0 to FDocument.childNodes.length - 1 do
   begin
-  	Node := FDocument.childNodes[I];
+    Node := FDocument.childNodes[I];
     if (Node.nodeType = NODE_PROCESSING_INSTRUCTION) and (Node.nodeName = 'xml-stylesheet') then
     begin
-    	S := Node.nodeValue;
+      S := Node.nodeValue;
       J := Pos(' href="', S);
       if J = 0 then Break;
       J := J + Length(' href="');
@@ -285,27 +285,27 @@ begin
       SetLength(S, J - 1);
       Result := S;
       Break;
-		end;
+    end;
   end;
 end;
 
 procedure TDocument.SetStyleSheet(Value: string);
 var
-	Node: IXMLDOMNode;
+  Node: IXMLDOMNode;
   I: Integer;
 begin
-	for I := 0 to FDocument.childNodes.length - 1 do
+  for I := 0 to FDocument.childNodes.length - 1 do
   begin
-  	Node := FDocument.childNodes[I];
+    Node := FDocument.childNodes[I];
     if (Node.nodeType = NODE_PROCESSING_INSTRUCTION) and (Node.nodeName = 'xml-stylesheet') then
     begin
-			Node.nodeValue := 'type="text/xsl" href="' + Value + '"';
+      Node.nodeValue := 'type="text/xsl" href="' + Value + '"';
       Exit;
-		end;
+    end;
   end;
   Node := FDocument.createProcessingInstruction('xml-stylesheet',
-		'type="text/xsl" href="' + Value + '"');
-	FDocument.insertBefore(Node, FDocument.lastChild);
+    'type="text/xsl" href="' + Value + '"');
+  FDocument.insertBefore(Node, FDocument.lastChild);
 end;
 
 function TDocument.CreateNode(const Name: string): INode;
@@ -325,29 +325,29 @@ end;
 
 procedure TDocument.Instruct(const Target, Data: string);
 var
-	Node: IXMLDOMNode;
+  Node: IXMLDOMNode;
   I: Integer;
 begin
   Node := FDocument.createProcessingInstruction('xml', DocVersion);
   if FDocument.firstChild = nil then
-  	FDocument.appendChild(Node)
+    FDocument.appendChild(Node)
   else if (FDocument.firstChild.nodeType <> NODE_PROCESSING_INSTRUCTION) or
     (FDocument.firstChild.nodeName <> 'xml') then
-  	FDocument.insertBefore(Node, FDocument.firstChild);
-	for I := 0 to FDocument.childNodes.length - 1 do
+    FDocument.insertBefore(Node, FDocument.firstChild);
+  for I := 0 to FDocument.childNodes.length - 1 do
   begin
-  	Node := FDocument.childNodes[I];
+    Node := FDocument.childNodes[I];
     if (Node.nodeType = NODE_PROCESSING_INSTRUCTION) and (Node.nodeName = Target) then
     begin
-			Node.nodeValue := Data;
+      Node.nodeValue := Data;
       Exit;
-		end;
+    end;
   end;
   Node := FDocument.createProcessingInstruction(Target, Data);
   if FDocument.lastChild.nodeType = NODE_ELEMENT then
-  	FDocument.insertBefore(Node, FDocument.lastChild)
+    FDocument.insertBefore(Node, FDocument.lastChild)
   else
-  	FDocument.appendChild(Node);
+    FDocument.appendChild(Node);
 end;
 
 procedure TDocument.LoadFromFile(const FileName: string);
@@ -362,10 +362,10 @@ end;
 
 function TDocument.Transform(StyleSheet: IDocument): string;
 begin
-	Result := '';
+  Result := '';
   if StyleSheet = nil then Exit;
   Result := FDocument.transformNode(StyleSheet.Controller as IXMLDOMNode);
-	{Result := FastReplace(FDocument.transformNode(StyleSheet.Controller as IXMLDOMNode),
+  {Result := FastReplace(FDocument.transformNode(StyleSheet.Controller as IXMLDOMNode),
     ' xmlns=""', '', True);}
 end;
 
@@ -418,13 +418,13 @@ var
 begin
   if FParent.QueryInterface(IXMLDomDocument, Document) <> S_OK then
     Document := FParent.ownerDocument;
-	Count := FieldCount(Name, FieldTerminator);
+  Count := FieldCount(Name, FieldTerminator);
   Parent := FParent;
   Child := nil;
   for I := 0 to Count - 1 do
   begin
-	  Child := Document.createNode(NODE_ELEMENT, FieldValue(Name, FieldTerminator, I), '');
-  	Parent := Parent.appendChild(Child);
+    Child := Document.createNode(NODE_ELEMENT, FieldValue(Name, FieldTerminator, I), '');
+    Parent := Parent.appendChild(Child);
   end;
   Result := TNode.Create(Parent);
 end;
@@ -471,7 +471,7 @@ end;
 
 procedure TNodes.Replace(OldNode, NewNode: INode);
 begin
-	FParent.replaceChild(NewNode.Controller as IXMLDOMNode, OldNode.Controller as IXMLDOMNode);
+  FParent.replaceChild(NewNode.Controller as IXMLDOMNode, OldNode.Controller as IXMLDOMNode);
 end;
 
 { TElement }
@@ -559,24 +559,24 @@ end;
 
 function TNode.GetAttributes: IAttributes;
 begin
-	if FAttributes = nil then
-	  if FNode.attributes <> nil then
-  	  FAttributes := TAttributes.Create(FNode, FNode.attributes)
-	  else
-  	  FAttributes := nil;
-	Result := FAttributes;
+  if FAttributes = nil then
+    if FNode.attributes <> nil then
+      FAttributes := TAttributes.Create(FNode, FNode.attributes)
+    else
+      FAttributes := nil;
+  Result := FAttributes;
 end;
 
 function TNode.GetFiler: IFiler;
 begin
-	Result := Self;
+  Result := Self;
 end;
 
 function TNode.GetNodes: INodes;
 begin
-	if FNodes = nil then
-		FNodes := TNodes.Create(FNode, FNode.childNodes);
-	Result := FNodes;
+  if FNodes = nil then
+    FNodes := TNodes.Create(FNode, FNode.childNodes);
+  Result := FNodes;
 end;
 
 function TNode.Clone(Deep: Boolean = True): INode;
@@ -631,19 +631,19 @@ var
   Count, I: Integer;
 begin
   Document := FNode.ownerDocument;
-	Count := FieldCount(Name, FieldTerminator);
+  Count := FieldCount(Name, FieldTerminator);
   Parent := FNode;
   Child := nil;
   for I := 0 to Count - 1 do
   begin
-	  Child := Parent.selectSingleNode(FieldValue(Name, FieldTerminator, I));
+    Child := Parent.selectSingleNode(FieldValue(Name, FieldTerminator, I));
     if Child <> nil then
     begin
-    	Parent := Child;
+      Parent := Child;
       Continue;
     end;
-		Child := Document.createNode(NODE_ELEMENT, FieldValue(Name, FieldTerminator, I), '');
-  	Parent := Parent.appendChild(Child);
+    Child := Document.createNode(NODE_ELEMENT, FieldValue(Name, FieldTerminator, I), '');
+    Parent := Parent.appendChild(Child);
   end;
   Result := TNode.Create(Parent);
 end;
@@ -658,16 +658,16 @@ const
      -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
      -1,10,11,12,13,14,15);
 var
-	B: PByte absolute Buffer;
-	Index: Integer;
-	I: Integer;
+  B: PByte absolute Buffer;
+  Index: Integer;
+  I: Integer;
 begin
-	if Length(Text) <> Size * 2 then Exit;
+  if Length(Text) <> Size * 2 then Exit;
   Index := 1;
   for I := 1 to Size do
   begin
-  	if not CharInSet(Text[Index], ['0'..'9', 'A'..'F', 'a'..'f']) or
-    	not CharInSet(Text[Index], ['0'..'9', 'A'..'F', 'a'..'f']) then Break;
+    if not CharInSet(Text[Index], ['0'..'9', 'A'..'F', 'a'..'f']) or
+      not CharInSet(Text[Index], ['0'..'9', 'A'..'F', 'a'..'f']) then Break;
     B^ := Byte((HexCodes[Text[Index]] shl 4) + HexCodes[Text[Index + 1]]);
     Inc(Index, 2);
     Inc(B);
@@ -676,22 +676,22 @@ end;
 
 procedure BinaryToText(Buffer: Pointer; Size: Integer; var Text: string);
 const
-	HexChars = '0123456789ABCDEF';
+  HexChars = '0123456789ABCDEF';
 var
-	B: PByte;
-	Index: Integer;
-	I: Integer;
+  B: PByte;
+  Index: Integer;
+  I: Integer;
 begin
-	Text := '';
-	if Size < 1 then Exit;
-	SetLength(Text, (Size) * 2);
+  Text := '';
+  if Size < 1 then Exit;
+  SetLength(Text, (Size) * 2);
   B := Buffer;
   Index := 1;
   for I := 1 to Size do
   begin
-  	Text[Index] := HexChars[(B^ shr $4) + 1];
+    Text[Index] := HexChars[(B^ shr $4) + 1];
     Inc(Index);
-  	Text[Index] := HexChars[(B^ and $F) + 1];
+    Text[Index] := HexChars[(B^ and $F) + 1];
     Inc(Index);
     Inc(B);
   end;
@@ -699,61 +699,61 @@ end;
 
 procedure TNode.ReadBinary(const Name: string; Stream: IStream);
 var
-	S: string;
+  S: string;
   B: Pointer;
   I, W: Integer;
 begin
-	S := ForceNode(Name).Value;
+  S := ForceNode(Name).Value;
   I := Length(S) shr 1;
   if I = 0 then Exit;
-	GetMem(B, I);
+  GetMem(B, I);
   try
-		TextToBinary(S, B, I);
+    TextToBinary(S, B, I);
     Stream.Write(B, I, @W);
   finally
-  	FreeMem(B);
+    FreeMem(B);
   end;
 end;
 
 procedure TNode.WriteBinary(const Name: string; Stream: IStream);
 var
-	S, T: string;
-	B: array[$0..$FF] of Byte;
+  S, T: string;
+  B: array[$0..$FF] of Byte;
   I: Integer;
 begin
   S := '';
   T := '';
   repeat
     if Stream.Read(@B, SizeOf(B), @I) <> S_OK then Break;
-		BinaryToText(@B, I, T);
+    BinaryToText(@B, I, T);
     S := S + T;
   until I < SizeOf(B);
-	ForceNode(Name).Value := S;
+  ForceNode(Name).Value := S;
 end;
 
 {procedure TNode.WriteBinary(const Name: string; Stream: IStream);
 var
-	S, T: string;
-	B: array[$0..$FF] of Byte;
+  S, T: string;
+  B: array[$0..$FF] of Byte;
   I: Integer;
 begin
   S := '';
   T := '';
   repeat
     Stream.Write(@B, SizeOf(B), @I);
-		BinaryToText(@B, I, T);
+    BinaryToText(@B, I, T);
     S := S + T;
   until I < SizeOf(B);
-	ForceNode(Name).Value := S;
+  ForceNode(Name).Value := S;
 end;}
 
 function TNode.ReadBool(const Name: string; Default: Boolean = False; Stored: Boolean = True): Boolean;
 var
-	Node: INode;
+  Node: INode;
   S: string;
 begin
   if Stored then
-  	Node := ForceNode(Name)
+    Node := ForceNode(Name)
   else
     Node := FindNode(Name);
   if Node = nil then
@@ -761,31 +761,31 @@ begin
     Result := Default;
     Exit;
   end;
-	S := UpperCase(Node.Value);
+  S := UpperCase(Node.Value);
   if (S = '1') or (S = 'Y') or (S = 'YES') or (S = 'TRUE') then
-  	Result := True
-	else if (S = 'N') or (S = 'NO') or (S = 'FALSE') then
-  	Result := False
-	else
-  	Result := Default;
+    Result := True
+  else if (S = 'N') or (S = 'NO') or (S = 'FALSE') then
+    Result := False
+  else
+    Result := Default;
   if Stored then
-		if Result then Node.Value := 'true' else Node.Value := 'false';
+    if Result then Node.Value := 'true' else Node.Value := 'false';
 end;
 
 procedure TNode.WriteBool(const Name: string; Value: Boolean);
 var
-	Node: INode;
+  Node: INode;
 begin
-	Node := ForceNode(Name);
+  Node := ForceNode(Name);
   if Value then Node.Value := 'true' else Node.Value := 'false';
 end;
 
 function TNode.ReadDate(const Name: string; const Default: TDateTime = 0; Stored: Boolean = True): TDateTime;
 var
-	Node: INode;
+  Node: INode;
 begin
   if Stored then
-  	Node := ForceNode(Name)
+    Node := ForceNode(Name)
   else
     Node := FindNode(Name);
   if Node = nil then
@@ -793,22 +793,22 @@ begin
     Result := Default;
     Exit;
   end;
-	Result := StrToDateDef(Node.Value, Default);
+  Result := StrToDateDef(Node.Value, Default);
   if Stored then
-	  Node.Value := DateToStr(Result);
+    Node.Value := DateToStr(Result);
 end;
 
 procedure TNode.WriteDate(const Name: string; const Value: TDateTime);
 begin
-	ForceNode(Name).Value := DateToStr(Value);
+  ForceNode(Name).Value := DateToStr(Value);
 end;
 
 function TNode.ReadDateTime(const Name: string; const Default: TDateTime = 0; Stored: Boolean = True): TDateTime;
 var
-	Node: INode;
+  Node: INode;
 begin
   if Stored then
-  	Node := ForceNode(Name)
+    Node := ForceNode(Name)
   else
     Node := FindNode(Name);
   if Node = nil then
@@ -816,22 +816,22 @@ begin
     Result := Default;
     Exit;
   end;
-	Result := StrToDateTimeDef(Node.Value, Default);
+  Result := StrToDateTimeDef(Node.Value, Default);
   if Stored then
-	  Node.Value := DateTimeToStr(Result);
+    Node.Value := DateTimeToStr(Result);
 end;
 
 procedure TNode.WriteDateTime(const Name: string; const Value: TDateTime);
 begin
-	ForceNode(Name).Value := DateTimeToStr(Value);
+  ForceNode(Name).Value := DateTimeToStr(Value);
 end;
 
 function TNode.ReadTime(const Name: string; const Default: TDateTime = 0; Stored: Boolean = True): TDateTime;
 var
-	Node: INode;
+  Node: INode;
 begin
   if Stored then
-  	Node := ForceNode(Name)
+    Node := ForceNode(Name)
   else
     Node := FindNode(Name);
   if Node = nil then
@@ -839,22 +839,22 @@ begin
     Result := Default;
     Exit;
   end;
-	Result := StrToTimeDef(Node.Value, Default);
+  Result := StrToTimeDef(Node.Value, Default);
   if Stored then
-	  Node.Value := TimeToStr(Result);
+    Node.Value := TimeToStr(Result);
 end;
 
 procedure TNode.WriteTime(const Name: string; const Value: TDateTime);
 begin
-	ForceNode(Name).Value := TimeToStr(Value);
+  ForceNode(Name).Value := TimeToStr(Value);
 end;
 
 function TNode.ReadFloat(const Name: string; const Default: Double = 0; Stored: Boolean = True): Double;
 var
-	Node: INode;
+  Node: INode;
 begin
   if Stored then
-  	Node := ForceNode(Name)
+    Node := ForceNode(Name)
   else
     Node := FindNode(Name);
   if Node = nil then
@@ -862,22 +862,22 @@ begin
     Result := Default;
     Exit;
   end;
-	Result := StrToFloatDef(Node.Value, Default);
+  Result := StrToFloatDef(Node.Value, Default);
   if Stored then
-	  Node.Value := FloatToStr(Result);
+    Node.Value := FloatToStr(Result);
 end;
 
 procedure TNode.WriteFloat(const Name: string; const Value: Double);
 begin
-	ForceNode(Name).Value := FloatToStr(Value);
+  ForceNode(Name).Value := FloatToStr(Value);
 end;
 
 function TNode.ReadInteger(const Name: string; Default: Integer = 0; Stored: Boolean = True): Integer;
 var
-	Node: INode;
+  Node: INode;
 begin
   if Stored then
-  	Node := ForceNode(Name)
+    Node := ForceNode(Name)
   else
     Node := FindNode(Name);
   if Node = nil then
@@ -885,22 +885,22 @@ begin
     Result := Default;
     Exit;
   end;
-	Result := StrToIntDef(Node.Value, Default);
+  Result := StrToIntDef(Node.Value, Default);
   if Stored then
-	  Node.Value := IntToStr(Result);
+    Node.Value := IntToStr(Result);
 end;
 
 procedure TNode.WriteInteger(const Name: string; Value: Integer);
 begin
-	ForceNode(Name).Value := IntToStr(Value);
+  ForceNode(Name).Value := IntToStr(Value);
 end;
 
 function TNode.ReadString(const Name: string; const Default: string = ''; Stored: Boolean = True): string;
 var
-	Node: INode;
+  Node: INode;
 begin
   if Stored then
-  	Node := ForceNode(Name)
+    Node := ForceNode(Name)
   else
     Node := FindNode(Name);
   if Node = nil then
@@ -908,18 +908,18 @@ begin
     Result := Default;
     Exit;
   end;
-	Result := Node.Value;
+  Result := Node.Value;
   if Result = '' then
   begin
-  	Result := Default;
-	  if Stored then
-  	  Node.Value := Result;
-	end;
+    Result := Default;
+    if Stored then
+      Node.Value := Result;
+  end;
 end;
 
 procedure TNode.WriteString(const Name: string; const Value: string);
 begin
-	ForceNode(Name).Value := Value;
+  ForceNode(Name).Value := Value;
 end;
 
 function TNode.ReadObject: TObject;
@@ -944,15 +944,15 @@ end;
 
 function TNode.Read(const Name: string): Variant;
 begin
-	Result := ForceNode(Name).Value;
+  Result := ForceNode(Name).Value;
 end;
 
 procedure TNode.Write(const Name: string; const Value: Variant);
 begin
   if Value = NULL then
-  	ForceNode(Name).Value := ''
+    ForceNode(Name).Value := ''
   else
-  	ForceNode(Name).Value := Value;
+    ForceNode(Name).Value := Value;
 end;
 
 { TAttributes }
@@ -981,22 +981,22 @@ end;
 
 function TAttributes.GetFiler: IFiler;
 begin
-	Result := Self;
+  Result := Self;
 end;
 
 function TAttributes.GetNamedAttribute(const Name: string): IAttribute;
 var
-	Node: IXMLDOMNode;
+  Node: IXMLDOMNode;
   Attribute: IXMLDOMAttribute;
 begin
-	Node := FAttributes.getNamedItem(Name);
-	if Node = nil then
+  Node := FAttributes.getNamedItem(Name);
+  if Node = nil then
   begin
-	  Attribute := FParent.ownerDocument.createAttribute(Name);
+    Attribute := FParent.ownerDocument.createAttribute(Name);
     FAttributes.setNamedItem(Attribute);
   end
   else
-  	Attribute := Node as IXMLDOMAttribute;
+    Attribute := Node as IXMLDOMAttribute;
   Result := TAttribute.Create(Attribute);
 end;
 
@@ -1047,163 +1047,163 @@ end;
 
 function TAttributes.ReadBool(const Name: string; Default: Boolean = False; Stored: Boolean = True): Boolean;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
   S: string;
 begin
   if Stored or (FAttributes.getNamedItem(Name) <> nil) then
-  	Attribute := GetNamedAttribute(Name)
+    Attribute := GetNamedAttribute(Name)
   else
   begin
     Result := Default;
     Exit;
   end;
-	S := UpperCase(Attribute.Value);
+  S := UpperCase(Attribute.Value);
   if (S = '1') or (S = 'Y') or (S = 'YES') or (S = 'TRUE') then
-  	Result := True
-	else if (S = 'N') or (S = 'NO') or (S = 'FALSE') then
-  	Result := False
-	else
-  	Result := Default;
-	if Stored then
-		if Result then Attribute.Value := 'true' else Attribute.Value := 'false';
+    Result := True
+  else if (S = 'N') or (S = 'NO') or (S = 'FALSE') then
+    Result := False
+  else
+    Result := Default;
+  if Stored then
+    if Result then Attribute.Value := 'true' else Attribute.Value := 'false';
 end;
 
 procedure TAttributes.WriteBool(const Name: string; Value: Boolean);
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
-	Attribute := GetNamedAttribute(Name);
+  Attribute := GetNamedAttribute(Name);
   if Value then Attribute.Value := 'true' else Attribute.Value := 'false';
 end;
 
 function TAttributes.ReadDate(const Name: string; const Default: TDateTime = 0; Stored: Boolean = True): TDateTime;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
   if Stored or (FAttributes.getNamedItem(Name) <> nil) then
-  	Attribute := GetNamedAttribute(Name)
+    Attribute := GetNamedAttribute(Name)
   else
   begin
     Result := Default;
     Exit;
   end;
-	Result := StrToDateDef(Attribute.Value, Default);
+  Result := StrToDateDef(Attribute.Value, Default);
   if Stored then
-	  Attribute.Value := DateToStr(Result);
+    Attribute.Value := DateToStr(Result);
 end;
 
 procedure TAttributes.WriteDate(const Name: string; const Value: TDateTime);
 begin
-	GetNamedAttribute(Name).Value := DateToStr(Value);
+  GetNamedAttribute(Name).Value := DateToStr(Value);
 end;
 
 function TAttributes.ReadDateTime(const Name: string; const Default: TDateTime = 0; Stored: Boolean = True): TDateTime;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
   if Stored or (FAttributes.getNamedItem(Name) <> nil) then
-  	Attribute := GetNamedAttribute(Name)
+    Attribute := GetNamedAttribute(Name)
   else
   begin
     Result := Default;
     Exit;
   end;
-	Result := StrToDateTimeDef(Attribute.Value, Default);
+  Result := StrToDateTimeDef(Attribute.Value, Default);
   if Stored then
-	  Attribute.Value := DateTimeToStr(Result);
+    Attribute.Value := DateTimeToStr(Result);
 end;
 
 procedure TAttributes.WriteDateTime(const Name: string; const Value: TDateTime);
 begin
-	GetNamedAttribute(Name).Value := DateTimeToStr(Value);
+  GetNamedAttribute(Name).Value := DateTimeToStr(Value);
 end;
 
 function TAttributes.ReadTime(const Name: string; const Default: TDateTime = 0; Stored: Boolean = True): TDateTime;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
   if Stored or (FAttributes.getNamedItem(Name) <> nil) then
-  	Attribute := GetNamedAttribute(Name)
+    Attribute := GetNamedAttribute(Name)
   else
   begin
     Result := Default;
     Exit;
   end;
-	Result := StrToTimeDef(Attribute.Value, Default);
+  Result := StrToTimeDef(Attribute.Value, Default);
   if Stored then
-	  Attribute.Value := TimeToStr(Result);
+    Attribute.Value := TimeToStr(Result);
 end;
 
 procedure TAttributes.WriteTime(const Name: string; const Value: TDateTime);
 begin
-	GetNamedAttribute(Name).Value := TimeToStr(Value);
+  GetNamedAttribute(Name).Value := TimeToStr(Value);
 end;
 
 function TAttributes.ReadFloat(const Name: string; const Default: Double = 0; Stored: Boolean = True): Double;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
   if Stored or (FAttributes.getNamedItem(Name) <> nil) then
-  	Attribute := GetNamedAttribute(Name)
+    Attribute := GetNamedAttribute(Name)
   else
   begin
     Result := Default;
     Exit;
   end;
-	Result := StrToFloatDef(Attribute.Value, Default);
+  Result := StrToFloatDef(Attribute.Value, Default);
   if Stored then
-	  Attribute.Value := FloatToStr(Result);
+    Attribute.Value := FloatToStr(Result);
 end;
 
 procedure TAttributes.WriteFloat(const Name: string; const Value: Double);
 begin
-	GetNamedAttribute(Name).Value := FloatToStr(Value);
+  GetNamedAttribute(Name).Value := FloatToStr(Value);
 end;
 
 function TAttributes.ReadInteger(const Name: string; Default: Integer = 0; Stored: Boolean = True): Integer;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
   if Stored or (FAttributes.getNamedItem(Name) <> nil) then
-  	Attribute := GetNamedAttribute(Name)
+    Attribute := GetNamedAttribute(Name)
   else
   begin
     Result := Default;
     Exit;
   end;
-	Result := StrToIntDef(Attribute.Value, Default);
+  Result := StrToIntDef(Attribute.Value, Default);
   if Stored then
-	  Attribute.Value := IntToStr(Result);
+    Attribute.Value := IntToStr(Result);
 end;
 
 procedure TAttributes.WriteInteger(const Name: string; Value: Integer);
 begin
-	GetNamedAttribute(Name).Value := FloatToStr(Value);
+  GetNamedAttribute(Name).Value := FloatToStr(Value);
 end;
 
 function TAttributes.ReadString(const Name: string; const Default: string = ''; Stored: Boolean = True): string;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
   if Stored or (FAttributes.getNamedItem(Name) <> nil) then
-  	Attribute := GetNamedAttribute(Name)
+    Attribute := GetNamedAttribute(Name)
   else
   begin
     Result := Default;
     Exit;
   end;
-	Result := Attribute.Value;
+  Result := Attribute.Value;
   if Result = '' then
   begin
-  	Result := Default;
+    Result := Default;
     if Stored then
-	    Attribute.Value := Result;
-	end;
+      Attribute.Value := Result;
+  end;
 end;
 
 procedure TAttributes.WriteString(const Name: string; const Value: string);
 begin
-	GetNamedAttribute(Name).Value := Value;
+  GetNamedAttribute(Name).Value := Value;
 end;
 
 function TAttributes.ReadObject: TObject;
@@ -1228,36 +1228,36 @@ end;
 
 function TAttributes.Read(const Name: string): Variant;
 var
-	Attribute: IAttribute;
+  Attribute: IAttribute;
 begin
-	Attribute := GetNamedAttribute(Name);
-	Result := Attribute.Value;
+  Attribute := GetNamedAttribute(Name);
+  Result := Attribute.Value;
 end;
 
 procedure TAttributes.Write(const Name: string; const Value: Variant);
 begin
   if Value = NULL then
-  	GetNamedAttribute(Name).Value := ''
+    GetNamedAttribute(Name).Value := ''
   else
-  	GetNamedAttribute(Name).Value := Value;
+    GetNamedAttribute(Name).Value := Value;
 end;
 
 procedure SaveObject(Instance: TObject; Document: IDocumentInterface);
 var
-	O: IObjectStorage;
-	D: IDocument;
-	N: INode;
+  O: IObjectStorage;
+  D: IDocument;
+  N: INode;
 begin
-	if Supports(Instance, IObjectStorage, O) then
+  if Supports(Instance, IObjectStorage, O) then
   begin
-  	if Supports(Document, IDocument, D) then
+    if Supports(Document, IDocument, D) then
     begin
-    	N := D.CreateNode(O.Name);
+      N := D.CreateNode(O.Name);
       O.WriteData(N);
-		end
-  	else if Supports(Document, INode, N) then
+    end
+    else if Supports(Document, INode, N) then
     begin
-    	N := N.Nodes.Add(O.Name);
+      N := N.Nodes.Add(O.Name);
       O.WriteData(N);
     end;
   end;
@@ -1265,19 +1265,19 @@ end;
 
 procedure LoadObject(Instance: TObject; Document: IDocumentInterface);
 var
-	O: IObjectStorage;
-	D: IDocument;
-	N: INode;
+  O: IObjectStorage;
+  D: IDocument;
+  N: INode;
 begin
-	if Supports(Instance, IObjectStorage, O) then
+  if Supports(Instance, IObjectStorage, O) then
   begin
-  	if Supports(Document, IDocument, D) and (D.Root <> nil) and (D.Root.Name = O.Name) then
-    	O.ReadData(D.Root)
-  	else if Supports(Document, INode, N) then
+    if Supports(Document, IDocument, D) and (D.Root <> nil) and (D.Root.Name = O.Name) then
+      O.ReadData(D.Root)
+    else if Supports(Document, INode, N) then
     begin
-    	N := N.FindNode(O.Name);
+      N := N.FindNode(O.Name);
       if N <> nil then
-	      O.ReadData(N);
+        O.ReadData(N);
     end;
   end;
 end;
@@ -1303,12 +1303,12 @@ end;
 
 function MSXMLCreateDocument: IDocument;
 var
-	Clsid: TCLSID;
+  Clsid: TCLSID;
 begin
-	if CLSIDFromProgID('Msxml2.DOMDocument.4.0', Clsid) = S_OK then
-	  Result := TDocument.Create(CreateOleObject('Msxml2.DOMDocument.4.0') as IXMLDOMDocument)
+  if CLSIDFromProgID('Msxml2.DOMDocument.4.0', Clsid) = S_OK then
+    Result := TDocument.Create(CreateOleObject('Msxml2.DOMDocument.4.0') as IXMLDOMDocument)
   else
-	  Result := TDocument.Create(CreateOleObject('Msxml.DOMDocument') as IXMLDOMDocument);
+    Result := TDocument.Create(CreateOleObject('Msxml.DOMDocument') as IXMLDOMDocument);
 end;
 
 end.

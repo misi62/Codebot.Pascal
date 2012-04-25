@@ -83,41 +83,41 @@ function IncludeTrailingPathDelimiter(const S: string): string;
 { TTempStream }
 
 type
-	TTempStream = class(TStream)
+  TTempStream = class(TStream)
   private
-  	FStream: TStream;
+    FStream: TStream;
     FFileName: string;
   protected
-		{$IFDEF D6_UP}
+    {$IFDEF D6_UP}
     function GetSize: Int64; override;
     procedure SetSize(const NewSize: Int64); override;
     {$ENDIF}
     procedure SetSize(NewSize: Longint); override;
   public
-  	constructor Create;
+    constructor Create;
     destructor Destroy; override;
     function Read(var Buffer; Count: Longint): Longint; override;
     function Write(const Buffer; Count: Longint): Longint; override;
     function Seek(Offset: Longint; Origin: Word): Longint; override;
-		{$IFDEF D6_UP}
+    {$IFDEF D6_UP}
     function Seek(const Offset: Int64; Origin: TSeekOrigin): Int64; override;
     {$ENDIF}
   end;
 
 { IZipFile }
 
-	EZipException = class(Exception);
-	TRecurseMode = (rmFile, rmDirectory, rmRecurse);
+  EZipException = class(Exception);
+  TRecurseMode = (rmFile, rmDirectory, rmRecurse);
 
-	IZipFile = interface(IUnknown)
-	  ['{85854574-28ED-4B86-A62D-FC006E0DA49C}']
+  IZipFile = interface(IUnknown)
+    ['{85854574-28ED-4B86-A62D-FC006E0DA49C}']
     procedure Add(const Files: string; Recurse: TRecurseMode = rmFile); overload;
     procedure Add(Files: TStrings; Recurse: TRecurseMode = rmFile); overload;
     procedure CopyList(Strings: TStrings);
     procedure Extract(const Directory, Files: string;
-    	ExpandDirs: Boolean = True); overload;
+      ExpandDirs: Boolean = True); overload;
     procedure Extract(const Directory: string; Files: TStrings;
-    	ExpandDirs: Boolean = True); overload;
+      ExpandDirs: Boolean = True); overload;
     procedure Remove(const Files: string); overload;
     procedure Remove(Files: TStrings); overload;
     procedure Rename(const Files: string); overload;
@@ -130,14 +130,14 @@ type
     procedure SetItem(Index: Integer; const Value: string);
     function GetTempDir: string;
     procedure SetTempDir(Value: string);
-		property FileName: string read GetFileName write SetFileName;
-  	property Count: Integer read GetCount;
+    property FileName: string read GetFileName write SetFileName;
+    property Count: Integer read GetCount;
     property Item[Index: Integer]: string read GetItem write SetItem; default;
     property TempDir: string read GetTempDir write SetTempDir;
   end;
 
 var
-	CreateZipFile: function: IZipFile = nil;
+  CreateZipFile: function: IZipFile = nil;
 
 { TDrive  }
 
@@ -649,9 +649,9 @@ var
   TempPath: string;
 begin
   if Path = '' then
-		TempPath := GetTempPath
-	else
-		TempPath := IncludeTrailingPathDelimiter(Path);
+    TempPath := GetTempPath
+  else
+    TempPath := IncludeTrailingPathDelimiter(Path);
   SetLength(Result, MAX_PATH);
   Windows.GetTempFileName(PChar(TempPath), '~TM', 0, PChar(Result));
   SetLength(Result, StrLen(PChar(Result)));
@@ -775,22 +775,22 @@ end;
 
 constructor TTempStream.Create;
 begin
-	inherited Create;
+  inherited Create;
   FFileName := GetTempFileName;
   FStream := TFileStream.Create(FFileName, fmCreate);
 end;
 
 destructor TTempStream.Destroy;
 begin
-	FStream.Free;
+  FStream.Free;
   if FileExists(FFileName) then
-	  DeleteFile(FFileName);
+    DeleteFile(FFileName);
   inherited Destroy;
 end;
 
 function TTempStream.Read(var Buffer; Count: Integer): Longint;
 begin
-	Result := FStream.Read(Buffer, Count);
+  Result := FStream.Read(Buffer, Count);
 end;
 
 
@@ -802,59 +802,59 @@ end;
 {$IFDEF D6_UP}
 procedure TTempStream.SetSize(const NewSize: Int64);
 const
-	MemSize = 1024 * 1024 * 10;
+  MemSize = 1024 * 1024 * 10;
 var
-	A, B, P: Int64;
+  A, B, P: Int64;
   Data: Pointer;
 begin
-	A := NewSize;
+  A := NewSize;
   B := FStream.Size;
-	P := FStream.Position;
+  P := FStream.Position;
   if A > B then
   begin
-  	FStream.Seek(0, soFromEnd);
+    FStream.Seek(0, soFromEnd);
     GetMem(Data, MemSize);
     try
-    	FillChar(Data^, MemSize, #0);
+      FillChar(Data^, MemSize, #0);
       A := A - B;
       while True do
-	      if A > MemSize then
-  	    begin
-					FStream.Write(Data^, MemSize);
-      	  Dec(A, MemSize);
-				end
-      	else
-      	begin
-					FStream.Write(Data^, A);
-        	Break;
-      	end;
+        if A > MemSize then
+        begin
+          FStream.Write(Data^, MemSize);
+          Dec(A, MemSize);
+        end
+        else
+        begin
+          FStream.Write(Data^, A);
+          Break;
+        end;
     finally
-    	FreeMem(Data);
+      FreeMem(Data);
     end;
     FStream.Position := P;
   end
   else
-	  FStream.Size := NewSize;
+    FStream.Size := NewSize;
 end;
 
 function TTempStream.GetSize: Int64;
 begin
-	Result := FStream.Size;
+  Result := FStream.Size;
 end;
 
 function TTempStream.Seek(const Offset: Int64; Origin: TSeekOrigin): Int64;
 begin
-	Result := FStream.Seek(Offset, Origin);
+  Result := FStream.Seek(Offset, Origin);
 end;
 {$ENDIF}
 function TTempStream.Seek(Offset: Integer; Origin: Word): Longint;
 begin
-	Result := FStream.Seek(Offset, Origin);
+  Result := FStream.Seek(Offset, Origin);
 end;
 
 function TTempStream.Write(const Buffer; Count: Integer): Longint;
 begin
-	Result := FStream.Write(Buffer, Count);
+  Result := FStream.Write(Buffer, Count);
 end;
 
 { TDrives }
@@ -1312,22 +1312,22 @@ end;
 function IsFolderEmpty(const Folder: string): Boolean;
 var
   SearchRec: TSearchRec;
-	S: string;
+  S: string;
   I: Integer;
 begin
   S := IncludeTrailingPathDelimiter(Folder) + '*.*';
   I := FindFirst(S, faAnyFile, SearchRec);
   Result := True;
-	while I = 0 do
+  while I = 0 do
   begin
-		if SearchRec.Name[1] <> '.' then
+    if SearchRec.Name[1] <> '.' then
     begin
-    	Result := False;
+      Result := False;
       Break;
     end;
-		I := FindNext(SearchRec);
+    I := FindNext(SearchRec);
   end;
-	FindClose(SearchRec);
+  FindClose(SearchRec);
 end;
 
 { TModuleItem }
@@ -1789,27 +1789,27 @@ var
 
 function _F(X, Y, Z: UINT4): UINT4;
 begin
-	Result := (((x) and (y)) or ((not x) and (z)));
+  Result := (((x) and (y)) or ((not x) and (z)));
 end;
 
 function _G(X, Y, Z: UINT4): UINT4;
 begin
-	Result := (((x) and (z)) or ((y) and (not z)));
+  Result := (((x) and (z)) or ((y) and (not z)));
 end;
 
 function _H(X, Y, Z: UINT4): UINT4;
 begin
-	Result := X xor Y xor Z;
+  Result := X xor Y xor Z;
 end;
 
 function _I(X, Y, Z: UINT4): UINT4;
 begin
-	Result := Y xor (X or (not Z));
+  Result := Y xor (X or (not Z));
 end;
 
 function RotateLeft(X, N: UINT4): UINT4;
 begin
-	Result := (X shl N) or (X shr (32 - N));
+  Result := (X shl N) or (X shr (32 - N));
 end;
 
 procedure FF(var A: UINT4; B, C, D, X, S, AC: UINT4);
@@ -1844,10 +1844,10 @@ procedure MD5Encode(Output: PByteArray; Input: PUINT4Array; Len: LongWord);
 var
  i, j: LongWord;
 begin
-	j := 0;
-	i := 0;
-	while j < Len do
-	begin
+  j := 0;
+  i := 0;
+  while j < Len do
+  begin
   output[j] := Byte(input[i] and $FF);
   output[j+1] := Byte((input[i] shr 8) and $FF);
   output[j+2] := Byte((input[i] shr 16) and $FF);
@@ -1887,152 +1887,152 @@ var
  A, B, C, D: UINT4;
  X : array[0..15] of UINT4;
 begin
-	a := State[0]; b := State[1]; c := State[2]; d := State[3];
-	MD5Decode(PUINT4Array(@x), PByteArray(Buffer), 64);
-	FF(A, B, C, D, X[ 0], S11, $D76AA478);
-	FF(D, A, B, C, X[ 1], S12, $E8C7B756);
-	FF(C, D, A, B, X[ 2], S13, $242070DB);
-	FF(B, C, D, A, X[ 3], S14, $C1BDCEEE);
-	FF(A, B, C, D, X[ 4], S11, $F57C0FAF);
-	FF(D, A, B, C, X[ 5], S12, $4787C62A);
-	FF(C, D, A, B, X[ 6], S13, $A8304613);
-	FF(B, C, D, A, X[ 7], S14, $FD469501);
-	FF(A, B, C, D, X[ 8], S11, $698098D8);
-	FF(D, A, B, C, X[ 9], S12, $8B44F7AF);
-	FF(C, D, A, B, X[10], S13, $FFFF5BB1);
-	FF(B, C, D, A, X[11], S14, $895CD7BE);
-	FF(A, B, C, D, X[12], S11, $6B901122);
-	FF(D, A, B, C, X[13], S12, $FD987193);
-	FF(C, D, A, B, X[14], S13, $A679438E);
-	FF(B, C, D, A, X[15], S14, $49B40821);
-	GG(A, B, C, D, X[ 1], S21, $F61E2562);
-	GG(D, A, B, C, X[ 6], S22, $C040B340);
-	GG(C, D, A, B, X[11], S23, $265E5A51);
-	GG(B, C, D, A, X[ 0], S24, $E9B6C7AA);
-	GG(A, B, C, D, X[ 5], S21, $D62F105D);
-	GG(D, A, B, C, X[10], S22, $02441453);
-	GG(C, D, A, B, X[15], S23, $D8A1E681);
-	GG(B, C, D, A, X[ 4], S24, $E7D3FBC8);
-	GG(A, B, C, D, X[ 9], S21, $21E1CDE6);
-	GG(D, A, B, C, X[14], S22, $C33707D6);
-	GG(C, D, A, B, X[ 3], S23, $F4D50D87);
-	GG(B, C, D, A, X[ 8], S24, $455A14ED);
-	GG(A, B, C, D, X[13], S21, $A9E3E905);
-	GG(D, A, B, C, X[ 2], S22, $FCEFA3F8);
-	GG(C, D, A, B, X[ 7], S23, $676F02D9);
-	GG(B, C, D, A, X[12], S24, $8D2A4C8A);
-	HH(A, B, C, D, X[ 5], S31, $FFFA3942);
-	HH(D, A, B, C, X[ 8], S32, $8771F681);
-	HH(C, D, A, B, X[11], S33, $6D9D6122);
-	HH(B, C, D, A, X[14], S34, $FDE5380C);
-	HH(A, B, C, D, X[ 1], S31, $A4BEEA44);
-	HH(D, A, B, C, X[ 4], S32, $4BDECFA9);
-	HH(C, D, A, B, X[ 7], S33, $F6BB4B60);
-	HH(B, C, D, A, X[10], S34, $BEBFBC70);
-	HH(A, B, C, D, X[13], S31, $289B7EC6);
-	HH(D, A, B, C, X[ 0], S32, $EAA127FA);
-	HH(C, D, A, B, X[ 3], S33, $D4EF3085);
-	HH(B, C, D, A, X[ 6], S34, $04881D05);
-	HH(A, B, C, D, X[ 9], S31, $D9D4D039);
-	HH(D, A, B, C, X[12], S32, $E6DB99E5);
-	HH(C, D, A, B, X[15], S33, $1FA27CF8);
-	HH(B, C, D, A, X[ 2], S34, $C4AC5665);
-	II(A, B, C, D, X[ 0], S41, $F4292244);
-	II(D, A, B, C, X[ 7], S42, $432AFF97);
-	II(C, D, A, B, X[14], S43, $AB9423A7);
-	II(B, C, D, A, X[ 5], S44, $FC93A039);
-	II(A, B, C, D, X[12], S41, $655B59C3);
-	II(D, A, B, C, X[ 3], S42, $8F0CCC92);
-	II(C, D, A, B, X[10], S43, $FFEFF47D);
-	II(B, C, D, A, X[ 1], S44, $85845DD1);
-	II(A, B, C, D, X[ 8], S41, $6FA87E4F);
-	II(D, A, B, C, X[15], S42, $FE2CE6E0);
-	II(C, D, A, B, X[ 6], S43, $A3014314);
-	II(B, C, D, A, X[13], S44, $4E0811A1);
-	II(A, B, C, D, X[ 4], S41, $F7537E82);
-	II(D, A, B, C, X[11], S42, $BD3AF235);
-	II(C, D, A, B, X[ 2], S43, $2AD7D2BB);
-	II(B, C, D, A, X[ 9], S44, $EB86D391);
-	Inc(State[0], A);
-	Inc(State[1], B);
-	Inc(State[2], C);
-	Inc(State[3], D);
-	MD5_memset (PByteArray(@x), 0, SizeOf (x));
+  a := State[0]; b := State[1]; c := State[2]; d := State[3];
+  MD5Decode(PUINT4Array(@x), PByteArray(Buffer), 64);
+  FF(A, B, C, D, X[ 0], S11, $D76AA478);
+  FF(D, A, B, C, X[ 1], S12, $E8C7B756);
+  FF(C, D, A, B, X[ 2], S13, $242070DB);
+  FF(B, C, D, A, X[ 3], S14, $C1BDCEEE);
+  FF(A, B, C, D, X[ 4], S11, $F57C0FAF);
+  FF(D, A, B, C, X[ 5], S12, $4787C62A);
+  FF(C, D, A, B, X[ 6], S13, $A8304613);
+  FF(B, C, D, A, X[ 7], S14, $FD469501);
+  FF(A, B, C, D, X[ 8], S11, $698098D8);
+  FF(D, A, B, C, X[ 9], S12, $8B44F7AF);
+  FF(C, D, A, B, X[10], S13, $FFFF5BB1);
+  FF(B, C, D, A, X[11], S14, $895CD7BE);
+  FF(A, B, C, D, X[12], S11, $6B901122);
+  FF(D, A, B, C, X[13], S12, $FD987193);
+  FF(C, D, A, B, X[14], S13, $A679438E);
+  FF(B, C, D, A, X[15], S14, $49B40821);
+  GG(A, B, C, D, X[ 1], S21, $F61E2562);
+  GG(D, A, B, C, X[ 6], S22, $C040B340);
+  GG(C, D, A, B, X[11], S23, $265E5A51);
+  GG(B, C, D, A, X[ 0], S24, $E9B6C7AA);
+  GG(A, B, C, D, X[ 5], S21, $D62F105D);
+  GG(D, A, B, C, X[10], S22, $02441453);
+  GG(C, D, A, B, X[15], S23, $D8A1E681);
+  GG(B, C, D, A, X[ 4], S24, $E7D3FBC8);
+  GG(A, B, C, D, X[ 9], S21, $21E1CDE6);
+  GG(D, A, B, C, X[14], S22, $C33707D6);
+  GG(C, D, A, B, X[ 3], S23, $F4D50D87);
+  GG(B, C, D, A, X[ 8], S24, $455A14ED);
+  GG(A, B, C, D, X[13], S21, $A9E3E905);
+  GG(D, A, B, C, X[ 2], S22, $FCEFA3F8);
+  GG(C, D, A, B, X[ 7], S23, $676F02D9);
+  GG(B, C, D, A, X[12], S24, $8D2A4C8A);
+  HH(A, B, C, D, X[ 5], S31, $FFFA3942);
+  HH(D, A, B, C, X[ 8], S32, $8771F681);
+  HH(C, D, A, B, X[11], S33, $6D9D6122);
+  HH(B, C, D, A, X[14], S34, $FDE5380C);
+  HH(A, B, C, D, X[ 1], S31, $A4BEEA44);
+  HH(D, A, B, C, X[ 4], S32, $4BDECFA9);
+  HH(C, D, A, B, X[ 7], S33, $F6BB4B60);
+  HH(B, C, D, A, X[10], S34, $BEBFBC70);
+  HH(A, B, C, D, X[13], S31, $289B7EC6);
+  HH(D, A, B, C, X[ 0], S32, $EAA127FA);
+  HH(C, D, A, B, X[ 3], S33, $D4EF3085);
+  HH(B, C, D, A, X[ 6], S34, $04881D05);
+  HH(A, B, C, D, X[ 9], S31, $D9D4D039);
+  HH(D, A, B, C, X[12], S32, $E6DB99E5);
+  HH(C, D, A, B, X[15], S33, $1FA27CF8);
+  HH(B, C, D, A, X[ 2], S34, $C4AC5665);
+  II(A, B, C, D, X[ 0], S41, $F4292244);
+  II(D, A, B, C, X[ 7], S42, $432AFF97);
+  II(C, D, A, B, X[14], S43, $AB9423A7);
+  II(B, C, D, A, X[ 5], S44, $FC93A039);
+  II(A, B, C, D, X[12], S41, $655B59C3);
+  II(D, A, B, C, X[ 3], S42, $8F0CCC92);
+  II(C, D, A, B, X[10], S43, $FFEFF47D);
+  II(B, C, D, A, X[ 1], S44, $85845DD1);
+  II(A, B, C, D, X[ 8], S41, $6FA87E4F);
+  II(D, A, B, C, X[15], S42, $FE2CE6E0);
+  II(C, D, A, B, X[ 6], S43, $A3014314);
+  II(B, C, D, A, X[13], S44, $4E0811A1);
+  II(A, B, C, D, X[ 4], S41, $F7537E82);
+  II(D, A, B, C, X[11], S42, $BD3AF235);
+  II(C, D, A, B, X[ 2], S43, $2AD7D2BB);
+  II(B, C, D, A, X[ 9], S44, $EB86D391);
+  Inc(State[0], A);
+  Inc(State[1], B);
+  Inc(State[2], C);
+  Inc(State[3], D);
+  MD5_memset (PByteArray(@x), 0, SizeOf (x));
 end;
 
 procedure MD5Init(var Context: TMD5Context);
 begin
-	FillChar(Context, SizeOf(Context), 0);
-	Context.state[0] := $67452301;
-	Context.state[1] := $EFCDAB89;
-	Context.state[2] := $98BADCFE;
-	Context.state[3] := $10325476;
+  FillChar(Context, SizeOf(Context), 0);
+  Context.state[0] := $67452301;
+  Context.state[1] := $EFCDAB89;
+  Context.state[2] := $98BADCFE;
+  Context.state[3] := $10325476;
 end;
 
 procedure MD5Update(var Context: TMD5Context; Input: PByteArray; InputLen: LongWord);
 var
-	i, index, partLen: LongWord;
+  i, index, partLen: LongWord;
 begin
-	index := LongWord( (context.count[0] shr 3) and $3F);
-	Inc(Context.count[0], UINT4(InputLen) shl 3);
-	if Context.count[0] < UINT4(InputLen) shl 3 then Inc(Context.count[1]);
-	Inc(Context.count[1], UINT4(InputLen) shr 29);
-	partLen := 64 - index;
-	if inputLen >= partLen then
+  index := LongWord( (context.count[0] shr 3) and $3F);
+  Inc(Context.count[0], UINT4(InputLen) shl 3);
+  if Context.count[0] < UINT4(InputLen) shl 3 then Inc(Context.count[1]);
+  Inc(Context.count[1], UINT4(InputLen) shr 29);
+  partLen := 64 - index;
+  if inputLen >= partLen then
   begin
-		MD5_memcpy(PByteArray(@Context.buffer[index]), Input, PartLen);
-		MD5Transform(@Context.state, @Context.buffer);
-		i := partLen;
-		while i + 63 < inputLen do
-	  begin
-			MD5Transform(@Context.state, PArray64Byte(@Input[i]));
-			Inc(i, 64);
-		end;
-		index := 0;
-	end
-	else
-  	i := 0;
-	MD5_memcpy(PByteArray(@Context.buffer[index]), PByteArray(@Input[i]), inputLen - i);
+    MD5_memcpy(PByteArray(@Context.buffer[index]), Input, PartLen);
+    MD5Transform(@Context.state, @Context.buffer);
+    i := partLen;
+    while i + 63 < inputLen do
+    begin
+      MD5Transform(@Context.state, PArray64Byte(@Input[i]));
+      Inc(i, 64);
+    end;
+    index := 0;
+  end
+  else
+    i := 0;
+  MD5_memcpy(PByteArray(@Context.buffer[index]), PByteArray(@Input[i]), inputLen - i);
 end;
 
 procedure MD5Final(var Digest: TMD5Digest; var Context: TMD5Context);
 var
-	bits: array [0..7] of Byte;
-	index, padLen: LongWord;
+  bits: array [0..7] of Byte;
+  index, padLen: LongWord;
 begin
-	MD5Encode(PByteArray(@bits), PUINT4Array(@Context.count), 8);
-	index := LongWord( (Context.count[0] shr 3) and $3F);
-	if index < 56 then padLen := 56 - index else padLen := 120 - index;
-	MD5Update(Context, PByteArray(@PADDING), padLen);
-	MD5Update(Context, PByteArray(@Bits), 8);
-	MD5Encode(PByteArray(@Digest), PUINT4Array(@Context.state), 16);
-	MD5_memset(PByteArray(@Context), 0, SizeOf(Context));
+  MD5Encode(PByteArray(@bits), PUINT4Array(@Context.count), 8);
+  index := LongWord( (Context.count[0] shr 3) and $3F);
+  if index < 56 then padLen := 56 - index else padLen := 120 - index;
+  MD5Update(Context, PByteArray(@PADDING), padLen);
+  MD5Update(Context, PByteArray(@Bits), 8);
+  MD5Encode(PByteArray(@Digest), PUINT4Array(@Context.state), 16);
+  MD5_memset(PByteArray(@Context), 0, SizeOf(Context));
 end;
 
 function MD5DigestToStr(const Digest: TMD5Digest): string;
 var
  I: Integer;
 begin
-	Result :=  '';
-	for I := Low(Digest.V) to High(Digest.V) do
-		Result := Result + IntToHex(Digest.V[I], 2);
+  Result :=  '';
+  for I := Low(Digest.V) to High(Digest.V) do
+    Result := Result + IntToHex(Digest.V[I], 2);
 end;
 
 function MD5String(const S: string): TMD5Digest;
 begin
-	Result := MD5Buffer(PChar(S)^, Length(S));
+  Result := MD5Buffer(PChar(S)^, Length(S));
 end;
 
 function MD5File(const FileName: string): TMD5Digest;
 var
  F: TFileStream;
 begin
-	F := TFileStream.Create(FileName, fmOpenRead);
-	try
-		Result := MD5Stream(F);
+  F := TFileStream.Create(FileName, fmOpenRead);
+  try
+    Result := MD5Stream(F);
   finally
-		F.Free;
-	end;
+    F.Free;
+  end;
 end;
 
 function MD5Stream(const Stream: TStream): TMD5Digest;
@@ -2044,40 +2044,40 @@ var
   TotalBytes : Integer;
   SavePos: Integer;
 begin
-	MD5Init(Context);
-	Size := Stream.Size;
-	SavePos := Stream.Position;
-	TotalBytes := 0;
-	try
-		Stream.Seek(0, soFromBeginning);
-		repeat
-			ReadBytes := Stream.Read(Buffer, SizeOf(Buffer));
-			Inc(TotalBytes, ReadBytes);
-			MD5Update(Context, @Buffer, ReadBytes);
-		until (ReadBytes = 0) or (TotalBytes = Size);
-	finally
-		Stream.Seek(SavePos, soFromBeginning);
-	end;
-	MD5Final(Result, Context);
+  MD5Init(Context);
+  Size := Stream.Size;
+  SavePos := Stream.Position;
+  TotalBytes := 0;
+  try
+    Stream.Seek(0, soFromBeginning);
+    repeat
+      ReadBytes := Stream.Read(Buffer, SizeOf(Buffer));
+      Inc(TotalBytes, ReadBytes);
+      MD5Update(Context, @Buffer, ReadBytes);
+    until (ReadBytes = 0) or (TotalBytes = Size);
+  finally
+    Stream.Seek(SavePos, soFromBeginning);
+  end;
+  MD5Final(Result, Context);
 end;
 
 function MD5Buffer(const Buffer; Size: Integer): TMD5Digest;
 var
-	Context: TMD5Context;
+  Context: TMD5Context;
 begin
-	MD5Init(Context);
-	MD5Update(Context, PByteArray(@Buffer), Size);
-	MD5Final(Result, Context);
+  MD5Init(Context);
+  MD5Update(Context, PByteArray(@Buffer), Size);
+  MD5Final(Result, Context);
 end;
 
 function MD5DigestCompare(const Digest1, Digest2: TMD5Digest): Boolean;
 begin
-	Result := False;
-	if Digest1.A <> Digest2.A then Exit;
-	if Digest1.B <> Digest2.B then Exit;
-	if Digest1.C <> Digest2.C then Exit;
-	if Digest1.D <> Digest2.D then Exit;
-	Result := True;
+  Result := False;
+  if Digest1.A <> Digest2.A then Exit;
+  if Digest1.B <> Digest2.B then Exit;
+  if Digest1.C <> Digest2.C then Exit;
+  if Digest1.D <> Digest2.D then Exit;
+  Result := True;
 end;
 
 { SHA1, SHA256 rountines }

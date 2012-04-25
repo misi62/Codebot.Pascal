@@ -254,11 +254,11 @@ type
     FSelectChanged: Boolean;
     FHoverNode: TShellTreeNode;
     FOnNodeHover: TShellNotifyEvent;
-		procedure ShellTreeChange(Sender: TObject; Node: TShellNode);
-		procedure ShellTreeMouseMove(Sender: TObject; Shift: TShiftState; X,
-			Y: Integer);
-		procedure ShellTreeMouseUp(Sender: TObject; Button: TMouseButton;
-  		Shift: TShiftState; X, Y: Integer);
+    procedure ShellTreeChange(Sender: TObject; Node: TShellNode);
+    procedure ShellTreeMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ShellTreeMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   protected
     procedure DoNodeHover(Node: TShellTreeNode);
   public
@@ -281,11 +281,11 @@ type
   TShellEdit = class(TPopupEdit)
   private
     FAutoComplete: IAutoComplete2;
-  	FShellTreePopupForm: TShellTreePopupForm;
+    FShellTreePopupForm: TShellTreePopupForm;
     FOptions: TShellEditOptions;
-		FStrings: IUnknown;
+    FStrings: IUnknown;
     FOnNodeHover: TShellNotifyEvent;
-		procedure SelectionChanged;
+    procedure SelectionChanged;
     procedure TreeNodeHover(Sender: TObject; Node: TShellNode);
     function GetSelectedNode: TShellNode;
     procedure SetSelectedNode(Value: TShellNode);
@@ -294,14 +294,14 @@ type
     procedure SetOptions(Value: TShellEditOptions);
     function GetRoot: TShellNode;
     procedure SetRoot(Value: TShellNode);
-		function GetStatusText: string;
+    function GetStatusText: string;
     procedure SetStatusText(Value: string);
     function GetSpecialFolder: TSpecialFolder;
     procedure SetSpecialFolder(Value: TSpecialFolder);
   protected
     function CreatePopup: TCustomPopupForm; override;
-		procedure CreateWnd; override;
-		procedure DoPlaceEdit(var Rect: TRect); override;
+    procedure CreateWnd; override;
+    procedure DoPlaceEdit(var Rect: TRect); override;
     procedure DoPopup; override;
     procedure DoCancel(Sender: TObject); override;
     procedure DoSelect(Sender: TObject); override;
@@ -316,7 +316,7 @@ type
     property SearchStrings;
     property TextChanged;
   published
-  	property AutoHeight;
+    property AutoHeight;
     property BorderStyle;
     property ButtonVisible;
     property Anchors;
@@ -350,7 +350,7 @@ type
     property Visible;
     property WantTabs;
     property HotTrack: Boolean read GetHotTrack write SetHotTrack;
-		property StatusText: string read GetStatusText write SetStatusText;
+    property StatusText: string read GetStatusText write SetStatusText;
     property SpecialFolder: TSpecialFolder read GetSpecialFolder write SetSpecialFolder;
     property OnButtonPress;
     property OnButtonClick;
@@ -384,11 +384,11 @@ type
 
 { TShellView }
 
-	TShellViewMode = (vmIcon, vmSmallIcon, vmList, vmDetails, vmThumnail,
-  	vmTile, vmThumbstrip);
+  TShellViewMode = (vmIcon, vmSmallIcon, vmList, vmDetails, vmThumnail,
+    vmTile, vmThumbstrip);
 
   TShellView = class(TShellControl, IOleWindow, IShellBrowser, ICommDlgBrowser,
-  	ICommDlgBrowser2)
+    ICommDlgBrowser2)
   private
     FDefListViewProc: Pointer;
     FListViewInstance: Pointer;
@@ -414,7 +414,7 @@ type
     procedure ShellViewWndProc(var Message: TMessage);
     procedure SetRoot(Value: TShellNode);
     procedure SetSpecialFolder(Value: TSpecialFolder);
-		procedure SetViewMode(Value: TShellViewMode);
+    procedure SetViewMode(Value: TShellViewMode);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
     procedure CreateWnd; override;
@@ -448,7 +448,7 @@ type
     { ICommDlgBrowser2 }
     function Notify(ppshv: IShellView; dwNotifyType: DWORD): HResult; stdcall;
     function GetDefaultMenuText(ppshv: IShellView; pszText: PWideChar;
-    	cchMax: Integer): HResult; stdcall;
+      cchMax: Integer): HResult; stdcall;
     function GetViewFlags(out pdwFlags: DWORD): HResult; stdcall;
   public
     constructor Create(AOwner: TComponent); override;
@@ -484,7 +484,7 @@ type
     property TabOrder;
     property TabStop default True;
     property Text;
-		property ViewMode: TShellViewMode read FViewMode write SetViewMode;
+    property ViewMode: TShellViewMode read FViewMode write SetViewMode;
     property Visible;
     property OnClick;
     property OnContextPopup;
@@ -497,8 +497,8 @@ type
     property OnEndDrag;
     property OnEnter;
     property OnExit;
-  	property OnIncludeItem: TShellActionEvent read FOnIncludeItem write
-    	FOnIncludeItem;
+    property OnIncludeItem: TShellActionEvent read FOnIncludeItem write
+      FOnIncludeItem;
     property OnKeyDown;
     property OnKeyPress;
     property OnKeyUp;
@@ -645,10 +645,10 @@ begin
   if Result = nil then
   begin
     if SmallImages then
-    	Result := TSmallShellImages.Create(Application)
+      Result := TSmallShellImages.Create(Application)
     else
-    	Result := TLargeShellImages.Create(Application);
-		ShellImageLists[SmallImages] := Result;
+      Result := TLargeShellImages.Create(Application);
+    ShellImageLists[SmallImages] := Result;
   end;
 end;
 
@@ -796,17 +796,17 @@ end;
 
 function FindTreeNode(Root: TShellTreeNode; Node: TShellNode): TShellTreeNode;
 var
-	I: Integer;
+  I: Integer;
 begin
-	Result := nil;
-	if ILIsEqual(Root.AbsoluteList, Node.AbsoluteList) then
-  	Result := Root
+  Result := nil;
+  if ILIsEqual(Root.AbsoluteList, Node.AbsoluteList) then
+    Result := Root
   else if ILIsChild(Root.AbsoluteList, Node.AbsoluteList) then
   begin
-  	Root.Expand;
+    Root.Expand;
     for I := 0 to Root.Count - 1 do
     begin
-			Result := FindTreeNode(Root[I], Node);
+      Result := FindTreeNode(Root[I], Node);
       if Result <> nil then Break;
     end;
   end;
@@ -1056,7 +1056,7 @@ begin
     if TreeView_HitTest(Handle, HitTest) <> nil then
       Result := GetNode(HitTest.hItem)
     else
-    	Result := nil;
+      Result := nil;
   end;
 end;
 
@@ -1198,8 +1198,8 @@ end;
 
 procedure TShellTree.SetReadOnly(Value: Boolean);
 begin
-	FReadOnly := Value;
-	SetComCtlStyle(Self, TVS_EDITLABELS, not Value);
+  FReadOnly := Value;
+  SetComCtlStyle(Self, TVS_EDITLABELS, not Value);
 end;
 
 function TShellTree.GetSelectedNode: TShellNode;
@@ -1209,12 +1209,12 @@ end;
 
 procedure TShellTree.SetSelectedNode(Value: TShellNode);
 var
-	Node: TShellTreeNode;
+  Node: TShellTreeNode;
 begin
   if Value <> nil then
     Node := FindTreeNode(TShellTreeNode(FRoot), Value)
-	else
-		Node := nil;
+  else
+    Node := nil;
   if Node <> nil then
     TreeView_SelectItem(Handle, Node.Handle)
   else
@@ -1312,41 +1312,41 @@ end;
 
 procedure TShellTreePopupForm.Popup;
 begin
-	FSelectChanged := False;
+  FSelectChanged := False;
   FHoverNode := nil;
   inherited Popup;
 end;
 
 procedure TShellTreePopupForm.DoNodeHover(Node: TShellTreeNode);
 begin
-	if Node <> FHoverNode then
+  if Node <> FHoverNode then
   begin
-  	FHoverNode := Node;
+    FHoverNode := Node;
     if Assigned(FOnNodeHover) then
-    	FOnNodeHover(Self, Node);
+      FOnNodeHover(Self, Node);
   end;
 end;
 
 procedure TShellTreePopupForm.ShellTreeChange(Sender: TObject; Node: TShellNode);
 begin
-	FSelectChanged := True;
+  FSelectChanged := True;
 end;
 
 procedure TShellTreePopupForm.ShellTreeMouseMove(Sender: TObject; Shift: TShiftState; X,
-	Y: Integer);
+  Y: Integer);
 var
-	Node: TShellTreeNode;
+  Node: TShellTreeNode;
 begin
-	Node := FShellTree.GetNodeAt(X, Y);
+  Node := FShellTree.GetNodeAt(X, Y);
   if Node <> nil then
-  	DoNodeHover(Node);
+    DoNodeHover(Node);
 end;
 
 procedure TShellTreePopupForm.ShellTreeMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-	if FSelectChanged then
-  	Select;
+  if FSelectChanged then
+    Select;
 end;
 
 { TShellEdit }
@@ -1359,15 +1359,15 @@ var
 begin
   Wnd := FindWindow(AutoClass, nil);
   if Wnd <> 0 then
-  	ShowWindow(Wnd, SW_HIDE);
+    ShowWindow(Wnd, SW_HIDE);
 end;
 
 constructor TShellEdit.Create(AOwner: TComponent);
 begin
-	inherited Create(AOwner);
+  inherited Create(AOwner);
   AutoHeight := False;
   Images := ShellImageList;
-	FShellTreePopupForm := TShellTreePopupForm.Create(Self);
+  FShellTreePopupForm := TShellTreePopupForm.Create(Self);
   FShellTreePopupForm.OnNodeHover := TreeNodeHover;
   if @RegisterShellUnits <> nil then
     RegisterShellUnits(AOwner);
@@ -1375,45 +1375,45 @@ end;
 
 function TShellEdit.CreatePopup: TCustomPopupForm;
 begin
-	Result := FShellTreePopupForm;
+  Result := FShellTreePopupForm;
 end;
 
 procedure TShellEdit.CreateWnd;
 begin
-	inherited CreateWnd;
+  inherited CreateWnd;
   FShellTreePopupForm.Height := 125;
   SelectionChanged;
 end;
 
 procedure TShellEdit.TreeNodeHover(Sender: TObject; Node: TShellNode);
 begin
-	if Assigned(FOnNodeHover) then
-  	FOnNodeHover(Self, Node);
+  if Assigned(FOnNodeHover) then
+    FOnNodeHover(Self, Node);
 end;
 
 procedure TShellEdit.SelectionChanged;
 var
-	Node: TShellTreeNode;
+  Node: TShellTreeNode;
   Folder: IPersistFolder;
 begin
-	Node := TShellTreeNode(FShellTreePopupForm.FShellTree.SelectedNode);
+  Node := TShellTreeNode(FShellTreePopupForm.FShellTree.SelectedNode);
   if Node <> nil then
-	begin
-  	ImageIndex := Node.ImageIndex;
+  begin
+    ImageIndex := Node.ImageIndex;
     if Node.FileSystem and ((FOptions * [soShortName] = []) or (ILGetCount(Node.AbsoluteList) < 3)) then
-  		Text := Node.Path
-  	else
-  		Text := Node.Name;
+      Text := Node.Path
+    else
+      Text := Node.Name;
     SelStart := 0;
     if FStrings <> nil then
-	    if Supports(FStrings, IPersistFolder, Folder) then
-      	Folder.Initialize(Node.AbsoluteList);
-	end;
+      if Supports(FStrings, IPersistFolder, Folder) then
+        Folder.Initialize(Node.AbsoluteList);
+  end;
 end;
 
 procedure TShellEdit.DoPlaceEdit(var Rect: TRect);
 begin
-	inherited DoPlaceEdit(Rect);
+  inherited DoPlaceEdit(Rect);
   Inc(Rect.Top);
   Rect.Bottom := Rect.Bottom - 2;
 end;
@@ -1437,20 +1437,20 @@ end;
 
 procedure TShellEdit.DoSelect(Sender: TObject);
 begin
-	SelectionChanged;
+  SelectionChanged;
   if FAutoComplete <> nil then
     FAutoComplete.Enable(True);
-	inherited DoSelect(Sender);
+  inherited DoSelect(Sender);
 end;
 
 procedure TShellEdit.KeyDown(var Key: Word; Shift: TShiftState);
 var
-	Item: PItemIDList;
+  Item: PItemIDList;
   Node, PriorNode: TShellNode;
   S: string;
 begin
   inherited KeyDown(Key, Shift);
-	if Key = VK_RETURN then
+  if Key = VK_RETURN then
   begin
     if SelectedNode = nil then
       S := ''
@@ -1458,10 +1458,10 @@ begin
       S := IncludeTrailingPathDelimiter(SelectedNode.Path);
     Item := ILCreateFromPath(S + Trim(Text));
     if Item = nil then
-  		Item := ILCreateFromPath(Text);
+      Item := ILCreateFromPath(Text);
     if Item <> nil then
     begin
-    	Node := TShellNode.CreateFromList(Item);
+      Node := TShellNode.CreateFromList(Item);
       if Node.ShellFolder <> nil then
       begin
         PriorNode := SelectedNode;
@@ -1481,34 +1481,34 @@ end;
 
 function TShellEdit.GetSelectedNode: TShellNode;
 begin
-	Result := FShellTreePopupForm.FShellTree.SelectedNode;
+  Result := FShellTreePopupForm.FShellTree.SelectedNode;
 end;
 
 procedure TShellEdit.SetSelectedNode(Value: TShellNode);
 begin
-	FShellTreePopupForm.FShellTree.SelectedNode := Value;
+  FShellTreePopupForm.FShellTree.SelectedNode := Value;
   SelectionChanged;
 end;
 
 function TShellEdit.GetRoot: TShellNode;
 begin
-	Result := FShellTreePopupForm.FShellTree.Root;
+  Result := FShellTreePopupForm.FShellTree.Root;
 end;
 
 procedure TShellEdit.SetRoot(Value: TShellNode);
 begin
-	FShellTreePopupForm.FShellTree.Root := Value;
-	SelectionChanged;
+  FShellTreePopupForm.FShellTree.Root := Value;
+  SelectionChanged;
 end;
 
 function TShellEdit.GetHotTrack: Boolean;
 begin
-	Result := FShellTreePopupForm.FShellTree.HotTrack;
+  Result := FShellTreePopupForm.FShellTree.HotTrack;
 end;
 
 procedure TShellEdit.SetHotTrack(Value: Boolean);
 begin
-	FShellTreePopupForm.FShellTree.HotTrack := Value;
+  FShellTreePopupForm.FShellTree.HotTrack := Value;
 end;
 
 procedure TShellEdit.SetOptions(Value: TShellEditOptions);
@@ -1529,7 +1529,7 @@ begin
     if OptionChanged([soSuggest]) then
       if Includes(Value, [soSuggest]) then
       begin
-      	FAutoComplete := CreateComObject(CLSID_AutoComplete) as IAutoComplete2;
+        FAutoComplete := CreateComObject(CLSID_AutoComplete) as IAutoComplete2;
         FStrings := CreateComObject(CLSID_ACListISF);
         OleCheck(FAutoComplete.SetOptions(ACO_AUTOSUGGEST or ACO_UPDOWNKEYDROPSLIST));
         OleCheck(FAutoComplete.Init(EditHandle, FStrings, nil, nil));
@@ -1548,31 +1548,31 @@ end;
 
 function TShellEdit.GetStatusText: string;
 begin
-	Result := FShellTreePopupForm.StatusText;
+  Result := FShellTreePopupForm.StatusText;
 end;
 
 procedure TShellEdit.SetStatusText(Value: string);
 begin
-	FShellTreePopupForm.StatusText := Value;
+  FShellTreePopupForm.StatusText := Value;
 end;
 
 function TShellEdit.GetSpecialFolder: TSpecialFolder;
 begin
-	Result := FShellTreePopupForm.FShellTree.SpecialFolder;
+  Result := FShellTreePopupForm.FShellTree.SpecialFolder;
 end;
 
 procedure TShellEdit.SetSpecialFolder(Value: TSpecialFolder);
 begin
-	FShellTreePopupForm.FShellTree.SpecialFolder := Value;
+  FShellTreePopupForm.FShellTree.SpecialFolder := Value;
   SelectionChanged;
 end;
 
 { TShellView }
 
 const
-	ViewModes: array[TShellViewMode] of UINT = (
-		FVM_ICON, FVM_SMALLICON, FVM_LIST, FVM_DETAILS, FVM_THUMBNAIL,
-		FVM_TILE, FVM_THUMBSTRIP);
+  ViewModes: array[TShellViewMode] of UINT = (
+    FVM_ICON, FVM_SMALLICON, FVM_LIST, FVM_DETAILS, FVM_THUMBNAIL,
+    FVM_TILE, FVM_THUMBSTRIP);
 
 constructor TShellView.Create(AOwner: TComponent);
 begin
@@ -1605,7 +1605,7 @@ end;
 
 procedure TShellView.CreateParams(var Params: TCreateParams);
 begin
-	inherited CreateParams(Params);
+  inherited CreateParams(Params);
   Params.ExStyle := Params.ExStyle and (not WS_EX_CLIENTEDGE);
 end;
 
@@ -1630,8 +1630,8 @@ end;
 
 procedure TShellView.DoViewChanged;
 begin
-	if Assigned(FOnViewChanged) then
-  	FOnViewChanged(Self);
+  if Assigned(FOnViewChanged) then
+    FOnViewChanged(Self);
 end;
 
 procedure TShellView.ListViewWndProc(var Message: TMessage);
@@ -1726,21 +1726,21 @@ var
   L: PItemIDList;
   I: Integer;
 begin
-	Result := nil;
-	if FShellView = nil then
+  Result := nil;
+  if FShellView = nil then
     Exit;
-	if Supports(FShellView, IFolderView, F) and (F.GetFocusedItem(I) = S_OK) and
-		(F.Item(I, L) = S_OK) and (L <> nil) then
-	begin
+  if Supports(FShellView, IFolderView, F) and (F.GetFocusedItem(I) = S_OK) and
+    (F.Item(I, L) = S_OK) and (L <> nil) then
+  begin
     if FFocusedNode = nil then
       FFocusedNode := TShellNode.Create(FRoot.Clone, L)
     else if ILIsEqual(FFocusedNode.RelativeList, L) then
-	  	ILFree(L)
+      ILFree(L)
     else
     begin
-    	FFocusedNode.Free;
-  	  FFocusedNode := nil;
-	  	FFocusedNode := TShellNode.Create(FRoot.Clone, L);
+      FFocusedNode.Free;
+      FFocusedNode := nil;
+      FFocusedNode := TShellNode.Create(FRoot.Clone, L);
     end;
     Result := FFocusedNode;
   end;
@@ -1748,34 +1748,34 @@ end;
 
 procedure TShellView.Up;
 var
-	Node: TShellNode;
-	L: PItemIDList;
+  Node: TShellNode;
+  L: PItemIDList;
 begin
-	if ILIsRoot(FRoot.AbsoluteList) then Exit;
-	L := ILClone(FRoot.AbsoluteList);
+  if ILIsRoot(FRoot.AbsoluteList) then Exit;
+  L := ILClone(FRoot.AbsoluteList);
   if ILRemoveLastID(L) then
-		Node := TShellNode.CreateFromList(L)
-	else
-		Node := TShellNode.CreateFromList(nil);
-	Root := Node;
+    Node := TShellNode.CreateFromList(L)
+  else
+    Node := TShellNode.CreateFromList(nil);
+  Root := Node;
   Node.Free;
 end;
 
 procedure TShellView.SetRoot(Value: TShellNode);
 var
-	WasFocused: Boolean;
+  WasFocused: Boolean;
   FolderSettings: TFolderSettings;
   ViewRect: TRect;
   OldView: IShellView;
   Edge: Integer;
 begin
-	if Value = nil then Exit;
-	if Value.ShellFolder = nil then Exit;
-	if IsWindow(FShellViewHandle) and ILIsEqual(FRoot.AbsoluteList, Value.AbsoluteList) then Exit;
+  if Value = nil then Exit;
+  if Value.ShellFolder = nil then Exit;
+  if IsWindow(FShellViewHandle) and ILIsEqual(FRoot.AbsoluteList, Value.AbsoluteList) then Exit;
   if HandleAllocated and (Value <> FRoot) then
   begin
     FRoot.Assign(Value);
-  	FFocusedNode.Free;
+    FFocusedNode.Free;
     FFocusedNode := nil;
     WasFocused := IsChild(Handle, Windows.GetFocus);
     OldView := FShellView;
@@ -1788,12 +1788,12 @@ begin
       GMEM_DISCARDABLE, 0), True, FStream));
     OleCheck(FRoot.ShellFolder.CreateViewObject(Handle,
       IID_IShellView, FShellView));
-  	with FolderSettings do
-  	begin
-    	ViewMode := ViewModes[FViewMode];
-  	  fFlags := FWF_NOCLIENTEDGE;
-	  end;
-	    Edge := 0;
+    with FolderSettings do
+    begin
+      ViewMode := ViewModes[FViewMode];
+      fFlags := FWF_NOCLIENTEDGE;
+    end;
+      Edge := 0;
     ViewRect := Rect(Edge, Edge, ClientWidth - Edge, ClientHeight - Edge);
     OleCheck(FShellView.CreateViewWindow(OldView, FolderSettings,  Self as
       IShellBrowser, ViewRect, FShellViewHandle));
@@ -1804,8 +1804,8 @@ begin
     FDefShellViewProc := Pointer(GetWindowLong(FShellViewHandle, GWL_WNDPROC));
     SetWindowLong(FShellViewHandle, GWL_WNDPROC, Longint(FShellViewInstance));
     if WasFocused then
-	    Windows.SetFocus(FShellViewHandle);
-		if OldView <> nil then
+      Windows.SetFocus(FShellViewHandle);
+    if OldView <> nil then
       OldView.DestroyViewWindow;
     {if csDesigning in ComponentState then
     begin
@@ -1833,18 +1833,18 @@ end;
 
 procedure TShellView.SetViewMode(Value: TShellViewMode);
 var
-	Changed: Boolean;
-	F: IFolderView;
+  Changed: Boolean;
+  F: IFolderView;
 begin
-	Changed := Value <> FViewmode;
-	FViewMode := Value;
+  Changed := Value <> FViewmode;
+  FViewMode := Value;
   if FShellView <> nil then
   begin
-  	if Supports(FShellView, IFolderView, F) then
-    	F.SetCurrentViewMode(ViewModes[Value]);
+    if Supports(FShellView, IFolderView, F) then
+      F.SetCurrentViewMode(ViewModes[Value]);
   end;
   if Changed then
-  	DoViewChanged;
+    DoViewChanged;
 end;
 
 { TShellView.IOleWindow }
@@ -1946,27 +1946,27 @@ end;
 
 function TShellView.OnDefaultCommand(const ppshv: IShellView): HResult;
 var
-	AllowAction: Boolean;
+  AllowAction: Boolean;
   Node: TShellNode;
 begin
-	AllowAction := True;
+  AllowAction := True;
   if Assigned(FOnDefaultAction) then
   try
-  	Node := GetFocusedNode;
+    Node := GetFocusedNode;
     if Node <> nil then
     try
-    	Node := Node.Clone;
-			FOnDefaultAction(Self, Node, AllowAction);
+      Node := Node.Clone;
+      FOnDefaultAction(Self, Node, AllowAction);
     finally
-    	Node.Free;
+      Node.Free;
     end;
   except
     Application.HandleException(Self);
   end;
   if AllowAction then
-	  Result := S_FALSE
-	else
-	  Result := S_OK;
+    Result := S_FALSE
+  else
+    Result := S_OK;
 end;
 
 function TShellView.OnStateChange(const ppshv: IShellView; Change: ULONG): HResult;
@@ -1976,12 +1976,12 @@ end;
 
 function TShellView.IncludeObject(const ppshv: IShellView; pidl: PItemIDList): HResult;
 var
-	AllowAction: Boolean;
+  AllowAction: Boolean;
   Node: TShellNode;
 begin
-	AllowAction := True;
-	if Assigned(FOnIncludeItem) then
-	try
+  AllowAction := True;
+  if Assigned(FOnIncludeItem) then
+  try
     Node := TShellNode.Create(FRoot.Clone, ILClone(pidl));
     try
       FOnIncludeItem(Self, Node, AllowAction);
@@ -1992,47 +1992,47 @@ begin
     Application.HandleException(Self);
   end;
   if AllowAction then
-	  Result := S_OK
-	else
-	  Result := S_FALSE;
+    Result := S_OK
+  else
+    Result := S_FALSE;
 end;
 
 { TShellView.ICommDlgBrowser2 }
 
 function TShellView.Notify(ppshv: IShellView; dwNotifyType: DWORD): HResult;
 var
-	View: TShellViewMode;
-	F: IFolderView;
-	M: UINT;
+  View: TShellViewMode;
+  F: IFolderView;
+  M: UINT;
 begin
-	if dwNotifyType = CDB2N_CONTEXTMENU_DONE then
-		if Supports(ppshv, IFolderView, F) and (F.GetCurrentViewMode(M) = S_OK) and
-    	(M <> ViewModes[FViewMode]) then
-		for View := Low(View) to High(View) do
-    	if ViewModes[View] = M then
-	    begin
-  	    FViewMode := View;
+  if dwNotifyType = CDB2N_CONTEXTMENU_DONE then
+    if Supports(ppshv, IFolderView, F) and (F.GetCurrentViewMode(M) = S_OK) and
+      (M <> ViewModes[FViewMode]) then
+    for View := Low(View) to High(View) do
+      if ViewModes[View] = M then
+      begin
+        FViewMode := View;
         try
-      		DoViewChanged;
+          DoViewChanged;
         except
-    			Application.HandleException(Self);
-  			end;
-				Break;
-  		end;
-	Result := S_OK;
+          Application.HandleException(Self);
+        end;
+        Break;
+      end;
+  Result := S_OK;
 end;
 
 function TShellView.GetDefaultMenuText(ppshv: IShellView; pszText: PWideChar;
-	cchMax: Integer): HResult;
+  cchMax: Integer): HResult;
 begin
-	FillChar(pszText^, 2, #0);
-	Result := S_OK;
+  FillChar(pszText^, 2, #0);
+  Result := S_OK;
 end;
 
 function TShellView.GetViewFlags(out pdwFlags: DWORD): HResult;
 begin
-	pdwFlags := CDB2GVF_SHOWALLFILES;
-	Result := S_OK;
+  pdwFlags := CDB2GVF_SHOWALLFILES;
+  Result := S_OK;
 end;
 
 procedure TShellView.WMGetDlgCode(var Message: TWMGetDlgCode);
@@ -2050,14 +2050,14 @@ end;
 
 procedure TShellView.WMPaint(var Message: TWMPaint);
 var
-	PS: TPaintStruct;
+  PS: TPaintStruct;
   Rect: TRect;
 begin
-	if GetUpdateRect(Handle, Rect, False) then
+  if GetUpdateRect(Handle, Rect, False) then
   begin
-  	BeginPaint(Handle, PS);
-		Rect := Classes.Rect(0, 0, Width, Height);
-		//DrawThemeBorder(PS.hdc, clWindow, Rect, []);
+    BeginPaint(Handle, PS);
+    Rect := Classes.Rect(0, 0, Width, Height);
+    //DrawThemeBorder(PS.hdc, clWindow, Rect, []);
     EndPaint(Handle, PS);
   end;
   Message.Result := 0;
@@ -2065,13 +2065,13 @@ end;
 
 procedure TShellView.WMSize(var Message: TWMSize);
 var
-	Edge: Integer;
+  Edge: Integer;
 begin
-  	Edge := 0;
+    Edge := 0;
   if FShellViewHandle <> 0 then
-		with Message do
-			SetWindowPos(FShellViewHandle, 0, Edge, Edge, Width - Edge,
-				Height - Edge, SWP_NOZORDER or SWP_NOACTIVATE);
+    with Message do
+      SetWindowPos(FShellViewHandle, 0, Edge, Edge, Width - Edge,
+        Height - Edge, SWP_NOZORDER or SWP_NOACTIVATE);
   inherited;
 end;
 

@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Windows, Messages, SysUtils, Classes, ActiveX, SysTools;
+  Windows, Messages, SysUtils, Classes, ActiveX, SysTools;
 
 type
   TInterfaceListFilter = function (Item: IInterface): Boolean;
@@ -88,29 +88,29 @@ type
 
   TMessageThreadEvent = procedure(Sender: TObject; const Params: TThreadEventParams) of object;
 
-	TMessageThread = class(TThread)
-	private
-  	FAborted: Boolean;
+  TMessageThread = class(TThread)
+  private
+    FAborted: Boolean;
     FThreadEvent: TMessageThreadEvent;
     FParams: TThreadEventParams;
     FSilent: Boolean;
     FUtilityWindow: TUtilityWindow;
     procedure Sync(Event: TThreadEvent; Message: string; Error: Exception);
     procedure WMSync(var Msg: TMessage); message WM_SYNC;
-	protected
+  protected
     procedure Execute; override;
     procedure Init; virtual;
     procedure Uninit; virtual;
     procedure Run; virtual; abstract;
-  	procedure SyncStart; virtual;
-  	procedure SyncTerminate; virtual;
-  	procedure SyncMessage(const Msg: string); virtual;
-  	procedure SyncException(E: Exception); virtual;
-  	property Aborted: Boolean read FAborted;
-	public
-  	constructor Create(ThreadEvent: TMessageThreadEvent; Silent: Boolean = False);
+    procedure SyncStart; virtual;
+    procedure SyncTerminate; virtual;
+    procedure SyncMessage(const Msg: string); virtual;
+    procedure SyncException(E: Exception); virtual;
+    property Aborted: Boolean read FAborted;
+  public
+    constructor Create(ThreadEvent: TMessageThreadEvent; Silent: Boolean = False);
     destructor Destroy; override;
-		procedure Abort;
+    procedure Abort;
     procedure Display(const Msg: string);
   end;
 
@@ -407,16 +407,16 @@ end;
 
 constructor TMessageThread.Create(ThreadEvent: TMessageThreadEvent; Silent: Boolean = False);
 begin
-	FUtilityWindow := TUtilityWindow.Create(Self);
-	FThreadEvent := ThreadEvent;
-	FSilent := Silent;
+  FUtilityWindow := TUtilityWindow.Create(Self);
+  FThreadEvent := ThreadEvent;
+  FSilent := Silent;
   inherited Create(False);
 end;
 
 destructor TMessageThread.Destroy;
 begin
   FUtilityWindow.Free;
-	inherited Destroy;
+  inherited Destroy;
 end;
 
 procedure TMessageThread.Init;
@@ -430,7 +430,7 @@ end;
 procedure TMessageThread.Execute;
 begin
   FreeOnTerminate := True;
-	CoInitialize(nil);
+  CoInitialize(nil);
   try
     Init;
     try
@@ -440,18 +440,18 @@ begin
       except
         on E: Exception do SyncException(E);
       end;
-  	finally
+    finally
       SyncTerminate;
     end;
   finally
     Uninit;
     CoUninitialize;
-	end;
+  end;
 end;
 
 procedure TMessageThread.Abort;
 begin
-	FAborted := True;
+  FAborted := True;
 end;
 
 procedure TMessageThread.Display(const Msg: string);
@@ -462,7 +462,7 @@ end;
 procedure TMessageThread.Sync(Event: TThreadEvent; Message: string; Error: Exception);
 begin
   if FSilent then Exit;
-	if Assigned(FThreadEvent) then
+  if Assigned(FThreadEvent) then
   begin
     FParams.Event := Event;
     FParams.Message := Message;
@@ -473,7 +473,7 @@ end;
 
 procedure TMessageThread.WMSync(var Msg: TMessage);
 begin
-	if Assigned(FThreadEvent) then
+  if Assigned(FThreadEvent) then
     FThreadEvent(Self, FParams);
 end;
 

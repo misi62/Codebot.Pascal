@@ -60,72 +60,72 @@ const
   CLSID_WICFormatConverterWMPhoto: TGUID = '{9CB5172B-D600-46BA-AB77-77BB7E3A00D9}';
 
   GUID_WICPixelFormatUndefined: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC900}';
-	GUID_WICPixelFormatDontCare: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC900}';
-	GUID_WICPixelFormat1bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC901}';
-	GUID_WICPixelFormat2bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC902}';
-	GUID_WICPixelFormat4bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC903}';
-	GUID_WICPixelFormat8bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC904}';
-	GUID_WICPixelFormatBlackWhite: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC905}';
-	GUID_WICPixelFormat2bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC906}';
-	GUID_WICPixelFormat4bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC907}';
-	GUID_WICPixelFormat8bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC908}';
-	GUID_WICPixelFormat16bppBGR555: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC909}';
-	GUID_WICPixelFormat16bppBGR565: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90A}';
-	GUID_WICPixelFormat16bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90B}';
-	GUID_WICPixelFormat24bppBGR: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90C}';
-	GUID_WICPixelFormat24bppRGB: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90D}';
-	GUID_WICPixelFormat32bppBGR: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90E}';
-	GUID_WICPixelFormat32bppBGRA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90F}';
-	GUID_WICPixelFormat32bppPBGRA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC910}';
-	GUID_WICPixelFormat32bppGrayFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC911}';
-	GUID_WICPixelFormat48bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC912}';
-	GUID_WICPixelFormat16bppGrayFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC913}';
-	GUID_WICPixelFormat32bppBGR101010: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC914}';
-	GUID_WICPixelFormat48bppRGB: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC915}';
-	GUID_WICPixelFormat64bppRGBA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC916}';
-	GUID_WICPixelFormat64bppPRGBA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC917}';
-	GUID_WICPixelFormat96bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC918}';
-	GUID_WICPixelFormat128bppRGBAFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC919}';
-	GUID_WICPixelFormat128bppPRGBAFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91A}';
-	GUID_WICPixelFormat128bppRGBFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91B}';
-	GUID_WICPixelFormat32bppCMYK: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91C}';
-	GUID_WICPixelFormat64bppRGBAFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91D}';
-	GUID_WICPixelFormat64bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC940}';
-	GUID_WICPixelFormat128bppRGBAFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91E}';
-	GUID_WICPixelFormat128bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC941}';
-	GUID_WICPixelFormat64bppRGBAHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93A}';
-	GUID_WICPixelFormat64bppRGBHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC942}';
-	GUID_WICPixelFormat48bppRGBHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93B}';
-	GUID_WICPixelFormat32bppRGBE: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93D}';
-	GUID_WICPixelFormat16bppGrayHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93E}';
-	GUID_WICPixelFormat32bppGrayFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93F}';
-	GUID_WICPixelFormat64bppCMYK: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91F}';
-	GUID_WICPixelFormat24bpp3Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC920}';
-	GUID_WICPixelFormat32bpp4Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC921}';
-	GUID_WICPixelFormat40bpp5Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC922}';
-	GUID_WICPixelFormat48bpp6Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC923}';
-	GUID_WICPixelFormat56bpp7Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC924}';
-	GUID_WICPixelFormat64bpp8Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC925}';
-	GUID_WICPixelFormat48bpp3Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC926}';
-	GUID_WICPixelFormat64bpp4Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC927}';
-	GUID_WICPixelFormat80bpp5Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC928}';
-	GUID_WICPixelFormat96bpp6Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC929}';
-	GUID_WICPixelFormat112bpp7Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92A}';
-	GUID_WICPixelFormat128bpp8Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92B}';
-	GUID_WICPixelFormat40bppCMYKAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92C}';
-	GUID_WICPixelFormat80bppCMYKAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92D}';
-	GUID_WICPixelFormat32bpp3ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92E}';
-	GUID_WICPixelFormat40bpp4ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92F}';
-	GUID_WICPixelFormat48bpp5ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC930}';
-	GUID_WICPixelFormat56bpp6ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC931}';
-	GUID_WICPixelFormat64bpp7ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC932}';
-	GUID_WICPixelFormat72bpp8ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC933}';
-	GUID_WICPixelFormat64bpp3ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC934}';
-	GUID_WICPixelFormat80bpp4ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC935}';
-	GUID_WICPixelFormat96bpp5ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC936}';
-	GUID_WICPixelFormat112bpp6ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC937}';
-	GUID_WICPixelFormat128bpp7ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC938}';
-	GUID_WICPixelFormat144bpp8ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC939}';
+  GUID_WICPixelFormatDontCare: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC900}';
+  GUID_WICPixelFormat1bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC901}';
+  GUID_WICPixelFormat2bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC902}';
+  GUID_WICPixelFormat4bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC903}';
+  GUID_WICPixelFormat8bppIndexed: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC904}';
+  GUID_WICPixelFormatBlackWhite: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC905}';
+  GUID_WICPixelFormat2bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC906}';
+  GUID_WICPixelFormat4bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC907}';
+  GUID_WICPixelFormat8bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC908}';
+  GUID_WICPixelFormat16bppBGR555: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC909}';
+  GUID_WICPixelFormat16bppBGR565: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90A}';
+  GUID_WICPixelFormat16bppGray: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90B}';
+  GUID_WICPixelFormat24bppBGR: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90C}';
+  GUID_WICPixelFormat24bppRGB: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90D}';
+  GUID_WICPixelFormat32bppBGR: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90E}';
+  GUID_WICPixelFormat32bppBGRA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC90F}';
+  GUID_WICPixelFormat32bppPBGRA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC910}';
+  GUID_WICPixelFormat32bppGrayFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC911}';
+  GUID_WICPixelFormat48bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC912}';
+  GUID_WICPixelFormat16bppGrayFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC913}';
+  GUID_WICPixelFormat32bppBGR101010: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC914}';
+  GUID_WICPixelFormat48bppRGB: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC915}';
+  GUID_WICPixelFormat64bppRGBA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC916}';
+  GUID_WICPixelFormat64bppPRGBA: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC917}';
+  GUID_WICPixelFormat96bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC918}';
+  GUID_WICPixelFormat128bppRGBAFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC919}';
+  GUID_WICPixelFormat128bppPRGBAFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91A}';
+  GUID_WICPixelFormat128bppRGBFloat: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91B}';
+  GUID_WICPixelFormat32bppCMYK: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91C}';
+  GUID_WICPixelFormat64bppRGBAFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91D}';
+  GUID_WICPixelFormat64bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC940}';
+  GUID_WICPixelFormat128bppRGBAFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91E}';
+  GUID_WICPixelFormat128bppRGBFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC941}';
+  GUID_WICPixelFormat64bppRGBAHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93A}';
+  GUID_WICPixelFormat64bppRGBHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC942}';
+  GUID_WICPixelFormat48bppRGBHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93B}';
+  GUID_WICPixelFormat32bppRGBE: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93D}';
+  GUID_WICPixelFormat16bppGrayHalf: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93E}';
+  GUID_WICPixelFormat32bppGrayFixedPoint: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC93F}';
+  GUID_WICPixelFormat64bppCMYK: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC91F}';
+  GUID_WICPixelFormat24bpp3Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC920}';
+  GUID_WICPixelFormat32bpp4Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC921}';
+  GUID_WICPixelFormat40bpp5Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC922}';
+  GUID_WICPixelFormat48bpp6Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC923}';
+  GUID_WICPixelFormat56bpp7Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC924}';
+  GUID_WICPixelFormat64bpp8Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC925}';
+  GUID_WICPixelFormat48bpp3Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC926}';
+  GUID_WICPixelFormat64bpp4Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC927}';
+  GUID_WICPixelFormat80bpp5Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC928}';
+  GUID_WICPixelFormat96bpp6Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC929}';
+  GUID_WICPixelFormat112bpp7Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92A}';
+  GUID_WICPixelFormat128bpp8Channels: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92B}';
+  GUID_WICPixelFormat40bppCMYKAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92C}';
+  GUID_WICPixelFormat80bppCMYKAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92D}';
+  GUID_WICPixelFormat32bpp3ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92E}';
+  GUID_WICPixelFormat40bpp4ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC92F}';
+  GUID_WICPixelFormat48bpp5ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC930}';
+  GUID_WICPixelFormat56bpp6ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC931}';
+  GUID_WICPixelFormat64bpp7ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC932}';
+  GUID_WICPixelFormat72bpp8ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC933}';
+  GUID_WICPixelFormat64bpp3ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC934}';
+  GUID_WICPixelFormat80bpp4ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC935}';
+  GUID_WICPixelFormat96bpp5ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC936}';
+  GUID_WICPixelFormat112bpp6ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC937}';
+  GUID_WICPixelFormat128bpp7ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC938}';
+  GUID_WICPixelFormat144bpp8ChannelsAlpha: TGUID = '{6FDDC324-4E03-4BFE-B185-3D77768DC939}';
 
 const
   IID_IWICPALETTE: TGUID = '{00000040-A8F2-4877-BA0A-FD2B6645FB94}';
@@ -161,53 +161,53 @@ const
 
   INTSAFE_E_ARITHMETIC_OVERFLOW                 = $80070216;  // 0X216 = 534 = ERROR_ARITHMETIC_OVERFLOW
   FACILITY_WINCODEC_ERR                         = $898;
-	WINCODEC_ERR_BASE                             = $2000;
+  WINCODEC_ERR_BASE                             = $2000;
   WINCODEC_ERR_SEV                              = 1;
-	WINCODEC_ERR_GENERIC_ERROR                    = E_FAIL;
-	WINCODEC_ERR_INVALIDPARAMETER                 = E_INVALIDARG;
-	WINCODEC_ERR_OUTOFMEMORY                      = E_OUTOFMEMORY;
-	WINCODEC_ERR_NOTIMPLEMENTED                   = E_NOTIMPL;
-	WINCODEC_ERR_ABORTED                          = E_ABORT;
-	WINCODEC_ERR_ACCESSDENIED                     = E_ACCESSDENIED;
-	WINCODEC_ERR_VALUEOVERFLOW                    = INTSAFE_E_ARITHMETIC_OVERFLOW;
-	WINCODEC_ERR_WRONGSTATE                       = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F04));
-	WINCODEC_ERR_VALUEOUTOFRANGE                  = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F05));
-	WINCODEC_ERR_UNKNOWNIMAGEFORMAT               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F07));
-	WINCODEC_ERR_UNSUPPORTEDVERSION               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F0B));
-	WINCODEC_ERR_NOTINITIALIZED                   = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F0C));
-	WINCODEC_ERR_ALREADYLOCKED                    = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F0D));
-	WINCODEC_ERR_PROPERTYNOTFOUND                 = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F40));
-	WINCODEC_ERR_PROPERTYNOTSUPPORTED             = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F41));
-	WINCODEC_ERR_PROPERTYSIZE                     = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F42));
-	WINCODEC_ERR_CODECPRESENT                     = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F43));
-	WINCODEC_ERR_CODECNOTHUMBNAIL                 = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F44));
-	WINCODEC_ERR_PALETTEUNAVAILABLE               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F45));
-	WINCODEC_ERR_CODECTOOMANYSCANLINES            = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F46));
-	WINCODEC_ERR_INTERNALERROR                    = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F48));
-	WINCODEC_ERR_SOURCERECTDOESNOTMATCHDIMENSIONS = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F49));
-	WINCODEC_ERR_COMPONENTNOTFOUND                = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F50));
-	WINCODEC_ERR_IMAGESIZEOUTOFRANGE              = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F51));
-	WINCODEC_ERR_TOOMUCHMETADATA                  = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F52));
-	WINCODEC_ERR_BADIMAGE                         = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F60));
-	WINCODEC_ERR_BADHEADER                        = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F61));
-	WINCODEC_ERR_FRAMEMISSING                     = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F62));
-	WINCODEC_ERR_BADMETADATAHEADER                = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F63));
-	WINCODEC_ERR_BADSTREAMDATA                    = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F70));
-	WINCODEC_ERR_STREAMWRITE                      = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F71));
-	WINCODEC_ERR_STREAMREAD                       = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F72));
-	WINCODEC_ERR_STREAMNOTAVAILABLE               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F73));
-	WINCODEC_ERR_UNSUPPORTEDPIXELFORMAT           = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F80));
-	WINCODEC_ERR_UNSUPPORTEDOPERATION             = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F81));
-	WINCODEC_ERR_INVALIDREGISTRATION              = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8A));
-	WINCODEC_ERR_COMPONENTINITIALIZEFAILURE       = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8B));
-	WINCODEC_ERR_INSUFFICIENTBUFFER               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8C));
-	WINCODEC_ERR_DUPLICATEMETADATAPRESENT         = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8D));
-	WINCODEC_ERR_PROPERTYUNEXPECTEDTYPE           = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8E));
-	WINCODEC_ERR_UNEXPECTEDSIZE                   = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8F));
-	WINCODEC_ERR_INVALIDQUERYREQUEST              = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F90));
-	WINCODEC_ERR_UNEXPECTEDMETADATATYPE           = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F91));
-	WINCODEC_ERR_REQUESTONLYVALIDATMETADATAROOT   = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F92));
-	WINCODEC_ERR_INVALIDQUERYCHARACTER            = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F93));
+  WINCODEC_ERR_GENERIC_ERROR                    = E_FAIL;
+  WINCODEC_ERR_INVALIDPARAMETER                 = E_INVALIDARG;
+  WINCODEC_ERR_OUTOFMEMORY                      = E_OUTOFMEMORY;
+  WINCODEC_ERR_NOTIMPLEMENTED                   = E_NOTIMPL;
+  WINCODEC_ERR_ABORTED                          = E_ABORT;
+  WINCODEC_ERR_ACCESSDENIED                     = E_ACCESSDENIED;
+  WINCODEC_ERR_VALUEOVERFLOW                    = INTSAFE_E_ARITHMETIC_OVERFLOW;
+  WINCODEC_ERR_WRONGSTATE                       = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F04));
+  WINCODEC_ERR_VALUEOUTOFRANGE                  = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F05));
+  WINCODEC_ERR_UNKNOWNIMAGEFORMAT               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F07));
+  WINCODEC_ERR_UNSUPPORTEDVERSION               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F0B));
+  WINCODEC_ERR_NOTINITIALIZED                   = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F0C));
+  WINCODEC_ERR_ALREADYLOCKED                    = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F0D));
+  WINCODEC_ERR_PROPERTYNOTFOUND                 = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F40));
+  WINCODEC_ERR_PROPERTYNOTSUPPORTED             = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F41));
+  WINCODEC_ERR_PROPERTYSIZE                     = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F42));
+  WINCODEC_ERR_CODECPRESENT                     = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F43));
+  WINCODEC_ERR_CODECNOTHUMBNAIL                 = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F44));
+  WINCODEC_ERR_PALETTEUNAVAILABLE               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F45));
+  WINCODEC_ERR_CODECTOOMANYSCANLINES            = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F46));
+  WINCODEC_ERR_INTERNALERROR                    = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F48));
+  WINCODEC_ERR_SOURCERECTDOESNOTMATCHDIMENSIONS = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F49));
+  WINCODEC_ERR_COMPONENTNOTFOUND                = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F50));
+  WINCODEC_ERR_IMAGESIZEOUTOFRANGE              = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F51));
+  WINCODEC_ERR_TOOMUCHMETADATA                  = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F52));
+  WINCODEC_ERR_BADIMAGE                         = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F60));
+  WINCODEC_ERR_BADHEADER                        = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F61));
+  WINCODEC_ERR_FRAMEMISSING                     = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F62));
+  WINCODEC_ERR_BADMETADATAHEADER                = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F63));
+  WINCODEC_ERR_BADSTREAMDATA                    = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F70));
+  WINCODEC_ERR_STREAMWRITE                      = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F71));
+  WINCODEC_ERR_STREAMREAD                       = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F72));
+  WINCODEC_ERR_STREAMNOTAVAILABLE               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F73));
+  WINCODEC_ERR_UNSUPPORTEDPIXELFORMAT           = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F80));
+  WINCODEC_ERR_UNSUPPORTEDOPERATION             = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F81));
+  WINCODEC_ERR_INVALIDREGISTRATION              = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8A));
+  WINCODEC_ERR_COMPONENTINITIALIZEFAILURE       = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8B));
+  WINCODEC_ERR_INSUFFICIENTBUFFER               = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8C));
+  WINCODEC_ERR_DUPLICATEMETADATAPRESENT         = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8D));
+  WINCODEC_ERR_PROPERTYUNEXPECTEDTYPE           = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8E));
+  WINCODEC_ERR_UNEXPECTEDSIZE                   = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F8F));
+  WINCODEC_ERR_INVALIDQUERYREQUEST              = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F90));
+  WINCODEC_ERR_UNEXPECTEDMETADATATYPE           = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F91));
+  WINCODEC_ERR_REQUESTONLYVALIDATMETADATAROOT   = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F92));
+  WINCODEC_ERR_INVALIDQUERYCHARACTER            = HResult((WINCODEC_ERR_SEV shl 31) or (FACILITY_WINCODEC_ERR shl 16) or (WINCODEC_ERR_BASE + $F93));
 
   WICRawChangeNotification_ExposureCompensation       = $00000001;
   WICRawChangeNotification_NamedWhitePoint            = $00000002;
@@ -270,219 +270,219 @@ type
   WICColorContextType = LongInt;
 
 const
-	WICColorContextUninitialized = $0;
-	WICColorContextProfile = $1;
-	WICColorContextExifColorSpace = $2;
+  WICColorContextUninitialized = $0;
+  WICColorContextProfile = $1;
+  WICColorContextExifColorSpace = $2;
 
 type
   WICBitmapCreateCacheOption = LongInt;
 
 const
-	WICBitmapNoCache = $0;
-	WICBitmapCacheOnDemand = $1;
-	WICBitmapCacheOnLoad = $2;
+  WICBitmapNoCache = $0;
+  WICBitmapCacheOnDemand = $1;
+  WICBitmapCacheOnLoad = $2;
 
 type
   WICDecodeOptions = LongInt;
 
 const
-	WICDecodeMetadataCacheOnDemand = $0;
-	WICDecodeMetadataCacheOnLoad = $1;
+  WICDecodeMetadataCacheOnDemand = $0;
+  WICDecodeMetadataCacheOnLoad = $1;
 
 type
   WICBitmapEncoderCacheOption = LongInt;
 
 const
-	WICBitmapEncoderCacheInMemory = $0;
-	WICBitmapEncoderCacheTempFile = $1;
-	WICBitmapEncoderNoCache = $2;
+  WICBitmapEncoderCacheInMemory = $0;
+  WICBitmapEncoderCacheTempFile = $1;
+  WICBitmapEncoderNoCache = $2;
 
 type
   WICComponentType = LongInt;
 
 const
-	WICDecoder = $1;
-	WICEncoder = $2;
-	WICPixelFormatConverter = $4;
-	WICMetadataReader = $8;
-	WICMetadataWriter = $10;
-	WICPixelFormat = $20;
-	WICAllComponents = $3F;
+  WICDecoder = $1;
+  WICEncoder = $2;
+  WICPixelFormatConverter = $4;
+  WICMetadataReader = $8;
+  WICMetadataWriter = $10;
+  WICPixelFormat = $20;
+  WICAllComponents = $3F;
 
 type
   WICComponentEnumerateOptions = LongInt;
 
 const
-	WICComponentEnumerateDefault = $0;
-	WICComponentEnumerateRefresh = $1;
-	WICComponentEnumerateDisabled = LongInt($80000000);
-	WICComponentEnumerateUnsigned = LongInt($40000000);
+  WICComponentEnumerateDefault = $0;
+  WICComponentEnumerateRefresh = $1;
+  WICComponentEnumerateDisabled = LongInt($80000000);
+  WICComponentEnumerateUnsigned = LongInt($40000000);
 
 type
   WICBitmapInterpolationMode = LongInt;
 
 const
-	WICBitmapInterpolationModeNearestNeighbor = $0;
-	WICBitmapInterpolationModeLinear = $1;
-	WICBitmapInterpolationModeCubic = $2;
-	WICBitmapInterpolationModeFant = $3;
+  WICBitmapInterpolationModeNearestNeighbor = $0;
+  WICBitmapInterpolationModeLinear = $1;
+  WICBitmapInterpolationModeCubic = $2;
+  WICBitmapInterpolationModeFant = $3;
 
 type
   WICBitmapPaletteType = LongInt;
 
 const
-	WICBitmapPaletteTypeCustom = $0;
-	WICBitmapPaletteTypeMedianCut = $1;
-	WICBitmapPaletteTypeFixedBW = $2;
-	WICBitmapPaletteTypeFixedHalftone8 = $3;
-	WICBitmapPaletteTypeFixedHalftone27 = $4;
-	WICBitmapPaletteTypeFixedHalftone64 = $5;
-	WICBitmapPaletteTypeFixedHalftone125	= $6;
-	WICBitmapPaletteTypeFixedHalftone216	= $7;
-	WICBitmapPaletteTypeFixedWebPalette	= WICBitmapPaletteTypeFixedHalftone216;
-	WICBitmapPaletteTypeFixedHalftone252	= $8;
-	WICBitmapPaletteTypeFixedHalftone256	= $9;
-	WICBitmapPaletteTypeFixedGray4	= $A;
-	WICBitmapPaletteTypeFixedGray16	= $B;
-	WICBitmapPaletteTypeFixedGray256	= $C;
+  WICBitmapPaletteTypeCustom = $0;
+  WICBitmapPaletteTypeMedianCut = $1;
+  WICBitmapPaletteTypeFixedBW = $2;
+  WICBitmapPaletteTypeFixedHalftone8 = $3;
+  WICBitmapPaletteTypeFixedHalftone27 = $4;
+  WICBitmapPaletteTypeFixedHalftone64 = $5;
+  WICBitmapPaletteTypeFixedHalftone125  = $6;
+  WICBitmapPaletteTypeFixedHalftone216  = $7;
+  WICBitmapPaletteTypeFixedWebPalette  = WICBitmapPaletteTypeFixedHalftone216;
+  WICBitmapPaletteTypeFixedHalftone252  = $8;
+  WICBitmapPaletteTypeFixedHalftone256  = $9;
+  WICBitmapPaletteTypeFixedGray4  = $A;
+  WICBitmapPaletteTypeFixedGray16  = $B;
+  WICBitmapPaletteTypeFixedGray256  = $C;
 
 type
   WICBitmapDitherType = LongInt;
 
 const
-	WICBitmapDitherTypeNone = $0;
-	WICBitmapDitherTypeSolid = $0;
-	WICBitmapDitherTypeOrdered4x4 = $1;
-	WICBitmapDitherTypeOrdered8x8 = $2;
-	WICBitmapDitherTypeOrdered16x16 = $3;
-	WICBitmapDitherTypeSpiral4x4 = $4;
-	WICBitmapDitherTypeSpiral8x8 = $5;
-	WICBitmapDitherTypeDualSpiral4x4	= $6;
-	WICBitmapDitherTypeDualSpiral8x8	= $7;
-	WICBitmapDitherTypeErrorDiffusion	= $8;
+  WICBitmapDitherTypeNone = $0;
+  WICBitmapDitherTypeSolid = $0;
+  WICBitmapDitherTypeOrdered4x4 = $1;
+  WICBitmapDitherTypeOrdered8x8 = $2;
+  WICBitmapDitherTypeOrdered16x16 = $3;
+  WICBitmapDitherTypeSpiral4x4 = $4;
+  WICBitmapDitherTypeSpiral8x8 = $5;
+  WICBitmapDitherTypeDualSpiral4x4  = $6;
+  WICBitmapDitherTypeDualSpiral8x8  = $7;
+  WICBitmapDitherTypeErrorDiffusion  = $8;
 
 type
   WICBitmapAlphaChannelOption = LongInt;
 
 const
-	WICBitmapUseAlpha = $0;
-	WICBitmapUsePremultipliedAlpha = $1;
-	WICBitmapIgnoreAlpha = $2;
+  WICBitmapUseAlpha = $0;
+  WICBitmapUsePremultipliedAlpha = $1;
+  WICBitmapIgnoreAlpha = $2;
 
 type
   WICBitmapTransformOptions = LongInt;
 
 const
-	WICBitmapTransformRotate0 = 0;
-	WICBitmapTransformRotate90 = $1;
-	WICBitmapTransformRotate180 = $2;
-	WICBitmapTransformRotate270 = $3;
-	WICBitmapTransformFlipHorizontal = $8;
-	WICBitmapTransformFlipVertical = $10;
+  WICBitmapTransformRotate0 = 0;
+  WICBitmapTransformRotate90 = $1;
+  WICBitmapTransformRotate180 = $2;
+  WICBitmapTransformRotate270 = $3;
+  WICBitmapTransformFlipHorizontal = $8;
+  WICBitmapTransformFlipVertical = $10;
 
 type
   WICBitmapLockFlags = LongInt;
 
 const
-	WICBitmapLockRead = $1;
-	WICBitmapLockWrite = $2;
+  WICBitmapLockRead = $1;
+  WICBitmapLockWrite = $2;
 
 type
   WICBitmapDecoderCapabilities = LongInt;
 
 const
-	WICBitmapDecoderCapabilitySameEncoder = $1;
-	WICBitmapDecoderCapabilityCanDecodeAllImages = $2;
-	WICBitmapDecoderCapabilityCanDecodeSomeImages = $4;
-	WICBitmapDecoderCapabilityCanEnumerateMetadata = $8;
-	WICBitmapDecoderCapabilityCanDecodeThumbnail = $10;
+  WICBitmapDecoderCapabilitySameEncoder = $1;
+  WICBitmapDecoderCapabilityCanDecodeAllImages = $2;
+  WICBitmapDecoderCapabilityCanDecodeSomeImages = $4;
+  WICBitmapDecoderCapabilityCanEnumerateMetadata = $8;
+  WICBitmapDecoderCapabilityCanDecodeThumbnail = $10;
 
 type
   WICProgressOperation = LongInt;
 
 const
-	WICProgressOperationCopyPixels = $1;
-	WICProgressOperationWritePixels = $2;
-	WICProgressOperationAll = $FFFF;
+  WICProgressOperationCopyPixels = $1;
+  WICProgressOperationWritePixels = $2;
+  WICProgressOperationAll = $FFFF;
 
 type
   WICProgressNotification = LongInt;
 
 const
-	WICProgressNotificationBegin = $10000;
-	WICProgressNotificationEnd = $20000;
-	WICProgressNotificationFrequent = $40000;
-	WICProgressNotificationAll = LongInt($FFFF0000);
+  WICProgressNotificationBegin = $10000;
+  WICProgressNotificationEnd = $20000;
+  WICProgressNotificationFrequent = $40000;
+  WICProgressNotificationAll = LongInt($FFFF0000);
 
 type
   WICComponentSigning = LongInt;
 
 const
-	WICComponentSigned = $1;
-	WICComponentUnsigned = $2;
-	WICComponentSafe = $4;
-	WICComponentDisabled = LongInt($80000000);
+  WICComponentSigned = $1;
+  WICComponentUnsigned = $2;
+  WICComponentSafe = $4;
+  WICComponentDisabled = LongInt($80000000);
 
 type
   WICTiffCompressionOption = LongInt;
 
 const
-	WICTiffCompressionDontCare = $0;
-	WICTiffCompressionNone = $1;
-	WICTiffCompressionCCITT3 = $2;
-	WICTiffCompressionCCITT4 = $3;
-	WICTiffCompressionLZW	= $4;
-	WICTiffCompressionRLE	= $5;
-	WICTiffCompressionZIP	= $6;
+  WICTiffCompressionDontCare = $0;
+  WICTiffCompressionNone = $1;
+  WICTiffCompressionCCITT3 = $2;
+  WICTiffCompressionCCITT4 = $3;
+  WICTiffCompressionLZW  = $4;
+  WICTiffCompressionRLE  = $5;
+  WICTiffCompressionZIP  = $6;
 
 type
   WICNamedWhitePoint = LongInt;
 
 const
-	WICWhitePointDefault = $1;
-	WICWhitePointDaylight	= $2;
-	WICWhitePointCloudy	= $4;
-	WICWhitePointShade = $8;
-	WICWhitePointTungsten	= $10;
-	WICWhitePointFluorescent = $20;
-	WICWhitePointFlash = $40;
-	WICWhitePointUnderwater	= $80;
-	WICWhitePointCustom	= $100;
-	WICWhitePointAutoWhiteBalance	= $200;
-	WICWhitePointAsShot	= WICWhitePointDefault;
+  WICWhitePointDefault = $1;
+  WICWhitePointDaylight  = $2;
+  WICWhitePointCloudy  = $4;
+  WICWhitePointShade = $8;
+  WICWhitePointTungsten  = $10;
+  WICWhitePointFluorescent = $20;
+  WICWhitePointFlash = $40;
+  WICWhitePointUnderwater  = $80;
+  WICWhitePointCustom  = $100;
+  WICWhitePointAutoWhiteBalance  = $200;
+  WICWhitePointAsShot  = WICWhitePointDefault;
 
 type
   WICRawCapabilities = LongInt;
 
 const
-	WICRawCapabilityNotSupported = $0;
-	WICRawCapabilityGetSupported = $1;
-	WICRawCapabilityFullySupported = $2;
+  WICRawCapabilityNotSupported = $0;
+  WICRawCapabilityGetSupported = $1;
+  WICRawCapabilityFullySupported = $2;
 
 type
   WICRawRotationCapabilities = LongInt;
 
 const
-	WICRawRotationCapabilityNotSupported = $0;
-	WICRawRotationCapabilityGetSupported = $1;
-	WICRawRotationCapabilityNinetyDegreesSupported = $2;
-	WICRawRotationCapabilityFullySupported = $3;
+  WICRawRotationCapabilityNotSupported = $0;
+  WICRawRotationCapabilityGetSupported = $1;
+  WICRawRotationCapabilityNinetyDegreesSupported = $2;
+  WICRawRotationCapabilityFullySupported = $3;
 
 type
   WICRawParameterSet = LongInt;
 
 const
-	WICAsShotParameterSet = $1;
-	WICUserAdjustedParameterSet = $2;
-	WICAutoAdjustedParameterSet = $3;
+  WICAsShotParameterSet = $1;
+  WICUserAdjustedParameterSet = $2;
+  WICAutoAdjustedParameterSet = $3;
 
 type
   WICRawRenderMode = LongInt;
 
 const
-	WICRawRenderModeDraft = $1;
-	WICRawRenderModeNormal = $2;
-	WICRawRenderModeBestQuality = $3;
+  WICRawRenderModeDraft = $1;
+  WICRawRenderModeNormal = $2;
+  WICRawRenderModeBestQuality = $3;
 
 type
   WICMetadataCreationOptions = LongInt;
@@ -497,19 +497,19 @@ type
   WICPersistOptions = LongInt;
 
 const
-	WICPersistOptionDefault = $0;
-	WICPersistOptionLittleEndian = $0;
-	WICPersistOptionBigEndian = $1;
-	WICPersistOptionStrictFormat = $2;
-	WICPersistOptionNoCacheStream = $4;
-	WICPersistOptionPreferUTF8 = $8;
-	WICPersistOptionMask = LongInt($FFFF);
+  WICPersistOptionDefault = $0;
+  WICPersistOptionLittleEndian = $0;
+  WICPersistOptionBigEndian = $1;
+  WICPersistOptionStrictFormat = $2;
+  WICPersistOptionNoCacheStream = $4;
+  WICPersistOptionPreferUTF8 = $8;
+  WICPersistOptionMask = LongInt($FFFF);
 {$ELSE}
 type
   WICColorContextType = (
     WICColorContextUninitialized = $0,
     WICColorContextProfile = $1,
-  	WICColorContextExifColorSpace = $2);
+    WICColorContextExifColorSpace = $2);
 
   WICBitmapCreateCacheOption = (
     WICBitmapNoCache = $0,
@@ -553,14 +553,14 @@ type
     WICBitmapPaletteTypeFixedHalftone8 = $3,
     WICBitmapPaletteTypeFixedHalftone27 = $4,
     WICBitmapPaletteTypeFixedHalftone64 = $5,
-		WICBitmapPaletteTypeFixedHalftone125	= $6,
-		WICBitmapPaletteTypeFixedHalftone216	= $7,
-		WICBitmapPaletteTypeFixedWebPalette	= WICBitmapPaletteTypeFixedHalftone216,
-		WICBitmapPaletteTypeFixedHalftone252	= $8,
-		WICBitmapPaletteTypeFixedHalftone256	= $9,
-		WICBitmapPaletteTypeFixedGray4	= $A,
-		WICBitmapPaletteTypeFixedGray16	= $B,
-		WICBitmapPaletteTypeFixedGray256	= $C);
+    WICBitmapPaletteTypeFixedHalftone125  = $6,
+    WICBitmapPaletteTypeFixedHalftone216  = $7,
+    WICBitmapPaletteTypeFixedWebPalette  = WICBitmapPaletteTypeFixedHalftone216,
+    WICBitmapPaletteTypeFixedHalftone252  = $8,
+    WICBitmapPaletteTypeFixedHalftone256  = $9,
+    WICBitmapPaletteTypeFixedGray4  = $A,
+    WICBitmapPaletteTypeFixedGray16  = $B,
+    WICBitmapPaletteTypeFixedGray256  = $C);
 
   WICBitmapDitherType = (
     WICBitmapDitherTypeNone = $0,
@@ -570,9 +570,9 @@ type
     WICBitmapDitherTypeOrdered16x16 = $3,
     WICBitmapDitherTypeSpiral4x4 = $4,
     WICBitmapDitherTypeSpiral8x8 = $5,
-		WICBitmapDitherTypeDualSpiral4x4	= $6,
-		WICBitmapDitherTypeDualSpiral8x8	= $7,
-		WICBitmapDitherTypeErrorDiffusion	= $8);
+    WICBitmapDitherTypeDualSpiral4x4  = $6,
+    WICBitmapDitherTypeDualSpiral8x8  = $7,
+    WICBitmapDitherTypeErrorDiffusion  = $8);
 
   WICBitmapAlphaChannelOption = (
     WICBitmapUseAlpha = $0,
@@ -616,37 +616,37 @@ type
     WICComponentDisabled = LongInt($80000000));
 
   WICTiffCompressionOption = (
-	  WICTiffCompressionDontCare = $0,
-		WICTiffCompressionNone = $1,
-		WICTiffCompressionCCITT3 = $2,
-		WICTiffCompressionCCITT4 = $3,
-		WICTiffCompressionLZW	= $4,
-		WICTiffCompressionRLE	= $5,
-		WICTiffCompressionZIP	= $6);
+    WICTiffCompressionDontCare = $0,
+    WICTiffCompressionNone = $1,
+    WICTiffCompressionCCITT3 = $2,
+    WICTiffCompressionCCITT4 = $3,
+    WICTiffCompressionLZW  = $4,
+    WICTiffCompressionRLE  = $5,
+    WICTiffCompressionZIP  = $6);
 
   WICNamedWhitePoint = (
-		WICWhitePointDefault = $1,
-		WICWhitePointDaylight	= $2,
-		WICWhitePointCloudy	= $4,
-		WICWhitePointShade = $8,
-		WICWhitePointTungsten	= $10,
-		WICWhitePointFluorescent = $20,
-		WICWhitePointFlash = $40,
-		WICWhitePointUnderwater	= $80,
-		WICWhitePointCustom	= $100,
-		WICWhitePointAutoWhiteBalance	= $200,
-		WICWhitePointAsShot	= WICWhitePointDefault);
+    WICWhitePointDefault = $1,
+    WICWhitePointDaylight  = $2,
+    WICWhitePointCloudy  = $4,
+    WICWhitePointShade = $8,
+    WICWhitePointTungsten  = $10,
+    WICWhitePointFluorescent = $20,
+    WICWhitePointFlash = $40,
+    WICWhitePointUnderwater  = $80,
+    WICWhitePointCustom  = $100,
+    WICWhitePointAutoWhiteBalance  = $200,
+    WICWhitePointAsShot  = WICWhitePointDefault);
 
   WICRawCapabilities = (
-		WICRawCapabilityNotSupported = $0,
-		WICRawCapabilityGetSupported = $1,
-		WICRawCapabilityFullySupported = $2);
+    WICRawCapabilityNotSupported = $0,
+    WICRawCapabilityGetSupported = $1,
+    WICRawCapabilityFullySupported = $2);
 
   WICRawRotationCapabilities = (
-		WICRawRotationCapabilityNotSupported = $0,
-		WICRawRotationCapabilityGetSupported = $1,
-		WICRawRotationCapabilityNinetyDegreesSupported = $2,
-		WICRawRotationCapabilityFullySupported = $3);
+    WICRawRotationCapabilityNotSupported = $0,
+    WICRawRotationCapabilityGetSupported = $1,
+    WICRawRotationCapabilityNinetyDegreesSupported = $2,
+    WICRawRotationCapabilityFullySupported = $3);
 
   WICRawParameterSet = (
     WICAsShotParameterSet = $1,
@@ -694,7 +694,7 @@ type
     ToneCurveSupport: WICRawCapabilities;
     RotationSupport: WICRawRotationCapabilities;
     RenderModeSupport: WICRawCapabilities;
-	end;
+  end;
 
 type
   TProgressNotification = function(pvData: Pointer; uFrameNum: ULONG;
@@ -770,7 +770,7 @@ type
   IWICFormatConverter = interface(IWICBitmapSource)
   ['{00000301-A8F2-4877-BA0A-FD2B6645FB94}']
     function Initialize(pISource: IWICBitmapSource; const dstFormat: REFWICPixelFormatGUID; dither: WICBitmapDitherType;
-		  pIPalette: IWICPalette; alphaThresholdPercent: Double; paletteTranslate: WICBitmapPaletteType): HResult; stdcall;
+      pIPalette: IWICPalette; alphaThresholdPercent: Double; paletteTranslate: WICBitmapPaletteType): HResult; stdcall;
     function CanConvert(const srcPixelFormat, dstPixelFormat: REFWICPixelFormatGUID; out pfCanConvert: boolean): HResult; stdcall;
   end;
 
@@ -817,7 +817,7 @@ type
   IWICColorTransform = interface(IWICBitmapSource)
   ['{B66F034F-D0E2-40AB-B436-6DE39E321A94}']
     function Initialize(pIBitmapSource: IWICBitmapSource; pIContextSource: IWICColorContext;
-		  pIContextDest: IWICColorContext; const pixelFmtDest: REFWICPixelFormatGUID): HResult; stdcall;
+      pIContextDest: IWICColorContext; const pixelFmtDest: REFWICPixelFormatGUID): HResult; stdcall;
   end;
 
   IWICFastMetadataEncoder = interface(IUnknown)
@@ -902,7 +902,7 @@ type
   IWICBitmapSourceTransform = interface(IUnknown)
   ['{3B16811B-6A43-4EC9-B713-3D5A0C13B940}']
     function CopyPixels(prcSrc: WICRect; uiWidth, uiHeight: UINT; pguidDstFormat: WICPixelFormatGUID;
-		  dstTransform: WICBitmapTransformOptions; nStride: UINT; cbBufferSize: UINT; out pbBuffer: PByte): HResult; stdcall;
+      dstTransform: WICBitmapTransformOptions; nStride: UINT; cbBufferSize: UINT; out pbBuffer: PByte): HResult; stdcall;
     function GetClosestSize(out puiWidth: UINT; out puiHeight: UINT): HResult; stdcall;
     function GetClosestPixelFormat(out pguidDstFormat: WICPixelFormatGUID): HResult; stdcall;
     function DoesSupportTransform(dstTransform: WICBitmapTransformOptions; out pfIsSupported: boolean): HResult; stdcall;
@@ -918,7 +918,7 @@ type
   IWICBitmapCodecProgressNotification = interface(IUnknown)
   ['{64C1024E-C3CF-4462-8078-88C2B11C46D9}']
     function RegisterProgressNotification( pfnProgressNotification: TProgressNotification; pvData: Pointer;
-		  dwProgressFlags: DWORD): HResult; stdcall;
+      dwProgressFlags: DWORD): HResult; stdcall;
   end;
 
   IWICComponentInfo = interface(IUnknown)
@@ -944,7 +944,7 @@ type
     function GetContainerFormat(out pguidContainerFormat: TGUID): HResult; stdcall;
     function GetPixelFormats(cFormats: UINT; var pguidPixelFormats: TGUID; out pcActual: UINT): HResult; stdcall;
     function GetColorManagementVersion(cchColorManagementVersion: UINT; var wzColorManagementVersion: PWideChar;
-		  out pcActual: UINT): HResult; stdcall;
+      out pcActual: UINT): HResult; stdcall;
     function GetDeviceManufacturer(cchDeviceManufacturer: UINT; var wzDeviceManufacturer: PWideChar; out pcActual: UINT): HResult; stdcall;
     function GetDeviceModels(cchDeviceModels: UINT; var wzDeviceModels: PWideChar; out pcActual: UINT): HResult; stdcall;
     function GetMimeTypes(cchMimeTypes: UINT; var wzMimeTypes: PWideChar; out pcActual: UINT): HResult; stdcall;
@@ -980,11 +980,11 @@ type
   IWICImagingFactory = interface(IUnknown)
   ['{EC5EC8A9-C395-4314-9C77-54D7A935FF70}']
     function CreateDecoderFromFilename(wzFilename: PWideChar; pguidVendor: PGUID; dwDesiredAccess: DWORD;
-		  metadataOptions: WICDecodeOptions; out ppIDecoder: IWICBitmapDecoder): HResult; stdcall;
+      metadataOptions: WICDecodeOptions; out ppIDecoder: IWICBitmapDecoder): HResult; stdcall;
     function CreateDecoderFromStream(pIStream: IStream; pguidVendor: PGUID; metadataOptions: WICDecodeOptions;
-		  out ppIDecoder: IWICBitmapDecoder): HResult; stdcall;
+      out ppIDecoder: IWICBitmapDecoder): HResult; stdcall;
     function CreateDecoderFromFileHandle(hFile: Pointer; pguidVendor: PGUID; metadataOptions: WICDecodeOptions;
-		  out ppIDecoder: IWICBitmapDecoder): HResult; stdcall;
+      out ppIDecoder: IWICBitmapDecoder): HResult; stdcall;
     function CreateComponentInfo(const clsidComponent: TGUID; out ppIInfo: IWICComponentInfo): HResult; stdcall;
     function CreateDecoder(const guidContainerFormat: TGUID; pguidVendor: PGUID; out ppIDecoder: IWICBitmapDecoder): HResult; stdcall;
     function CreateEncoder(const guidContainerFormat: TGUID; pguidVendor: PGUID; out ppIEncoder: IWICBitmapEncoder): HResult; stdcall;
@@ -997,24 +997,24 @@ type
     function CreateColorContext(out ppIWICColorContext: IWICColorContext): HResult; stdcall;
     function CreateColorTransformer(out ppIWICColorTransform: IWICColorTransform): HResult; stdcall;
     function CreateBitmap(uiWidth, uiHeight: UINT; const pixelFormat: REFWICPixelFormatGUID;
-		  option: WICBitmapCreateCacheOption; out ppIBitmap: IWICBitmap): HResult; stdcall;
+      option: WICBitmapCreateCacheOption; out ppIBitmap: IWICBitmap): HResult; stdcall;
     function CreateBitmapFromSource(pIBitmapSource: IWICBitmapSource; option: WICBitmapCreateCacheOption;
-		  out ppIBitmap: IWICBitmap): HResult; stdcall;
+      out ppIBitmap: IWICBitmap): HResult; stdcall;
     function CreateBitmapFromSourceRect(pIBitmapSource: IWICBitmapSource; x, y, width, height: UINT;
-		  out ppIBitmap: IWICBitmap): HResult; stdcall;
+      out ppIBitmap: IWICBitmap): HResult; stdcall;
     function CreateBitmapFromMemory(uiWidth, uiHeight: UINT; const pixelFormat: REFWICPixelFormatGUID; cPWideCharide,
-		  cbBufferSize: UINT; pbBuffer: PByte; out ppIBitmap: IWICBitmap): HResult; stdcall;
+      cbBufferSize: UINT; pbBuffer: PByte; out ppIBitmap: IWICBitmap): HResult; stdcall;
     function CreateBitmapFromHBITMAP(Bitmap: HBITMAP; hPalette: HPALETTE; options: WICBitmapAlphaChannelOption;
-		  out ppIBitmap: IWICBitmap): HResult; stdcall;
+      out ppIBitmap: IWICBitmap): HResult; stdcall;
     function CreateBitmapFromHICON(Icon: HICON; out ppIBitmap: IWICBitmap): HResult; stdcall;
     function CreateComponentEnumerator(componentTypes, options: DWORD; out ppIEnumUnknown: IEnumUnknown): HResult; stdcall;
     function CreateFastMetadataEncoderFromDecoder(pIDecoder: IWICBitmapDecoder;
-		  out ppIFastEncoder: IWICFastMetadataEncoder): HResult; stdcall;
+      out ppIFastEncoder: IWICFastMetadataEncoder): HResult; stdcall;
     function CreateFastMetadataEncoderFromFrameDecode(pIFrameDecoder: IWICBitmapFrameDecode;
-		  out ppIFastEncoder: IWICFastMetadataEncoder): HResult; stdcall;
+      out ppIFastEncoder: IWICFastMetadataEncoder): HResult; stdcall;
     function CreateQueryWriter(const guidMetadataFormat, pguidVendor: TGUID; out ppIQueryWriter: IWICMetadataQueryWriter): HResult; stdcall;
     function CreateQueryWriterFromReader(pIQueryReader: IWICMetadataQueryReader; const pguidVendor: TGUID;
-		  out ppIQueryWriter: IWICMetadataQueryWriter): HResult; stdcall;
+      out ppIQueryWriter: IWICMetadataQueryWriter): HResult; stdcall;
   end;
 
   IWICDevelopRawNotificationCallback = interface(IUnknown)
@@ -1126,7 +1126,7 @@ type
     Pattern: PByte;
     Mask: PByte;
     DataOffset: ULARGE_INTEGER;
-	end;
+  end;
 
   WICMetadataHeader = record
     Position: ULARGE_INTEGER;
@@ -1222,17 +1222,17 @@ type
   IWICComponentFactory = interface(IWICImagingFactory)
   ['{412D0C3A-9650-44FA-AF5B-DD2A06C8E8FB}']
     function CreateMetadataReader(guidMetadataFormat: TGUID; pguidVendor: PGUID; dwOptions: DWORD; pIStream: IStream;
-		  out ppIReader: IWICMetadataReader): HResult; stdcall;
+      out ppIReader: IWICMetadataReader): HResult; stdcall;
     function CreateMetadataReaderFromContainer(guidContainerFormat: TGUID; pguidVendor: PGUID; dwOptions: DWORD; pIStream: IStream;
-		  out ppIReader: IWICMetadataReader): HResult; stdcall;
+      out ppIReader: IWICMetadataReader): HResult; stdcall;
     function CreateMetadataWriter(guidMetadataFormat: TGUID; pguidVendor: PGUID; dwMetadataOptions: DWORD;
-		  out ppIWriter: IWICMetadataWriter): HResult; stdcall;
+      out ppIWriter: IWICMetadataWriter): HResult; stdcall;
     function CreateMetadataWriterFromReader(pIReader: IWICMetadataReader; pguidVendor: PGUID;
-		  out ppIWriter: IWICMetadataWriter): HResult; stdcall;
+      out ppIWriter: IWICMetadataWriter): HResult; stdcall;
     function CreateQueryReaderFromBlockReader(pIBlockReader: IWICMetadataBlockReader;
-		  out ppIQueryReader: IWICMetadataQueryReader): HResult; stdcall;
+      out ppIQueryReader: IWICMetadataQueryReader): HResult; stdcall;
     function CreateQueryWriterFromBlockWriter(pIBlockWriter: IWICMetadataBlockWriter;
-		  out ppIQueryWriter: IWICMetadataQueryWriter): HResult; stdcall;
+      out ppIQueryWriter: IWICMetadataQueryWriter): HResult; stdcall;
     function CreateEncoderPropertyBag(ppropOptions: TPROPBAG2; cCount: UINT; out ppIPropertyBag: IPropertyBag2): HResult; stdcall;
   end;
 

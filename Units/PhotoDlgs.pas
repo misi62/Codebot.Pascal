@@ -3,22 +3,22 @@ unit PhotoDlgs;
 interface
 
 uses
-	Windows, Messages, SysUtils, Classes, Controls, Dialogs, Forms;
+  Windows, Messages, SysUtils, Classes, Controls, Dialogs, Forms;
 
 { TPhotoCaptureDialog }
 
 type
-	TPhotoCaptureDialog = class(TCommonDialog)
+  TPhotoCaptureDialog = class(TCommonDialog)
   private
     FAuthor: string;
     FDirectory: string;
-  	FPhotos: TStrings;
+    FPhotos: TStrings;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function Execute: Boolean; override;
     property Photos: TStrings read FPhotos;
-	published
+  published
     property Author: string read FAuthor write FAuthor;
     property Directory: string read FDirectory write FDirectory;
   end;
@@ -31,7 +31,7 @@ implementation
 { Interface Module }
 
 var
-	codelib: HMODULE;
+  codelib: HMODULE;
 
 { Imports }
 
@@ -64,13 +64,13 @@ end;
 
 constructor TPhotoCaptureDialog.Create(AOwner: TComponent);
 begin
-	inherited Create(AOwner);
-	FPhotos := TStringList.Create;
+  inherited Create(AOwner);
+  FPhotos := TStringList.Create;
 end;
 
 destructor TPhotoCaptureDialog.Destroy;
 begin
-	FPhotos.Free;
+  FPhotos.Free;
   inherited Destroy;
 end;
 
@@ -94,16 +94,16 @@ begin
   end
   else
     Result := False;
-	{if Form = nil then
-		Form := TCameraForm.Create(Application);
-	Form.HandleNeeded;
-	Form.Author := Author;
-	Form.Directory := Directory;
-	Result := Form.ShowModal = mrOk;
-	if Result then
-		FPhotos.Assign(Form.Photos)
-	else
-		FPhotos.Clear;}
+  {if Form = nil then
+    Form := TCameraForm.Create(Application);
+  Form.HandleNeeded;
+  Form.Author := Author;
+  Form.Directory := Directory;
+  Result := Form.ShowModal = mrOk;
+  if Result then
+    FPhotos.Assign(Form.Photos)
+  else
+    FPhotos.Clear;}
 end;
 
 end.

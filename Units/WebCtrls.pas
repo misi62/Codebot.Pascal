@@ -3,7 +3,7 @@ unit WebCtrls;
 interface
 
 uses
-	Windows, Messages, ActiveX, SysUtils, Classes, Controls, Forms, Graphics, GraphTools,
+  Windows, Messages, ActiveX, SysUtils, Classes, Controls, Forms, Graphics, GraphTools,
   MSHTML, ShellDocView, ComObj, Dialogs;
 
 function ColorToHtml(Color: TColor): string;
@@ -17,7 +17,7 @@ type
     pchHostNS: PWChar;      // pointer to namespace list for custom tags
   end;
 
-	IDocHostUIHandler = interface(IUnknown)
+  IDocHostUIHandler = interface(IUnknown)
     ['{bd3f23c0-d43e-11cf-893b-00aa00bdce1a}']
     { Display a shortcut menu }
     function ShowContextMenu(
@@ -77,7 +77,7 @@ type
     { Called to obtain our IDispatch interface. Used to enable the
       browser to call methods in the host (e.g. from JavaScript) }
     function GetExternal(
-    	out ppDispatch: IDispatch): HResult; stdcall;
+      out ppDispatch: IDispatch): HResult; stdcall;
     { Gives the host an opportunity to modify the URL to be loaded }
     function TranslateUrl(
       const dwTranslate: DWORD;
@@ -159,23 +159,23 @@ type
     property CanDelete: Boolean read GetCanDelete;}
   end;
 
-	TDocOptions = set of (doBorder, doContextMenu, doScrollbars, doSelection);
+  TDocOptions = set of (doBorder, doContextMenu, doScrollbars, doSelection);
 
   TDocBrowser = class(TWebBrowserEx, IOleInPlaceSite, IDocHostUIHandler)
-	private
+  private
     FCommands: TDocCommands;
     FExtern: IDispatch;
-		FOptions: TDocOptions;
+    FOptions: TDocOptions;
     procedure WaitUntilReady;
-  	function GetSource: string;
-  	procedure SetSource(const Value: string);
-  	function GetEditing: Boolean;
-  	procedure SetEditing(Value: Boolean);
+    function GetSource: string;
+    procedure SetSource(const Value: string);
+    function GetEditing: Boolean;
+    procedure SetEditing(Value: Boolean);
     //procedure WMGetDlgCode(var Message: TWMGetDlgCode); message WM_GETDLGCODE;
     procedure WMSetFocus(var Message: TWMSetFocus); message WM_SETFOCUS;
-	protected
+  protected
     procedure CreateWnd; override;
-  	{ TDocBrowser.IOleInPlaceSite }
+    { TDocBrowser.IOleInPlaceSite }
     function GetWindow(out wnd: HWnd): HResult; stdcall;
     function CanInPlaceActivate: HResult; stdcall;
     function OnInPlaceActivate: HResult; stdcall;
@@ -190,7 +190,7 @@ type
     function DiscardUndoState: HResult; stdcall;
     function DeactivateAndUndo: HResult; stdcall;
     function OnPosRectChange(const rcPosRect: TRect): HResult; stdcall;
-  	{ TDocBrowser.IDocHostUIHandler }
+    { TDocBrowser.IDocHostUIHandler }
     function ShowContextMenu(
       const dwID: DWORD;
       const ppt: PPOINT;
@@ -227,7 +227,7 @@ type
       const pDropTarget: IDropTarget;
       out ppDropTarget: IDropTarget): HResult; stdcall;
     function GetExternal(
-    	out ppDispatch: IDispatch): HResult; stdcall;
+      out ppDispatch: IDispatch): HResult; stdcall;
     function TranslateUrl(
       const dwTranslate: DWORD;
       const pchURLIn: POLESTR;
@@ -235,51 +235,51 @@ type
     function FilterDataObject(
       const pDO: IDataObject;
       out ppDORet: IDataObject): HResult; stdcall;
-	public
+  public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     property Commands: TDocCommands read FCommands;
     property Extern: IDispatch read FExtern write FExtern;
     property Source: string read GetSource write SetSource;
     property Editing: Boolean read GetEditing write SetEditing;
-	published
-  	property Options: TDocOptions read FOptions write FOptions;
+  published
+    property Options: TDocOptions read FOptions write FOptions;
   end;
 
 { TArgList and ArgParam refer to parameters passed to script objects }
 
-	TArgList = record
+  TArgList = record
     Arguments: PVariantArgList;
-  	Count: Integer;
-	end;
+    Count: Integer;
+  end;
 
 function ArgParam(Index: Integer; const Args: TArgList): OleVariant;
 
 { TAutoDispatch }
 
 type
-	TAutoDispatch = class(TInterfacedObject, IDispatch)
+  TAutoDispatch = class(TInterfacedObject, IDispatch)
   private
-  	FMethods: TStrings;
+    FMethods: TStrings;
     FProperties: TStrings;
   protected
-  	function OnMethod(MethodIndex: Integer; const Args: TArgList): OleVariant; virtual;
+    function OnMethod(MethodIndex: Integer; const Args: TArgList): OleVariant; virtual;
     function OnGetProperty(PropIndex: Integer; const Args: TArgList): OleVariant; virtual;
     procedure OnSetProperty(PropIndex: Integer; const Args: TArgList; const Value: OleVariant); virtual;
-		property Methods: TStrings read FMethods;
+    property Methods: TStrings read FMethods;
     property Properties: TStrings read FProperties;
   protected
-  	{ IDispatch }
+    { IDispatch }
     function GetTypeInfoCount(out Count: Integer): HResult; stdcall;
     function GetTypeInfo(Index, LocaleID: Integer; out TypeInfo): HResult; stdcall;
     function GetIDsOfNames(const IID: TGUID; Names: Pointer;
       NameCount, LocaleID: Integer; DispIDs: Pointer): HResult; stdcall;
     function Invoke(DispID: Integer; const IID: TGUID; LocaleID: Integer;
       Flags: Word; var Params; VarResult, ExcepInfo, ArgErr: Pointer): HResult; stdcall;
-	public
-  	constructor Create; virtual;
-		destructor Destroy; override;
-	end;
+  public
+    constructor Create; virtual;
+    destructor Destroy; override;
+  end;
 
   TAutoDispatchClass = class of TAutoDispatch;
 
@@ -763,8 +763,8 @@ end;
 
 procedure TDocCommands.SafeInit(ForceLoad: Boolean = False);
 begin
-	if ForceLoad or (FBrowser.Document = nil) then
-  	FBrowser.Navigate('about:blank');
+  if ForceLoad or (FBrowser.Document = nil) then
+    FBrowser.Navigate('about:blank');
   while FBrowser.ReadyState <> READYSTATE_COMPLETE do
   begin
     Application.ProcessMessages;
@@ -780,7 +780,7 @@ var
 begin
   Result := -1;
   SafeInit;
-	if Supports(FBrowser.Document, IOleCommandTarget, Command) then
+  if Supports(FBrowser.Document, IOleCommandTarget, Command) then
   begin
     Group := CGID_MSHTML;
     OleCmd.cmdID := Cmd;
@@ -799,7 +799,7 @@ var
   Group: TGUID;
 begin
   SafeInit;
-	if Supports(FBrowser.Document, IOleCommandTarget, Command) then
+  if Supports(FBrowser.Document, IOleCommandTarget, Command) then
   begin
     Group := CGID_MSHTML;
     Command.Exec(@Group, Cmd, Prompts[Prompt], A, B);
@@ -823,10 +823,10 @@ end;
 
 procedure TDocCommands.New;
 var
-	Persist: IPersistStreamInit;
+  Persist: IPersistStreamInit;
 begin
   SafeInit(True);
-	if Supports(FBrowser.Document, IPersistStreamInit, Persist) then
+  if Supports(FBrowser.Document, IPersistStreamInit, Persist) then
     Persist.InitNew;
 end;
 
@@ -1014,12 +1014,12 @@ end;*)
 
 function TDocBrowser.GetSource: string;
 var
-	Persist: IPersistStreamInit;
+  Persist: IPersistStreamInit;
   StringStream: TStringStream;
   Adapter: IStream;
 begin
   FCommands.SafeInit;
-	if Supports(Document, IPersistStreamInit, Persist) then
+  if Supports(Document, IPersistStreamInit, Persist) then
   begin
     WaitUntilReady;
     StringStream := TStringStream.Create('');
@@ -1031,16 +1031,16 @@ end;
 
 procedure TDocBrowser.SetSource(const Value: string);
 var
-	Persist: IPersistStreamInit;
+  Persist: IPersistStreamInit;
   Adapter: IStream;
 begin
   FCommands.SafeInit;
-	if Supports(Document, IPersistStreamInit, Persist) then
+  if Supports(Document, IPersistStreamInit, Persist) then
   begin
-  	if Persist.InitNew = S_OK then
+    if Persist.InitNew = S_OK then
     begin
-    	Adapter := TStreamAdapter.Create(TStringStream.Create(Value), soOwned);
-   		Persist.Load(Adapter);
+      Adapter := TStreamAdapter.Create(TStringStream.Create(Value), soOwned);
+       Persist.Load(Adapter);
     end;
     WaitUntilReady;
   end;
@@ -1050,7 +1050,7 @@ function TDocBrowser.GetEditing: Boolean;
 var
   Doc: IHTMLDocument2;
 begin
-	if Supports(Document, IHTMLDocument2, Doc) then
+  if Supports(Document, IHTMLDocument2, Doc) then
     Result := UpperCase(Doc.designMode) = 'ON'
   else
     Result := False;
@@ -1067,7 +1067,7 @@ begin
   if Value <> GetEditing then
   begin
     S := Source;
-  	if Supports(Document, IHTMLDocument2, Doc) then
+    if Supports(Document, IHTMLDocument2, Doc) then
       Doc.designMode := ModeStates[Value];
     Source := S;
   end;
@@ -1161,7 +1161,7 @@ end;
 function TDocBrowser.EnableModeless(const fEnable: BOOL): HResult;
 begin
   { Return S_OK to indicate we handled (ignored) OK }
-	Result := S_OK;
+  Result := S_OK;
 end;
 
 function TDocBrowser.FilterDataObject(
@@ -1189,9 +1189,9 @@ function TDocBrowser.GetExternal(
 begin
   ppDispatch := FExtern;
   if ppDispatch = nil then
-	  Result := E_FAIL
-	else
-	  Result := S_OK;
+    Result := E_FAIL
+  else
+    Result := S_OK;
 end;
 
 function TDocBrowser.GetHostInfo(
@@ -1265,11 +1265,11 @@ function TDocBrowser.ShowContextMenu(
 begin
   { Return S_FALSE to notify we didn't display a menu and to
     let browser display its own menu }
-	if doContextMenu in FOptions then
-	  Result := S_FALSE
+  if doContextMenu in FOptions then
+    Result := S_FALSE
   else
   begin
-	  Result := S_OK;
+    Result := S_OK;
     if PopupMenu <> nil then
       PopupMenu.Popup(ppt.X, ppt.Y);
   end
@@ -1314,15 +1314,15 @@ end;
 
 function ArgParam(Index: Integer; const Args: TArgList): OleVariant;
 begin
-	Result := OleVariant(Args.Arguments[Args.Count - Index - 1]);
+  Result := OleVariant(Args.Arguments[Args.Count - Index - 1]);
 end;
 
 type
-	PPInteger = ^PInteger;
+  PPInteger = ^PInteger;
 
 const
-	BaseMethodDispid = $200;
-	BasePropertyDispid = -$200;
+  BaseMethodDispid = $200;
+  BasePropertyDispid = -$200;
 
   DISPATCH_METHOD         = $1;
   DISPATCH_PROPERTYGET    = $2;
@@ -1330,26 +1330,26 @@ const
 
 constructor TAutoDispatch.Create;
 begin
-	inherited Create;
-	FMethods := TStringList.Create;
+  inherited Create;
+  FMethods := TStringList.Create;
   FProperties := TStringList.Create;
 end;
 
 destructor TAutoDispatch.Destroy;
 begin
-	FProperties.Free;
-	FMethods.Free;
+  FProperties.Free;
+  FMethods.Free;
   inherited Destroy;
 end;
 
 function TAutoDispatch.OnMethod(MethodIndex: Integer; const Args: TArgList): OleVariant;
 begin
-	VarClear(Result);
+  VarClear(Result);
 end;
 
 function TAutoDispatch.OnGetProperty(PropIndex: Integer; const Args: TArgList): OleVariant;
 begin
-	VarClear(Result);
+  VarClear(Result);
 end;
 
 procedure TAutoDispatch.OnSetProperty(PropIndex: Integer; const Args: TArgList; const Value: OleVariant);
@@ -1361,90 +1361,90 @@ end;
 function TAutoDispatch.GetTypeInfo(Index, LocaleID: Integer;
   out TypeInfo): HResult;
 begin
-	Pointer(TypeInfo) := nil;
-	Result := S_OK;
+  Pointer(TypeInfo) := nil;
+  Result := S_OK;
 end;
 
 function TAutoDispatch.GetTypeInfoCount(out Count: Integer): HResult;
 begin
-	Count := 0;
-	Result := S_OK;
+  Count := 0;
+  Result := S_OK;
 end;
 
 function TAutoDispatch.GetIDsOfNames(const IID: TGUID; Names: Pointer;
   NameCount, LocaleID: Integer; DispIDs: Pointer): HResult;
 var
-	S: WideString;
+  S: WideString;
   I: Integer;
 begin
-	Result := DISP_E_UNKNOWNNAME;
-	if NameCount = 1 then
+  Result := DISP_E_UNKNOWNNAME;
+  if NameCount = 1 then
   begin
-  	S := UpperCase(PPWideChar(Names)^);
+    S := UpperCase(PPWideChar(Names)^);
     I := FMethods.IndexOf(S);
     if I > -1 then
     begin
-    	PInteger(DispIDs)^ := I + BaseMethodDispid;
-    	Result := S_OK;
+      PInteger(DispIDs)^ := I + BaseMethodDispid;
+      Result := S_OK;
     end
     else
     begin
-	    I := FProperties.IndexOf(S);
-	    if I > -1 then
-  	  begin
-    		PInteger(DispIDs)^ := I + BasePropertyDispid;
-    		Result := S_OK;
-	    end;
-		end;
-	end
+      I := FProperties.IndexOf(S);
+      if I > -1 then
+      begin
+        PInteger(DispIDs)^ := I + BasePropertyDispid;
+        Result := S_OK;
+      end;
+    end;
+  end
 end;
 
 function TAutoDispatch.Invoke(DispID: Integer; const IID: TGUID;
   LocaleID: Integer; Flags: Word; var Params; VarResult, ExcepInfo,
   ArgErr: Pointer): HResult;
 var
-	DispParams: PDispParams;
+  DispParams: PDispParams;
   Output: POleVariant absolute VarResult;
   ArgList: TArgList;
 begin
-	DispParams := @Params;
-	Output := VarResult;
+  DispParams := @Params;
+  Output := VarResult;
   ArgList.Count := DispParams.cArgs;
   ArgList.Arguments := DispParams.rgvarg;
-	Result := DISP_E_BADINDEX;
-	try
-		if Flags and DISPATCH_METHOD = DISPATCH_METHOD then
+  Result := DISP_E_BADINDEX;
+  try
+    if Flags and DISPATCH_METHOD = DISPATCH_METHOD then
     begin
-			Dec(DispId, BaseMethodDispid);
+      Dec(DispId, BaseMethodDispid);
       if (DispId > -1) and (DispId < FMethods.Count) then
       begin
         Result := S_OK;
         if Output <> nil then
-	      	Output^ := OnMethod(DispId, ArgList)
-				else
-	      	OnMethod(DispId, ArgList);
-			end;
+          Output^ := OnMethod(DispId, ArgList)
+        else
+          OnMethod(DispId, ArgList);
+      end;
     end
     else if (Flags = DISPATCH_PROPERTYGET) or (Flags = DISPATCH_PROPERTYPUT) then
     begin
-			Dec(DispId, BasePropertyDispid);
+      Dec(DispId, BasePropertyDispid);
       if (DispId > -1) and (DispId < FProperties.Count) then
       begin
         Result := S_OK;
-      	if Flags = DISPATCH_PROPERTYGET  then
-	      	Output^ := OnGetProperty(DispId, ArgList)
-				else
+        if Flags = DISPATCH_PROPERTYGET  then
+          Output^ := OnGetProperty(DispId, ArgList)
+        else
         begin
           if DispParams.cArgs > 0 then
-						OnSetProperty(DispId, ArgList, OleVariant(DispParams.rgvarg^[0]))
-					else
-          	Result := DISP_E_BADPARAMCOUNT;
-				end;
-			end;
+            OnSetProperty(DispId, ArgList, OleVariant(DispParams.rgvarg^[0]))
+          else
+            Result := DISP_E_BADPARAMCOUNT;
+        end;
+      end;
     end
   except
-  	// fill out error information
-		Result := E_FAIL;
+    // fill out error information
+    Result := E_FAIL;
   end;
 end;
 

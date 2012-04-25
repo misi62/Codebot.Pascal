@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 uses
-	Windows, Messages, SysUtils, Classes, ComCtrls, ShellAPI, VisualLogFrm,
+  Windows, Messages, SysUtils, Classes, ComCtrls, ShellAPI, VisualLogFrm,
   Forms, FileTools, ShlTools, ShlCtrls, StrTools;
 
 { TVisualLog }
@@ -22,7 +22,7 @@ uses
 type
   TVisualLog = class(TObject)
   private
-  	FListView: TListView;
+    FListView: TListView;
     FRootDir: string;
     FPrefix: string;
     FFileName: string;
@@ -33,11 +33,11 @@ type
       Node: TShellNode; var AllowAction: Boolean);
     procedure Help;
   public
-  	constructor Create(ListView: TListView; const RootDir: string);
+    constructor Create(ListView: TListView; const RootDir: string);
     procedure Close;
     procedure AlignFrame;
-		procedure Add(const Msg: string; Silent: Boolean = False); overload;
-		procedure Add(const Strings: TStrings); overload;
+    procedure Add(const Msg: string; Silent: Boolean = False); overload;
+    procedure Add(const Strings: TStrings); overload;
     procedure Reset(const Title, Prefix: string);
     procedure Refresh(const Title, Prefix: string);
     procedure Hide;
@@ -54,17 +54,17 @@ var
 
 constructor TVisualLog.Create(ListView: TListView; const RootDir: string);
 var
-	S: string;
+  S: string;
 begin
-	inherited Create;
+  inherited Create;
   if RootDir = '' then
-  	S := ExtractFilePath(ParamStr(0))
-	else
-  	S := RootDir;
+    S := ExtractFilePath(ParamStr(0))
+  else
+    S := RootDir;
   CreateDir(ExcludeTrailingPathDelimiter(S));
   FListView := ListView;
   if FListView <> nil then
-  	FListView.OnDblClick := ListViewDoubleClick;
+    FListView.OnDblClick := ListViewDoubleClick;
   FRootDir := IncludeTrailingPathDelimiter(S);
   Help;
   if not FindSwitch('/hide') then
@@ -104,8 +104,8 @@ begin
     AlignFrame;
     SendMessage(FFrame.LogList.Handle, WM_VSCROLL, SB_BOTTOM, 0);
   end;
-	{if (FListView.Items.Count > 0) and FileExists(FFileName) then
-  	ShellExecute(0, 'open', PChar(FFileName), nil, nil, SW_SHOW);}
+  {if (FListView.Items.Count > 0) and FileExists(FFileName) then
+    ShellExecute(0, 'open', PChar(FFileName), nil, nil, SW_SHOW);}
 end;
 
 procedure TVisualLog.BackButtonClick(Sender: TObject);
@@ -130,46 +130,46 @@ end;
 
 procedure TVisualLog.Add(const Msg: string; Silent: Boolean = False);
 var
-	Item: TListItem;
-	F: TextFile;
+  Item: TListItem;
+  F: TextFile;
 begin
-	if (FListView <> nil) and (not Silent) then
-	begin
-		Item := FListView.Items.Add;
-  	Item.Caption := FormatDateTime('hh:mm:ss',  Now);
-	  Item.SubItems.Add(Msg);
-		SendMessage(FListView.Handle, WM_VSCROLL, SB_BOTTOM, 0);
-	end;
+  if (FListView <> nil) and (not Silent) then
+  begin
+    Item := FListView.Items.Add;
+    Item.Caption := FormatDateTime('hh:mm:ss',  Now);
+    Item.SubItems.Add(Msg);
+    SendMessage(FListView.Handle, WM_VSCROLL, SB_BOTTOM, 0);
+  end;
   if not FileExists(FFileName) then Exit;
-	AssignFile(F, FFileName);
+  AssignFile(F, FFileName);
   try
-  	Append(F);
+    Append(F);
     WriteLn(F, FormatDateTime('mm/dd/yyyy hh:nn:ssAM/PM', Now) + ' ' + Msg);
   finally
-  	CloseFile(F);
+    CloseFile(F);
   end;
 end;
 
 procedure TVisualLog.Add(const Strings: TStrings);
 var
-	Item: TListItem;
-	F: TextFile;
+  Item: TListItem;
+  F: TextFile;
   I: Integer;
 begin
   if not FileExists(FFileName) then Exit;
-	AssignFile(F, FFileName);
+  AssignFile(F, FFileName);
   try
-  	Append(F);
+    Append(F);
     for I := 0 to Strings.Count - 1 do
       WriteLn(F, Strings[I]);
   finally
-  	CloseFile(F);
+    CloseFile(F);
   end;
 end;
 
 procedure TVisualLog.Help;
 begin
-	if FListView <> nil then
+  if FListView <> nil then
   begin
     FListView.Items.Clear;
     with FListView.Items.Add do
@@ -187,20 +187,20 @@ end;
 
 procedure TVisualLog.Reset(const Title, Prefix: string);
 var
-	F: TextFile;
+  F: TextFile;
 begin
   Help;
   FPrefix := Prefix;
   FFileName := FRootDir + Prefix + FormatDateTime('yyyymmdd.hhnnss', Now) + '.log';
-	AssignFile(F, FFileName);
+  AssignFile(F, FFileName);
   try
-  	Rewrite(F);
+    Rewrite(F);
     WriteLn(F, 'Log for: ' + Title);
     WriteLn(F, 'Version: ' + GetFileVersion);
     WriteLn(F, 'Created on: ' + FormatDateTime('mmmm d yyyy hh:nn:ssAM/PM', Now));
     WriteLn(F, ' ');
   finally
-  	CloseFile(F);
+    CloseFile(F);
   end;
   if FFrame <> nil then
   begin

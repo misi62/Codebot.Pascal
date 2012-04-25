@@ -430,10 +430,10 @@ type
 
   TImageDrawList = class(TCustomDrawList)
   private
-		FChangeLink: TChangeLink;
+    FChangeLink: TChangeLink;
     FDisplayEmpty: Boolean;
-  	FImages: TCustomImageList;
-		procedure ImagesChange(Sender: TObject);
+    FImages: TCustomImageList;
+    procedure ImagesChange(Sender: TObject);
     procedure UpdateImages(var InternalImages: TCustomImageList;
       ExternalImages: TCustomImageList);
     procedure SetDisplayEmpty(Value: Boolean);
@@ -441,24 +441,24 @@ type
     procedure SetImages(Value: TCustomImageList);
     function GetImageIndex: Integer;
     procedure SetImageIndex(Value: Integer);
-	protected
+  protected
     procedure DrawItem(Index: Integer; var Rect: TRect;
       State: TDrawState); override;
-		procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
-  	constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-  	property ImageIndex: Integer read GetImageIndex write SetImageIndex;
+    property ImageIndex: Integer read GetImageIndex write SetImageIndex;
     property LineHeight: Integer read GetLineHeight;
   published
-  	property BorderStyle;
+    property BorderStyle;
     property DisplayEmpty: Boolean read FDisplayEmpty write SetDisplayEmpty;
-  	property Images: TCustomImageList read FImages write SetImages;
+    property Images: TCustomImageList read FImages write SetImages;
     property TabOrder;
-  	property TabStop;
+    property TabStop;
     property OnClick;
     property OnSelectItem;
-	end;
+  end;
 
 implementation
 
@@ -515,7 +515,7 @@ end;
 { TScrollList }
 
 const
-	ScrollTimer = $100;
+  ScrollTimer = $100;
 
 constructor TScrollList.Create(AOwner: TComponent);
 begin
@@ -569,7 +569,7 @@ var
 begin
   if FMultiSelect then
     FShift := KeyboardStateToShiftState - [ssCtrl];
-	HintWindow.Active := False;
+  HintWindow.Active := False;
   Delta := -Message.WheelDelta div 120;
   if ItemIndex > -1 then
     if ItemIndex + Delta < 0 then
@@ -601,8 +601,8 @@ var
   ScrollDir: TScrollDir;
   Distance: Integer;
 begin
-	Message.Result := 0;
-	if (Message.TimerID <> ScrollTimer) or FMouseDisabled then Exit;
+  Message.Result := 0;
+  if (Message.TimerID <> ScrollTimer) or FMouseDisabled then Exit;
   if FScrolling then
   begin
     GetCursorPos(Point);
@@ -653,14 +653,14 @@ end;
 
 procedure TScrollList.WMSetFocus(var Message: TWMSetFocus);
 begin
-	inherited;
-	Invalidate;
+  inherited;
+  Invalidate;
 end;
 
 procedure TScrollList.WMKillFocus(var Message: TWMKillFocus);
 begin
-	inherited;
-	Invalidate;
+  inherited;
+  Invalidate;
 end;
 
 procedure TScrollList.CaptureMove(X, Y: Integer);
@@ -761,19 +761,19 @@ end;
 
 procedure TScrollList.MouseMove(Shift: TShiftState; X, Y: Integer);
 var
-	I: Integer;
+  I: Integer;
 begin
   inherited MouseMove(Shift, X, Y);
   if FMultiSelect then
     FShift := KeyboardStateToShiftState - [ssCtrl];
   if FHotTrack and (not FMouseDisabled) then
   begin
-  	I := ItemAtPos(Point(X, Y), True);
+    I := ItemAtPos(Point(X, Y), True);
     if I <> FHotIndex then
     begin
-    	InvalidateItem(FHotIndex);
+      InvalidateItem(FHotIndex);
       FHotIndex := I;
-    	InvalidateItem(FHotIndex);
+      InvalidateItem(FHotIndex);
     end;
   end;
   if MouseCapture and (not FMouseDisabled) then
@@ -814,15 +814,15 @@ begin
       if FMultiSelect and FSelectItems[FTopIndex + I] then
         Include(DrawState, dsSelected);
       if FTopIndex + I = FHotIndex then
-      	Include(DrawState, dsHot);
+        Include(DrawState, dsHot);
       if FTopIndex + I = FDownIndex then
-      	Include(DrawState, dsPressed);
+        Include(DrawState, dsPressed);
       R := UpdateRect;
       DrawItem(FTopIndex + I, R, DrawState);
     end;
     Top := Bottom;
   end;
-	inherited Paint;
+  inherited Paint;
 end;
 
 procedure TScrollList.DrawItem(Index: Integer; var Rect: TRect;
@@ -945,7 +945,7 @@ end;
 
 procedure TScrollList.SetItemHeight(Value: Integer);
 var
-	WasVisible: Boolean;
+  WasVisible: Boolean;
 begin
   if Value < 1 then
     Value := 1;
@@ -954,7 +954,7 @@ begin
     FItemHeight := Value;
     WasVisible := Visible;
     Visible := False;
-		UpdateScrollRange;
+    UpdateScrollRange;
     Visible := WasVisible;
     Invalidate;
   end;
@@ -962,9 +962,9 @@ end;
 
 procedure TScrollList.SetHotTrack(Value: Boolean);
 begin
-	if Value <> FHotTrack then
+  if Value <> FHotTrack then
   begin
-  	FHotTrack := Value;
+    FHotTrack := Value;
     InvalidateItem(FHotIndex);
     FHotIndex := -1;
   end;
@@ -1036,9 +1036,9 @@ begin
     PriorIndex := FItemIndex;
     if not HandleAllocated then
     begin
-    	FItemIndex := Value;
-    	Exit;
-		end;
+      FItemIndex := Value;
+      Exit;
+    end;
     CanSelect := True;
     SelectItem(FItemIndex, Value, CanSelect);
     if CanSelect then
@@ -1687,7 +1687,7 @@ end;
 
 constructor TImageDrawList.Create(AOwner: TComponent);
 begin
-	inherited Create(AOwner);
+  inherited Create(AOwner);
   Color := clWindow;
   Width := 100;
   Height := 200;
@@ -1701,7 +1701,7 @@ end;
 destructor TImageDrawList.Destroy;
 begin
   UpdateImages(FImages, nil);
- 	FChangeLink.Free;
+   FChangeLink.Free;
   inherited Destroy;
 end;
 
@@ -1717,7 +1717,7 @@ begin
   else
   begin
     DrawRectState(Canvas.Handle, Rect, Color, State);
-  	if FImages = nil then Exit;
+    if FImages = nil then Exit;
     ImageListDraw(FImages, Canvas, Rect, Index, State);
   end;
 end;
@@ -1728,18 +1728,18 @@ var
 begin
   if Sender is TCustomImageList then
   begin
-  	if FDisplayEmpty then
-    	Count := Images.Count + 1
-		else
-    	Count := Images.Count;
-  	ItemHeight := Images.Height + 16;
+    if FDisplayEmpty then
+      Count := Images.Count + 1
+    else
+      Count := Images.Count;
+    ItemHeight := Images.Height + 16;
   end
   else
   begin
-  	if FDisplayEmpty then
-	  	Count := 1
+    if FDisplayEmpty then
+      Count := 1
     else
-	  	Count := 0;
+      Count := 0;
     ItemHeight := 32;
   end;
   Invalidate;
@@ -1755,7 +1755,7 @@ begin
 end;
 
 procedure TImageDrawList.UpdateImages(var InternalImages: TCustomImageList;
-	ExternalImages: TCustomImageList);
+  ExternalImages: TCustomImageList);
 begin
   if InternalImages <> nil then
   begin
@@ -1768,18 +1768,18 @@ begin
     InternalImages.RegisterChanges(FChangeLink);
     InternalImages.FreeNotification(Self);
   end;
-	ImagesChange(InternalImages);
+  ImagesChange(InternalImages);
 end;
 
 procedure TImageDrawList.SetDisplayEmpty(Value: Boolean);
 begin
-	if Value <> FDisplayEmpty then
+  if Value <> FDisplayEmpty then
   begin
-  	FDisplayEmpty := Value;
-  	if Value then
-    	Count := Count + 1
-		else
-    	Count := Count - 1;
+    FDisplayEmpty := Value;
+    if Value then
+      Count := Count + 1
+    else
+      Count := Count - 1;
     Invalidate;
   end;
 end;
@@ -1799,17 +1799,17 @@ function TImageDrawList.GetImageIndex: Integer;
 begin
   Result := ItemIndex;
   if FDisplayEmpty then
-  	Dec(Result);
+    Dec(Result);
   if Result < 0 then
-  	Result := -1;
+    Result := -1;
 end;
 
 procedure TImageDrawList.SetImageIndex(Value: Integer);
 begin
   if FDisplayEmpty then
-  	ItemIndex := Value + 1
-	else
-  	ItemIndex := Value;
+    ItemIndex := Value + 1
+  else
+    ItemIndex := Value;
 end;
 
 end.

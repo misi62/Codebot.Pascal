@@ -29,8 +29,8 @@ type
   private
     FStylizer: TDesignStylizer;
     procedure SetStylizer(Value: TDesignStylizer);
-	public
-  	property Stylizer: TDesignStylizer read FStylizer write SetStylizer;
+  public
+    property Stylizer: TDesignStylizer read FStylizer write SetStylizer;
   end;
 
 implementation
@@ -39,23 +39,23 @@ implementation
 
 procedure TAdvancedStylesForm.FormCreate(Sender: TObject);
 begin
-	DesktopFont := True;
+  DesktopFont := True;
   ClientHeight := OffsetGroupBox.Top * 2 + OffsetGroupBox.Height;
   ClientWidth := OffsetGroupBox.Left * 2 + OffsetGroupBox.Width;
 end;
 
 procedure TAdvancedStylesForm.SetStylizer(Value: TDesignStylizer);
 begin
-	FStylizer := Value;
+  FStylizer := Value;
   if FStylizer <> nil then
   begin
-		XSpinner.Position := FStylizer.BandOffsetX;
-		YSpinner.Position := FStylizer.BandOffsetY;
-    case	FStylizer.BandAlignment of
-    	taLeftJustify: LeftButton.Down :=  True;
+    XSpinner.Position := FStylizer.BandOffsetX;
+    YSpinner.Position := FStylizer.BandOffsetY;
+    case  FStylizer.BandAlignment of
+      taLeftJustify: LeftButton.Down :=  True;
       taCenter: CenterButton.Down :=  True;
       taRightJustify: RightButton.Down :=  True;
-		end;
+    end;
   end;
 end;
 
@@ -63,7 +63,7 @@ procedure TAdvancedStylesForm.XSpinnerChangingEx(Sender: TObject;
   var AllowChange: Boolean; NewValue: Smallint;
   Direction: TUpDownDirection);
 begin
-	AllowChange := True;
+  AllowChange := True;
   if FStylizer = nil then Exit;
   FStylizer.BandOffsetX := NewValue;
   FStylizer.RestoreState;
@@ -73,7 +73,7 @@ procedure TAdvancedStylesForm.YSpinnerChangingEx(Sender: TObject;
   var AllowChange: Boolean; NewValue: Smallint;
   Direction: TUpDownDirection);
 begin
-	AllowChange := True;
+  AllowChange := True;
   if FStylizer = nil then Exit;
   FStylizer.BandOffsetY := NewValue;
   FStylizer.RestoreState;
@@ -82,7 +82,7 @@ end;
 procedure TAdvancedStylesForm.XEditExit(Sender: TObject);
 begin
   if FStylizer = nil then Exit;
-	XSpinner.Position := StrToIntDef(XEdit.Text, XSpinner.Position);
+  XSpinner.Position := StrToIntDef(XEdit.Text, XSpinner.Position);
   FStylizer.BandOffsetX := XSpinner.Position;
   FStylizer.Refresh;
 end;
@@ -90,7 +90,7 @@ end;
 procedure TAdvancedStylesForm.YEditExit(Sender: TObject);
 begin
   if FStylizer = nil then Exit;
-	YSpinner.Position := StrToIntDef(YEdit.Text, YSpinner.Position);
+  YSpinner.Position := StrToIntDef(YEdit.Text, YSpinner.Position);
   FStylizer.BandOffsetY := YSpinner.Position;
   FStylizer.Refresh;
 end;
@@ -98,9 +98,9 @@ end;
 procedure TAdvancedStylesForm.BandAlignmentClick(Sender: TObject);
 begin
   if FStylizer = nil then Exit;
-	LeftButton.Down := LeftButton = Sender;
-	CenterButton.Down := CenterButton = Sender;
-	RightButton.Down := RightButton = Sender;
+  LeftButton.Down := LeftButton = Sender;
+  CenterButton.Down := CenterButton = Sender;
+  RightButton.Down := RightButton = Sender;
   FStylizer.BandAlignment := TAlignment(TComponent(Sender).Tag);
   FStylizer.Refresh;
 end;

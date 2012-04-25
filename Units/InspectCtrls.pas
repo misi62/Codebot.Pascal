@@ -309,7 +309,7 @@ type
     property TabStop;
     property TabOrder;
     property UseDockManager;
-		property Visible;
+    property Visible;
     property WantEnter;
     property OnCanResize;
     property OnClick;
@@ -355,12 +355,12 @@ function EditorKindToString(Kind: TEditorKind): string;
 procedure GetEditorKindStrings(Strings: TStrings);
 
 var
-	RegisterInspectorUnits: procedure(AOwner: TComponent);
+  RegisterInspectorUnits: procedure(AOwner: TComponent);
 
 implementation
 
 uses
-	StrTools;
+  StrTools;
 
 { TInspectorEditor class }
 
@@ -393,8 +393,8 @@ end;
 
 procedure TInspectorEditor.Click;
 begin
-	if FOwner.FInspector.FInspectObject <> nil then
-  	FOwner.FInspector.FInspectObject.Edit;
+  if FOwner.FInspector.FInspectObject <> nil then
+    FOwner.FInspector.FInspectObject.Edit;
 end;
 
 procedure TInspectorEditor.DoSubmit;
@@ -881,12 +881,12 @@ end;
 
 procedure TInspectObject.Recreate;
 var
-	I: TCustomInspector;
+  I: TCustomInspector;
 begin
-	I := Inspector;
+  I := Inspector;
   if I <> nil then
   begin
-  	I.InspectObject := nil;
+    I.InspectObject := nil;
     I.InspectObject := Self;
   end;
 end;
@@ -898,10 +898,10 @@ end;
 
 function TInspectObject.GetEditor: TInspectorEditor;
 begin
-	Result := nil;
+  Result := nil;
   if (Inspector <> nil) and (Inspector.InspectObject = Self) and
-  	(Inspector.ItemIndex > - 1) then
-		Result := Inspector.Editors[Inspector.ItemIndex];
+    (Inspector.ItemIndex > - 1) then
+    Result := Inspector.Editors[Inspector.ItemIndex];
 end;
 
 procedure TInspectObject.SetEditorText(const EditorName: string;
@@ -1055,8 +1055,8 @@ var
   Col: Integer;
   Row: Integer;
 begin
-	PixelColors[False] := Blend(Color, 0);
-	PixelColors[True] := Blend(Color, clWhite);
+  PixelColors[False] := Blend(Color, 0);
+  PixelColors[True] := Blend(Color, clWhite);
   with Bitmap do
   begin
     Height := 8;
@@ -1070,7 +1070,7 @@ end;
 procedure TCustomInspector.DrawItem(Index: Integer; var Rect: TRect;
   State: TDrawState);
 var
-	Dots: TBitmap;
+  Dots: TBitmap;
 
   procedure DrawClassicGrid;
   begin
@@ -1083,8 +1083,8 @@ var
         if not FReadOnly then
         begin
           Brush.Color := clWindow;
-	        FillRect(Classes.Rect(FSplitPos + 1, Top, ClientWidth, Bottom));
-				end;
+          FillRect(Classes.Rect(FSplitPos + 1, Top, ClientWidth, Bottom));
+        end;
       end;
       {else
         FillRect(Rect);}
@@ -1173,7 +1173,7 @@ var
   PriorMode: Integer;
   PriorStyle: TFontStyles;
 begin
-	Dots := TBitmap.Create;
+  Dots := TBitmap.Create;
   BuildColorBitmap(Dots, Color);
   if FStyle = isClassic then
     DrawClassicGrid
@@ -1188,9 +1188,9 @@ begin
     Font := FInplaceEdit.Font;
     ItemHeight := Canvas.TextHeight('Wg') + 4;
     if Enabled then
-	    Font.Color := clWindowText
-		else
-	    Font.Color := cl3DDkShadow;
+      Font.Color := clWindowText
+    else
+      Font.Color := cl3DDkShadow;
     Left := 5;
     Right := FSplitPos - 1;
     PriorMode := SetBkMode(Handle, TRANSPARENT);
@@ -1198,10 +1198,10 @@ begin
     Dec(DrawRect.Bottom);
     PriorStyle := Font.Style;
     if (FStyle = isFlat) and (dsSelected in State) then
-			Font.Style := [fsBold];
+      Font.Style := [fsBold];
     DrawText(Handle, PChar(Editor.Name), -1, DrawRect, DrawLeft or DT_VCENTER);
     if (FStyle = isFlat) and (dsSelected in State) then
-			Font.Style := PriorStyle;
+      Font.Style := PriorStyle;
     Left := FSplitPos + 4;
     Right := ClientWidth;
     if FStyle = isClassic then
@@ -1290,17 +1290,17 @@ procedure TCustomInspector.Paint;
 var
   R: TRect;
 begin
-	if Style = isClassic then
-  	FillRectColor(Canvas.Handle, ClientRect, Color)
-	else
+  if Style = isClassic then
+    FillRectColor(Canvas.Handle, ClientRect, Color)
+  else
   begin
-  	R := ClientRect;
+    R := ClientRect;
     R.Right := FSplitPos;
-  	FillRectColor(Canvas.Handle, R, Color);
-  	R := ClientRect;
+    FillRectColor(Canvas.Handle, R, Color);
+    R := ClientRect;
     R.Left := FSplitPos;
-  	FillRectColor(Canvas.Handle, R, clWindow);
-	end;
+    FillRectColor(Canvas.Handle, R, clWindow);
+  end;
   inherited Paint;
 end;
 
@@ -1350,7 +1350,7 @@ begin
   UpdateWindow(Handle);
   inherited SelectItem(PriorIndex, NewIndex, CanSelect);
   if CanSelect and (FInspectObject <> nil) then
-		FInspectObject.Change;
+    FInspectObject.Change;
 end;
 
 function TCustomInspector.Submit(Editor: TInspectorEditor; const Value: string): Boolean;
@@ -1377,22 +1377,22 @@ end;
 
 procedure TCustomInspector.CMEnabledChanged(var Message: TMessage);
 var
-	WasVisible: Boolean;
+  WasVisible: Boolean;
 begin
-	inherited;
+  inherited;
   if Enabled then
-		FInplaceEdit.Font.Color := clWindowText
-	else
-		FInplaceEdit.Font.Color := cl3DDkShadow;
-	WasVisible := Visible;
+    FInplaceEdit.Font.Color := clWindowText
+  else
+    FInplaceEdit.Font.Color := cl3DDkShadow;
+  WasVisible := Visible;
   Visible := False;
-	InvalidateRect(Handle, nil, True);
+  InvalidateRect(Handle, nil, True);
   Visible := WasVisible;
 end;
 
 procedure TCustomInspector.CMFontChanged(var Message: TMessage);
 var
-	DC: HDC;
+  DC: HDC;
   F: HFONT;
 begin
   inherited;
@@ -1443,19 +1443,19 @@ end;
 
 procedure TCustomInspector.WMEraseBkgnd(var Message: TWMEraseBkgnd);
 {var
-	R: TRect;}
+  R: TRect;}
 begin
-	{if Style = isClassic then
-  	FillRectColor(Message.DC, ClientRect, Color)
-	else
+  {if Style = isClassic then
+    FillRectColor(Message.DC, ClientRect, Color)
+  else
   begin
-  	R := ClientRect;
+    R := ClientRect;
     R.Right := FSplitPos;
-  	FillRectColor(Message.DC, R, Color);
-  	R := ClientRect;
+    FillRectColor(Message.DC, R, Color);
+    R := ClientRect;
     R.Left := FSplitPos;
-  	FillRectColor(Message.DC, R, clWindow);
-	end;}
+    FillRectColor(Message.DC, R, clWindow);
+  end;}
   Message.Result := 1;
 end;
 
@@ -1463,7 +1463,7 @@ procedure TCustomInspector.UpdateControls(Index: Integer);
 var
   Wnd: HWND;
 begin
-	if not HandleAllocated then Exit;
+  if not HandleAllocated then Exit;
   with FInplaceEdit do
     if Index > -1 then
     begin
@@ -1524,14 +1524,14 @@ end;
 
 procedure TCustomInspector.SetEditors(Value: TInspectorEditors);
 var
-	Form: TCustomForm;
+  Form: TCustomForm;
 begin
   FEditors.Assign(Value);
   if Owner is TCustomForm then
   begin
-  	Form := Owner as TCustomForm;
+    Form := Owner as TCustomForm;
     if Form.Designer <> nil then
-			Form.Designer.Modified;
+      Form.Designer.Modified;
   end;
 end;
 
@@ -1570,7 +1570,7 @@ begin
     FReadOnly := Value;
     FInplaceEdit.ReadOnly := Value;
     TCustomInspector(FInplaceEdit).Color := EnabledColors[(not FReadOnly) or
-    	(FStyle = isFlat)];
+      (FStyle = isFlat)];
     Invalidate;
   end;
 end;
@@ -1604,7 +1604,7 @@ begin
     FSplitPos := Value;
     ClipRect := Rect(FSplitPos, 0, ClientWidth + 200, ClientHeight);
     ScrollWindowEx(Handle, Delta, 0, @ClipRect, @ClipRect, 0, nil, SW_INVALIDATE
-    	or SW_ERASE );
+      or SW_ERASE );
     if Delta > 0 then
       ClipRect := Rect(FSplitPos - Delta - 1, 0, FSplitPos + Delta, ClientHeight)
     else

@@ -45,17 +45,17 @@ type
 
   TDropFiles = class(TComponent)
   private
-  	FWinControl: TWinControl;
-	  FOnDropFiles: TDropFilesEvent;
+    FWinControl: TWinControl;
+    FOnDropFiles: TDropFilesEvent;
     procedure SetWinControl(const Value: TWinControl);
-	protected
-  	procedure DoDropFiles(Sender: TObject; Files: TStrings); dynamic;
-		procedure Loaded; override;
-		procedure Notification(AComponent: TComponent; Operation: TOperation); override;
-	public
-  	destructor Destroy; override;
-	published
-  	property WinControl: TWinControl read FWinControl write SetWinControl;
+  protected
+    procedure DoDropFiles(Sender: TObject; Files: TStrings); dynamic;
+    procedure Loaded; override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+  public
+    destructor Destroy; override;
+  published
+    property WinControl: TWinControl read FWinControl write SetWinControl;
     property OnDropFiles: TDropFilesEvent read FOnDropFiles write FOnDropFiles;
   end;
 
@@ -95,7 +95,7 @@ begin
   FWinControl.WindowProc := FWndMethod;
   DropManager.FList.Remove(Self);
   if FWinControl.HandleAllocated then
-	  DragAcceptFiles(FWinControl.Handle, False);
+    DragAcceptFiles(FWinControl.Handle, False);
 end;
 
 procedure TDropControl.ProcessMessage(var Msg: TMessage);
@@ -156,16 +156,16 @@ var
 begin
   Files := TStringList.Create;
   try
-  	F := Trim(UpperCase(FFilter));
+    F := Trim(UpperCase(FFilter));
     for I := 0 to DragQueryFile(Drop, $FFFFFFFF, Buffer, MAX_PATH)-1 do
     begin
       DragQueryFile(Drop, I, Buffer, MAX_PATH);
       S := Buffer;
       if (F = '') or (UpperCase(ExtractFileExt(S)) = F) then
-	      if FUseUNC then
-  	      Files.Add(ExpandUNCFilename(S))
-    	  else
-      	  Files.Add(S);
+        if FUseUNC then
+          Files.Add(ExpandUNCFilename(S))
+        else
+          Files.Add(S);
     end;
     with TDropControl(DropControl) do
       if Assigned(FOnDropFiles) then
@@ -210,44 +210,44 @@ end;
 
 destructor TDropFiles.Destroy;
 begin
-	WinControl := nil;
+  WinControl := nil;
   inherited Destroy;
 end;
 
 procedure TDropFiles.DoDropFiles(Sender: TObject; Files: TStrings);
 begin
-	if Assigned(FOnDropFiles) then FOnDropFiles(Self, Files);
+  if Assigned(FOnDropFiles) then FOnDropFiles(Self, Files);
 end;
 
 procedure TDropFiles.Loaded;
 begin
-	inherited Loaded;
+  inherited Loaded;
   if FWinControl <> nil then
-		DropManager.RegisterControl(FWinControl, DoDropFiles);
+    DropManager.RegisterControl(FWinControl, DoDropFiles);
 end;
 
 procedure TDropFiles.Notification(AComponent: TComponent; Operation: TOperation);
 begin
-	inherited Notification(AComponent, Operation);
-	if (Operation = opRemove) and (AComponent = FWinControl) then
-  	WinControl := nil;
+  inherited Notification(AComponent, Operation);
+  if (Operation = opRemove) and (AComponent = FWinControl) then
+    WinControl := nil;
 end;
 
 procedure TDropFiles.SetWinControl(const Value: TWinControl);
 begin
   if Value <> FWinControl then
   begin
-  	if FWinControl <> nil then
+    if FWinControl <> nil then
     begin
-    	FWinControl.RemoveFreeNotification(Self);
+      FWinControl.RemoveFreeNotification(Self);
       DropManager.UnregisterControl(FWinControl);
     end;
-	  FWinControl := Value;
-  	if FWinControl <> nil then
+    FWinControl := Value;
+    if FWinControl <> nil then
     begin
-    	FWinControl.FreeNotification(Self);
+      FWinControl.FreeNotification(Self);
       if not (csLoading in ComponentState) then
-	      DropManager.RegisterControl(FWinControl, DoDropFiles);
+        DropManager.RegisterControl(FWinControl, DoDropFiles);
     end;
   end;
 end;

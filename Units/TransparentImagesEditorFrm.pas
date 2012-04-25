@@ -63,7 +63,7 @@ begin
     OkButton.Visible := True;
     Result := ShowModal = mrOk;
     if Result then
-    	Images.Assign(FImages);
+      Images.Assign(FImages);
   finally
     Free;
   end;

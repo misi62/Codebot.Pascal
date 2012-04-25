@@ -14,7 +14,7 @@ interface
 {$I CODEBOT.INC}
 
 {$IFNDEF D10_UP}
-	{$R MANIFEST.RES}
+  {$R MANIFEST.RES}
 {$ENDIF}
 
 uses
@@ -39,14 +39,14 @@ function RectBounds(Left, Top, Width, Height: Integer): TRectBounds; overload;
 function RectBounds(const Rect: TRect): TRectBounds; overload;
 
 type
-	TRGB = BaseTypes.TRGB;
-	PRGB = BaseTypes.PRGB;
+  TRGB = BaseTypes.TRGB;
+  PRGB = BaseTypes.PRGB;
 
-	TRGBA = BaseTypes.TRGBA;
-	PRGBA = BaseTypes.PRGBA;
+  TRGBA = BaseTypes.TRGBA;
+  PRGBA = BaseTypes.PRGBA;
 
-	TRGBAFloat = BaseTypes.TRGBAFloat;
-	PRGBAFloat = BaseTypes.PRGBAFloat;
+  TRGBAFloat = BaseTypes.TRGBAFloat;
+  PRGBAFloat = BaseTypes.PRGBAFloat;
 
 function RGBColor(R, G, B: Byte): TColor;
 function RGBAToColor(RGBA: TRGBA): TColor;
@@ -92,19 +92,19 @@ type
   end;
 
 { The LayerBlit procedure represents paint program like layer blending
-	see also http://www.pegtop.net/delphi/articles/blendmodes/ }
+  see also http://www.pegtop.net/delphi/articles/blendmodes/ }
 
 type
-	TBlitMode = (bmNormal, bmAverage, bmScreen, bmMultiply, bmLighten, bmDarken,
-  	bmDifference);
+  TBlitMode = (bmNormal, bmAverage, bmScreen, bmMultiply, bmLighten, bmDarken,
+    bmDifference);
 
 procedure LayerBlit(Dest: HDC; X, Y, Width, Height: Integer; Src: HDC;
-	SrcX, SrcY: Integer; Mode: TBlitMode); overload;
+  SrcX, SrcY: Integer; Mode: TBlitMode); overload;
 procedure LayerBlit(Dest: HDC; X, Y: Integer; Mask: TFastBitmap;
-	Mode: TBlitMode); overload;
+  Mode: TBlitMode); overload;
 
 type
-	TResizeMode = (rmBicubic, rmBilinear, rmNearest);
+  TResizeMode = (rmBicubic, rmBilinear, rmNearest);
 
 procedure ResizeBitmap(var Bitmap: TBitmap; NewWidth, NewHeight: Integer; Mode: TResizeMode);
 
@@ -116,7 +116,7 @@ procedure ColorPick(Enabled: Boolean);
 
 const
   ILD_PRESSED = $0080;
-	CN_COLORPICK = WM_USER + $FA0;
+  CN_COLORPICK = WM_USER + $FA0;
 
 { New color constants defined by Internet Explorer }
 
@@ -347,7 +347,7 @@ function GetTextColor(Background: TColor): TColor;
     with alternating colors specified by the ForeColor and BackColor parameters }
 
 type
-	TBitmapBrush = (bbChecker, bbHalflight);
+  TBitmapBrush = (bbChecker, bbHalflight);
 
 function GetBitmap(ForeColor: TColor; BackColor: TColor): TBitmap; overload;
 function GetBitmap(Resource: Integer): TBitmap; overload;
@@ -432,7 +432,7 @@ procedure DrawArrow(DC: HDC; Rect: TRect; Direction: TDirection;
   ForeColor, BackColor: TColor; Size: Integer = 0; Enabled: Boolean = True); overload;
 
 procedure DrawArrow(DC: HDC; Rect: TRect; Direction: TDirection;
-	Color: TColor = clWindowFrame; Enabled: Boolean = True); overload;
+  Color: TColor = clWindowFrame; Enabled: Boolean = True); overload;
 
 { The DrawBox procedure }
 
@@ -519,7 +519,7 @@ procedure DrawEditText(DC: HDC; const Text: string; const Rect: TRect; Direction
 procedure DrawFocus(DC: HDC; Rect: TRect; BorderX: Integer = 0; BorderY: Integer = 0);
 
 { The DrawClose procedure draws a close symbol in a device context centered
-  about the Rect parameter	}
+  about the Rect parameter  }
 
 procedure DrawClose(DC: HDC; Rect: TRect; Color: TColor = clWindowFrame);
 
@@ -558,7 +558,7 @@ procedure DrawEllipsis(DC: HDC; Rect: TRect; Enabled: Boolean = True);
 
 type
   TDrawFrameState = (dfFocus, dfFramed, dfHover, dfRaised, dfFlat,
-  	dfLowered, dfSunken, dfPressed, dfPushed);
+    dfLowered, dfSunken, dfPressed, dfPushed);
 
 procedure DrawFrame(DC: HDC; Rect: TRect; State: TDrawFrameState);
 
@@ -678,8 +678,8 @@ procedure BlitAnd(Dest: HDC; const Rect: TRect; Source: HDC);
 procedure BlitOr(Dest: HDC; const Rect: TRect; Source: HDC);
 
 type
-	TGlyphKind = (gkClose, gkPin, gkPinPushed, gkChevronUp, gkChevronDown,
-  	gkArrowLeft, gkArrowRight, gkArrowUp, gkArrowDown,
+  TGlyphKind = (gkClose, gkPin, gkPinPushed, gkChevronUp, gkChevronDown,
+    gkArrowLeft, gkArrowRight, gkArrowUp, gkArrowDown,
     gkArrowLeftDisabled, gkArrowRightDisabled, gkArrowUpDisabled,
     gkArrowDownDisabled, gkEllipse, gkQuestion, gkVSpin, gkHSpin);
 
@@ -720,7 +720,7 @@ type
   );
 
 { The root part of each element is sometimes used for special painting and does
-	not belong to a certain state. }
+  not belong to a certain state. }
 
 { Button }
 
@@ -1080,7 +1080,7 @@ type
     State: Integer;
   end;
 
-	TThemeSize = THEMESIZE;
+  TThemeSize = THEMESIZE;
 
 const
   tsMin = TS_MIN;
@@ -1116,7 +1116,7 @@ const
 
 
 { TThemePainter  is a small foot print class to provide the user with pure
-	Windows XP theme related abilities like	painting elements and text or
+  Windows XP theme related abilities like  painting elements and text or
   retrieving certain info. }
 
 type
@@ -1170,7 +1170,7 @@ type
     procedure DrawParentBackground(Window: HWND; Target: HDC; Details: PThemedDetails; OnlyIfTransparent: Boolean;
       Bounds: PRect = nil);
     procedure DrawText(DC: HDC; const Details: TThemedDetails;
-    	const S: WideString; R: TRect; Flags: Cardinal);
+      const S: WideString; R: TRect; Flags: Cardinal);
     function HasTransparentParts(Details: TThemedDetails): Boolean;
     function PartSize(const Details: TThemedDetails; var Rect: TRect; ThemeSize: TThemeSize = tsDraw): TSize; overload;
     function PartSize(const Details: TThemedDetails; ThemeSize: TThemeSize = tsDraw): TSize; overload;
@@ -1195,7 +1195,7 @@ procedure DrawThemeComboBox(DC: HDC; Rect: TRect; State: TDrawState);
 procedure DrawThemeComboButton(DC: HDC; Rect: TRect; State: TDrawState);
 
 procedure DrawThemeBorder(DC: HDC; const Rect: TRect; State: TDrawState;
-	Thickness: Integer = -1; X: Integer = 0; Y: Integer = 0);
+  Thickness: Integer = -1; X: Integer = 0; Y: Integer = 0);
 procedure DrawThemeBorderInflate(DC: HDC; var Rect: TRect; State: TDrawState);
 procedure DrawThemeEdit(DC: HDC; const Rect: TRect; State: TDrawState);
 procedure DrawThemeButton(DC: HDC; const Rect: TRect; State: TDrawState);
@@ -1216,9 +1216,9 @@ procedure DrawThemeScroll(DC: HDC; const Rect: TRect; State: TDrawState);
 // procedure DrawThemeScroll(DC: HDC; Direction: TDirection; const Rect: TRect; State: TDrawState);
 procedure DrawFlatScroll(DC: HDC; Direction: TDirection; const Rect: TRect; State: TDrawState);
 procedure DrawThemeGrip(DC: HDC; const Rect: TRect);
-procedure	DrawThemeGripper(DC: HDC; Rect: TRect; Color: TColor; Horizontal: Boolean = True);
+procedure  DrawThemeGripper(DC: HDC; Rect: TRect; Color: TColor; Horizontal: Boolean = True);
 procedure DrawThemeGroupBox(DC: HDC; const Text: string; const Rect: TRect; State: TDrawState);
-procedure DrawThemeExpandableBox(DC: HDC; const Text: string; const Rect: TRect;	State: TDrawState);
+procedure DrawThemeExpandableBox(DC: HDC; const Text: string; const Rect: TRect;  State: TDrawState);
 procedure DrawThemeHorzThumb(DC: HDC; const Rect: TRect; State: TDrawState);
 procedure DrawThemeHorzSplit(DC: HDC; const Rect: TRect; State: TDrawState);
 procedure DrawThemeVertThumb(DC: HDC; const Rect: TRect; State: TDrawState);
@@ -1227,11 +1227,11 @@ procedure DrawThemeCloseBox(DC: HDC; const Text: string; const Rect: TRect; Stat
 procedure DrawThemeStatus(DC: HDC; const Text: string; const Rect: TRect);
 procedure DrawThemeBar(DC: HDC; Rect: TRect; Background: TColor);
 procedure DrawThemeSeperator(DC: HDC; Rect: TRect; Background: TColor;
-	Themed: Boolean = True; Transparent: Boolean = False; Flat: Boolean = False); overload;
+  Themed: Boolean = True; Transparent: Boolean = False; Flat: Boolean = False); overload;
 procedure DrawThemeSeperator(DC: HDC; const Rect: TRect; ForeGround,
-	Background: TColor); overload;
+  Background: TColor); overload;
 procedure DrawThemeDesigner(DC: HDC; const Rect: TRect; GripSize: Integer;
-	FixedWidth, FixedHeight: Boolean; State: TDrawState);
+  FixedWidth, FixedHeight: Boolean; State: TDrawState);
 
 { Alpha blending suport routines }
 
@@ -1262,29 +1262,29 @@ type
 
 { Glass image routines }
 
-	IGlassImage = interface
-  	['{98ADB4B7-83BB-4B77-A8F5-F2A5B102981B}']
+  IGlassImage = interface
+    ['{98ADB4B7-83BB-4B77-A8F5-F2A5B102981B}']
     function GetDC: HDC;
     function GetGraphic: TGraphic;
     function GetPixelDepth: TPixelDepth;
     function GetScanline(Row: Integer): Pointer;
     function GetStride: Integer;
     property DC: HDC read GetDC;
-		property Graphic: TGraphic read GetGraphic;
+    property Graphic: TGraphic read GetGraphic;
     property PixelDepth: TPixelDepth read GetPixelDepth;
     property Scanline[Row: Integer]: Pointer read GetScanline;
     property Stride: Integer read GetStride;
   end;
 
-	INativeDraw = interface(IGlassImage)
-		['{381653CF-19EA-43F7-83E3-CDED1D5554BF}']
+  INativeDraw = interface(IGlassImage)
+    ['{381653CF-19EA-43F7-83E3-CDED1D5554BF}']
     procedure DrawAlpha(const Rect: TRect; DC: HDC; X, Y: Integer;
       Opacity: Byte = $FF; Grayscale: Boolean = False);
     procedure DrawState(const Rect: TRect; DC: HDC; X, Y: Integer;
       State: TDrawState = []);
     procedure DrawColor(const Rect: TRect; DC: HDC; X, Y: Integer;
       Color: TColor; Opacity: Byte = $FF);
-	end;
+  end;
 
 function CreateGlassImage(Stream: TStream = nil): IGlassImage;
 
@@ -1302,7 +1302,7 @@ implementation
 {$R GLYPHS.RES}
 
 uses
-	Consts;
+  Consts;
 
 function RectBounds(Left, Top, Width, Height: Integer): TRectBounds;
 begin
@@ -1327,12 +1327,12 @@ begin
   RGBA.Red := B;
   RGBA.Green:= G;
   RGBA.Blue := R;
-	RGBA.Alpha := 0;
+  RGBA.Alpha := 0;
 end;
 
 function RGBAToColor(RGBA: TRGBA): TColor;
 begin
-	RGBA.Alpha := RGBA.Blue;
+  RGBA.Alpha := RGBA.Blue;
   RGBA.Blue := RGBA.Red;
   RGBA.Red := RGBA.Alpha;
   RGBA.Alpha := 0;
@@ -1362,7 +1362,7 @@ end;
 function ColorToRGBA(Color: TColor): TRGBA;
 begin
   Result := TRGBA(ColorToRGB(Color));
-	Result.Alpha := Result.Blue;
+  Result.Alpha := Result.Blue;
   Result.Blue := Result.Red;
   Result.Red := Result.Alpha;
   Result.Alpha := 0;
@@ -1804,181 +1804,181 @@ end;
 { LayerBlit }
 
 procedure LayerBlit(Dest: HDC; X, Y, Width, Height: Integer; Src: HDC;
-	SrcX, SrcY: Integer; Mode: TBlitMode);
+  SrcX, SrcY: Integer; Mode: TBlitMode);
 var
-	A, B: TFastBitmap;
+  A, B: TFastBitmap;
   Col, Row: Integer;
   BitsA, BitsB: PRGB;
 begin
-	if Mode = bmNormal then
+  if Mode = bmNormal then
   begin
-  	BitBlt(Dest, X, Y, Width, Height, Src, SrcX, SrcY, SRCCOPY);
+    BitBlt(Dest, X, Y, Width, Height, Src, SrcX, SrcY, SRCCOPY);
     Exit;
-	end;
-	A := CreateFastBitmap(Width, Height);
+  end;
+  A := CreateFastBitmap(Width, Height);
   B := CreateFastBitmap(Width, Height);
   try
-  	BitBlt(A.DC, 0, 0, Width, Height, Dest, X, Y, SRCCOPY);
-  	BitBlt(B.DC, 0, 0, Width, Height, Src, SrcX, SrcY, SRCCOPY);
+    BitBlt(A.DC, 0, 0, Width, Height, Dest, X, Y, SRCCOPY);
+    BitBlt(B.DC, 0, 0, Width, Height, Src, SrcX, SrcY, SRCCOPY);
     BitsA := A.Bits;
     BitsB := B.Bits;
     case Mode of
-    	bmAverage:
-				for Col := 0 to Width - 1 do
-		    	for Row := 0 to Height - 1 do
-		      begin
-		      	BitsA.Blue := (BitsA.Blue + BitsB.Blue) shr 1;
-		      	BitsA.Green := (BitsA.Green + BitsB.Green) shr 1;
-		      	BitsA.Red := (BitsA.Red + BitsB.Red) shr 1;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-			bmScreen:
-				for Col := 0 to Width - 1 do
-		    	for Row := 0 to Height - 1 do
-		      begin
-		      	BitsA.Blue := $FF - (($FF - BitsA.Blue) * ($FF - BitsB.Blue) shr 8);
-		      	BitsA.Green := $FF - (($FF - BitsA.Green) * ($FF - BitsB.Green) shr 8);
-		      	BitsA.Red := $FF - (($FF - BitsA.Red) * ($FF - BitsB.Red) shr 8);
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmMultiply:
-				for Col := 0 to Width - 1 do
-		    	for Row := 0 to Height - 1 do
-		      begin
-		      	BitsA.Blue := (BitsA.Blue * BitsB.Blue) shr 8;
-		      	BitsA.Green := (BitsA.Green * BitsB.Green) shr 8;
-		      	BitsA.Red := (BitsA.Red * BitsB.Red) shr 8;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmLighten:
-				for Col := 0 to Width - 1 do
-		    	for Row := 0 to Height - 1 do
-		      begin
-		      	if BitsB.Blue > BitsA.Blue then BitsA.Blue := BitsB.Blue;
-		      	if BitsB.Green > BitsA.Green then BitsA.Green := BitsB.Green;
-		      	if BitsB.Red > BitsA.Red then BitsA.Red := BitsB.Red;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmDarken:
-				for Col := 0 to Width - 1 do
-		    	for Row := 0 to Height - 1 do
-		      begin
-		      	if BitsB.Blue < BitsA.Blue then BitsA.Blue := BitsB.Blue;
-		      	if BitsB.Green < BitsA.Green then BitsA.Green := BitsB.Green;
-		      	if BitsB.Red < BitsA.Red then BitsA.Red := BitsB.Red;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmDifference:
-				for Col := 0 to Width - 1 do
-		    	for Row := 0 to Height - 1 do
-		      begin
-		      	BitsA.Blue := $FF - Abs($FF - BitsA.Blue - BitsB.Blue);
-		      	BitsA.Green := $FF - Abs($FF - BitsA.Green - BitsB.Green);
-		      	BitsA.Red := $FF - Abs($FF - BitsA.Red - BitsB.Red);
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-		end;
-  	BitBlt(Dest, X, Y, Width, Height, A.DC, 0, 0, SRCCOPY);
+      bmAverage:
+        for Col := 0 to Width - 1 do
+          for Row := 0 to Height - 1 do
+          begin
+            BitsA.Blue := (BitsA.Blue + BitsB.Blue) shr 1;
+            BitsA.Green := (BitsA.Green + BitsB.Green) shr 1;
+            BitsA.Red := (BitsA.Red + BitsB.Red) shr 1;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmScreen:
+        for Col := 0 to Width - 1 do
+          for Row := 0 to Height - 1 do
+          begin
+            BitsA.Blue := $FF - (($FF - BitsA.Blue) * ($FF - BitsB.Blue) shr 8);
+            BitsA.Green := $FF - (($FF - BitsA.Green) * ($FF - BitsB.Green) shr 8);
+            BitsA.Red := $FF - (($FF - BitsA.Red) * ($FF - BitsB.Red) shr 8);
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmMultiply:
+        for Col := 0 to Width - 1 do
+          for Row := 0 to Height - 1 do
+          begin
+            BitsA.Blue := (BitsA.Blue * BitsB.Blue) shr 8;
+            BitsA.Green := (BitsA.Green * BitsB.Green) shr 8;
+            BitsA.Red := (BitsA.Red * BitsB.Red) shr 8;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmLighten:
+        for Col := 0 to Width - 1 do
+          for Row := 0 to Height - 1 do
+          begin
+            if BitsB.Blue > BitsA.Blue then BitsA.Blue := BitsB.Blue;
+            if BitsB.Green > BitsA.Green then BitsA.Green := BitsB.Green;
+            if BitsB.Red > BitsA.Red then BitsA.Red := BitsB.Red;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmDarken:
+        for Col := 0 to Width - 1 do
+          for Row := 0 to Height - 1 do
+          begin
+            if BitsB.Blue < BitsA.Blue then BitsA.Blue := BitsB.Blue;
+            if BitsB.Green < BitsA.Green then BitsA.Green := BitsB.Green;
+            if BitsB.Red < BitsA.Red then BitsA.Red := BitsB.Red;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmDifference:
+        for Col := 0 to Width - 1 do
+          for Row := 0 to Height - 1 do
+          begin
+            BitsA.Blue := $FF - Abs($FF - BitsA.Blue - BitsB.Blue);
+            BitsA.Green := $FF - Abs($FF - BitsA.Green - BitsB.Green);
+            BitsA.Red := $FF - Abs($FF - BitsA.Red - BitsB.Red);
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+    end;
+    BitBlt(Dest, X, Y, Width, Height, A.DC, 0, 0, SRCCOPY);
   finally
-  	DestroyFastBitmap(B);
-  	DestroyFastBitmap(A);
+    DestroyFastBitmap(B);
+    DestroyFastBitmap(A);
   end;
 end;
 
 procedure LayerBlit(Dest: HDC; X, Y: Integer; Mask: TFastBitmap;
-	Mode: TBlitMode);
+  Mode: TBlitMode);
 var
-	A, B: TFastBitmap;
+  A, B: TFastBitmap;
   Col, Row: Integer;
   BitsA, BitsB: PRGB;
 begin
-	if Mode = bmNormal then
+  if Mode = bmNormal then
   begin
-  	BitBlt(Dest, X, Y, Mask.Width, Mask.Height, Mask.DC, 0, 0, SRCCOPY);
+    BitBlt(Dest, X, Y, Mask.Width, Mask.Height, Mask.DC, 0, 0, SRCCOPY);
     Exit;
-	end;
-	A := CreateFastBitmap(Mask.Width, Mask.Height);
+  end;
+  A := CreateFastBitmap(Mask.Width, Mask.Height);
   try
-  	BitBlt(A.DC, 0, 0, Mask.Width, Mask.Height, Dest, X, Y, SRCCOPY);
+    BitBlt(A.DC, 0, 0, Mask.Width, Mask.Height, Dest, X, Y, SRCCOPY);
     BitsA := A.Bits;
-	  B := Mask;
+    B := Mask;
     BitsB := B.Bits;
-    case	Mode of
-    	bmAverage:
-				for Col := 0 to Mask.Width - 1 do
-		    	for Row := 0 to Mask.Height - 1 do
-		      begin
-		      	BitsA.Blue := (BitsA.Blue + BitsB.Blue) shr 1;
-		      	BitsA.Green := (BitsA.Green + BitsB.Green) shr 1;
-		      	BitsA.Red := (BitsA.Red + BitsB.Red) shr 1;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-			bmScreen:
-				for Col := 0 to Mask.Width - 1 do
-		    	for Row := 0 to Mask.Height - 1 do
-		      begin
-		      	BitsA.Blue := $FF - (($FF - BitsA.Blue) * ($FF - BitsB.Blue) shr 8);
-		      	BitsA.Green := $FF - (($FF - BitsA.Green) * ($FF - BitsB.Green) shr 8);
-		      	BitsA.Red := $FF - (($FF - BitsA.Red) * ($FF - BitsB.Red) shr 8);
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmMultiply:
-				for Col := 0 to Mask.Width - 1 do
-		    	for Row := 0 to Mask.Height - 1 do
-		      begin
-		      	BitsA.Blue := (BitsA.Blue * BitsB.Blue) shr 8;
-		      	BitsA.Green := (BitsA.Green * BitsB.Green) shr 8;
-		      	BitsA.Red := (BitsA.Red * BitsB.Red) shr 8;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmLighten:
-				for Col := 0 to Mask.Width - 1 do
-		    	for Row := 0 to Mask.Height - 1 do
-		      begin
-		      	if BitsB.Blue > BitsA.Blue then BitsA.Blue := BitsB.Blue;
-		      	if BitsB.Green > BitsA.Green then BitsA.Green := BitsB.Green;
-		      	if BitsB.Red > BitsA.Red then BitsA.Red := BitsB.Red;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmDarken:
-				for Col := 0 to Mask.Width - 1 do
-		    	for Row := 0 to Mask.Height - 1 do
-		      begin
-		      	if BitsB.Blue < BitsA.Blue then BitsA.Blue := BitsB.Blue;
-		      	if BitsB.Green < BitsA.Green then BitsA.Green := BitsB.Green;
-		      	if BitsB.Red < BitsA.Red then BitsA.Red := BitsB.Red;
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-    	bmDifference:
-				for Col := 0 to Mask.Width - 1 do
-		    	for Row := 0 to Mask.Height - 1 do
-		      begin
-		      	BitsA.Blue := $FF - Abs($FF - BitsA.Blue - BitsB.Blue);
-		      	BitsA.Green := $FF - Abs($FF - BitsA.Green - BitsB.Green);
-		      	BitsA.Red := $FF - Abs($FF - BitsA.Red - BitsB.Red);
-						Inc(BitsA);
-						Inc(BitsB);
-		      end;
-		end;
-  	BitBlt(Dest, X, Y, Mask.Width, Mask.Height, A.DC, 0, 0, SRCCOPY);
+    case  Mode of
+      bmAverage:
+        for Col := 0 to Mask.Width - 1 do
+          for Row := 0 to Mask.Height - 1 do
+          begin
+            BitsA.Blue := (BitsA.Blue + BitsB.Blue) shr 1;
+            BitsA.Green := (BitsA.Green + BitsB.Green) shr 1;
+            BitsA.Red := (BitsA.Red + BitsB.Red) shr 1;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmScreen:
+        for Col := 0 to Mask.Width - 1 do
+          for Row := 0 to Mask.Height - 1 do
+          begin
+            BitsA.Blue := $FF - (($FF - BitsA.Blue) * ($FF - BitsB.Blue) shr 8);
+            BitsA.Green := $FF - (($FF - BitsA.Green) * ($FF - BitsB.Green) shr 8);
+            BitsA.Red := $FF - (($FF - BitsA.Red) * ($FF - BitsB.Red) shr 8);
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmMultiply:
+        for Col := 0 to Mask.Width - 1 do
+          for Row := 0 to Mask.Height - 1 do
+          begin
+            BitsA.Blue := (BitsA.Blue * BitsB.Blue) shr 8;
+            BitsA.Green := (BitsA.Green * BitsB.Green) shr 8;
+            BitsA.Red := (BitsA.Red * BitsB.Red) shr 8;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmLighten:
+        for Col := 0 to Mask.Width - 1 do
+          for Row := 0 to Mask.Height - 1 do
+          begin
+            if BitsB.Blue > BitsA.Blue then BitsA.Blue := BitsB.Blue;
+            if BitsB.Green > BitsA.Green then BitsA.Green := BitsB.Green;
+            if BitsB.Red > BitsA.Red then BitsA.Red := BitsB.Red;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmDarken:
+        for Col := 0 to Mask.Width - 1 do
+          for Row := 0 to Mask.Height - 1 do
+          begin
+            if BitsB.Blue < BitsA.Blue then BitsA.Blue := BitsB.Blue;
+            if BitsB.Green < BitsA.Green then BitsA.Green := BitsB.Green;
+            if BitsB.Red < BitsA.Red then BitsA.Red := BitsB.Red;
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+      bmDifference:
+        for Col := 0 to Mask.Width - 1 do
+          for Row := 0 to Mask.Height - 1 do
+          begin
+            BitsA.Blue := $FF - Abs($FF - BitsA.Blue - BitsB.Blue);
+            BitsA.Green := $FF - Abs($FF - BitsA.Green - BitsB.Green);
+            BitsA.Red := $FF - Abs($FF - BitsA.Red - BitsB.Red);
+            Inc(BitsA);
+            Inc(BitsB);
+          end;
+    end;
+    BitBlt(Dest, X, Y, Mask.Width, Mask.Height, A.DC, 0, 0, SRCCOPY);
   finally
-  	DestroyFastBitmap(A);
+    DestroyFastBitmap(A);
   end;
 end;
 
 const
-	MaxPixelCount = 32768;
+  MaxPixelCount = 32768;
 
 type
   PRGBTripleArray = ^TRGBTripleArray;
@@ -1991,7 +1991,7 @@ begin
   else if (Abs(X) >= 1) and (Abs(X) < 2) then
     Result := 4 - 8 * Abs(X) + 5 * X * X - X * X * Abs(X)
   else
-  	Result := 0;
+    Result := 0;
 end;
 
 procedure Bicubic(I1, I2, I3, I4: TRGBTriple; var New: TRGBTriple; U: Double);
@@ -2001,23 +2001,23 @@ begin
   I := Trunc(I1.rgbtRed * SinC(U + 1) + I2.rgbtRed
     * SinC(U) + I3.rgbtRed * SinC(U - 1) + I4.rgbtRed * SinC(U - 2));
   if I > 255 then
-  	I := 255
-	else if I < 0 then
-  	I := 0;
+    I := 255
+  else if I < 0 then
+    I := 0;
   New.rgbtRed := Byte(I);
   I := Trunc(I1.rgbtGreen * SinC(U + 1) + I2.rgbtGreen
     * SinC(U) + I3.rgbtGreen * SinC(U - 1) + I4.rgbtGreen * SinC(U - 2));
   if I > 255 then
-  	I := 255
-	else if I < 0 then
-  	I := 0;
+    I := 255
+  else if I < 0 then
+    I := 0;
   New.rgbtGreen := Byte(I);
   I := Trunc(I1.rgbtBlue * SinC(U + 1) + I2.rgbtBlue
     * SinC(U) + I3.rgbtBlue * SinC(U - 1) + I4.rgbtBlue * SinC(U - 2));
   if I > 255 then
-  	I := 255
-	else if I < 0 then
-  	I := 0;
+    I := 255
+  else if I < 0 then
+    I := 0;
   New.rgbtBlue := Byte(I);
 end;
 
@@ -2162,19 +2162,19 @@ end;
 
 procedure ResizeBitmap(var Bitmap: TBitmap; NewWidth, NewHeight: Integer; Mode: TResizeMode);
 var
-	Dest: TBitmap;
+  Dest: TBitmap;
   W, H: Integer;
 begin
-	Dest := nil;
+  Dest := nil;
   W := Bitmap.Width;
   H := Bitmap.Height;
   if (W > 0) and (H > 0) then
   try
-		case Mode of
-	  	rmBicubic: ResizeBicubic(Bitmap, Dest, NewWidth, NewHeight, W, H);
-	    rmBilinear: ResizeBilinear(Bitmap, Dest, NewWidth, NewHeight, W, H);
-	    rmNearest: ResizeNearest(Bitmap, Dest, NewWidth, NewHeight, W, H);
-		end;
+    case Mode of
+      rmBicubic: ResizeBicubic(Bitmap, Dest, NewWidth, NewHeight, W, H);
+      rmBilinear: ResizeBilinear(Bitmap, Dest, NewWidth, NewHeight, W, H);
+      rmNearest: ResizeNearest(Bitmap, Dest, NewWidth, NewHeight, W, H);
+    end;
   finally
     Bitmap.Free;
     Bitmap := Dest;
@@ -2356,32 +2356,32 @@ end;
 
 var
   InternalHighlight: Integer = -1;
-	InternalThemeBorder: Integer = -1;
+  InternalThemeBorder: Integer = -1;
 
 function clThemeBorder: TColor;
 var
-	Bitmap: TBitmap;
+  Bitmap: TBitmap;
 begin
   if not ThemePainter.Enabled then
   begin
-		Result := clHighlight;
-		Exit;
-	end;
+    Result := clHighlight;
+    Exit;
+  end;
   if ColorToRGB(InternalHighlight) <> ColorToRGB(clHighlight) then
   begin
     InternalHighlight := ColorToRGB(clHighlight);
     InternalThemeBorder := -1;
   end;
-	Result := TColor(InternalThemeBorder);
+  Result := TColor(InternalThemeBorder);
   if InternalThemeBorder <> -1 then Exit;
   Bitmap := TBitmap.Create;
   try
-  	Bitmap.Height := 10;
+    Bitmap.Height := 10;
     Bitmap.Width := 10;
     DrawThemeBorder(Bitmap.Canvas.Handle, Rect(0, 0, 10, 10), []);
     Result := Bitmap.Canvas.Pixels[5, 0];
   finally
-  	Bitmap.Free;
+    Bitmap.Free;
   end;
   InternalThemeBorder := Integer(Result);
 end;
@@ -2392,9 +2392,9 @@ var
 begin
   if not ThemePainter.Enabled then
   begin
-		Result := Blend(clHighlight, clWindow, 60);
-		Exit;
-	end;
+    Result := Blend(clHighlight, clWindow, 60);
+    Exit;
+  end;
   Result := clThemeBorder;
   C := ColorToRGBA(Result);
   if (Abs(C.Blue - C.Red) < $20) and (Abs(C.Red - C.Green) < $20) and
@@ -2404,22 +2404,22 @@ end;
 
 function clSelected: TColor;
 begin
-	Result := Blend(clWindow, clHighlight, 75)
+  Result := Blend(clWindow, clHighlight, 75)
 end;
 
 function clSelectedBorder: TColor;
 begin
-	Result := Blend(clWindow, clHighlight, 50)
+  Result := Blend(clWindow, clHighlight, 50)
 end;
 
 function clSelectedBkgnd: TColor;
 begin
-	Result := Blend(clWindow, clHighlight, 75)
+  Result := Blend(clWindow, clHighlight, 75)
 end;
 
 function clColumn: TColor;
 begin
-	Result := Blend(clWindow, clWindowText, 90);
+  Result := Blend(clWindow, clWindowText, 90);
 end;
 
 function DirectionToAlignment(Direction: TDirection): TAlignment;
@@ -2851,15 +2851,15 @@ end;
 
 function GetBorder: Integer;
 begin
-	if ThemePainter.Enabled then
-  	Result := 1
+  if ThemePainter.Enabled then
+    Result := 1
   else
-  	Result := GetSystemMetrics(SM_CXEDGE);
+    Result := GetSystemMetrics(SM_CXEDGE);
 end;
 
 function AverageColor(Color: TColor): Byte;
 var
-	RGB: TRGBQuad absolute Color;
+  RGB: TRGBQuad absolute Color;
 begin
   Color := ColorToRGB(Color);
   Result := (RGB.rgbBlue + RGB.rgbGreen + RGB.rgbRed) div 3;
@@ -2871,18 +2871,18 @@ var
 begin
   if AverageColor(clWindow) > AverageColor(clWindowFrame) then
   begin
-	  L := ColorToRGB(clWindowFrame);
-  	H := ColorToRGB(clWindow);
-	end
+    L := ColorToRGB(clWindowFrame);
+    H := ColorToRGB(clWindow);
+  end
   else
   begin
-	  H := ColorToRGB(clWindowFrame);
-  	L := ColorToRGB(clWindow);
-	end;
+    H := ColorToRGB(clWindowFrame);
+    L := ColorToRGB(clWindow);
+  end;
   if AverageColor(Background) > 128 then
-  	Result := L
-	else
-  	Result := H;
+    Result := L
+  else
+    Result := H;
 end;
 
 { Get object functions }
@@ -2958,28 +2958,28 @@ end;
 
 function GetBrush(Bitmap: TBitmapBrush): HBRUSH; overload;
 const
-	ImageOffset = 20;
+  ImageOffset = 20;
 var
-	B: TBitmap;
+  B: TBitmap;
 begin
-	case Bitmap of
-  	bbChecker:
-    	begin
-			  B := TBitmap.Create;
-			  B.Height :=  ImageOffset;
-			  B.Width := ImageOffset;
-			  with B.Canvas do
-			  begin
-			  	Brush.Color := clWhite;
-			  	FillRect(Rect(0, 0, ImageOffset, ImageOffset));
-					Brush.Color := clSilver;
-			  	FillRect(Rect(0, ImageOffset div 2, ImageOffset div 2, ImageOffset));
-					FillRect(Rect(ImageOffset div 2, 0, ImageOffset, ImageOffset div 2));
-				end;
-			end;
-	else
-		B := GetBitmap(clBtnFace, clBtnHighlight);
-	end;
+  case Bitmap of
+    bbChecker:
+      begin
+        B := TBitmap.Create;
+        B.Height :=  ImageOffset;
+        B.Width := ImageOffset;
+        with B.Canvas do
+        begin
+          Brush.Color := clWhite;
+          FillRect(Rect(0, 0, ImageOffset, ImageOffset));
+          Brush.Color := clSilver;
+          FillRect(Rect(0, ImageOffset div 2, ImageOffset div 2, ImageOffset));
+          FillRect(Rect(ImageOffset div 2, 0, ImageOffset, ImageOffset div 2));
+        end;
+      end;
+  else
+    B := GetBitmap(clBtnFace, clBtnHighlight);
+  end;
   Result := GetBrush(B);
   B.Free;
 end;
@@ -3149,9 +3149,9 @@ end;
 
 procedure FillRectColor(DC: HDC; const Rect: TRect; Color: TColor);
 var
-	B: HBRUSH;
+  B: HBRUSH;
 begin
-	B:= GetBrush(Color);
+  B:= GetBrush(Color);
   FillRect(DC, Rect, B);
   DeleteObject(B);
 end;
@@ -3161,7 +3161,7 @@ var
   B: TFastBitmap;
   R: Single;
   C: TRGBA;
-	F: TBlendFunction;
+  F: TBlendFunction;
 begin
   B := CreateFastBitmap(1, 1, pd32);
   R := Alpha / $FF;
@@ -3181,7 +3181,7 @@ end;
 
 procedure FillRectColorPixel(DC: HDC; Rect: TRect; Pixel: TFastBitmap);
 var
-	F: TBlendFunction;
+  F: TBlendFunction;
 begin
   FillChar(F, SizeOf(F), #0);
   F.SourceConstantAlpha := $FF;
@@ -3192,17 +3192,17 @@ end;
 
 procedure FillRectOutline(DC: HDC; const Rect: TRect; Color: TColor; Style: TPenStyle = psSolid);
 var
-	P: HPEN;
+  P: HPEN;
 begin
   SetBkMode(DC, TRANSPARENT);
-	P := SelectObject(DC, GetPen(Color, Style));
+  P := SelectObject(DC, GetPen(Color, Style));
   with Rect do
   begin
-  	MoveToEx(DC, Left, Top, nil);
-		LineTo(DC, Right - 1, Top);
-		LineTo(DC, Right - 1, Bottom - 1);
-		LineTo(DC, Left, Bottom - 1);
-		LineTo(DC, Left, Top);
+    MoveToEx(DC, Left, Top, nil);
+    LineTo(DC, Right - 1, Top);
+    LineTo(DC, Right - 1, Bottom - 1);
+    LineTo(DC, Left, Bottom - 1);
+    LineTo(DC, Left, Top);
   end;
   OverwriteObject(DC, P);
 end;
@@ -3279,7 +3279,7 @@ var
 procedure SwapFont(A, B: TFont);
 begin
   if ScratchFont = nil then
-  	ScratchFont := TFont.Create;
+    ScratchFont := TFont.Create;
   ScratchFont.Assign(A);
   A.Assign(B);
   B.Assign(ScratchFont);
@@ -3371,39 +3371,39 @@ end;
 
 procedure FontRatio(var X, Y: Double);
 var
-	LogFont: TLogFont;
+  LogFont: TLogFont;
   Font: HFont;
 begin
-	X := 1;
-	Y := 1;
+  X := 1;
+  Y := 1;
   // !
   Exit;
-	if SystemParametersInfo(SPI_GETICONTITLELOGFONT, SizeOf(LogFont), @LogFont, 0) then
+  if SystemParametersInfo(SPI_GETICONTITLELOGFONT, SizeOf(LogFont), @LogFont, 0) then
   begin
-		Font := CreateFontIndirect(LogFont);
+    Font := CreateFontIndirect(LogFont);
     FontRatio(Font, X, Y);
     DeleteObject(Font)
-	end;
+  end;
 end;
 
 procedure FontRatio(Font: HFont; var X, Y: Double);
 const
-	Characters = ' !@#$%^&*()_0123456789ABCDEFGHIJLLMNOPQRSTUVWTYZabcdefghijklmnopqrstuvwxyz';
+  Characters = ' !@#$%^&*()_0123456789ABCDEFGHIJLLMNOPQRSTUVWTYZabcdefghijklmnopqrstuvwxyz';
   DesignX = 448;
   DesignY = 39;
 var
-	DC: HDC;
+  DC: HDC;
   Size: TSize;
   S: string;
 begin
   DC := GetDC(0);
   Font := SelectObject(DC, Font);
   S := Characters;
-	Size := CalcCaptionSize(DC, S);
-	X := Size.cx;
+  Size := CalcCaptionSize(DC, S);
+  X := Size.cx;
   S := S + #13#10 + S + #13#10 + S;
-	Y := CalcMemoHeight(DC, S, Round(X) + 1);
-	SelectObject(DC, Font);
+  Y := CalcMemoHeight(DC, S, Round(X) + 1);
+  SelectObject(DC, Font);
   ReleaseDC(0, DC);
   X := X / DesignX;
   Y := Y / DesignY;
@@ -3511,7 +3511,7 @@ var
   MemDC: HDC;
   I: Integer;
 begin
-	I := Round(GetDeviceCaps(DC, LOGPIXELSX) / 96 * 13);
+  I := Round(GetDeviceCaps(DC, LOGPIXELSX) / 96 * 13);
   // Mask := GetRect(0, 0, 13, 13);
   Mask := GetRect(0, 0, I, I);
   if Flat then
@@ -3606,21 +3606,21 @@ end;
 
 procedure DrawSeparator(DC: HDC; Rect: TRect; Color: TColor; Horizontal: Boolean = True);
 begin
-	if Horizontal then
+  if Horizontal then
   begin
-		Rect.Left := Rect.Left + (WidthOf(Rect) shr 1);
-	  Rect.Right := Rect.Left + 1;
+    Rect.Left := Rect.Left + (WidthOf(Rect) shr 1);
+    Rect.Right := Rect.Left + 1;
   end
   else
   begin
-		Rect.Top := Rect.Top + (HeightOf(Rect) shr 1);
-	  Rect.Bottom := Rect.Top + 1;
+    Rect.Top := Rect.Top + (HeightOf(Rect) shr 1);
+    Rect.Bottom := Rect.Top + 1;
   end;
   FillRectColor(DC, Rect, Blend(Color, clBlack, 75));
-	if Horizontal then
-	  Slide(Rect, drRight)
-	else
-  	Slide(Rect);
+  if Horizontal then
+    Slide(Rect, drRight)
+  else
+    Slide(Rect);
   FillRectColor(DC, Rect, Blend(Color, clWhite));
 end;
 
@@ -3664,7 +3664,7 @@ end;
 
 procedure DrawStyleOutline(DC: HDC; Rect: TRect; Light: Boolean = False);
 begin
-	if Light then
+  if Light then
     DrawRectOutline(DC, Rect, clHighlight) // Blend(clHighlight, clWindow, 66))
   else
     DrawRectOutline(DC, Rect, clHighlight);
@@ -3672,18 +3672,18 @@ end;
 
 procedure DrawStyleRect(DC: HDC; Rect: TRect; Light: Boolean = False);
 begin
-	if Light then
+  if Light then
   begin
-   	FillRectColor(DC, Rect, Blend(clHighlight, clWindow, 66));
-		InflateRect(Rect, -1, -1);
-   	FillRectColor(DC, Rect, Blend(clHighlight, clWindow, 15));
-	end
+     FillRectColor(DC, Rect, Blend(clHighlight, clWindow, 66));
+    InflateRect(Rect, -1, -1);
+     FillRectColor(DC, Rect, Blend(clHighlight, clWindow, 15));
+  end
   else
   begin
-   	FillRectColor(DC, Rect, clHighlight);
-		InflateRect(Rect, -1, -1);
-   	FillRectColor(DC, Rect, Blend(clHighlight, clWindow, 50));
-	end;
+     FillRectColor(DC, Rect, clHighlight);
+    InflateRect(Rect, -1, -1);
+     FillRectColor(DC, Rect, Blend(clHighlight, clWindow, 50));
+  end;
 end;
 
 procedure DrawMenuHighlightRect(DC: HDC; Rect: TRect);
@@ -3710,18 +3710,18 @@ begin
   B := 0;
   if Hollow then
     B := GetStockObject(HOLLOW_BRUSH);
-	if Light then
+  if Light then
   begin
     P := GetPen(Blend(clHighlight, clWindow, 66));
     if not Hollow then
       B := GetBrush(Blend(clHighlight, clWindow, 20));
-	end
+  end
   else
   begin
     P := GetPen(clHighlight);
     if not Hollow then
       B := GetBrush(Blend(clHighlight, clWindow, 33));
-	end;
+  end;
   P := SelectObject(DC, P);
   B := SelectObject(DC, B);
   RoundRect(DC, Rect.Left, Rect.Top, Rect.Right, Rect.Bottom, Radius, Radius);
@@ -3734,7 +3734,7 @@ end;
 
 procedure DrawStyleRectOutline(DC: HDC; Rect: TRect; Light: Boolean = False);
 begin
-	if Light then
+  if Light then
     FillRectOutline(DC, Rect, Blend(clHighlight, clWindow, 33))
   else
     FillRectOutline(DC, Rect, Blend(clHighlight, clWindow, 66));
@@ -3762,7 +3762,7 @@ begin
   begin
     if dsFocused in State then
       if dsPressed in State then
-       	FillRectColor(DC, Rect, clHighlight)
+         FillRectColor(DC, Rect, clHighlight)
       else
         DrawStyleRect(DC, Rect, False)
     else
@@ -3803,9 +3803,9 @@ var
 begin
   FillChar(Size, SizeOf(Size), #0);
   if Text = '' then
-	  GetTextExtentPoint32(DC, ' ', 1, Size)
+    GetTextExtentPoint32(DC, ' ', 1, Size)
   else
-	  GetTextExtentPoint32(DC, PChar(Text), Length(Text), Size);
+    GetTextExtentPoint32(DC, PChar(Text), Length(Text), Size);
   Result := Rect;
   with Result do
   begin
@@ -3824,8 +3824,8 @@ begin
       drRight:
         Left := Rect.Right - Size.cx;
       drFill:
-      	begin
-        	Left := Left + WidthOf(Rect) div 2 - Size.cx div 2;
+        begin
+          Left := Left + WidthOf(Rect) div 2 - Size.cx div 2;
           Right := Left + Size.cx;
         end;
     end;
@@ -3901,7 +3901,7 @@ end;
 
 procedure DrawCaption(DC: HDC;  const Caption: string; Rect: TRect;  Direction: TDirection; Enabled: Boolean = True; HidePrefix: Boolean = False);
 const
-	PrefixFlags: array[Boolean] of Integer = (0, DT_HIDEPREFIX);
+  PrefixFlags: array[Boolean] of Integer = (0, DT_HIDEPREFIX);
   TabSpace = 10;
 var
   DrawRect: TRect;
@@ -3955,33 +3955,33 @@ procedure DrawFocus(DC: HDC; Rect: TRect; BorderX: Integer = 0; BorderY: Integer
 var
   PriorColor: COLORREF;
 begin
-	InflateRect(Rect, BorderX, BorderY);
+  InflateRect(Rect, BorderX, BorderY);
   PriorColor := SetTextColor(DC, 0);
   DrawFocusRect(DC, Rect);
   SetTextColor(DC, PriorColor);
 end;
 
 procedure DrawArrow(DC: HDC; Rect: TRect; Direction: TDirection;
-	Color: TColor = clWindowFrame; Enabled: Boolean = True);
+  Color: TColor = clWindowFrame; Enabled: Boolean = True);
 var
-	Glyph: TGlyphKind;
+  Glyph: TGlyphKind;
 begin
-	case Direction of
-  	drLeft: Glyph := gkArrowLeft;
+  case Direction of
+    drLeft: Glyph := gkArrowLeft;
     drRight:Glyph := gkArrowRight;
-  	drUp: Glyph := gkArrowUp;
-  	drDown: Glyph := gkArrowDown;
+    drUp: Glyph := gkArrowUp;
+    drDown: Glyph := gkArrowDown;
   else
-  	Exit;
+    Exit;
   end;
   if not Enabled then
     Inc(Glyph, 4);
-	GlyphDraw(DC, Rect, Glyph, Color);
+  GlyphDraw(DC, Rect, Glyph, Color);
 end;
 
 procedure DrawClose(DC: HDC; Rect: TRect; Color: TColor = clWindowFrame);
 begin
-	GlyphDraw(DC, Rect, gkClose, Color);
+  GlyphDraw(DC, Rect, gkClose, Color);
 end;
 
 procedure DrawDivider(DC: HDC; Rect: TRect; Kind: TDrawDividerKind);
@@ -4612,15 +4612,15 @@ end;
 
 procedure DrawDashedRect(DC: HDC; const Rect: TRect; Pen, Brush: TColor);
 var
-	P: HPEN;
+  P: HPEN;
   B: HBRUSH;
 begin
-	P := SelectObject(DC, GetPen(Pen, psDot));
-	B := SelectObject(DC, GetBrush(Brush));
+  P := SelectObject(DC, GetPen(Pen, psDot));
+  B := SelectObject(DC, GetBrush(Brush));
   with Rect do
-	  Rectangle(DC, Left, Top, Right, Bottom);
-	OverwriteObject(DC, P);
-	OverwriteObject(DC, B);
+    Rectangle(DC, Left, Top, Right, Bottom);
+  OverwriteObject(DC, P);
+  OverwriteObject(DC, B);
 end;
 
 procedure DrawSlantRect(DC: HDC; const Rect: TRect; const A, B: TPoint);
@@ -4658,7 +4658,7 @@ var
   Pen: HPEN;
   Point: TPoint;
 begin
-	{ BeginPath(DC); }
+  { BeginPath(DC); }
   Pen := SelectObject(DC, GetPen(Color));
   with Rect do
   begin
@@ -4674,11 +4674,11 @@ begin
     MoveToEx(DC, Point.x, Point.y, nil);
   end;
   OverwriteObject(DC, Pen);
-	{ EndPath(DC);
+  { EndPath(DC);
     if Solid then
-	    StrokeAndFillPath(DC)
-		else
-	    StrokePath(DC); }
+      StrokeAndFillPath(DC)
+    else
+      StrokePath(DC); }
 end;
 
 { DrawBubble }
@@ -5016,27 +5016,27 @@ end;
 
 procedure BlitInvert(DC: HDC; const Rect: TRect);
 begin
-	with Rect do
-		BitBlt(DC, Left, Top, Right - Left, Bottom - Top, 0, 0, 0, DSTINVERT);
+  with Rect do
+    BitBlt(DC, Left, Top, Right - Left, Bottom - Top, 0, 0, 0, DSTINVERT);
 end;
 
 procedure BlitAnd(Dest: HDC; const Rect: TRect; Source: HDC);
 begin
-	with Rect do
-		BitBlt(Dest, Left, Top, Right - Left, Bottom - Top, Source, 0, 0, SRCAND);
+  with Rect do
+    BitBlt(Dest, Left, Top, Right - Left, Bottom - Top, Source, 0, 0, SRCAND);
 end;
 
 procedure BlitOr(Dest: HDC; const Rect: TRect; Source: HDC);
 begin
-	with Rect do
-		BitBlt(Dest, Left, Top, Right - Left, Bottom - Top, Source, 0, 0, SRCPAINT);
+  with Rect do
+    BitBlt(Dest, Left, Top, Right - Left, Bottom - Top, Source, 0, 0, SRCPAINT);
 end;
 
 var
-	InternalGlyphs: array[TGlyphKind] of TBitmap;
+  InternalGlyphs: array[TGlyphKind] of TBitmap;
 
 const
-	GlyphBase = 1001;
+  GlyphBase = 1001;
   GlyphDim = 12;
   GlyphHalf = GlyphDim div 2;
   GlyphBits = GlyphDim * GlyphDim;
@@ -5044,7 +5044,7 @@ const
 function GlyphFind(Kind: TGlyphKind): TBitmap;
 begin
   if InternalGlyphs[Kind] = nil then
-	  InternalGlyphs[Kind] := GetBitmap(GlyphBase + Ord(Kind));
+    InternalGlyphs[Kind] := GetBitmap(GlyphBase + Ord(Kind));
   Result := InternalGlyphs[Kind];
 end;
 
@@ -5105,45 +5105,45 @@ end;
 
 procedure GlyphDraw(DC: HDC; const Rect: TRect; Glyph: TGlyphKind; Color: TColor);
 var
-	H, W: Integer;
+  H, W: Integer;
 begin
   H := Rect.Bottom - Rect.Top;
   W := Rect.Right - Rect.Left;
   with Rect do
-		GlyphBlendBlt(DC, Glyph, Left + (W - GlyphDim) div 2,
+    GlyphBlendBlt(DC, Glyph, Left + (W - GlyphDim) div 2,
       Top + (H - GlyphDim) div 2, Color);
 end;
 
 procedure GlyphFrame(DC: HDC; Rect: TRect; Glyph: TGlyphKind; State: TDrawState;
   Color: TColor);
 var
-	X, Y, H, W: Integer;
+  X, Y, H, W: Integer;
   Pen: HPEN;
   Brush: HBRUSH;
 begin
-	X := GlyphDim;
+  X := GlyphDim;
   Y := GlyphDim;
   H := Rect.Bottom - Rect.Top;
   W := Rect.Right - Rect.Left;
   with Rect do
   begin
-		Left := Left + (W - X) div 2;
+    Left := Left + (W - X) div 2;
     Top := Top + (H - Y) div 2;
     Right := Left + X + 1;
     Bottom := Top + Y;
- 	end;
+   end;
   if dsPressed in State then
-  	OffsetRect(Rect, 1, 1);
-	GlyphBlendBlt(DC, Glyph, Rect.Left, Rect.Top, Color);
+    OffsetRect(Rect, 1, 1);
+  GlyphBlendBlt(DC, Glyph, Rect.Left, Rect.Top, Color);
   if dsFlat in State then Exit;
-	InflateRect(Rect, 2, 2);
+  InflateRect(Rect, 2, 2);
   if dsPressed in State then
   begin
-  	OffsetRect(Rect, -1, -1);
+    OffsetRect(Rect, -1, -1);
     Inc(Rect.Right);
     Inc(Rect.Bottom);
     if dsThin in State then
-	  	DrawFrame(DC, Rect, dfLowered)
+      DrawFrame(DC, Rect, dfLowered)
     else
       DrawFrame(DC, Rect, dfSunken);
 
@@ -5153,8 +5153,8 @@ begin
     Pen := SelectObject(DC, CreatePen(PS_SOLID, 2, ColorToRGB(Color)));
     Brush := SelectObject(DC, GetStockObject(HOLLOW_BRUSH));
     with Rect do
-    	Rectangle(DC, Left, Top, Right, Bottom);
-		OverwriteObject(DC, Pen);
+      Rectangle(DC, Left, Top, Right, Bottom);
+    OverwriteObject(DC, Pen);
     SelectObject(DC, Brush);
   end;
 end;
@@ -5171,7 +5171,7 @@ end;
 
 constructor TThemePainter.Create;
 begin
-	FWindow := TUtilityWindow.Create(Self);
+  FWindow := TUtilityWindow.Create(Self);
   FAvailable := ThemesLoaded;
   UpdateThemes;
 end;
@@ -5179,7 +5179,7 @@ end;
 destructor TThemePainter.Destroy;
 begin
   UnloadThemeData;
-	FWindow.Free;
+  FWindow.Free;
   inherited;
 end;
 
@@ -5243,12 +5243,12 @@ end;
 procedure TThemePainter.WMThemeChanged(var Message: TMessage);
 begin
   UpdateThemes;
-	DoOnThemeChange;
+  DoOnThemeChange;
 end;
 
 procedure TThemePainter.DoOnThemeChange;
 begin
-	InternalThemeBorder := -1;
+  InternalThemeBorder := -1;
   if Assigned(FOnThemeChange) then
     FOnThemeChange(Self);
 end;
@@ -6543,7 +6543,7 @@ begin
 end;
 
 procedure TThemePainter.DrawText(DC: HDC; const Details: TThemedDetails;
-	const S: WideString; R: TRect; Flags: Cardinal);
+  const S: WideString; R: TRect; Flags: Cardinal);
 begin
   with Details do
     DrawThemeText(Theme[Element], DC, Part, State, PWideChar(S), Length(S), Flags, 0, R);
@@ -6558,13 +6558,13 @@ end;
 function TThemePainter.PartSize(const Details: TThemedDetails; var Rect: TRect; ThemeSize: TThemeSize = tsDraw): TSize;
 begin
   with Details do
-  	GetThemePartSize(Theme[Element], 0, Part, State, @Rect, ThemeSize, Result);
+    GetThemePartSize(Theme[Element], 0, Part, State, @Rect, ThemeSize, Result);
 end;
 
 function TThemePainter.PartSize(const Details: TThemedDetails; ThemeSize: TThemeSize = tsDraw): TSize;
 begin
   with Details do
-  	GetThemePartSize(Theme[Element], 0, Part, State, nil, ThemeSize, Result); // tsDraw
+    GetThemePartSize(Theme[Element], 0, Part, State, nil, ThemeSize, Result); // tsDraw
 end;
 
 procedure TThemePainter.UpdateThemes;
@@ -6580,9 +6580,9 @@ end;
 
 function GetThemeBorder: Integer;
 const
-	Borders: array[Boolean] of Integer = (2, 2);
+  Borders: array[Boolean] of Integer = (2, 2);
 begin
-	Result := Borders[ThemePainter.Enabled];
+  Result := Borders[ThemePainter.Enabled];
 end;
 
 function CalcEditHeight(DC: HDC): Integer;
@@ -6665,7 +6665,7 @@ begin
   begin
     FrameState := DFCS_SCROLLDOWN;
     if dsPressed in State then
-	    FrameState := FrameState or DFCS_PUSHED or DFCS_FLAT;
+      FrameState := FrameState or DFCS_PUSHED or DFCS_FLAT;
     DrawFrameControl(DC, Rect, DFC_SCROLL, FrameState);
   end;
   if dsCustom in State then
@@ -6677,16 +6677,16 @@ begin
 end;
 
 procedure DrawThemeBorder(DC: HDC; const Rect: TRect; State: TDrawState;
-	Thickness: Integer = -1; X: Integer = 0; Y: Integer = 0);
+  Thickness: Integer = -1; X: Integer = 0; Y: Integer = 0);
 var
   A, B: TRect;
   E: TThemedEdit;
 begin
-	A := Rect;
+  A := Rect;
   B := Rect;
   OffsetRect(B, X, Y);
   if Thickness < 0 then
-  	Thickness := GetThemeBorder;
+    Thickness := GetThemeBorder;
   InflateRect(B, -Thickness, -Thickness);
   SelectClipRect(DC, B, RGN_DIFF);
   with ThemePainter do
@@ -6753,8 +6753,8 @@ var
   Theme: TThemedButton;
   R: TRect;
 begin
-	if dsFlat in State then
-		DrawThemeThinButton(DC, Rect, State)
+  if dsFlat in State then
+    DrawThemeThinButton(DC, Rect, State)
   else if ThemePainter.Enabled then
   begin
     Theme := tbPushButtonNormal;
@@ -6776,13 +6776,13 @@ begin
     R := Rect;
     if dsFocused in State then
     begin
-	    DrawFrame(DC, R, dfFocus);
+      DrawFrame(DC, R, dfFocus);
       InflateRect(R, -1, -1);
     end;
     if (dsHot in State) and (dsPressed in State) then
-	    DrawFrame(DC, R, dfPressed)
+      DrawFrame(DC, R, dfPressed)
     else
-	    DrawFrame(DC, R, dfFramed);
+      DrawFrame(DC, R, dfFramed);
   end;
 end;
 
@@ -6812,12 +6812,12 @@ begin
   end
   else
   begin
-		if dsDisabled in State then Exit;
+    if dsDisabled in State then Exit;
     if dsHot in State then
       if dsPressed in State then
-  	    DrawFrame(DC, Rect, dfLowered)
+        DrawFrame(DC, Rect, dfLowered)
       else
-	      DrawFrame(DC, Rect, dfRaised);
+        DrawFrame(DC, Rect, dfRaised);
   end;
 end;
 
@@ -6841,27 +6841,27 @@ begin
   else
   begin
     if dsDisabled in State then
-	    B := GetBrush(clBtnFace)
+      B := GetBrush(clBtnFace)
     else if dsHot in State then
       if dsPressed in State then
-	      B := GetBrush(clBtnFace, clBtnShadow)
+        B := GetBrush(clBtnFace, clBtnShadow)
       else
-	      B := GetBrush(clBtnFace, clBtnHighlight)
+        B := GetBrush(clBtnFace, clBtnHighlight)
     else if dsSelected in State then
       B := GetBrush(clBtnFace, Blend(clBtnHighlight, clBtnFace))
-		else
+    else
       B := GetBrush(clBtnFace);
-  	FillRect(DC, Rect, B);
+    FillRect(DC, Rect, B);
     DeleteObject(B);
     if dsDisabled in State then
-	    DrawFrame(DC, Rect, dfRaised)
+      DrawFrame(DC, Rect, dfRaised)
     else if dsHot in State then
       if dsPressed in State then
-	      DrawFrame(DC, Rect, dfLowered)
+        DrawFrame(DC, Rect, dfLowered)
       else
-	      DrawFrame(DC, Rect, dfRaised)
-		else
-	    DrawFrame(DC, Rect, dfRaised);
+        DrawFrame(DC, Rect, dfRaised)
+    else
+      DrawFrame(DC, Rect, dfRaised);
   end;
 end;
 
@@ -6882,13 +6882,13 @@ begin
 end;
 
 procedure DrawThemeGroupBox(DC: HDC; const Text: string; const Rect: TRect;
-	State: TDrawState);
+  State: TDrawState);
 var
   GroupRect: TRect;
   CaptionRect: TRect;
   NodeRect: TRect;
   ClipRect: TRect;
-	Details: TThemedDetails;
+  Details: TThemedDetails;
 begin
   GroupRect := Rect;
   CaptionRect := Rect;
@@ -6914,19 +6914,19 @@ begin
   GroupRect.Top := GroupRect.Top + HeightOf(CaptionRect) div 2 + 1;
   GroupRect.Left := GroupRect.Left + NodeSize div 2;
   if not (dsExpanded in State) then
-	  with GroupRect do
+    with GroupRect do
     begin
-  	  ExcludeClipRect(DC, Right - 4, Top, Right, Bottom);
-  	  ExcludeClipRect(DC, ClipRect.Left, Top + 2, Right, Bottom);
+      ExcludeClipRect(DC, Right - 4, Top, Right, Bottom);
+      ExcludeClipRect(DC, ClipRect.Left, Top + 2, Right, Bottom);
     end;
   if ThemePainter.Enabled then
-	  with ThemePainter do
+    with ThemePainter do
     begin
       if dsDisabled in State then
         Details := GetDetails(tbGroupBoxNormal)
       else
         Details := GetDetails(tbGroupBoxDisabled);
-	    DrawElement(DC, Details, GroupRect);
+      DrawElement(DC, Details, GroupRect);
       SelectClipRgn(DC, 0);
       DrawText(DC, Details, Text, CaptionRect, DT_CENTER or DT_SINGLELINE);
     end
@@ -6939,21 +6939,21 @@ begin
     DrawCaption(DC, Text, CaptionRect, drCenter);
     FilLRect(DC, NodeRect, COLOR_BTNFACE + 1);
     if dsPressed in State then
-	    DrawFrame(DC, NodeRect, dfLowered)
+      DrawFrame(DC, NodeRect, dfLowered)
     else
-	    DrawFrame(DC, NodeRect, dfRaised);
+      DrawFrame(DC, NodeRect, dfRaised);
     DrawNode(DC, NodeRect, dsExpanded in State);
   end;
 end;
 
 procedure DrawThemeExpandableBox(DC: HDC; const Text: string; const Rect: TRect;
-	State: TDrawState);
+  State: TDrawState);
 var
   GroupRect: TRect;
   CaptionRect: TRect;
   NodeRect: TRect;
   ClipRect: TRect;
-	Details: TThemedDetails;
+  Details: TThemedDetails;
 begin
   GroupRect := Rect;
   CaptionRect := Rect;
@@ -6979,30 +6979,30 @@ begin
   GroupRect.Top := GroupRect.Top + HeightOf(CaptionRect) div 2 + 1;
   GroupRect.Left := GroupRect.Left + NodeSize div 2;
   if not (dsExpanded in State) then
-	  with GroupRect do
+    with GroupRect do
     begin
-  	  ExcludeClipRect(DC, Right - 4, Top, Right, Bottom);
-  	  ExcludeClipRect(DC, ClipRect.Left, Top + 2, Right, Bottom);
+      ExcludeClipRect(DC, Right - 4, Top, Right, Bottom);
+      ExcludeClipRect(DC, ClipRect.Left, Top + 2, Right, Bottom);
     end;
   if ThemePainter.Enabled then
-	  with ThemePainter do
+    with ThemePainter do
     begin
       if dsDisabled in State then
         Details := GetDetails(tbGroupBoxNormal)
       else
         Details := GetDetails(tbGroupBoxDisabled);
-	    DrawElement(DC, Details, GroupRect);
+      DrawElement(DC, Details, GroupRect);
       SelectClipRgn(DC, 0);
       DrawText(DC, Details, Text, CaptionRect, DT_CENTER or DT_SINGLELINE);
       if dsPressed in State then
-			  Details := GetDetails(ttbButtonPressed);
+        Details := GetDetails(ttbButtonPressed);
       {else
-			  Details := GetDetails(ttbButtonHot);}
+        Details := GetDetails(ttbButtonHot);}
       DrawElement(DC, Details, NodeRect);
       if dsExpanded in State then
-			  Details := GetDetails(ttGlyphOpened)
+        Details := GetDetails(ttGlyphOpened)
       else
-			  Details := GetDetails(ttGlyphClosed);
+        Details := GetDetails(ttGlyphClosed);
       DrawElement(DC, Details, NodeRect);
     end
   else
@@ -7014,9 +7014,9 @@ begin
     DrawCaption(DC, Text, CaptionRect, drCenter);
     FilLRect(DC, NodeRect, COLOR_BTNFACE + 1);
     if dsPressed in State then
-	    DrawFrame(DC, NodeRect, dfLowered)
+      DrawFrame(DC, NodeRect, dfLowered)
     else
-	    DrawFrame(DC, NodeRect, dfRaised);
+      DrawFrame(DC, NodeRect, dfRaised);
     DrawNode(DC, NodeRect, dsExpanded in State);
   end;
 end;
@@ -7041,7 +7041,7 @@ begin
   else
   begin
     FillRectColor(DC, Rect, clBtnFace);
-		DrawFrame(DC, Rect, dfFramed);
+    DrawFrame(DC, Rect, dfFramed);
   end;
 end;
 
@@ -7065,7 +7065,7 @@ begin
   else
   begin
     FillRectColor(DC, Rect, clBtnFace);
-		DrawFrame(DC, Rect, dfFramed);
+    DrawFrame(DC, Rect, dfFramed);
   end;
 end;
 
@@ -7077,7 +7077,7 @@ var
 begin
   if ThemePainter.Enabled then
   begin
-		R := Rect;
+    R := Rect;
     Dec(R.Left, 2);
     Inc(R.Right, 2);
     Theme := ttbSeparatorNormal;
@@ -7090,7 +7090,7 @@ begin
     ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), R);
   end
   else
-		DrawFrame(DC, Rect, dfLowered);
+    DrawFrame(DC, Rect, dfLowered);
 end;
 
 procedure DrawThemeVertSplit(DC: HDC; const Rect: TRect; State: TDrawState);
@@ -7100,7 +7100,7 @@ var
 begin
   if ThemePainter.Enabled then
   begin
-		R := Rect;
+    R := Rect;
     Dec(R.Top, 2);
     Inc(R.Bottom, 2);
     Theme := ttbSeparatorVertNormal;
@@ -7113,7 +7113,7 @@ begin
     ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), R);
   end
   else
-		DrawDivider(DC, Rect, ddVert);
+    DrawDivider(DC, Rect, ddVert);
 end;
 
 procedure DrawThemeCheckBox(DC: HDC; const Rect: TRect; State: TDrawState);
@@ -7129,101 +7129,101 @@ begin
       Theme := tbCheckBoxUncheckedPressed
     else if dsHot in State then
       Theme := tbCheckBoxUncheckedHot;
-		if dsChecked in State then
-    	Inc(Theme, 4);
+    if dsChecked in State then
+      Inc(Theme, 4);
     ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), Rect);
   end
   else
-		DrawCheckBox(DC, Rect, dsChecked in State, clWindow, clWindow, False);
+    DrawCheckBox(DC, Rect, dsChecked in State, clWindow, clWindow, False);
 end;
 
 procedure DrawThemeClose(DC: HDC; const Rect: TRect; State: TDrawState; Color: TColor = clWindowFrame);
 var
   Theme: TThemedExplorerBar;
 begin
-	if ThemePainter.Enabled then
+  if ThemePainter.Enabled then
   begin
-		if dsDisabled in State then
-    	Theme := tebHeaderCloseNormal
-		else if dsPressed in State then
-    	Theme := tebHeaderClosePressed
-		else if dsHot in State then
-    	Theme := tebHeaderCloseHot
-		else
-    	Theme := tebHeaderCloseNormal;
-		ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), Rect);
+    if dsDisabled in State then
+      Theme := tebHeaderCloseNormal
+    else if dsPressed in State then
+      Theme := tebHeaderClosePressed
+    else if dsHot in State then
+      Theme := tebHeaderCloseHot
+    else
+      Theme := tebHeaderCloseNormal;
+    ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), Rect);
   end
   else
-  	GlyphFrame(DC, Rect, gkClose, State, Color);
+    GlyphFrame(DC, Rect, gkClose, State, Color);
 end;
 
 procedure DrawThemeToolClose(DC: HDC; const Rect: TRect; State: TDrawState; Color: TColor = clWindowFrame);
 var
   Theme: TThemedToolTip;
 begin
-	if ThemePainter.Enabled then
+  if ThemePainter.Enabled then
   begin
-		if dsDisabled in State then
-    	Theme := tttCloseNormal
-		else if dsPressed in State then
-    	Theme := tttClosePressed
-		else if dsHot in State then
-    	Theme := tttCloseHot
-		else
-    	Theme := tttCloseNormal;
-		ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), Rect);
+    if dsDisabled in State then
+      Theme := tttCloseNormal
+    else if dsPressed in State then
+      Theme := tttClosePressed
+    else if dsHot in State then
+      Theme := tttCloseHot
+    else
+      Theme := tttCloseNormal;
+    ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), Rect);
   end
   else
-  	GlyphFrame(DC, Rect, gkClose, State, Color);
+    GlyphFrame(DC, Rect, gkClose, State, Color);
 end;
 
 procedure DrawThemePin(DC: HDC; const Rect: TRect; State: TDrawState; Color: TColor = clWindowFrame);
 var
   Theme: TThemedExplorerBar;
 begin
-	if ThemePainter.Enabled then
+  if ThemePainter.Enabled then
   begin
-		if dsDisabled in State then
-    	Theme := tebHeaderPinSelectedNormal
-		else if dsPressed in State then
-    	Theme := tebHeaderPinSelectedPressed
-		else if dsHot in State then
-    	Theme := tebHeaderPinSelectedHot
-		else
-    	Theme := tebHeaderPinNormal;
-		ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), Rect);
+    if dsDisabled in State then
+      Theme := tebHeaderPinSelectedNormal
+    else if dsPressed in State then
+      Theme := tebHeaderPinSelectedPressed
+    else if dsHot in State then
+      Theme := tebHeaderPinSelectedHot
+    else
+      Theme := tebHeaderPinNormal;
+    ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), Rect);
   end
   else if dsPressed in State then
-  	GlyphFrame(DC, Rect, gkPinPushed, State, Color)
+    GlyphFrame(DC, Rect, gkPinPushed, State, Color)
   else
-  	GlyphFrame(DC, Rect, gkPin, State, Color);
+    GlyphFrame(DC, Rect, gkPin, State, Color);
 end;
 
 procedure DrawThemeArrow(DC: HDC; Direction: TDirection; const Rect: TRect; State: TDrawState;
  Color: TColor = clWindowFrame; Adjust: Integer = 0);
 const
-	GlyphSize = 17;
+  GlyphSize = 17;
 var
-	Theme: TThemedScrollBar;
-	R: TRect;
+  Theme: TThemedScrollBar;
+  R: TRect;
   I: Integer;
 begin
   if ThemePainter.Enabled then
   begin
-  	case Direction of
+    case Direction of
       drLeft: Theme := tsArrowBtnLeftNormal;
-			drUp: Theme := tsArrowBtnUpNormal;
+      drUp: Theme := tsArrowBtnUpNormal;
       drRight: Theme := tsArrowBtnRightNormal;
       drDown: Theme := tsArrowBtnDownNormal;
     else
-    	Exit;
-		end;
+      Exit;
+    end;
     if dsDisabled in State then
-			Inc(Theme, 3)
+      Inc(Theme, 3)
     else if dsPressed in State then
-			Inc(Theme, 2)
+      Inc(Theme, 2)
     else if dsHot in State then
-			Inc(Theme, 1);
+      Inc(Theme, 1);
     R := Rect;
     I := (WidthOf(Rect) - GlyphSize) div 2;
     Inc(R.Left, I); //  + Adjust
@@ -7231,10 +7231,10 @@ begin
     Inc(R.Top, I + Adjust);
     R.Right := R.Left + GlyphSize;
     R.Bottom := R.Top + GlyphSize;
-  	ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), R);
+    ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), R);
   end
   else
-		DrawArrow(DC, Rect, Direction, Color, not (dsDisabled in State));
+    DrawArrow(DC, Rect, Direction, Color, not (dsDisabled in State));
 end;
 
 procedure DrawScroll(DC: HDC; Theme: TThemedScrollBar; Rect: TRect);
@@ -7257,7 +7257,7 @@ end;
 
 procedure DrawThemeScroll(DC: HDC; const Rect: TRect; State: TDrawState);
 var
-	Theme: TThemedScrollBar;
+  Theme: TThemedScrollBar;
   FrameState: Cardinal;
   // R: TRect;
 begin
@@ -7276,44 +7276,44 @@ begin
   begin
     FrameState := DFCS_SCROLLDOWN;
     if dsPressed in State then
-	    FrameState := FrameState or DFCS_FLAT;
+      FrameState := FrameState or DFCS_FLAT;
     DrawFrameControl(DC, Rect, DFC_SCROLL, FrameState);
   end;
 
 (*  if ThemePainter.Enabled then
   begin
     R := Rect;
-  	Theme := tsArrowBtnRightNormal;
+    Theme := tsArrowBtnRightNormal;
     if dsDisabled in State then
-			Inc(Theme, 3)
+      Inc(Theme, 3)
     else if dsPressed in State then
-			Inc(Theme, 2)
+      Inc(Theme, 2)
     else if dsHot in State then
-			Inc(Theme, 1);
+      Inc(Theme, 1);
     ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), R);
     StretchBlt(DC, R.Left + 3, R.Top + 3, WidthOf(R) - 6, HeightOf(R) - 6, DC,
       R.Left + 3, R.Top + 3, 2, HeightOf(R) - 6, SRCCOPY);
   end
   else
   begin
-		FrameState := 0;
-  	{case Direction of
+    FrameState := 0;
+    {case Direction of
       drLeft: FrameState := DFCS_SCROLLLEFT;
-			drUp: FrameState := DFCS_SCROLLUP;
+      drUp: FrameState := DFCS_SCROLLUP;
       drRight: FrameState := DFCS_SCROLLRIGHT;
       drDown: FrameState := DFCS_SCROLLDOWN;
       drCenter: FrameState := DFCS_BUTTONPUSH;
-		end;}
+    end;}
     if dsThin in State then
-			FrameState := FrameState or DFCS_FLAT;
+      FrameState := FrameState or DFCS_FLAT;
     if dsDisabled in State then
-			FrameState := FrameState or DFCS_INACTIVE
+      FrameState := FrameState or DFCS_INACTIVE
     else if dsPressed in State then
-			FrameState := FrameState or DFCS_PUSHED or DFCS_FLAT;
+      FrameState := FrameState or DFCS_PUSHED or DFCS_FLAT;
     //if Direction = drCenter then
-	    DrawFrameControl(DC, Rect, DFC_BUTTON, FrameState)
+      DrawFrameControl(DC, Rect, DFC_BUTTON, FrameState)
     //else
-	    //DrawFrameControl(DC, Rect, DFC_SCROLL, FrameState);
+      //DrawFrameControl(DC, Rect, DFC_SCROLL, FrameState);
   end;*)
 end;
 
@@ -7322,7 +7322,7 @@ var
   FrameState: Cardinal;
 begin
   FrameState := 0;
-	case Direction of
+  case Direction of
     drLeft: FrameState := DFCS_SCROLLLEFT;
     drUp: FrameState := DFCS_SCROLLUP;
     drRight: FrameState := DFCS_SCROLLRIGHT;
@@ -7332,9 +7332,9 @@ begin
   if dsThin in State then
     FrameState := FrameState or DFCS_FLAT;
   if dsDisabled in State then
-	  FrameState := FrameState or DFCS_INACTIVE
+    FrameState := FrameState or DFCS_INACTIVE
   else if dsPressed in State then
-	  FrameState := FrameState or DFCS_PUSHED or DFCS_FLAT;
+    FrameState := FrameState or DFCS_PUSHED or DFCS_FLAT;
   if Direction = drCenter then
     DrawFrameControl(DC, Rect, DFC_BUTTON, FrameState)
   else
@@ -7354,31 +7354,31 @@ begin
       DrawGrip(DC, DrawRect);
 end;
 
-procedure	DrawThemeGripper(DC: HDC; Rect: TRect; Color: TColor; Horizontal: Boolean = True);
+procedure  DrawThemeGripper(DC: HDC; Rect: TRect; Color: TColor; Horizontal: Boolean = True);
 var
-	Details: TThemedRebar;
+  Details: TThemedRebar;
 begin
-	if Horizontal then
-  	Details := trGripper
-	else
-  	Details := trGripperVert;
-	with ThemePainter do
-  	if Enabled then
-			DrawElement(DC, GetDetails(Details), Rect)
-		else
+  if Horizontal then
+    Details := trGripper
+  else
+    Details := trGripperVert;
+  with ThemePainter do
+    if Enabled then
+      DrawElement(DC, GetDetails(Details), Rect)
+    else
     begin
       if Horizontal then
-      	OffsetRect(Rect, 2, 0)
-			else
-      	OffsetRect(Rect, 0, 2);
-    	InflateRect(Rect, -4, -4);
-			DrawSeparator(DC, Rect, Color, Horizontal);
+        OffsetRect(Rect, 2, 0)
+      else
+        OffsetRect(Rect, 0, 2);
+      InflateRect(Rect, -4, -4);
+      DrawSeparator(DC, Rect, Color, Horizontal);
       if Horizontal then
-      	OffsetRect(Rect, -3, 0)
-			else
-      	OffsetRect(Rect, 0, -3);
-			DrawSeparator(DC, Rect, Color, Horizontal);
-		end;
+        OffsetRect(Rect, -3, 0)
+      else
+        OffsetRect(Rect, 0, -3);
+      DrawSeparator(DC, Rect, Color, Horizontal);
+    end;
 end;
 
 procedure DrawThemeCloseBox(DC: HDC; const Text: string; const Rect: TRect; State: TDrawState);
@@ -7386,20 +7386,20 @@ var
   Theme: TThemedExplorerBar;
   R: TRect;
 begin
-	R := Rect;
-	with ThemePainter do
-	  if ThemePainter.Enabled then
-	    DrawElement(DC, GetDetails(teEditTextNormal), R)
+  R := Rect;
+  with ThemePainter do
+    if ThemePainter.Enabled then
+      DrawElement(DC, GetDetails(teEditTextNormal), R)
     else
     begin
-    	DrawFrame(DC, R, dfSunken);
-			InflateRect(R, -2, -2);
+      DrawFrame(DC, R, dfSunken);
+      InflateRect(R, -2, -2);
       FillRect(DC, R, COLOR_WINDOW + 1);
     end;
-	R := Rect;
-	InflateRect(R, -2, -2);
+  R := Rect;
+  InflateRect(R, -2, -2);
   R.Bottom := Rect.Top + 29;
-	with ThemePainter do
+  with ThemePainter do
     if Enabled then
     begin
       DrawElement(DC, GetDetails(trRebarRoot), R);
@@ -7411,7 +7411,7 @@ begin
       FillRect(DC, R, COLOR_BTNFACE + 1);
       Inc(R.Bottom);
     end;
-	Inc(R.Left, 5);
+  Inc(R.Left, 5);
   DrawCaption(DC, Text, R, drLeft);
   R.Left := R.Right - HeightOf(R);
   if ThemePainter.Enabled then
@@ -7420,50 +7420,50 @@ begin
     if dsPressed in State then
       Theme := tebHeaderClosePressed
     else if dsHot in State then
-	    Theme := tebHeaderCloseHot;
+      Theme := tebHeaderCloseHot;
     ThemePainter.DrawElement(DC, ThemePainter.GetDetails(Theme), R);
     Slide(R, drLeft);
     ThemePainter.DrawElement(DC, ThemePainter.GetDetails(tebHeaderPinNormal), R);
-	end
+  end
   else
   begin
     DrawClose(DC, R);
     Slide(R, drLeft);
-		GlyphDraw(DC, R, gkPin, clWindowFrame);
+    GlyphDraw(DC, R, gkPin, clWindowFrame);
   end;
 end;
 
 procedure DrawThemeStatus(DC: HDC; const Text: string; const Rect: TRect);
 var
-	R: TRect;
+  R: TRect;
 begin
- 	with ThemePainter do
-	  if Enabled then
-		begin
-    	R := Rect;
-  		DrawElement(DC, GetDetails(tsStatusRoot), R);
-	    R.Left := R.Right - HeightOf(R);
-	  	DrawElement(DC, GetDetails(tsGripper), R);
-	  end
+   with ThemePainter do
+    if Enabled then
+    begin
+      R := Rect;
+      DrawElement(DC, GetDetails(tsStatusRoot), R);
+      R.Left := R.Right - HeightOf(R);
+      DrawElement(DC, GetDetails(tsGripper), R);
+    end
     else
     begin
-  		FillRect(DC, Rect, COLOR_BTNFACE + 1);
-			DrawGrip(DC, Rect, False);
+      FillRect(DC, Rect, COLOR_BTNFACE + 1);
+      DrawGrip(DC, Rect, False);
       DrawDivider(DC, Rect, ddVert);
     end;
-	R := Rect;
+  R := Rect;
   R.Right := R.Right - HeightOf(Rect);
-	Inc(R.Left, HeightOf(R) div 2);
-	DrawCaption(DC,Text, R, drLeft)
+  Inc(R.Left, HeightOf(R) div 2);
+  DrawCaption(DC,Text, R, drLeft)
 end;
 
 procedure DrawThemeSeperator(DC: HDC; const Rect: TRect; ForeGround, Background: TColor);
 var
-	Brush: HBrush;
+  Brush: HBrush;
   Pen: HPen;
   R: TRect;
 begin
-	Brush := GetBrush(Background);
+  Brush := GetBrush(Background);
   FillRect(DC, Rect, Brush);
   DeleteObject(Brush);
   Pen := SelectObject(DC, GetPen(ForeGround));
@@ -7498,105 +7498,105 @@ begin
 end;
 
 procedure DrawThemeSeperator(DC: HDC; Rect: TRect; Background: TColor;
-	Themed: Boolean = True; Transparent: Boolean = False; Flat: Boolean = False);
+  Themed: Boolean = True; Transparent: Boolean = False; Flat: Boolean = False);
 var
   Pen: HPen;
 begin
-	if not Transparent then
-  	FillRectColor(DC, Rect, Background);
+  if not Transparent then
+    FillRectColor(DC, Rect, Background);
   Themed := Themed or ThemePainter.Enabled;
   Flat := Flat and ThemePainter.Enabled;
   if Flat then
   begin
-		Rect.Top := Rect.Bottom - 1;
+    Rect.Top := Rect.Bottom - 1;
     FillRectColor(DC, Rect, clThemeBorder);
   end
   else if Themed then
     DrawThemeBar(DC, Rect, Background)
-	  {Pen := SelectObject(DC, GetPen(clActiveCaption));
+    {Pen := SelectObject(DC, GetPen(clActiveCaption));
     //Pen := SelectObject(DC, GetPen(clThemeBorder));
- 		MoveToEx(DC, Rect.Left, Rect.Bottom - 1, nil);
-	  LineTo(DC, Rect.Right, Rect.Bottom -1);
-  	OverwriteObject(DC, Pen);
-	  R := Rect;
-  	R.Top := R.Bottom - 1;
-	  R.Right := WidthOf(Rect) div 2;
-  	DrawGradient(DC, R, Background, clActiveCaption, drRight); //
-	  R.Left := R.Right + 1;
-  	R.Right := Rect.Right;
-	  DrawGradient(DC, R, Background, clActiveCaption, drLeft); //}
+     MoveToEx(DC, Rect.Left, Rect.Bottom - 1, nil);
+    LineTo(DC, Rect.Right, Rect.Bottom -1);
+    OverwriteObject(DC, Pen);
+    R := Rect;
+    R.Top := R.Bottom - 1;
+    R.Right := WidthOf(Rect) div 2;
+    DrawGradient(DC, R, Background, clActiveCaption, drRight); //
+    R.Left := R.Right + 1;
+    R.Right := Rect.Right;
+    DrawGradient(DC, R, Background, clActiveCaption, drLeft); //}
   else
   begin
-	  Pen := SelectObject(DC, GetPen(clBtnShadow));
- 		MoveToEx(DC, Rect.Left, Rect.Bottom - 2, nil);
-	  LineTo(DC, Rect.Right, Rect.Bottom - 2);
-  	OverwriteObject(DC, GetPen(clBtnHighlight));
-	 	MoveToEx(DC, Rect.Left, Rect.Bottom - 1, nil);
-  	LineTo(DC, Rect.Right, Rect.Bottom - 1);
-	  OverwriteObject(DC, Pen);
-	end;
+    Pen := SelectObject(DC, GetPen(clBtnShadow));
+     MoveToEx(DC, Rect.Left, Rect.Bottom - 2, nil);
+    LineTo(DC, Rect.Right, Rect.Bottom - 2);
+    OverwriteObject(DC, GetPen(clBtnHighlight));
+     MoveToEx(DC, Rect.Left, Rect.Bottom - 1, nil);
+    LineTo(DC, Rect.Right, Rect.Bottom - 1);
+    OverwriteObject(DC, Pen);
+  end;
 end;
 
 procedure DrawThemeDesigner(DC: HDC; const Rect: TRect; GripSize: Integer;
-	FixedWidth, FixedHeight: Boolean; State: TDrawState);
+  FixedWidth, FixedHeight: Boolean; State: TDrawState);
 var
-	A, B: TRect;
-	C: TColor;
+  A, B: TRect;
+  C: TColor;
   X, Y: Integer;
 begin
   A := Rect;
   if dsFocused in State then
-		if ThemePainter.Enabled then
+    if ThemePainter.Enabled then
     begin
-    	C := clInactiveCaption;
-			DrawThemeBorder(DC, Rect, [])
-		end
-		else
+      C := clInactiveCaption;
+      DrawThemeBorder(DC, Rect, [])
+    end
+    else
     begin
       C := cl3DDkShadow;
-  		DrawRectOutline(DC, A, cl3DDkShadow);
-		end
-	else
-  	C := clGray;
-	InflateRect(A, -1, -1);
-	for X := 0 to 2 do
+      DrawRectOutline(DC, A, cl3DDkShadow);
+    end
+  else
+    C := clGray;
+  InflateRect(A, -1, -1);
+  for X := 0 to 2 do
   begin
-		if (X = 0) and FixedHeight then Continue;
-		A := Rect;
-		case X of
-			0:
-      	begin
-        	A.Left := (WidthOf(Rect) - GripSize) shr 1;
-					A.Right := A.Left + GripSize;
+    if (X = 0) and FixedHeight then Continue;
+    A := Rect;
+    case X of
+      0:
+        begin
+          A.Left := (WidthOf(Rect) - GripSize) shr 1;
+          A.Right := A.Left + GripSize;
         end;
       1: A.Right := GripSize;
       2: A.Left := A.Right - GripSize;
     end;
     for Y := 0 to 2 do
     begin
-			if (Y > 0) and FixedHeight then Continue;
-	   	if (X = 0) and (Y = 0) then Continue;
-     	B := A;
-			case Y of
+      if (Y > 0) and FixedHeight then Continue;
+       if (X = 0) and (Y = 0) then Continue;
+       B := A;
+      case Y of
         0:
- 	      	begin
-   	    		B.Top := (HeightOf(Rect) - GripSize) shr 1;
-						B.Bottom := B.Top + GripSize;
-       	  end;
-       	1: B.Bottom := GripSize;
+           begin
+             B.Top := (HeightOf(Rect) - GripSize) shr 1;
+            B.Bottom := B.Top + GripSize;
+           end;
+         1: B.Bottom := GripSize;
         2: B.Top := A.Bottom - GripSize;
- 	    end;
-			if ThemePainter.Enabled and (dsFocused in State) then
-				ThemePainter.DrawElement(DC, ThemePainter.GetDetails(tebHeaderBackgroundNormal), B)
-			else
-				FillRectColor(DC, B, C);
-		end;
-	end;
+       end;
+      if ThemePainter.Enabled and (dsFocused in State) then
+        ThemePainter.DrawElement(DC, ThemePainter.GetDetails(tebHeaderBackgroundNormal), B)
+      else
+        FillRectColor(DC, B, C);
+    end;
+  end;
 end;
 
 {procedure DrawThemeNode(DC: HDC; const Rect: TRect; State: TDrawState);
 begin
-	DrawNode(DC, Rect);
+  DrawNode(DC, Rect);
 end;}
 
 function CreateBlendSection(DC: HDC; Width: Integer; Height: Integer): HBITMAP;
@@ -7768,29 +7768,29 @@ end;
 { Glass image routines }
 
 type
-	TNativeGlassImage = class(TInterfacedObject, IUnknown, IGlassImage, INativeDraw)
+  TNativeGlassImage = class(TInterfacedObject, IUnknown, IGlassImage, INativeDraw)
   private
-  	FImage: TAlphaImage;
+    FImage: TAlphaImage;
     FGrayscale: TAlphaImage;
     procedure Change(Sender: TObject);
     procedure Draw(DestDC, SrcDC: HDC; const Rect: TRect; X, Y: Integer;
       Opacity: Byte);
   protected
-  	{ IGlassImage }
+    { IGlassImage }
     function GetDC: HDC;
     function GetGraphic: TGraphic;
     function GetPixelDepth: TPixelDepth;
     function GetScanline(Row: Integer): Pointer;
     function GetStride: Integer;
-  	{ INativeDraw }
+    { INativeDraw }
     procedure DrawAlpha(const Rect: TRect; DC: HDC; X, Y: Integer;
       Opacity: Byte = $FF; Grayscale: Boolean = False);
     procedure DrawState(const Rect: TRect; DC: HDC; X, Y: Integer;
       State: TDrawState = []);
     procedure DrawColor(const Rect: TRect; DC: HDC; X, Y: Integer;
       Color: TColor; Opacity: Byte = $FF);
-	public
-  	constructor Create;
+  public
+    constructor Create;
     destructor Destroy; override;
   end;
 
@@ -7798,7 +7798,7 @@ type
 
 constructor TNativeGlassImage.Create;
 begin
-	inherited Create;
+  inherited Create;
   FImage := TAlphaImage.Create;
   FImage.PixelDepth := pd32;
   FImage.OnChange := Change;
@@ -7806,14 +7806,14 @@ end;
 
 destructor TNativeGlassImage.Destroy;
 begin
-	FImage.Free;
+  FImage.Free;
   FGrayscale.Free;
-	inherited Destroy;
+  inherited Destroy;
 end;
 
 procedure TNativeGlassImage.Change(Sender: TObject);
 begin
-	FreeAndNil(FGrayscale);
+  FreeAndNil(FGrayscale);
 end;
 
 { TNativeGlassImage.IGlassImage }
@@ -7825,22 +7825,22 @@ end;
 
 function TNativeGlassImage.GetGraphic: TGraphic;
 begin
-	Result := FImage;
+  Result := FImage;
 end;
 
 function TNativeGlassImage.GetPixelDepth: TPixelDepth;
 begin
-	Result := FImage.PixelDepth;
+  Result := FImage.PixelDepth;
 end;
 
 function TNativeGlassImage.GetScanline(Row: Integer): Pointer;
 begin
-	Result := FImage.Scanline[Row];
+  Result := FImage.Scanline[Row];
 end;
 
 function TNativeGlassImage.GetStride: Integer;
 begin
-	FImage.HandleNeeded;
+  FImage.HandleNeeded;
   Result := FImage.Stride;
 end;
 
@@ -7849,14 +7849,14 @@ end;
 procedure TNativeGlassImage.Draw(DestDC, SrcDC: HDC; const Rect: TRect; X, Y: Integer;
   Opacity: Byte);
 var
-	Func: TBlendFunction;
+  Func: TBlendFunction;
 begin
   FillChar(Func, SizeOf(Func), #0);
-	Func.SourceConstantAlpha := Opacity;
+  Func.SourceConstantAlpha := Opacity;
   if FImage.PixelDepth = pd32 then
-		Func.AlphaFormat := AC_SRC_ALPHA;
-	AlphaBlend(DestDC, X, Y, WidthOf(Rect), HeightOf(Rect), SrcDC, Rect.Left,
-  	Rect.Top, WidthOf(Rect), HeightOf(Rect), Func);
+    Func.AlphaFormat := AC_SRC_ALPHA;
+  AlphaBlend(DestDC, X, Y, WidthOf(Rect), HeightOf(Rect), SrcDC, Rect.Left,
+    Rect.Top, WidthOf(Rect), HeightOf(Rect), Func);
 end;
 
 procedure TNativeGlassImage.DrawAlpha(const Rect: TRect; DC: HDC; X, Y: Integer;
@@ -7865,18 +7865,18 @@ var
   SrcDC: HDC;
 begin
   if FImage.Empty then Exit;
-	if Grayscale  then
+  if Grayscale  then
   begin
-  	if FGrayscale = nil then
+    if FGrayscale = nil then
     begin
-    	FGrayscale := TAlphaImage.Create;
+      FGrayscale := TAlphaImage.Create;
       FGrayscale.Assign(FImage);
       FGrayscale.Grayscale;
     end;
     SrcDC := FGrayscale.Canvas.Handle;
-	end
+  end
   else
-  	SrcDC := FImage.Canvas.Handle;
+    SrcDC := FImage.Canvas.Handle;
   Draw(DC, SrcDC, Rect, X, Y, Opacity);
 end;
 
@@ -7956,7 +7956,7 @@ end;
 
 function CreateGlassImage(Stream: TStream = nil): IGlassImage;
 begin
-	Result := TNativeGlassImage.Create as IGlassImage;
+  Result := TNativeGlassImage.Create as IGlassImage;
   if Stream <> nil then
     Result.Graphic.LoadFromStream(Stream);
 end;
@@ -7964,16 +7964,16 @@ end;
 { GlassImageBlit
 
 procedure GlassImageBlit(Source: IGlassImage; const Rect: TRect; DC: HDC;
-	X, Y: Integer; Opacity: Byte = $FF; Grayscale: Boolean = False);
+  X, Y: Integer; Opacity: Byte = $FF; Grayscale: Boolean = False);
 var
-	NativeDraw: INativeDraw;
+  NativeDraw: INativeDraw;
 begin
-	if Supports(Source, INativeDraw, NativeDraw) then
-  	NativeDraw.Draw(Rect, DC, X, Y, Opacity, Grayscale);
+  if Supports(Source, INativeDraw, NativeDraw) then
+    NativeDraw.Draw(Rect, DC, X, Y, Opacity, Grayscale);
 end; }
 
 {procedure GlassBlit(Source: IGlassImage; const Rect: TRect; DC: HDC; X, Y: Integer;
-	Opacity: Byte = $FF; Grayscale: Boolean = False);
+  Opacity: Byte = $FF; Grayscale: Boolean = False);
 var
   W, H, Row, Col, Size, I: Integer;
   Bitmap: TFastBitmap;
@@ -7987,113 +7987,113 @@ begin
   if not Source.Initialize then Exit;
   W := Source.Graphic.Width;
   H := Source.Graphic.Height;
- 	Area := Rect;
-	with Area do
-	begin
-		if Left < 0 then Left := 0;
+   Area := Rect;
+  with Area do
+  begin
+    if Left < 0 then Left := 0;
     if Top < 0 then Top := 0;
     if Right > W then Right := W;
     if Bottom > H then Bottom := H;
     if (Bottom - Top < 1) or (Right - Left < 1) then Exit;
-	end;
-	Bitmap := CreateFastBitmap(Area.Right - Area.Left, Area.Bottom - Area.Top);
- 	try
-		BitBlt(Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, DC, X, Y, SRCCOPY);
+  end;
+  Bitmap := CreateFastBitmap(Area.Right - Area.Left, Area.Bottom - Area.Top);
+   try
+    BitBlt(Bitmap.DC, 0, 0, Bitmap.Width, Bitmap.Height, DC, X, Y, SRCCOPY);
     OpacityBlend := Opacity / High(Byte);
     Size := Bitmap.Width * SizeOf(TRGBTriple) + Bitmap.Width mod 4;
     I := 0;
     for Row := Area.Bottom - 1 downto Area.Top do
     begin
       Inc(I);
-			A := Bitmap.Bits;
+      A := Bitmap.Bits;
       Inc(PByte(A), (I - 1) * Size);
-    	B := Source.Scanline[Row];
+      B := Source.Scanline[Row];
       Inc(B, Area.Left);
       Alpha := Pointer(Source.AlphaScanline[Row]);
       Inc(Alpha, Area.Left);
       for Col := Area.Left to Area.Right - 1 do
       begin
-      	if OpacityBlend = 0 then
+        if OpacityBlend = 0 then
         begin
-    	    Inc(A);
-  	      Inc(B);
-	        Inc(Alpha);
-        	Continue;
+          Inc(A);
+          Inc(B);
+          Inc(Alpha);
+          Continue;
         end;
-	      if OpacityBlend < 1 then
-  	    	Blend := Round(Alpha^ * OpacityBlend)
-				else
-        	Blend := Alpha^;
-				C := B^;
+        if OpacityBlend < 1 then
+          Blend := Round(Alpha^ * OpacityBlend)
+        else
+          Blend := Alpha^;
+        C := B^;
         if Grayscale then
         begin
-  	      C.rgbtRed := Round(0.3 * c.rgbtRed + 0.6 * c.rgbtGreen + 0.1 * c.rgbtBlue);
+          C.rgbtRed := Round(0.3 * c.rgbtRed + 0.6 * c.rgbtGreen + 0.1 * c.rgbtBlue);
           C.rgbtBlue := C.rgbtRed;
           C.rgbtGreen := c.rgbtRed;
         end;
-				if Blend = High(Byte) then
-	        A^ := C
-				else if Blend > 0 then
+        if Blend = High(Byte) then
+          A^ := C
+        else if Blend > 0 then
         begin
-        	SourceBlend := Blend / High(Byte);
+          SourceBlend := Blend / High(Byte);
           DestBlend := 1 - SourceBlend;
-	        A.rgbtBlue := Round(C.rgbtBlue * SourceBlend + A.rgbtBlue * DestBlend);
-	        A.rgbtGreen := Round(C.rgbtGreen * SourceBlend + A.rgbtGreen * DestBlend);
-	        A.rgbtRed := Round(C.rgbtRed * SourceBlend + A.rgbtRed * DestBlend);
+          A.rgbtBlue := Round(C.rgbtBlue * SourceBlend + A.rgbtBlue * DestBlend);
+          A.rgbtGreen := Round(C.rgbtGreen * SourceBlend + A.rgbtGreen * DestBlend);
+          A.rgbtRed := Round(C.rgbtRed * SourceBlend + A.rgbtRed * DestBlend);
         end;
         Inc(A);
         Inc(B);
         Inc(Alpha);
-			end;
-		end;
-		BitBlt(DC, X, Y, Bitmap.Width, Bitmap.Height, Bitmap.DC, 0, 0, SRCCOPY);
-	finally
-		DestroyFastBitmap(Bitmap);
-	end;
+      end;
+    end;
+    BitBlt(DC, X, Y, Bitmap.Width, Bitmap.Height, Bitmap.DC, 0, 0, SRCCOPY);
+  finally
+    DestroyFastBitmap(Bitmap);
+  end;
 end; }
 
 procedure InitializeGlyphs;
 var
-	I: TGlyphKind;
+  I: TGlyphKind;
 begin
-	for I := Low(InternalGlyphs) to High(InternalGlyphs) do
-  	InternalGlyphs[I] := nil;
+  for I := Low(InternalGlyphs) to High(InternalGlyphs) do
+    InternalGlyphs[I] := nil;
 end;
 
 procedure FinalizeGlyphs;
 var
-	I: TGlyphKind;
+  I: TGlyphKind;
 begin
-	for I := Low(InternalGlyphs) to High(InternalGlyphs) do
-  	InternalGlyphs[I].Free;
+  for I := Low(InternalGlyphs) to High(InternalGlyphs) do
+    InternalGlyphs[I].Free;
 end;
 
 {$IFNDEF LITE}
 type
-	TColorPicker = class
+  TColorPicker = class
   public
-  	constructor Create;
+    constructor Create;
     destructor Destroy; override;
     procedure Pick(Msg: Cardinal; const HookStruct: TMouseHookStruct;
     var Remove: Boolean);
   end;
 
 var
-	ColorPicker: TObject;
+  ColorPicker: TObject;
 
 procedure ColorPick(Enabled: Boolean);
 begin
-	if Enabled and (ColorPicker = nil) then
-  	ColorPicker := TColorPicker.Create
-	else if (not Enabled) and (ColorPicker <> nil) then
-  	FreeAndNil(ColorPicker);
+  if Enabled and (ColorPicker = nil) then
+    ColorPicker := TColorPicker.Create
+  else if (not Enabled) and (ColorPicker <> nil) then
+    FreeAndNil(ColorPicker);
 end;
 
 { TColorPicker }
 
 constructor TColorPicker.Create;
 begin
-	inherited Create;
+  inherited Create;
   HookMouse(Pick);
 end;
 
@@ -8114,12 +8114,12 @@ end;
 procedure TColorPicker.Pick(Msg: Cardinal;
   const HookStruct: TMouseHookStruct; var Remove: Boolean);
 var
-	DC: HDC;
+  DC: HDC;
   C: TColorRef;
 begin
   if (Msg = WM_LBUTTONDOWN) and IsShiftDown then
   begin
-  	DC := GetDC(0);
+    DC := GetDC(0);
     C := GetPixel(DC, HookStruct.pt.X, HookStruct.pt.Y);
     ReleaseDC(0, DC);
     SendMessage(GetFocus, CN_COLORPICK, C, 0);
@@ -8158,7 +8158,7 @@ end;
 
 initialization
   PatchINT3;
-	InternalThemePainter := nil;
+  InternalThemePainter := nil;
   ScratchFont := nil;
   ScratchBitmap := TBitmap.Create;
   with ScratchBitmap do
@@ -8168,12 +8168,12 @@ initialization
   end;
   InitializeGlyphs;
   TPicture.RegisterFileFormat('PNG', 'PNG Image Files', TAlphaImage);
-	TPicture.RegisterFileFormat('GIF', 'GIF Image Files', TAlphaImage);
-	TPicture.RegisterFileFormat('JPG', 'JPEG Image Files', TAlphaImage);
-	TPicture.RegisterFileFormat('TIFF', 'TIFF Image Files', TAlphaImage);
+  TPicture.RegisterFileFormat('GIF', 'GIF Image Files', TAlphaImage);
+  TPicture.RegisterFileFormat('JPG', 'JPEG Image Files', TAlphaImage);
+  TPicture.RegisterFileFormat('TIFF', 'TIFF Image Files', TAlphaImage);
 finalization
-	TPicture.UnregisterGraphicClass(TAlphaImage);
-	FinalizeGlyphs;
+  TPicture.UnregisterGraphicClass(TAlphaImage);
+  FinalizeGlyphs;
   ScratchBitmap.Free;
   ScratchFont.Free;
   InternalThemePainter.Free;
